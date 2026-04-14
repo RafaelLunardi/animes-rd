@@ -94,13 +94,6 @@ async function main() {
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify(output, null, 2), "utf8");
   console.log(`Saved to ${outPath}`);
-
-  const htmlPath = path.join(__dirname, "../index.html");
-  let html = fs.readFileSync(htmlPath, "utf8");
-  const inlineScript = `<script id="inline-data">window.__ANIMES_DATA__ = ${JSON.stringify(output)};<\/script>`;
-  html = html.replace(/<script id="inline-data">[\s\S]*?<\/script>/, inlineScript);
-  fs.writeFileSync(htmlPath, html, "utf8");
-  console.log("index.html updated with inline data");
 }
 
 main().catch((err) => {

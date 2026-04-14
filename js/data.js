@@ -4,10 +4,6 @@ let _data = null;
 
 export async function loadData() {
   if (_data) return _data;
-  if (window.__ANIMES_DATA__) {
-    _data = window.__ANIMES_DATA__;
-    return _data;
-  }
   const res = await fetch("data/animes.json");
   if (!res.ok) throw new Error("Falha ao carregar animes.json");
   _data = await res.json();

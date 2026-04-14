@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gráficos — Animes RD</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-logo">✦ Animes RD</span>
+  <a href="index.html">Início</a>
+  <a href="charts.html" class="active">Gráficos</a>
+  <a href="compare.html">Comparar</a>
+  <div class="nav-person">
+    <a href="rafael.html"><span class="nav-avatar" style="background:rgba(124,58,237,0.3);color:#a78bfa">R</span>Rafael</a>
+    <a href="fernando.html"><span class="nav-avatar" style="background:rgba(236,72,153,0.3);color:#f9a8d4">F</span>Fernando</a>
+    <a href="dudu.html"><span class="nav-avatar" style="background:rgba(52,211,153,0.3);color:#6ee7b7">D</span>Dudu</a>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="page-header">
+    <h1>📊 Gráficos Gerais</h1>
+    <p>Visão geral de todos os dados — Rafael, Fernando e Dudu</p>
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Top gêneros assistidos</div>
+      <div class="chart-container" style="height:320px">
+        <canvas id="chartTopGenres"></canvas>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Proporção por qtd. de espectadores</div>
+      <div class="chart-container" style="height:320px">
+        <canvas id="chartVotesPie"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:28px">
+    <div class="card-title">Gêneros por pessoa (top 8)</div>
+    <div class="chart-container" style="height:300px">
+      <canvas id="chartGenreByPerson"></canvas>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:28px">
+    <div class="card-title">Top 10 melhores notas gerais</div>
+    <div class="chart-container" style="height:320px">
+      <canvas id="chartVotesRanking"></canvas>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:28px">
+    <div class="card-title">Nota média × Controvérsia 🌶️ (hover para ver o nome)</div>
+    <div class="chart-container" style="height:340px">
+      <canvas id="chartScatter"></canvas>
+    </div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script type="module">
+  import { loadData } from "./js/data.js";
+  import { renderAllCharts } from "./js/charts.js";
+
+  const { animes } = await loadData();
+  renderAllCharts(animes);
+</script>
+</body>
+</html>

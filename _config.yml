@@ -1,0 +1,3 @@
+# Desativa o processamento Jekyll do GitHub Pages
+# Necessário para servir arquivos com _ no nome corretamente
+plugins: []

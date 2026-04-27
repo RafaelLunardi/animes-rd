@@ -87,13 +87,54 @@ function getComments(properties) {
   return comments;
 }
 
-async function fetchAllPages() {
+async function listBlockChildren(blockId) {
+  const results = [];
+  let cursor = undefined;
+
+  do {
+    const response = await notion.blocks.children.list({
+      block_id: blockId,
+      start_cursor: cursor,
+      page_size: 100,
+    });
+
+    results.push(...response.results);
+    cursor = response.has_more ? response.next_cursor : undefined;
+  } while (cursor);
+
+  return results;
+}
+
+async function resolveDatabaseId(id) {
+  try {
+    await notion.databases.retrieve({ database_id: id });
+    return id;
+  } catch (error) {
+    if (error.code !== "validation_error") throw error;
+  }
+
+  const children = await listBlockChildren(id);
+  const databases = children.filter((block) => block.type === "child_database");
+
+  if (!databases.length) {
+    throw new Error(`No child database found inside page ${id}.`);
+  }
+
+  const animesDatabase =
+    databases.find((block) => normalizeName(block.child_database?.title || "").includes("anime")) ||
+    databases[0];
+
+  console.log(`Using child database: ${animesDatabase.child_database?.title || animesDatabase.id}`);
+  return animesDatabase.id;
+}
+
+async function fetchAllPages(databaseId) {
   const results = [];
   let cursor = undefined;
 
   do {
     const response = await notion.databases.query({
-      database_id: DATABASE_ID,
+      database_id: databaseId,
       start_cursor: cursor,
       page_size: 100,
     });
@@ -107,7 +148,8 @@ async function fetchAllPages() {
 
 async function main() {
   console.log("Fetching Notion database...");
-  const pages = await fetchAllPages();
+  const databaseId = await resolveDatabaseId(DATABASE_ID);
+  const pages = await fetchAllPages(databaseId);
   console.log(`Found ${pages.length} entries.`);
 
   const animes = pages.map((page) => {

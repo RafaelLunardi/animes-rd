@@ -31,18 +31,21 @@ jobs:
           npm install
 
       - name: Fetch Notion data
-        if: ${{ secrets.NOTION_API_KEY != '' && secrets.NOTION_DATABASE_ID != '' }}
+        id: fetch_notion
         env:
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-        run: node scripts/fetch-notion.js
-
-      - name: Skip Notion fetch
-        if: ${{ secrets.NOTION_API_KEY == '' || secrets.NOTION_DATABASE_ID == '' }}
-        run: echo "Notion secrets not configured; keeping the current data/animes.json."
+        run: |
+          if [ -z "$NOTION_API_KEY" ] || [ -z "$NOTION_DATABASE_ID" ]; then
+            echo "Notion secrets not configured; keeping the current data/animes.json."
+            echo "updated=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          node scripts/fetch-notion.js
+          echo "updated=true" >> "$GITHUB_OUTPUT"
 
       - name: Commit updated data
-        if: ${{ secrets.NOTION_API_KEY != '' && secrets.NOTION_DATABASE_ID != '' }}
+        if: steps.fetch_notion.outputs.updated == 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

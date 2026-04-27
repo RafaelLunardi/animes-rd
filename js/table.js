@@ -13,6 +13,10 @@ let sortCol = "notaSort";
 let sortDir = -1;
 let currentModalIndex = null;
 let currentUser = null;
+let imageQueueRunning = false;
+
+const imageCache = new Map();
+const queuedImageMalIds = new Set();
 
 const isFirebaseConfigured = firebaseConfig.apiKey !== "SUA_API_KEY";
 const app = isFirebaseConfigured ? (getApps()[0] || initializeApp(firebaseConfig)) : null;
@@ -25,6 +29,9 @@ const NOTE_FIELDS = {
   Dudu: "notaDudu",
   Hacksuya: "notaHacksuya",
 };
+
+const FALLBACK_IMAGE =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Crect width='56' height='56' rx='8' fill='%2318171d'/%3E%3Cpath d='M16 36h24M18 18h20v20H18z' stroke='%237b7165' stroke-width='2' fill='none'/%3E%3Ccircle cx='23' cy='24' r='3' fill='%237b7165'/%3E%3Cpath d='M19 35l8-8 5 5 3-3 4 6' stroke='%237b7165' stroke-width='2' fill='none'/%3E%3C/svg%3E";
 
 function escapeHTML(value) {
   return String(value ?? "")
@@ -102,6 +109,89 @@ function getStoredPersonName(uid) {
 
 function setStoredPersonName(uid, personName) {
   localStorage.setItem(`user-${uid}-personName`, personName);
+}
+
+function getCachedImage(malId) {
+  if (!malId) return null;
+  if (imageCache.has(malId)) return imageCache.get(malId);
+
+  const cached = localStorage.getItem(`jikan-image-${malId}`);
+  if (cached) {
+    imageCache.set(malId, cached);
+    return cached;
+  }
+
+  return null;
+}
+
+function setCachedImage(malId, imageUrl) {
+  if (!malId || !imageUrl) return;
+  imageCache.set(malId, imageUrl);
+  try {
+    localStorage.setItem(`jikan-image-${malId}`, imageUrl);
+  } catch {
+    // Cache is best-effort; images still work for this render.
+  }
+}
+
+function renderAnimeIdentity(anime) {
+  const malId = anime.malId;
+  const imageUrl = getCachedImage(malId) || FALLBACK_IMAGE;
+  const imgAttrs = malId
+    ? `data-mal-id="${escapeHTML(malId)}" data-anime-img`
+    : "";
+
+  return `
+    <span class="anime-identity">
+      <img class="anime-img" src="${escapeHTML(imageUrl)}" alt="" loading="lazy" ${imgAttrs} />
+      <span class="anime-name">${escapeHTML(anime.nome)}</span>
+    </span>
+  `;
+}
+
+function updateRenderedImages(malId, imageUrl) {
+  document.querySelectorAll(`img[data-mal-id="${CSS.escape(String(malId))}"]`).forEach((img) => {
+    img.src = imageUrl;
+    img.classList.add("loaded");
+  });
+}
+
+function queueAnimeImage(malId) {
+  if (!malId || getCachedImage(malId) || queuedImageMalIds.has(malId)) return;
+  queuedImageMalIds.add(malId);
+  runImageQueue();
+}
+
+async function runImageQueue() {
+  if (imageQueueRunning) return;
+  imageQueueRunning = true;
+
+  while (queuedImageMalIds.size) {
+    const [malId] = queuedImageMalIds;
+    queuedImageMalIds.delete(malId);
+
+    try {
+      const res = await fetch(`https://api.jikan.moe/v4/anime/${encodeURIComponent(malId)}`);
+      if (res.ok) {
+        const payload = await res.json();
+        const imageUrl =
+          payload?.data?.images?.webp?.small_image_url ||
+          payload?.data?.images?.jpg?.small_image_url ||
+          payload?.data?.images?.webp?.image_url ||
+          payload?.data?.images?.jpg?.image_url;
+        if (imageUrl) {
+          setCachedImage(malId, imageUrl);
+          updateRenderedImages(malId, imageUrl);
+        }
+      }
+    } catch (error) {
+      console.warn("Falha ao buscar imagem na Jikan", malId, error);
+    }
+
+    await new Promise((resolve) => setTimeout(resolve, 450));
+  }
+
+  imageQueueRunning = false;
 }
 
 export function initTable(animes) {
@@ -194,7 +284,7 @@ function renderTable() {
 
     return `
       <tr data-idx="${i}" onclick="openModal(${allAnimes.indexOf(a)})">
-        <td><span class="anime-name">${escapeHTML(a.nome)}</span></td>
+        <td>${renderAnimeIdentity(a)}</td>
         <td>${genres}${moreGenres}</td>
         <td>${viewers}</td>
         <td><span class="nota ${notaCls}">${nota}</span></td>
@@ -204,6 +294,7 @@ function renderTable() {
     `;
   }).join("");
 
+  filtered.forEach((anime) => queueAnimeImage(anime.malId));
 }
 
 function renderModal() {

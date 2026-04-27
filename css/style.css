@@ -677,8 +677,28 @@ tbody tr:last-child { border-bottom: none; }
 tbody tr:hover { background: rgba(243,239,230,0.055); }
 tbody td { padding: 12px 14px; vertical-align: middle; }
 
+.anime-identity {
+  align-items: center;
+  display: inline-flex;
+  gap: 10px;
+  min-width: 220px;
+}
+
 .anime-name { color: var(--paper); font-weight: 700; }
-.anime-img { border-radius: 4px; height: 28px; margin-right: 8px; object-fit: cover; vertical-align: middle; width: 28px; }
+
+.anime-img {
+  background: rgba(243,239,230,0.07);
+  border: 1px solid rgba(243,239,230,0.12);
+  border-radius: 6px;
+  flex: 0 0 42px;
+  height: 42px;
+  object-fit: cover;
+  width: 42px;
+}
+
+.anime-img.loaded {
+  background: transparent;
+}
 
 .badge {
   border-radius: 999px;

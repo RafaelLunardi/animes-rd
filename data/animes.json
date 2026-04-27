@@ -1,35 +1,45 @@
 {
-  "updatedAt": "2026-04-27T22:08:04.906Z",
+  "updatedAt": "2026-04-27T22:27:00.661Z",
   "total": 175,
   "animes": [
     {
       "id": "3416beab-c784-813f-bff6-df2369802356",
       "nome": "Frieren: Beyond Journey's End",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael"
-      ],
-      "nota": "9.95",
       "generos": [
         "Fantasia 🧙",
         "Drama 😢",
         "Slice of Life 🍃"
       ],
-      "comentarios": "",
       "files": [],
-      "notaRafael": 9.9,
       "notaFernando": 10,
       "notaDudu": null,
       "notaHacksuya": null,
       "maisDeUmVoto": "sim",
       "qtdVotos": 2,
-      "notaSort": 9.95,
-      "controversia": 0.1,
       "migratedAt": {
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 52991
+      "malId": 52991,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Um bom anime"
+        }
+      ],
+      "comentarios": "Rafael: Um bom anime",
+      "controversia": 0.1,
+      "notaSort": 9.95,
+      "notaRafael": 9.9,
+      "nota": "9.95",
+      "updatedAt": {
+        "_seconds": 1777328219,
+        "_nanoseconds": 894000000
+      }
     },
     {
       "id": "3416beab-c784-81e6-a402-d03f1e1b1aba",

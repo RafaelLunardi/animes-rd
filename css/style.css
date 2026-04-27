@@ -1250,6 +1250,232 @@ tbody tr:hover {
   color: #1f2933;
 }
 
+/* Refined editorial palette */
+:root {
+  --bg: #f5f1e8;
+  --paper: #fffdf7;
+  --paper-soft: #e9dfcd;
+  --ink: #171717;
+  --text: #1f1d1a;
+  --muted: #706b62;
+  --faint: #a0988b;
+  --card: #fffdf7;
+  --card2: #f2eadb;
+  --border: #d9cdbc;
+  --border-hover: #171717;
+  --accent: #b33a2f;
+  --danger: #b33a2f;
+  --warning: #b8792a;
+  --success: #3b7b62;
+  --rafael-light: #6f5aa8;
+  --fernando-light: #a84671;
+  --dudu-light: #3b7b62;
+  --hacksuya-light: #3d7185;
+  --shadow: 0 18px 45px rgba(39, 31, 22, 0.08);
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 8%, rgba(179,58,47,0.08), transparent 320px),
+    radial-gradient(circle at 92% 12%, rgba(61,113,133,0.08), transparent 320px),
+    linear-gradient(180deg, #fffdf7 0, #f5f1e8 420px, #f0eadf 100%);
+  color: var(--text);
+}
+
+body::before {
+  opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(23,23,23,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(23,23,23,0.035) 1px, transparent 1px);
+}
+
+.nav {
+  background: rgba(255,253,247,0.94);
+  border-bottom: 1px solid #d8ccba;
+  box-shadow: 0 12px 30px rgba(39,31,22,0.05);
+}
+
+.nav-logo,
+.page-header h1,
+.section-head h2,
+.quick-links strong,
+.member-card h3,
+.feature-main h2,
+.pulse-card h2,
+.news-card h3,
+.modal-title,
+.person-hero h1,
+.anime-name,
+.blog-hero-copy h1,
+.blog-hero-card h2,
+.post-featured h2,
+.sidebar-box h2,
+.blog-section-head h2,
+.post-card h3 {
+  color: #171717;
+}
+
+.nav a {
+  color: #5f594f;
+}
+
+.nav a:hover {
+  background: #f2eadb;
+  color: #171717;
+}
+
+.nav a.active,
+.btn-primary,
+.btn:hover {
+  background: #171717;
+  border-color: #171717;
+  color: #fffdf7;
+}
+
+.eyebrow,
+.post-kicker,
+.news-source {
+  color: #b33a2f;
+}
+
+.hero-copy,
+.blog-hero-copy {
+  background:
+    linear-gradient(90deg, rgba(255,253,247,0.97), rgba(255,253,247,0.82)),
+    url("https://images.unsplash.com/photo-1618331833071-ce81bd50d300?auto=format&fit=crop&w=1600&q=80");
+}
+
+.hero-copy,
+.hero-panel,
+.quick-links a,
+.news-card,
+.stat-card,
+.card,
+.modal,
+.blog-hero-copy,
+.blog-hero-card,
+.post-featured,
+.sidebar-box,
+.post-card,
+.blog-categories a {
+  background: #fffdf7;
+  border-color: #171717;
+  box-shadow: 7px 7px 0 rgba(23,23,23,0.08);
+}
+
+.hero-panel,
+.blog-hero-card,
+.quick-links a:nth-child(1),
+.quick-links a:nth-child(2),
+.quick-links a:nth-child(3),
+.quick-links a:nth-child(4),
+.blog-categories a:nth-child(2),
+.blog-categories a:nth-child(3),
+.blog-categories a:nth-child(4),
+.blog-categories a:nth-child(5),
+.member-card:nth-child(1),
+.member-card:nth-child(2),
+.member-card:nth-child(3),
+.member-card:nth-child(4),
+.news-card:nth-child(1),
+.news-card:nth-child(2),
+.news-card:nth-child(3),
+.post-featured,
+.sidebar-box:nth-child(1),
+.sidebar-box:nth-child(2),
+.post-card:nth-child(1),
+.post-card:nth-child(2),
+.post-card:nth-child(3),
+.post-card:nth-child(4) {
+  background: #fffdf7;
+}
+
+.blog-hero-card,
+.post-featured {
+  background: #f2eadb;
+}
+
+.sidebar-box:nth-child(1),
+.post-card:nth-child(3) {
+  background: #eef4ef;
+}
+
+.sidebar-box:nth-child(2),
+.post-card:nth-child(2) {
+  background: #f5ecef;
+}
+
+.post-card:nth-child(4) {
+  background: #edf3f5;
+}
+
+.hero-copy p,
+.blog-hero-copy p,
+.blog-hero-card p,
+.post-featured p,
+.post-card p {
+  color: #39342d;
+}
+
+.btn {
+  background: #fffdf7;
+  border-color: #171717;
+  color: #171717;
+  box-shadow: 4px 4px 0 rgba(23,23,23,0.08);
+}
+
+.btn-primary:hover {
+  background: #b33a2f;
+  border-color: #171717;
+  color: #fffdf7;
+}
+
+.quick-links a:hover,
+.news-card:hover,
+.stat-card:hover,
+.card:hover {
+  box-shadow: 9px 9px 0 rgba(23,23,23,0.1);
+}
+
+.mini-metrics span,
+.quick-links a span,
+.member-card footer span,
+.post-meta span,
+.post-tags span {
+  background: rgba(23,23,23,0.04);
+  border-color: rgba(23,23,23,0.12);
+  color: #5f594f;
+}
+
+thead th {
+  background: #171717;
+  color: #fffdf7;
+}
+
+thead th:hover,
+thead th.sorted {
+  color: #d9cdbc;
+}
+
+tbody tr:hover {
+  background: rgba(179,58,47,0.07);
+}
+
+.badge-genre {
+  background: #f2eadb;
+  color: #39342d;
+}
+
+.note-box,
+.comment-item,
+.modal-comment {
+  background: #fffdf7;
+}
+
+.blog-categories a {
+  color: #171717;
+}
+
 .blog-shell {
   margin: 0 auto;
   max-width: 1240px;

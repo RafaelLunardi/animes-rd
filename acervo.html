@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Acervo — Animes RD</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=comments" />
 </head>
 <body>
 
@@ -72,7 +72,7 @@
 
 <script type="module">
   import { loadData, formatNota } from "./js/data.js";
-  import { initTable } from "./js/table.js";
+  import { initTable } from "./js/table.js?v=comments";
 
   async function init() {
     const { animes, updatedAt, total } = await loadData();

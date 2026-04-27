@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,650;6..72,750&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Inter:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,650;6..72,750&display=swap');
 
 :root {
   --bg: #101014;
@@ -1700,13 +1700,13 @@ tbody tr:hover {
 
 .blog-hero-copy h1 {
   color: #1f2933;
-  font-family: 'Newsreader', serif;
-  font-size: clamp(48px, 8vw, 96px);
-  font-weight: 750;
-  letter-spacing: -0.055em;
-  line-height: 0.88;
-  margin-bottom: 24px;
-  max-width: 880px;
+  font-family: 'Baloo 2', 'Inter', sans-serif;
+  font-size: clamp(36px, 5.4vw, 68px);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.02;
+  margin-bottom: 22px;
+  max-width: 760px;
 }
 
 .blog-hero-copy p {

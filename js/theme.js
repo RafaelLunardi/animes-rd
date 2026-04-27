@@ -9,6 +9,7 @@ function getPreferredTheme() {
 
 function applyTheme(theme) {
   const isDark = theme === "dark";
+  document.documentElement.dataset.theme = theme;
   document.body.classList.toggle(DARK_CLASS, isDark);
   document.querySelectorAll("[data-theme-toggle]").forEach((button) => {
     button.setAttribute("aria-label", isDark ? "Ativar modo claro" : "Ativar modo noturno");

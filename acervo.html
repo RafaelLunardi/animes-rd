@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -54,11 +54,11 @@
         <thead>
           <tr>
             <th data-col="nome">Anime</th>
-            <th data-col="generos">GÃªneros</th>
+            <th data-col="generos">Gêneros</th>
             <th data-col="quemAssistiu">Quem assistiu</th>
-            <th data-col="nota">Nota â­</th>
+            <th data-col="nota">Nota ⭐</th>
             <th data-col="qtdVotos">Votos</th>
-            <th data-col="controversia">ðŸŒ¶ï¸</th>
+            <th data-col="controversia">🌶️</th>
           </tr>
         </thead>
         <tbody id="anime-tbody">
@@ -79,7 +79,7 @@
     // Updated at
     const d = new Date(updatedAt);
     document.getElementById("updated-at").textContent =
-      `${total} animes Â· atualizado em ${d.toLocaleDateString("pt-BR")} Ã s ${d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
+      `${total} animes · atualizado em ${d.toLocaleDateString("pt-BR")} às ${d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
 
     // Stats
     const withNota = animes.filter(a => a.nota !== null);
@@ -99,19 +99,19 @@
         <div class="stat-sub">na base de dados</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">MÃ©dia geral</div>
-        <div class="stat-value" style="color:#34d399">${avgAll ? avgAll.toFixed(2) : "â€”"}</div>
+        <div class="stat-label">Média geral</div>
+        <div class="stat-value" style="color:#34d399">${avgAll ? avgAll.toFixed(2) : "—"}</div>
         <div class="stat-sub">de 10</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Mais controverso ðŸŒ¶ï¸</div>
-        <div class="stat-value" style="color:#ef4444;font-size:18px">${mostContr ? mostContr.controversia.toFixed(1) : "â€”"}</div>
-        <div class="stat-sub" title="${mostContr?.nome}">${mostContr?.nome?.slice(0, 22) || "â€”"}</div>
+        <div class="stat-label">Mais controverso 🌶️</div>
+        <div class="stat-value" style="color:#ef4444;font-size:18px">${mostContr ? mostContr.controversia.toFixed(1) : "—"}</div>
+        <div class="stat-sub" title="${mostContr?.nome}">${mostContr?.nome?.slice(0, 22) || "—"}</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">Melhor nota â­</div>
-        <div class="stat-value" style="color:#f59e0b">${topRated ? Number(topRated.nota).toFixed(2) : "â€”"}</div>
-        <div class="stat-sub" title="${topRated?.nome}">${topRated?.nome?.slice(0, 22) || "â€”"}</div>
+        <div class="stat-label">Melhor nota ⭐</div>
+        <div class="stat-value" style="color:#f59e0b">${topRated ? Number(topRated.nota).toFixed(2) : "—"}</div>
+        <div class="stat-sub" title="${topRated?.nome}">${topRated?.nome?.slice(0, 22) || "—"}</div>
       </div>
     `;
 

@@ -12,45 +12,29 @@ import {
 } from "./data.js";
 
 const OPENINGS = {
-  Rafael: [
-    "again - Fullmetal Alchemist: Brotherhood",
-    "Unravel - Tokyo Ghoul",
-    "Gurenge - Demon Slayer",
-  ],
-  Fernando: [
-    "Departure! - Hunter x Hunter",
-    "Haruka Kanata - Naruto",
-    "Kaikai Kitan - Jujutsu Kaisen",
-  ],
-  Dudu: [
-    "The Rumbling - Attack on Titan",
-    "Blue Bird - Naruto Shippuden",
-    "Silhouette - Naruto Shippuden",
-  ],
-  Hacksuya: [
-    "Kyouran Hey Kids!! - Noragami Aragoto",
-    "Inferno - Fire Force",
-    "Kick Back - Chainsaw Man",
-  ],
+  Rafael: ["again", "Unravel", "Gurenge"],
+  Fernando: ["Departure!", "Haruka Kanata", "Kaikai Kitan"],
+  Dudu: ["The Rumbling", "Blue Bird", "Silhouette"],
+  Hacksuya: ["Kyouran Hey Kids!!", "Inferno", "Kick Back"],
 };
 
 const NEWS_PLACEHOLDER = [
   {
     source: "Anime News API",
     title: "Endpoint de notícias pronto para conectar",
-    summary: "Troque o array local por fetch('/api/news') quando a API estiver disponível.",
+    summary: "O blog já está preparado para receber título, resumo, fonte e link externo.",
     url: "#",
   },
   {
     source: "Temporada",
-    title: "Feed pode destacar estreias e continuações",
-    summary: "Cards pensados para título, resumo curto, fonte e link externo.",
+    title: "Estreias, continuações e trailers",
+    summary: "A seção pode virar um feed automático com novidades da temporada.",
     url: "#",
   },
   {
     source: "Radar RD",
-    title: "Curadoria do grupo também cabe aqui",
-    summary: "A mesma área pode misturar notícias externas com posts internos do blog.",
+    title: "Pautas internas do grupo",
+    summary: "Também dá para misturar posts próprios com notícias vindas da API.",
     url: "#",
   },
 ];
@@ -66,10 +50,10 @@ function sharedTop(animes) {
   return [...animes]
     .filter((anime) => anime.nota !== null && anime.qtdVotos > 1)
     .sort((a, b) => Number(b.nota) - Number(a.nota))
-    .slice(0, 5);
+    .slice(0, 6);
 }
 
-function shortName(name, size = 34) {
+function shortName(name, size = 44) {
   return name.length > size ? `${name.slice(0, size - 1)}...` : name;
 }
 
@@ -77,21 +61,37 @@ function renderHero(data) {
   const date = new Date(data.updatedAt);
   const top = sharedTop(data.animes)[0];
   document.getElementById("home-subtitle").textContent =
-    `${data.total} animes catalogados, atualizado em ${date.toLocaleDateString("pt-BR")}. Rankings, opiniões e tretas organizadas em um painel só.`;
+    `${data.total} animes catalogados, atualizado em ${date.toLocaleDateString("pt-BR")}. Um blog para transformar nota, treta e recomendação em leitura.`;
 
   document.getElementById("hero-panel").innerHTML = `
-    <span class="eyebrow">Anime em destaque</span>
+    <span class="post-kicker">Destaque do acervo</span>
     <h2>${top ? top.nome : "Base carregada"}</h2>
     <p>${top ? `Nota geral ${formatNota(top.nota)} com ${top.qtdVotos} votos no grupo.` : "Assim que houver dados, o destaque aparece aqui."}</p>
-    <div class="mini-metrics">
-      <span>${data.total} animes</span>
-      <span>${topGenres(data.animes, 1)[0]?.[0] || "Gêneros"}</span>
-      <span>${PEOPLE.length} membros</span>
-    </div>
+    <a href="acervo.html">Ler no acervo</a>
   `;
 }
 
-function renderMemberCards(animes) {
+function renderFeaturedPost(animes) {
+  const top = sharedTop(animes)[0];
+  const genre = topGenres(animes, 1)[0]?.[0] || "Ranking";
+
+  document.getElementById("featured-post").innerHTML = `
+    <span class="post-kicker">${genre}</span>
+    <h2>${top ? `${top.nome}: o consenso atual do grupo` : "O anime mais querido do acervo"}</h2>
+    <p>
+      A nota coletiva ajuda a separar hype de favorito real. Este destaque usa apenas animes
+      com mais de um voto para valorizar consenso, discordância e gosto compartilhado.
+    </p>
+    <div class="post-meta">
+      <span>${top ? `${formatNota(top.nota)} de média` : "Sem nota"}</span>
+      <span>${top ? `${top.qtdVotos} votos` : "0 votos"}</span>
+      <span>Acervo RD</span>
+    </div>
+    <a class="post-link" href="acervo.html">Abrir acervo completo</a>
+  `;
+}
+
+function renderMemberPosts(animes) {
   document.getElementById("member-grid").innerHTML = PEOPLE.map((person) => {
     const topAnimes = topAnimesByPerson(animes, person);
     const watched = animesOf(animes, person);
@@ -100,71 +100,41 @@ function renderMemberCards(animes) {
     const color = PERSON_LIGHTS[person];
 
     return `
-      <article class="member-card card" style="--member-color:${color}">
-        <header>
-          <div class="member-mark">${person[0]}</div>
-          <div>
-            <h3>${person}</h3>
-            <p>${watched.length} animes vistos · média ${avg ? avg.toFixed(2) : "--"}</p>
-          </div>
-        </header>
-
-        <div class="rank-block">
-          <h4>Top animes</h4>
-          <ol>
-            ${topAnimes.map((anime) => `
-              <li>
-                <span>${shortName(anime.nome)}</span>
-                <strong>${formatNota(getPersonNota(anime, person))}</strong>
-              </li>
-            `).join("") || "<li><span>Sem notas ainda</span><strong>--</strong></li>"}
-          </ol>
+      <article class="post-card" style="--member-color:${color}">
+        <span class="post-kicker">${person}</span>
+        <h3>Top 3 do ${person}</h3>
+        <p>${watched.length} animes vistos, média ${avg ? avg.toFixed(2) : "--"} e gênero mais recorrente: ${favoriteGenre(animes, person)}.</p>
+        <ol>
+          ${topAnimes.map((anime) => `
+            <li>
+              <span>${shortName(anime.nome, 36)}</span>
+              <strong>${formatNota(getPersonNota(anime, person))}</strong>
+            </li>
+          `).join("") || "<li><span>Sem notas ainda</span><strong>--</strong></li>"}
+        </ol>
+        <div class="post-tags">
+          ${(OPENINGS[person] || []).slice(0, 2).map((opening) => `<span>${opening}</span>`).join("")}
+          <span>${controversial ? `hot take: ${shortName(controversial.nome, 18)}` : "sem controvérsia"}</span>
         </div>
-
-        <div class="rank-block compact">
-          <h4>Top openings</h4>
-          <ol>
-            ${(OPENINGS[person] || []).map((opening) => `<li><span>${opening}</span></li>`).join("")}
-          </ol>
-        </div>
-
-        <footer>
-          <span>${favoriteGenre(animes, person)}</span>
-          <span>${controversial ? `hot take: ${shortName(controversial.nome, 22)}` : "sem controvérsia"}</span>
-        </footer>
+        <a href="${person.toLowerCase()}.html">Abrir perfil</a>
       </article>
     `;
   }).join("");
 }
 
-function renderSpotlight(animes) {
-  const topShared = sharedTop(animes);
+function renderPulse(animes) {
   const hottest = [...animes]
     .filter((anime) => anime.controversia !== null)
     .sort((a, b) => b.controversia - a.controversia)
-    .slice(0, 4);
-
-  document.getElementById("spotlight-card").innerHTML = `
-    <span class="eyebrow">Consenso do grupo</span>
-    <h2>Top animes com mais de um voto</h2>
-    <div class="spotlight-list">
-      ${topShared.map((anime, index) => `
-        <div>
-          <strong>${index + 1}</strong>
-          <span>${anime.nome}</span>
-          <em>${formatNota(anime.nota)}</em>
-        </div>
-      `).join("")}
-    </div>
-  `;
+    .slice(0, 5);
 
   document.getElementById("pulse-card").innerHTML = `
-    <span class="eyebrow">Termômetro</span>
-    <h2>Mais controversos</h2>
+    <span class="eyebrow">Mais controversos</span>
+    <h2>Onde a conversa esquenta</h2>
     <div class="hot-list">
       ${hottest.map((anime) => `
         <a href="acervo.html" title="${anime.nome}">
-          <span>${shortName(anime.nome, 28)}</span>
+          <span>${shortName(anime.nome, 30)}</span>
           <strong>${anime.controversia.toFixed(1)}</strong>
         </a>
       `).join("")}
@@ -186,8 +156,9 @@ function renderNews() {
 async function init() {
   const data = await loadData();
   renderHero(data);
-  renderMemberCards(data.animes);
-  renderSpotlight(data.animes);
+  renderFeaturedPost(data.animes);
+  renderMemberPosts(data.animes);
+  renderPulse(data.animes);
   renderNews();
 }
 

@@ -37,20 +37,20 @@ const OPENINGS = {
 const NEWS_PLACEHOLDER = [
   {
     source: "Anime News API",
-    title: "Endpoint de noticias pronto para conectar",
-    summary: "Troque o array local por fetch('/api/news') quando a API estiver disponivel.",
+    title: "Endpoint de notícias pronto para conectar",
+    summary: "Troque o array local por fetch('/api/news') quando a API estiver disponível.",
     url: "#",
   },
   {
     source: "Temporada",
-    title: "Feed pode destacar estreias e continuacoes",
-    summary: "Cards pensados para titulo, resumo curto, fonte e link externo.",
+    title: "Feed pode destacar estreias e continuações",
+    summary: "Cards pensados para título, resumo curto, fonte e link externo.",
     url: "#",
   },
   {
     source: "Radar RD",
-    title: "Curadoria do grupo tambem cabe aqui",
-    summary: "A mesma area pode misturar noticias externas com posts internos do blog.",
+    title: "Curadoria do grupo também cabe aqui",
+    summary: "A mesma área pode misturar notícias externas com posts internos do blog.",
     url: "#",
   },
 ];
@@ -77,7 +77,7 @@ function renderHero(data) {
   const date = new Date(data.updatedAt);
   const top = sharedTop(data.animes)[0];
   document.getElementById("home-subtitle").textContent =
-    `${data.total} animes catalogados, atualizado em ${date.toLocaleDateString("pt-BR")}. Rankings, opinioes e tretas organizadas em um painel so.`;
+    `${data.total} animes catalogados, atualizado em ${date.toLocaleDateString("pt-BR")}. Rankings, opiniões e tretas organizadas em um painel só.`;
 
   document.getElementById("hero-panel").innerHTML = `
     <span class="eyebrow">Anime em destaque</span>
@@ -85,7 +85,7 @@ function renderHero(data) {
     <p>${top ? `Nota geral ${formatNota(top.nota)} com ${top.qtdVotos} votos no grupo.` : "Assim que houver dados, o destaque aparece aqui."}</p>
     <div class="mini-metrics">
       <span>${data.total} animes</span>
-      <span>${topGenres(data.animes, 1)[0]?.[0] || "Generos"}</span>
+      <span>${topGenres(data.animes, 1)[0]?.[0] || "Gêneros"}</span>
       <span>${PEOPLE.length} membros</span>
     </div>
   `;
@@ -105,7 +105,7 @@ function renderMemberCards(animes) {
           <div class="member-mark">${person[0]}</div>
           <div>
             <h3>${person}</h3>
-            <p>${watched.length} animes vistos · media ${avg ? avg.toFixed(2) : "--"}</p>
+            <p>${watched.length} animes vistos · média ${avg ? avg.toFixed(2) : "--"}</p>
           </div>
         </header>
 
@@ -130,7 +130,7 @@ function renderMemberCards(animes) {
 
         <footer>
           <span>${favoriteGenre(animes, person)}</span>
-          <span>${controversial ? `hot take: ${shortName(controversial.nome, 22)}` : "sem controversia"}</span>
+          <span>${controversial ? `hot take: ${shortName(controversial.nome, 22)}` : "sem controvérsia"}</span>
         </footer>
       </article>
     `;
@@ -159,7 +159,7 @@ function renderSpotlight(animes) {
   `;
 
   document.getElementById("pulse-card").innerHTML = `
-    <span class="eyebrow">Termometro</span>
+    <span class="eyebrow">Termômetro</span>
     <h2>Mais controversos</h2>
     <div class="hot-list">
       ${hottest.map((anime) => `
@@ -178,7 +178,7 @@ function renderNews() {
       <span class="news-source">${item.source}</span>
       <h3>${item.title}</h3>
       <p>${item.summary}</p>
-      <a href="${item.url}" ${item.url === "#" ? 'aria-disabled="true"' : ""}>Ler noticia</a>
+      <a href="${item.url}" ${item.url === "#" ? 'aria-disabled="true"' : ""}>Ler notícia</a>
     </article>
   `).join("");
 }
@@ -193,5 +193,5 @@ async function init() {
 
 init().catch((error) => {
   console.error(error);
-  document.getElementById("home-subtitle").textContent = "Nao foi possivel carregar os dados agora.";
+  document.getElementById("home-subtitle").textContent = "Não foi possível carregar os dados agora.";
 });

@@ -8,10 +8,19 @@ const path = require("path");
 // **IMPORTANTE:** No GitHub Actions, o secret `FIREBASE_SERVICE_ACCOUNT_KEY` conterá o JSON completo.
 // Para rodar localmente, você precisará criar um arquivo `scripts/serviceAccountKey.json` manualmente.
 let serviceAccount;
-if (process.env.NODE_ENV === "production") { // Ambiente GitHub Actions
+if (process.env.FIREBASE_SERVICE_ACCOUNT_KEY) {
+  // Ambiente GitHub Actions (usa a Secret)
+  console.log("Usando credenciais da variável de ambiente...");
   serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY);
-} else { // Ambiente local
-  serviceAccount = require("./serviceAccountKey.json");
+} else {
+  // Ambiente local (usa o arquivo)
+  console.log("Usando credenciais do arquivo local serviceAccountKey.json...");
+  try {
+    serviceAccount = require("./serviceAccountKey.json");
+  } catch (err) {
+    console.error("Erro: Arquivo serviceAccountKey.json não encontrado e variável FIREBASE_SERVICE_ACCOUNT_KEY não definida.");
+    process.exit(1);
+  }
 }
 
 admin.initializeApp({

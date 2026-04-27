@@ -57,13 +57,45 @@ function shortName(name, size = 44) {
   return name.length > size ? `${name.slice(0, size - 1)}...` : name;
 }
 
-function renderHero(data) {
+async function getAnimeHeroImage(anime) {
+  if (!anime?.malId) return "";
+  const cacheKey = `jikan-hero-image-${anime.malId}`;
+  const cached = localStorage.getItem(cacheKey);
+  if (cached) return cached;
+
+  const res = await fetch(`https://api.jikan.moe/v4/anime/${encodeURIComponent(anime.malId)}`);
+  if (!res.ok) return "";
+  const payload = await res.json();
+  const imageUrl =
+    payload?.data?.images?.webp?.large_image_url ||
+    payload?.data?.images?.jpg?.large_image_url ||
+    payload?.data?.images?.webp?.image_url ||
+    payload?.data?.images?.jpg?.image_url ||
+    "";
+
+  if (imageUrl) {
+    try {
+      localStorage.setItem(cacheKey, imageUrl);
+    } catch {}
+  }
+
+  return imageUrl;
+}
+
+async function renderHero(data) {
   const date = new Date(data.updatedAt);
   const top = sharedTop(data.animes)[0];
+  const heroImage = await getAnimeHeroImage(top);
   document.getElementById("home-subtitle").textContent =
     `${data.total} animes catalogados, atualizado em ${date.toLocaleDateString("pt-BR")}. Um blog para transformar nota, treta e recomendação em leitura.`;
 
-  document.getElementById("hero-panel").innerHTML = `
+  const heroPanel = document.getElementById("hero-panel");
+  if (heroImage) {
+    heroPanel.style.setProperty("--hero-anime-bg", `url("${heroImage}")`);
+    heroPanel.classList.add("has-bg");
+  }
+
+  heroPanel.innerHTML = `
     <span class="post-kicker">Destaque do acervo</span>
     <h2>${top ? top.nome : "Base carregada"}</h2>
     <p>${top ? `Nota geral ${formatNota(top.nota)} com ${top.qtdVotos} votos no grupo.` : "Assim que houver dados, o destaque aparece aqui."}</p>
@@ -155,7 +187,7 @@ function renderNews() {
 
 async function init() {
   const data = await loadData();
-  renderHero(data);
+  await renderHero(data);
   renderFeaturedPost(data.animes);
   renderMemberPosts(data.animes);
   renderPulse(data.animes);

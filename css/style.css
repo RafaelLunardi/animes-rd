@@ -2396,6 +2396,22 @@ body.dark-theme .blog-hero-card:not(.has-bg) {
   border-color: rgba(251,191,36,0.38);
 }
 
+body.dark-theme .blog-hero-card.has-bg {
+  background:
+    linear-gradient(180deg, rgba(16,16,20,0.58), rgba(16,16,20,0.86)),
+    linear-gradient(90deg, rgba(16,16,20,0.8), rgba(16,16,20,0.38)),
+    var(--hero-anime-bg);
+  background-position: center;
+  background-size: cover;
+  border-color: rgba(251,191,36,0.55);
+}
+
+body.dark-theme .blog-hero-card.has-bg h2,
+body.dark-theme .blog-hero-card.has-bg p,
+body.dark-theme .blog-hero-card.has-bg a {
+  color: #fff8e7;
+}
+
 body.dark-theme .table-wrap,
 body.dark-theme table {
   background: rgba(24,23,29,0.7);

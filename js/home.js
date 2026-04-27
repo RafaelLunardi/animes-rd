@@ -102,8 +102,8 @@ async function renderHero(data) {
   const heroPanel = document.getElementById("hero-panel");
   if (heroImage) {
     heroPanel.style.background = `
-      linear-gradient(180deg, rgba(16,16,20,0.58), rgba(16,16,20,0.86)),
-      linear-gradient(90deg, rgba(16,16,20,0.82), rgba(16,16,20,0.38)),
+      linear-gradient(180deg, rgba(16,16,20,0.5), rgba(16,16,20,0.8)),
+      linear-gradient(90deg, rgba(16,16,20,0.76), rgba(16,16,20,0.3)),
       url("${heroImage}")
     `;
     heroPanel.style.backgroundPosition = "center";

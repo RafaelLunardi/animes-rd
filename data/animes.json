@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-27T23:33:24.234Z",
+  "updatedAt": "2026-04-27T23:52:16.478Z",
   "total": 175,
   "animes": [
     {
@@ -4428,18 +4428,12 @@
     {
       "id": "3416beab-c784-8109-92f9-daaa7507f7f7",
       "nome": "Akame ga Kill!",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Hacksuya"
-      ],
       "nota": "6.95",
       "generos": [
         "Ação ⚔️",
         "Shounen 💥",
         "Drama 😢"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": 5.2,
       "notaFernando": 8.7,
@@ -4453,7 +4447,22 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 22199
+      "malId": 22199,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Protagonista lixo, chora chora e não faz nada. O poder do prota também é uma bosta.\n\nAkame é linda S2"
+        }
+      ],
+      "comentarios": "Rafael: Protagonista lixo, chora chora e não faz nada. O poder do prota também é uma bosta.\n\nAkame é linda S2",
+      "updatedAt": {
+        "_seconds": 1777333863,
+        "_nanoseconds": 899000000
+      }
     },
     {
       "id": "3416beab-c784-80ac-b85d-edbb259d8ad7",

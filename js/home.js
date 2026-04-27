@@ -39,6 +39,10 @@ const NEWS_PLACEHOLDER = [
   },
 ];
 
+const HERO_IMAGE_FALLBACKS = {
+  52991: "https://cdn.myanimelist.net/images/anime/1015/138006l.jpg",
+};
+
 function topAnimesByPerson(animes, person) {
   return animesOf(animes, person)
     .filter((anime) => getPersonNota(anime, person) !== null)
@@ -59,19 +63,25 @@ function shortName(name, size = 44) {
 
 async function getAnimeHeroImage(anime) {
   if (!anime?.malId) return "";
+  if (HERO_IMAGE_FALLBACKS[anime.malId]) return HERO_IMAGE_FALLBACKS[anime.malId];
   const cacheKey = `jikan-hero-image-${anime.malId}`;
   const cached = localStorage.getItem(cacheKey);
   if (cached) return cached;
 
-  const res = await fetch(`https://api.jikan.moe/v4/anime/${encodeURIComponent(anime.malId)}`);
-  if (!res.ok) return "";
-  const payload = await res.json();
-  const imageUrl =
-    payload?.data?.images?.webp?.large_image_url ||
-    payload?.data?.images?.jpg?.large_image_url ||
-    payload?.data?.images?.webp?.image_url ||
-    payload?.data?.images?.jpg?.image_url ||
-    "";
+  let imageUrl = "";
+  try {
+    const res = await fetch(`https://api.jikan.moe/v4/anime/${encodeURIComponent(anime.malId)}`);
+    if (!res.ok) return "";
+    const payload = await res.json();
+    imageUrl =
+      payload?.data?.images?.webp?.large_image_url ||
+      payload?.data?.images?.jpg?.large_image_url ||
+      payload?.data?.images?.webp?.image_url ||
+      payload?.data?.images?.jpg?.image_url ||
+      "";
+  } catch {
+    return "";
+  }
 
   if (imageUrl) {
     try {
@@ -91,7 +101,13 @@ async function renderHero(data) {
 
   const heroPanel = document.getElementById("hero-panel");
   if (heroImage) {
-    heroPanel.style.setProperty("--hero-anime-bg", `url("${heroImage}")`);
+    heroPanel.style.background = `
+      linear-gradient(180deg, rgba(16,16,20,0.58), rgba(16,16,20,0.86)),
+      linear-gradient(90deg, rgba(16,16,20,0.82), rgba(16,16,20,0.38)),
+      url("${heroImage}")
+    `;
+    heroPanel.style.backgroundPosition = "center";
+    heroPanel.style.backgroundSize = "cover";
     heroPanel.classList.add("has-bg");
   }
 

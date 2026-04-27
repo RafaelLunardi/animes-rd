@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acervo — Animes RD</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<nav class="nav">
+  <span class="nav-logo">✦ Animes RD</span>
+  <a href="index.html">Início</a>
+  <a href="acervo.html" class="active">Acervo</a>
+  <a href="charts.html">Gráficos</a>
+  <a href="compare.html">Comparar</a>
+  <div class="nav-person">
+    <a href="rafael.html">
+      <span class="nav-avatar" style="background:rgba(124,58,237,0.3);color:#a78bfa">R</span>
+      Rafael
+    </a>
+    <a href="fernando.html">
+      <span class="nav-avatar" style="background:rgba(236,72,153,0.3);color:#f9a8d4">F</span>
+      Fernando
+    </a>
+    <a href="dudu.html">
+      <span class="nav-avatar" style="background:rgba(52,211,153,0.3);color:#6ee7b7">D</span>
+      Dudu
+    </a>
+    <a href="hacksuya.html">
+      <span class="nav-avatar" style="background:rgba(6,182,212,0.3);color:#67e8f9">H</span>
+      Hacksuya
+    </a>
+  </div>
+</nav>
+
+<main class="page">
+  <div class="page-header">
+    <h1>📺 Acervo Animes RD</h1>
+    <p id="updated-at">Carregando dados...</p>
+  </div>
+
+  <div class="stats-grid" id="stats-grid">
+    <div class="stat-card"><div class="skeleton" style="width:60%;margin-bottom:8px"></div><div class="skeleton" style="width:40%;height:30px"></div></div>
+    <div class="stat-card"><div class="skeleton" style="width:60%;margin-bottom:8px"></div><div class="skeleton" style="width:40%;height:30px"></div></div>
+    <div class="stat-card"><div class="skeleton" style="width:60%;margin-bottom:8px"></div><div class="skeleton" style="width:40%;height:30px"></div></div>
+    <div class="stat-card"><div class="skeleton" style="width:60%;margin-bottom:8px"></div><div class="skeleton" style="width:40%;height:30px"></div></div>
+  </div>
+
+  <div class="card" style="margin-bottom:28px">
+    <div id="filters" class="filters"></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th data-col="nome">Anime</th>
+            <th data-col="generos">GÃªneros</th>
+            <th data-col="quemAssistiu">Quem assistiu</th>
+            <th data-col="nota">Nota â­</th>
+            <th data-col="qtdVotos">Votos</th>
+            <th data-col="controversia">ðŸŒ¶ï¸</th>
+          </tr>
+        </thead>
+        <tbody id="anime-tbody">
+          <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--faint)">Carregando...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+  import { loadData, formatNota } from "./js/data.js";
+  import { initTable } from "./js/table.js";
+
+  async function init() {
+    const { animes, updatedAt, total } = await loadData();
+
+    // Updated at
+    const d = new Date(updatedAt);
+    document.getElementById("updated-at").textContent =
+      `${total} animes Â· atualizado em ${d.toLocaleDateString("pt-BR")} Ã s ${d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
+
+    // Stats
+    const withNota = animes.filter(a => a.nota !== null);
+    const avgAll = withNota.reduce((s, a) => s + Number(a.nota), 0) / withNota.length;
+
+    const mostContr = [...animes].filter(a => a.controversia !== null)
+      .sort((a, b) => b.controversia - a.controversia)[0];
+
+    const topVoted = [...animes].sort((a, b) => (b.qtdVotos || 0) - (a.qtdVotos || 0))[0];
+    const topRated = [...animes].filter(a => a.nota !== null)
+      .sort((a, b) => Number(b.nota) - Number(a.nota))[0];
+
+    document.getElementById("stats-grid").innerHTML = `
+      <div class="stat-card">
+        <div class="stat-label">Total de animes</div>
+        <div class="stat-value" style="color:#a78bfa">${total}</div>
+        <div class="stat-sub">na base de dados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">MÃ©dia geral</div>
+        <div class="stat-value" style="color:#34d399">${avgAll ? avgAll.toFixed(2) : "â€”"}</div>
+        <div class="stat-sub">de 10</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Mais controverso ðŸŒ¶ï¸</div>
+        <div class="stat-value" style="color:#ef4444;font-size:18px">${mostContr ? mostContr.controversia.toFixed(1) : "â€”"}</div>
+        <div class="stat-sub" title="${mostContr?.nome}">${mostContr?.nome?.slice(0, 22) || "â€”"}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Melhor nota â­</div>
+        <div class="stat-value" style="color:#f59e0b">${topRated ? Number(topRated.nota).toFixed(2) : "â€”"}</div>
+        <div class="stat-sub" title="${topRated?.nome}">${topRated?.nome?.slice(0, 22) || "â€”"}</div>
+      </div>
+    `;
+
+    initTable(animes);
+  }
+
+  init().catch(console.error);
+</script>
+</body>
+</html>
+
+
+

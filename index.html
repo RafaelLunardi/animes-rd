@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -11,113 +11,110 @@
 <nav class="nav">
   <span class="nav-logo">✦ Animes RD</span>
   <a href="index.html" class="active">Início</a>
+  <a href="acervo.html">Acervo</a>
   <a href="charts.html">Gráficos</a>
   <a href="compare.html">Comparar</a>
   <div class="nav-person">
-    <a href="rafael.html">
-      <span class="nav-avatar" style="background:rgba(124,58,237,0.3);color:#a78bfa">R</span>
-      Rafael
-    </a>
-    <a href="fernando.html">
-      <span class="nav-avatar" style="background:rgba(236,72,153,0.3);color:#f9a8d4">F</span>
-      Fernando
-    </a>
-    <a href="dudu.html">
-      <span class="nav-avatar" style="background:rgba(52,211,153,0.3);color:#6ee7b7">D</span>
-      Dudu
-    </a>
-    <a href="hacksuya.html">
-      <span class="nav-avatar" style="background:rgba(6,182,212,0.3);color:#67e8f9">H</span>
-      Hacksuya
-    </a>
+    <a href="rafael.html"><span class="nav-avatar" style="background:rgba(124,58,237,0.3);color:#a78bfa">R</span>Rafael</a>
+    <a href="fernando.html"><span class="nav-avatar" style="background:rgba(236,72,153,0.3);color:#f9a8d4">F</span>Fernando</a>
+    <a href="dudu.html"><span class="nav-avatar" style="background:rgba(52,211,153,0.3);color:#6ee7b7">D</span>Dudu</a>
+    <a href="hacksuya.html"><span class="nav-avatar" style="background:rgba(6,182,212,0.3);color:#67e8f9">H</span>Hacksuya</a>
   </div>
 </nav>
 
-<main class="page">
-  <div class="page-header">
-    <h1>📺 Animes RD</h1>
-    <p id="updated-at">Carregando dados...</p>
-  </div>
-
-  <div class="stats-grid" id="stats-grid">
-    <div class="stat-card"><div class="skeleton" style="width:60%;margin-bottom:8px"></div><div class="skeleton" style="width:40%;height:30px"></div></div>
-    <div class="stat-card"><div class="skeleton" style="width:60%;margin-bottom:8px"></div><div class="skeleton" style="width:40%;height:30px"></div></div>
-    <div class="stat-card"><div class="skeleton" style="width:60%;margin-bottom:8px"></div><div class="skeleton" style="width:40%;height:30px"></div></div>
-    <div class="stat-card"><div class="skeleton" style="width:60%;margin-bottom:8px"></div><div class="skeleton" style="width:40%;height:30px"></div></div>
-  </div>
-
-  <div class="card" style="margin-bottom:28px">
-    <div id="filters" class="filters"></div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th data-col="nome">Anime</th>
-            <th data-col="generos">Gêneros</th>
-            <th data-col="quemAssistiu">Quem assistiu</th>
-            <th data-col="nota">Nota ⭐</th>
-            <th data-col="qtdVotos">Votos</th>
-            <th data-col="controversia">🌶️</th>
-          </tr>
-        </thead>
-        <tbody id="anime-tbody">
-          <tr><td colspan="6" style="text-align:center;padding:32px;color:var(--faint)">Carregando...</td></tr>
-        </tbody>
-      </table>
+<main class="page home-page">
+  <section class="home-hero">
+    <div class="hero-copy">
+      <span class="eyebrow">Watchlist da tropa</span>
+      <h1>Animes RD</h1>
+      <p id="home-subtitle">Carregando os dados do Notion...</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="acervo.html">Ver tabela</a>
+        <a class="btn" href="charts.html">Explorar grÃ¡ficos</a>
+        <a class="btn" href="compare.html">Comparar membros</a>
+      </div>
     </div>
-  </div>
+    <div class="hero-panel" id="hero-panel">
+      <div class="skeleton" style="height:18px;width:50%;margin-bottom:16px"></div>
+      <div class="skeleton" style="height:34px;width:80%;margin-bottom:10px"></div>
+      <div class="skeleton" style="height:14px;width:65%"></div>
+    </div>
+  </section>
+
+  <section class="quick-links" aria-label="Atalhos">
+    <a href="acervo.html">
+      <strong>Acervo completo</strong>
+      <span>busca, filtros e notas</span>
+    </a>
+    <a href="charts.html">
+      <strong>GrÃ¡ficos gerais</strong>
+      <span>gÃªneros, mÃ©dias e rankings</span>
+    </a>
+    <a href="compare.html">
+      <strong>Comparador</strong>
+      <span>duelos entre membros</span>
+    </a>
+    <a href="#noticias">
+      <strong>NotÃ­cias</strong>
+      <span>Ã¡rea pronta para API</span>
+    </a>
+  </section>
+
+  <section class="section-head">
+    <div>
+      <span class="eyebrow">Top 3 por membro</span>
+      <h2>Favoritos, openings e assinatura de gosto</h2>
+    </div>
+    <p>Os animes vÃªm do Notion. Os openings ficam em um bloco editÃ¡vel no JavaScript da home.</p>
+  </section>
+
+  <section class="member-grid" id="member-grid">
+    <div class="card"><div class="skeleton" style="height:260px"></div></div>
+    <div class="card"><div class="skeleton" style="height:260px"></div></div>
+    <div class="card"><div class="skeleton" style="height:260px"></div></div>
+    <div class="card"><div class="skeleton" style="height:260px"></div></div>
+  </section>
+
+  <section class="feature-row">
+    <div class="feature-main card" id="spotlight-card">
+      <div class="skeleton" style="height:260px"></div>
+    </div>
+    <aside class="card pulse-card" id="pulse-card">
+      <div class="skeleton" style="height:260px"></div>
+    </aside>
+  </section>
+
+  <section class="section-head" id="noticias">
+    <div>
+      <span class="eyebrow">Radar otaku</span>
+      <h2>NotÃ­cias</h2>
+    </div>
+    <p>Estrutura pronta para conectar em uma API de notÃ­cias de anime.</p>
+  </section>
+
+  <section class="news-grid" id="news-grid">
+    <article class="news-card">
+      <span class="news-source">API em breve</span>
+      <h3>Temporada nova no radar</h3>
+      <p>Quando a integraÃ§Ã£o entrar, este card recebe tÃ­tulo, resumo, fonte e link automaticamente.</p>
+      <a href="#" aria-disabled="true">Aguardando endpoint</a>
+    </article>
+    <article class="news-card">
+      <span class="news-source">API em breve</span>
+      <h3>Estreias e continuaÃ§Ãµes</h3>
+      <p>EspaÃ§o para novidades de lanÃ§amentos, trailers e anÃºncios relevantes para a base.</p>
+      <a href="#" aria-disabled="true">Aguardando endpoint</a>
+    </article>
+    <article class="news-card">
+      <span class="news-source">API em breve</span>
+      <h3>Ranking da semana</h3>
+      <p>A Ã¡rea pode exibir notÃ­cias externas ou um feed prÃ³prio curado pelo grupo.</p>
+      <a href="#" aria-disabled="true">Aguardando endpoint</a>
+    </article>
+  </section>
 </main>
 
-<script type="module">
-  import { loadData, formatNota } from "./js/data.js";
-  import { initTable } from "./js/table.js";
-
-  async function init() {
-    const { animes, updatedAt, total } = await loadData();
-
-    // Updated at
-    const d = new Date(updatedAt);
-    document.getElementById("updated-at").textContent =
-      `${total} animes · atualizado em ${d.toLocaleDateString("pt-BR")} às ${d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
-
-    // Stats
-    const withNota = animes.filter(a => a.nota !== null);
-    const avgAll = withNota.reduce((s, a) => s + Number(a.nota), 0) / withNota.length;
-
-    const mostContr = [...animes].filter(a => a.controversia !== null)
-      .sort((a, b) => b.controversia - a.controversia)[0];
-
-    const topVoted = [...animes].sort((a, b) => (b.qtdVotos || 0) - (a.qtdVotos || 0))[0];
-    const topRated = [...animes].filter(a => a.nota !== null)
-      .sort((a, b) => Number(b.nota) - Number(a.nota))[0];
-
-    document.getElementById("stats-grid").innerHTML = `
-      <div class="stat-card">
-        <div class="stat-label">Total de animes</div>
-        <div class="stat-value" style="color:#a78bfa">${total}</div>
-        <div class="stat-sub">na base de dados</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Média geral</div>
-        <div class="stat-value" style="color:#34d399">${avgAll ? avgAll.toFixed(2) : "—"}</div>
-        <div class="stat-sub">de 10</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Mais controverso 🌶️</div>
-        <div class="stat-value" style="color:#ef4444;font-size:18px">${mostContr ? mostContr.controversia.toFixed(1) : "—"}</div>
-        <div class="stat-sub" title="${mostContr?.nome}">${mostContr?.nome?.slice(0, 22) || "—"}</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">Melhor nota ⭐</div>
-        <div class="stat-value" style="color:#f59e0b">${topRated ? Number(topRated.nota).toFixed(2) : "—"}</div>
-        <div class="stat-sub" title="${topRated?.nome}">${topRated?.nome?.slice(0, 22) || "—"}</div>
-      </div>
-    `;
-
-    initTable(animes);
-  }
-
-  init().catch(console.error);
-</script>
+<script type="module" src="js/home.js"></script>
 </body>
 </html>
+

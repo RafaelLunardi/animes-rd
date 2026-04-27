@@ -68,7 +68,7 @@ button, input, select { font: inherit; }
   display: flex;
   gap: 6px;
   height: 64px;
-  padding: 0 max(24px, calc((100vw - 1240px) / 2));
+  padding: 0 24px;
   position: sticky;
   top: 0;
   z-index: 100;

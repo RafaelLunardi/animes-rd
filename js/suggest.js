@@ -522,19 +522,33 @@ async function handleSubmitAnime() {
 
 // --- Listener para Animes Pendentes ---
 
+let unsubscribePendingListener = null;
 let lastAnimesData = [];
+
 function startPendingAnimesListener() {
-  if (!db) return;
+  if (!db || !currentUser) return;
+
+  // Limpa listener anterior se existir para evitar duplicados
+  if (unsubscribePendingListener) {
+    unsubscribePendingListener();
+  }
 
   const q = query(pendingAnimesRef, orderBy("createdAt", "desc"));
 
-  onSnapshot(q, (snapshot) => {
+  unsubscribePendingListener = onSnapshot(q, (snapshot) => {
     const animes = [];
     snapshot.forEach(doc => {
       animes.push({ ...doc.data(), id: doc.id });
     });
     lastAnimesData = animes;
     renderPendingAnimes(animes);
+  }, (error) => {
+    console.error("Erro no listener de pendentes:", error);
+    if (error.code === 'permission-denied') {
+        pendingAnimesContainer.innerHTML = "<p style='color: var(--error); text-align:center; padding:40px'>Acesso negado. Você tem permissão para ver esta lista?</p>";
+    } else {
+        pendingAnimesContainer.innerHTML = "<p style='color: var(--error); text-align:center; padding:40px'>Erro ao carregar fila de aprovação.</p>";
+    }
   });
 }
 
@@ -546,11 +560,16 @@ async function init() {
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       await processUser(user);
+      startPendingAnimesListener();
     } else {
       currentUser = null;
+      if (unsubscribePendingListener) {
+        unsubscribePendingListener();
+        unsubscribePendingListener = null;
+      }
+      renderUIForUser(null);
+      pendingAnimesContainer.innerHTML = "<p style='color: var(--faint); text-align:center; padding:40px'>Faça login para ver a fila de aprovação.</p>";
     }
-    renderUIForUser(currentUser);
-    startPendingAnimesListener();
   });
 }
 

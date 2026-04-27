@@ -10,6 +10,7 @@
 
 <nav class="nav">
   <span class="nav-logo">✦ Animes RD</span>
+  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar modo noturno" title="Modo noturno">☾</button>
   <a href="index.html">Início</a>
   <a href="acervo.html">Acervo</a>
   <a href="charts.html">Gráficos</a>
@@ -168,6 +169,7 @@
     ? missed.slice(0,20).map(a => `<li><span class="name">${a.nome}</span><span class="empty-score">${a.quemAssistiu.join(", ")}</span></li>`).join("")
     : `<li style="color:var(--faint)">Assistiu tudo! 🎉</li>`;
 </script>
+<script type="module" src="./js/theme.js"></script>
 </body>
 </html>
 

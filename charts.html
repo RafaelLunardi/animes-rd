@@ -10,6 +10,7 @@
 
 <nav class="nav">
   <span class="nav-logo">✦ Animes RD</span>
+  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar modo noturno" title="Modo noturno">☾</button>
   <a href="index.html">Início</a>
   <a href="acervo.html">Acervo</a>
   <a href="charts.html" class="active">Gráficos</a>
@@ -87,6 +88,7 @@
   const { animes } = await loadData();
   renderAllCharts(animes);
 </script>
+<script type="module" src="./js/theme.js"></script>
 </body>
 </html>
 

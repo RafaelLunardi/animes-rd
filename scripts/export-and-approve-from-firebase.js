@@ -58,7 +58,9 @@ async function exportAndApproveAnimes() {
           id: animeId, // Mantém o ID original
           nome: animeData.nome,
           generos: animeData.generos,
-          comentarios: "", // Inicializa campos que podem não existir se ninguém votou 'Assisti'
+          malId: animeData.malId || null,
+          comentarios: "", 
+          comments: [], // Novo campo estruturado
           files: [],
           maisDeUmVoto: "nao",
           qtdVotos: 0,
@@ -73,6 +75,7 @@ async function exportAndApproveAnimes() {
 
         let totalScore = 0;
         let scoreCount = 0;
+        const allComments = [];
 
         // Processa os votos individuais para popular os campos finais
         for (const personName of PEOPLE) {
@@ -87,12 +90,17 @@ async function exportAndApproveAnimes() {
             if (personName === "Dudu") finalAnime.notaDudu = vote.score;
             if (personName === "Hacksuya") finalAnime.notaHacksuya = vote.score;
 
-            // Guarda o primeiro comentário encontrado para o anime (pode ser refinado)
-            if (!finalAnime.comentarios && vote.comment) {
-              finalAnime.comentarios = vote.comment;
+            if (vote.comment && vote.comment.trim()) {
+              allComments.push(`${personName}: ${vote.comment.trim()}`);
+              finalAnime.comments.push({
+                person: personName,
+                text: vote.comment.trim()
+              });
             }
           }
         }
+
+        finalAnime.comentarios = allComments.join("\n");
 
         if (scoreCount > 0) {
           finalAnime.nota = (totalScore / scoreCount).toFixed(2);

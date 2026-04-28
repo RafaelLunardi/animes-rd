@@ -222,6 +222,7 @@ function renderFeaturedPost(animes) {
   const comments = featuredComments(animes, top);
 
   document.getElementById("featured-post").innerHTML = `
+    <h2 class="featured-comment-title">Comentários</h2>
     <div class="featured-comment-wall" id="featured-comments" aria-live="polite"></div>
     <div class="featured-post-content">
       <p>

@@ -1919,7 +1919,7 @@ tbody tr:hover {
 .blog-section-head h2 {
   color: #1f2933;
   font-family: 'Baloo 2', 'Inter', sans-serif;
-  font-size: clamp(36px, 5.4vw, 68px);
+  font-size: clamp(28px, 3.4vw, 44px);
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.02;

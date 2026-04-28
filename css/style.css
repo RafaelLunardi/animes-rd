@@ -2264,7 +2264,9 @@ body.dark-theme .post-featured .featured-comment-title {
 }
 
 .nav-logo,
-body.dark-theme .nav-logo {
+.brand-gradient,
+body.dark-theme .nav-logo,
+body.dark-theme .brand-gradient {
   background: linear-gradient(90deg, #bbf7d0 0%, #a7f3d0 42%, #bae6fd 100%);
   background-clip: text;
   -webkit-background-clip: text;

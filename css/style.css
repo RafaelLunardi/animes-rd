@@ -3029,32 +3029,18 @@ body.suggest-page.dark-theme::before {
   box-shadow: 0 26px 70px rgba(0,0,0,0.34);
   display: grid;
   gap: 34px;
-  grid-template-columns: minmax(230px, 360px) 1fr;
+  grid-template-columns: 190px 1fr;
   margin-bottom: 30px;
   padding: 32px;
 }
 
-.nyx-portrait {
-  align-self: stretch;
-  background:
-    radial-gradient(circle at 50% 18%, rgba(216,180,254,0.26), transparent 42%),
-    linear-gradient(180deg, rgba(18,16,24,0.2), rgba(18,16,24,0.66));
-  border: 1px solid rgba(216,180,254,0.38);
-  border-radius: 28px;
-  box-shadow: 0 22px 60px rgba(88,28,135,0.3);
-  display: flex;
-  justify-content: center;
-  min-height: 460px;
-  overflow: hidden;
-}
-
-.nyx-portrait img {
-  display: block;
-  height: 100%;
-  max-height: 560px;
-  object-fit: contain;
-  object-position: bottom center;
-  width: 100%;
+.nyx-hero img {
+  aspect-ratio: 1;
+  border: 2px solid rgba(216,180,254,0.74);
+  border-radius: 999px;
+  box-shadow: 0 16px 44px rgba(88,28,135,0.36);
+  object-fit: cover;
+  width: 190px;
 }
 
 .nyx-hero h1,
@@ -3192,8 +3178,8 @@ body.suggest-page.dark-theme::before {
     padding: 24px;
   }
 
-  .nyx-portrait {
-    min-height: 360px;
+  .nyx-hero img {
+    width: 132px;
   }
 
   .nyx-results {

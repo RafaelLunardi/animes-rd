@@ -62,6 +62,15 @@ function shortName(name, size = 44) {
   return name.length > size ? `${name.slice(0, size - 1)}...` : name;
 }
 
+function shuffleItems(items) {
+  const shuffled = [...items];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+  }
+  return shuffled;
+}
+
 function escapeHTML(value) {
   return String(value ?? "").replace(/[&<>"']/g, (char) => ({
     "&": "&amp;",
@@ -104,17 +113,14 @@ function commentsForAnime(anime) {
 
 function featuredComments(animes, featuredAnime) {
   const mainComments = commentsForAnime(featuredAnime);
-  if (mainComments.length >= 3) return mainComments;
-
   const otherComments = animes.flatMap((anime) => commentsForAnime(anime));
 
-  return [...mainComments, ...otherComments]
+  return shuffleItems([...mainComments, ...otherComments]
     .filter((comment, index, list) =>
       list.findIndex((item) =>
         item.animeId === comment.animeId && item.person === comment.person && item.text === comment.text
       ) === index
-    )
-    .slice(0, 18);
+    ));
 }
 
 function renderCommentBalloons(comments) {
@@ -140,8 +146,9 @@ function startFeaturedCommentRotation(comments) {
   }
 
   const batches = [];
-  for (let index = 0; index < comments.length; index += 6) {
-    batches.push(comments.slice(index, index + 6));
+  const shuffledComments = shuffleItems(comments);
+  for (let index = 0; index < shuffledComments.length; index += 6) {
+    batches.push(shuffledComments.slice(index, index + 6));
   }
 
   if (!batches.length) {
@@ -155,11 +162,18 @@ function startFeaturedCommentRotation(comments) {
     wall.hidden = false;
     wall.innerHTML = renderCommentBalloons(batches[index]);
     index = (index + 1) % batches.length;
+    if (index === 0 && batches.length > 1) {
+      const reshuffled = shuffleItems(comments);
+      batches.splice(0, batches.length);
+      for (let nextIndex = 0; nextIndex < reshuffled.length; nextIndex += 6) {
+        batches.push(reshuffled.slice(nextIndex, nextIndex + 6));
+      }
+    }
   };
 
   renderBatch();
   if (batches.length > 1) {
-    featuredCommentTimer = setInterval(renderBatch, 30000);
+    featuredCommentTimer = setInterval(renderBatch, 12000);
   }
 }
 

@@ -455,14 +455,14 @@ function renderComments(anime) {
 
 function renderAuthBox() {
   if (!isFirebaseConfigured) {
-    return `<p class="edit-status">Firebase nÃ£o configurado para ediÃ§Ã£o.</p>`;
+    return `<p class="edit-status">Firebase não configurado para edição.</p>`;
   }
 
   if (!currentUser) {
     return `
       <section class="anime-edit-panel">
         <h3>Editar sua nota</h3>
-        <p>FaÃ§a login para editar apenas a sua nota e o seu comentÃ¡rio.</p>
+        <p>Faça login para editar apenas a sua nota e o seu comentário.</p>
         <button class="edit-button" type="button" data-login-action>Login com Google</button>
       </section>
     `;
@@ -509,11 +509,11 @@ function renderEditForm(anime) {
         <input id="anime-edit-score" type="number" min="0" max="10" step="0.1" value="${score}" />
       </label>
       <label class="edit-field">
-        <span>ComentÃ¡rio</span>
-        <textarea id="anime-edit-comment" maxlength="600" placeholder="Escreva seu comentÃ¡rio...">${escapeHTML(comment)}</textarea>
+        <span>Comentário</span>
+        <textarea id="anime-edit-comment" maxlength="600" placeholder="Escreva seu comentário...">${escapeHTML(comment)}</textarea>
       </label>
       <div class="anime-edit-actions">
-        <button class="edit-button" type="button" data-save-anime-edit>${hasScore || comment ? "Salvar alteraÃ§Ãµes" : "Enviar nota"}</button>
+        <button class="edit-button" type="button" data-save-anime-edit>${hasScore || comment ? "Salvar alterações" : "Enviar nota"}</button>
         <span id="anime-edit-status" class="edit-status"></span>
       </div>
     </section>
@@ -533,8 +533,8 @@ function showUserSelectionModal() {
   overlay.className = "user-selection-overlay";
   overlay.innerHTML = `
     <div class="user-selection-modal">
-      <h3>Quem Ã© vocÃª?</h3>
-      <p>Essa escolha define qual nota e comentÃ¡rio vocÃª pode editar.</p>
+      <h3>Quem é você?</h3>
+      <p>Essa escolha define qual nota e comentário você pode editar.</p>
       <div class="person-select-list">
         ${PEOPLE.map((person) => `
           <button type="button" data-person-name="${person}">
@@ -604,7 +604,7 @@ async function saveAnimeEdit(anime) {
 
     await runTransaction(db, async (transaction) => {
       const snap = await transaction.get(docRef);
-      if (!snap.exists()) throw new Error("Anime nÃ£o encontrado no Firebase.");
+      if (!snap.exists()) throw new Error("Anime não encontrado no Firebase.");
 
       const current = { ...anime, ...snap.data(), id: anime.id };
       current[noteField] = score;

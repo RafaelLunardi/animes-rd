@@ -31,7 +31,7 @@ function recommendationReason(anime, person, favorite) {
   const watchers = (anime.quemAssistiu || []).filter((name) => name !== person);
   const genreMatch = (anime.generos || []).some((genre) => cleanGenre(genre) === cleanGenre(favorite));
   if (genreMatch) return `combina com seu gosto por ${cleanGenre(favorite)}`;
-  if (watchers.length) return `${watchers.join(", ")} ja viu e a nota geral esta forte`;
+  if (watchers.length) return `${watchers.join(", ")} já viu e a nota geral está forte`;
   return "tem uma nota geral alta no acervo";
 }
 
@@ -62,7 +62,7 @@ function renderRecommendations(data, person) {
   const output = document.getElementById("nyx-results");
 
   document.getElementById("nyx-summary").textContent =
-    `${person} ja assistiu ${watched} animes. A Nyx separou dicas que ainda nao estao na lista dessa pessoa.`;
+    `${person} já assistiu ${watched} animes. A Nyx separou dicas que ainda não estão na lista dessa pessoa.`;
 
   output.innerHTML = recommendations.map((anime, index) => `
     <a class="nyx-rec-card" href="acervo.html?anime=${encodeURIComponent(anime.id)}">
@@ -73,7 +73,7 @@ function renderRecommendations(data, person) {
         <small>Nota geral ${formatNota(anime.nota)} · ${anime.qtdVotos || 0} voto(s)</small>
       </div>
     </a>
-  `).join("") || `<p class="nyx-empty">A Nyx nao encontrou recomendacoes novas agora.</p>`;
+  `).join("") || `<p class="nyx-empty">A Nyx não encontrou recomendações novas agora.</p>`;
 }
 
 async function init() {
@@ -94,5 +94,5 @@ async function init() {
 
 init().catch((error) => {
   console.error(error);
-  document.getElementById("nyx-summary").textContent = "A Nyx nao conseguiu carregar o acervo agora.";
+  document.getElementById("nyx-summary").textContent = "A Nyx não conseguiu carregar o acervo agora.";
 });

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hacksuya — Animes RD</title>
-  <link rel="stylesheet" href="css/style.css?v=nyx-icon-only-1" />
+  <title>Hacksuya â€” Animes RD</title>
+  <link rel="stylesheet" href="css/style.css?v=copy-fix-1" />
   <script type="module" src="./js/theme.js?v=dark-default-1"></script>
 </head>
 <body>
@@ -13,11 +13,11 @@
   <a class="nav-logo" href="index.html">Animes RD</a>
   <a href="index.html">Blog</a>
   <a href="acervo.html">Acervo</a>
-  <a href="charts.html">Gráficos</a>
+  <a href="charts.html">GrÃ¡ficos</a>
   <a href="compare.html">Comparar</a>
   <a href="suggest.html">Sugerir Anime</a>
-  <a href="pending.html">Fila de Aprovação</a>
-  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar modo noturno" title="Modo noturno">?</button>
+  <a href="pending.html">Fila de AprovaÃ§Ã£o</a>
+  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar modo noturno" title="Modo noturno">â˜¾</button>
   <div class="nav-person">
     <a href="rafael.html"><span class="nav-avatar" style="background:rgba(124,58,237,0.18);color:#6f45d8">R</span>Rafael</a>
     <a href="fernando.html"><span class="nav-avatar" style="background:rgba(236,72,153,0.18);color:#d83182">F</span>Fernando</a>
@@ -39,7 +39,7 @@
 
   <div class="grid-2" style="margin-bottom:28px">
     <div class="card">
-      <div class="card-title">Distribuição de gêneros</div>
+      <div class="card-title">DistribuiÃ§Ã£o de gÃªneros</div>
       <div class="chart-container" style="height:260px">
         <canvas id="chartPie"></canvas>
       </div>
@@ -54,13 +54,13 @@
 
   <div class="grid-2">
     <div class="card">
-      <div class="card-title">Animes exclusivos ??</div>
-      <p style="font-size:12px;color:var(--faint);margin-bottom:12px">Só Hacksuya assistiu</p>
+      <div class="card-title">Animes exclusivos</div>
+      <p style="font-size:12px;color:var(--faint);margin-bottom:12px">SÃ³ Hacksuya assistiu</p>
       <ul class="anime-list" id="list-exclusive"></ul>
     </div>
     <div class="card">
-      <div class="card-title">Ainda não assistiu ??</div>
-      <p style="font-size:12px;color:var(--faint);margin-bottom:12px">Os outros já viram</p>
+      <div class="card-title">Ainda nÃ£o assistiu</div>
+      <p style="font-size:12px;color:var(--faint);margin-bottom:12px">Os outros jÃ¡ viram</p>
       <ul class="anime-list" id="list-missed"></ul>
     </div>
   </div>
@@ -95,21 +95,21 @@
       <div class="stat-value" style="color:${LIGHT}">${mine.length}</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Gênero favorito</div>
+      <div class="stat-label">GÃªnero favorito</div>
       <div class="stat-value" style="font-size:16px;color:${LIGHT}">${genre}</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Média de notas</div>
-      <div class="stat-value" style="color:#34d399">${avg ? avg.toFixed(2) : "—"}</div>
+      <div class="stat-label">MÃ©dia de notas</div>
+      <div class="stat-value" style="color:#34d399">${avg ? avg.toFixed(2) : "â€”"}</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Anime favorito ?</div>
-      <div class="stat-value" style="font-size:15px;color:${LIGHT}" title="${fav?.nome}">${fav ? fav.nome.slice(0,18) : "—"}</div>
+      <div class="stat-label">Anime favorito</div>
+      <div class="stat-value" style="font-size:15px;color:${LIGHT}" title="${fav?.nome}">${fav ? fav.nome.slice(0,18) : "â€”"}</div>
       <div class="stat-sub">${fav ? pNota(fav)?.toFixed(1) : ""}</div>
     </div>
     <div class="stat-card">
-      <div class="stat-label">Mais controverso ???</div>
-      <div class="stat-value" style="font-size:15px;color:#ef4444" title="${contr?.nome}">${contr ? contr.nome.slice(0,18) : "—"}</div>
+      <div class="stat-label">Mais controverso</div>
+      <div class="stat-value" style="font-size:15px;color:#ef4444" title="${contr?.nome}">${contr ? contr.nome.slice(0,18) : "â€”"}</div>
       <div class="stat-sub">${contr ? "diff " + contr.controversia.toFixed(1) : ""}</div>
     </div>
   `;
@@ -142,7 +142,7 @@
   new Chart(document.getElementById("chartNotas"), {
     type: "bar",
     data: {
-      labels: top10.length ? top10.map(a => a.nome.length > 20 ? a.nome.slice(0,18)+"…" : a.nome) : ["Nenhum dado"],
+      labels: top10.length ? top10.map(a => a.nome.length > 20 ? a.nome.slice(0,18)+"â€”" : a.nome) : ["Nenhum dado"],
       datasets: [{
         data: top10.map(a => pNota(a)),
         backgroundColor: hexAlpha(COLOR, 0.75),
@@ -168,7 +168,7 @@
   const missed = missedAnimes(animes, PERSON);
   document.getElementById("list-missed").innerHTML = missed.length
     ? missed.slice(0,20).map(a => `<li><span class="name">${a.nome}</span><span class="empty-score">${a.quemAssistiu.join(", ")}</span></li>`).join("")
-    : `<li style="color:var(--faint)">Assistiu tudo! ??</li>`;
+    : `<li style="color:var(--faint)">Assistiu tudo!</li>`;
 </script>
 <script type="module" src="js/nyx-widget.js?v=nyx-icon-only-1"></script>
 </body>

@@ -110,7 +110,7 @@ function commentsForAnime(anime) {
       .map((comment) => ({
         animeId: anime.id,
         anime: anime.nome,
-        person: comment.person || "Comentario",
+        person: comment.person || "Comentário",
         text: comment.text,
       }));
   }
@@ -126,7 +126,7 @@ function commentsForAnime(anime) {
     .filter(Boolean)
     .map((line) => {
       const match = line.match(linePattern);
-      if (!match) return { animeId: anime.id, anime: anime.nome, person: "Comentario", text: line };
+      if (!match) return { animeId: anime.id, anime: anime.nome, person: "Comentário", text: line };
       const person = PEOPLE.find((name) => name.toLowerCase() === match[1].toLowerCase()) || match[1];
       return { animeId: anime.id, anime: anime.nome, person, text: match[2].trim() };
     })

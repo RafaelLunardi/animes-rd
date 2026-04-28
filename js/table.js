@@ -345,7 +345,7 @@ window.openModal = function(idx) {
   ];
 
   document.getElementById("modal-notes").innerHTML = notas.map((n) => `
-    <div class="note-box">
+    <div class="note-box" style="--note-color:${n.color}">
       <div class="person" style="color:${n.color}">${n.person}</div>
       <div class="score ${n.nota === null ? 'empty' : notaColor(n.nota)}">
         ${n.nota !== null ? Number(n.nota).toFixed(1) : "—"}

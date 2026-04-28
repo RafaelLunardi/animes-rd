@@ -2999,10 +2999,11 @@ body::-webkit-scrollbar-thumb:hover {
 body.dark-theme .note-box,
 .note-box {
   background:
-    linear-gradient(145deg, rgba(255,255,255,0.045), rgba(255,255,255,0.012)),
+    linear-gradient(145deg, color-mix(in srgb, var(--note-color, #ddd6fe) 20%, transparent), rgba(255,255,255,0.012)),
     rgba(12,12,17,0.72);
-  border: 1px solid rgba(221,214,254,0.16);
+  border: 1px solid color-mix(in srgb, var(--note-color, #ddd6fe) 42%, rgba(221,214,254,0.16));
   border-radius: 16px;
+  box-shadow: 0 14px 34px color-mix(in srgb, var(--note-color, #ddd6fe) 12%, transparent);
   padding: 16px;
 }
 

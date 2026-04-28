@@ -3,7 +3,7 @@
 import {
   PEOPLE, PERSON_COLORS, cleanGenreLabel,
   topGenres, countGenres, animesOf
-} from "./data.js";
+} from "./data.js?v=dudu-yellow-1";
 
 Chart.defaults.color = "#94a3b8";
 Chart.defaults.font.family = "'Poppins', sans-serif";

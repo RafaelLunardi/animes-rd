@@ -24,14 +24,14 @@ export const PEOPLE = ["Rafael", "Fernando", "Dudu", "Hacksuya"];
 export const PERSON_COLORS = {
   Rafael: "#7c3aed",
   Fernando: "#ec4899",
-  Dudu: "#34d399",
+  Dudu: "#eab308",
   Hacksuya: "#06b6d4",
 };
 
 export const PERSON_LIGHTS = {
   Rafael: "#a78bfa",
   Fernando: "#f9a8d4",
-  Dudu: "#6ee7b7",
+  Dudu: "#fde68a",
   Hacksuya: "#67e8f9",
 };
 

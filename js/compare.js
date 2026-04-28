@@ -4,7 +4,7 @@ import {
   PEOPLE, PERSON_COLORS, PERSON_LIGHTS,
   animesOf, commonAnimes, countGenres,
   topGenres, cleanGenreLabel, formatNota, notaColor
-} from "./data.js";
+} from "./data.js?v=dudu-yellow-1";
 
 Chart.defaults.color = "#94a3b8";
 Chart.defaults.font.family = "'Poppins', sans-serif";

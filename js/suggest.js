@@ -5,7 +5,7 @@ import { getFirestore, collection, addDoc, getDocs, doc, getDoc, updateDoc, serv
 import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
 import { firebaseConfig } from "./firebase-config.js";
-import { PEOPLE, PERSON_COLORS, PERSON_LIGHTS, personKey, getPersonNota, formatNota, notaColor } from "./data.js";
+import { PEOPLE, PERSON_COLORS, PERSON_LIGHTS, personKey, getPersonNota, formatNota, notaColor } from "./data.js?v=dudu-yellow-1";
 
 const GENRE_TRANSLATION = {
   "Action": "Ação", "Adventure": "Aventura", "Comedy": "Comédia", "Drama": "Drama",

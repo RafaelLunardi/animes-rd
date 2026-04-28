@@ -8,7 +8,7 @@ import {
   getPersonNota,
   loadData,
   mostControversial,
-} from "./data.js";
+} from "./data.js?v=dudu-yellow-1";
 
 const OPENINGS = {
   Rafael: ["again", "Unravel", "Gurenge"],

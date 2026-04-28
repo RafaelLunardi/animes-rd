@@ -5,7 +5,7 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChang
 import { getFirestore, doc, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebase-config.js";
-import { formatNota, notaColor, PEOPLE, PERSON_COLORS, PERSON_LIGHTS } from "./data.js";
+import { formatNota, notaColor, PEOPLE, PERSON_COLORS, PERSON_LIGHTS } from "./data.js?v=dudu-yellow-1";
 
 let allAnimes = [];
 let filtered = [];

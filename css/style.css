@@ -1862,15 +1862,12 @@ tbody tr:hover {
 }
 
 .featured-comment-wall {
-  align-content: flex-start;
-  align-items: flex-start;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
+  flex: 1 1 auto;
   margin-bottom: 34px;
   max-width: 760px;
-  min-height: 230px;
+  min-height: 330px;
   position: relative;
+  width: 100%;
   z-index: 1;
 }
 
@@ -1885,28 +1882,62 @@ tbody tr:hover {
   --balloon-tilt: -1.5deg;
   animation: balloonFloat 24s ease-in-out infinite;
   background: linear-gradient(145deg, rgba(236,253,245,0.96), rgba(187,247,208,0.76));
-  border: 1px solid rgba(134,239,172,0.68);
+  border: 1.5px solid var(--balloon-color);
   border-radius: 20px 20px 20px 6px;
   box-shadow: 0 16px 34px rgba(23,23,23,0.1);
-  flex: 0 1 auto;
   max-width: min(100%, 320px);
   min-width: 190px;
   padding: 14px 16px;
+  position: absolute;
   transform: translateY(0) rotate(var(--balloon-tilt));
   width: fit-content;
+}
+
+.comment-balloon-1 {
+  left: 0;
+  top: 4%;
 }
 
 .comment-balloon-2 {
   --balloon-drift: -7px;
   --balloon-tilt: 1.5deg;
   border-radius: 20px 20px 6px 20px;
-  margin-top: 22px;
+  max-width: 270px;
+  right: 4%;
+  top: 0;
 }
 
 .comment-balloon-3 {
   --balloon-drift: 6px;
   --balloon-tilt: -0.5deg;
-  margin-top: 8px;
+  left: 34%;
+  max-width: 300px;
+  top: 32%;
+}
+
+.comment-balloon-4 {
+  --balloon-drift: -6px;
+  --balloon-tilt: 1deg;
+  bottom: 10%;
+  left: 3%;
+  max-width: 260px;
+}
+
+.comment-balloon-5 {
+  --balloon-drift: 7px;
+  --balloon-tilt: -1deg;
+  border-radius: 20px 20px 6px 20px;
+  bottom: 12%;
+  max-width: 310px;
+  right: 0;
+}
+
+.comment-balloon-6 {
+  --balloon-drift: -5px;
+  --balloon-tilt: 0.6deg;
+  bottom: 0;
+  left: 30%;
+  max-width: 250px;
 }
 
 .comment-balloon strong {
@@ -2117,12 +2148,16 @@ tbody tr:hover {
   .blog-hero-card,
   .post-featured { min-height: 340px; }
   .featured-comment-wall {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     min-height: 0;
   }
   .comment-balloon {
     margin-top: 0;
     max-width: 100%;
     min-width: 0;
+    position: static;
     width: 100%;
   }
   .post-grid { grid-template-columns: 1fr; }
@@ -2522,7 +2557,6 @@ body.dark-theme .blog-hero-card.has-bg a {
 
 body.dark-theme .comment-balloon {
   background: linear-gradient(145deg, rgba(187,247,208,0.2), rgba(24,23,29,0.86));
-  border-color: rgba(187,247,208,0.42);
   box-shadow: 0 16px 34px rgba(0,0,0,0.22);
 }
 

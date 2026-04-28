@@ -136,8 +136,8 @@ function startFeaturedCommentRotation(comments) {
   }
 
   const batches = [];
-  for (let index = 0; index < comments.length; index += 3) {
-    batches.push(comments.slice(index, index + 3));
+  for (let index = 0; index < comments.length; index += 6) {
+    batches.push(comments.slice(index, index + 6));
   }
 
   if (!batches.length) {

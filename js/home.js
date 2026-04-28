@@ -43,6 +43,7 @@ const HERO_IMAGE_FALLBACKS = {
 };
 
 const FEATURED_ROTATION_HOURS = 5;
+const FEATURED_ROTATION_SALT = "test-swap-1";
 
 let featuredCommentTimer = null;
 
@@ -75,7 +76,7 @@ function featuredAnimeForNow(animes) {
 
   const rotationMs = FEATURED_ROTATION_HOURS * 60 * 60 * 1000;
   const rotationBlock = Math.floor(Date.now() / rotationMs);
-  const seed = Math.abs(hashText(`animes-rd-featured-${rotationBlock}`));
+  const seed = Math.abs(hashText(`animes-rd-featured-${FEATURED_ROTATION_SALT}-${rotationBlock}`));
   return candidates[seed % candidates.length];
 }
 

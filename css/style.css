@@ -1789,10 +1789,10 @@ tbody tr:hover {
 
 body.blog-page {
   background:
-    radial-gradient(circle at 14% 9%, rgba(124,58,237,0.16), transparent 360px),
-    radial-gradient(circle at 86% 4%, rgba(6,182,212,0.12), transparent 380px),
-    radial-gradient(circle at 58% 70%, rgba(234,179,8,0.055), transparent 520px),
-    linear-gradient(135deg, #08090d 0%, #101016 40%, #071416 100%);
+    radial-gradient(circle at 14% 34%, rgba(124,58,237,0.095), transparent 520px),
+    radial-gradient(circle at 86% 28%, rgba(6,182,212,0.075), transparent 540px),
+    radial-gradient(circle at 56% 82%, rgba(234,179,8,0.035), transparent 620px),
+    linear-gradient(155deg, #08090d 0%, #0e0f15 48%, #071315 100%);
 }
 
 body.blog-page::before {
@@ -2906,10 +2906,10 @@ body:not(.dark-theme) .person-select-list button {
 
 body.blog-page.dark-theme {
   background:
-    radial-gradient(circle at 14% 9%, rgba(124,58,237,0.16), transparent 360px),
-    radial-gradient(circle at 86% 4%, rgba(6,182,212,0.12), transparent 380px),
-    radial-gradient(circle at 58% 70%, rgba(234,179,8,0.055), transparent 520px),
-    linear-gradient(135deg, #08090d 0%, #101016 40%, #071416 100%);
+    radial-gradient(circle at 14% 34%, rgba(124,58,237,0.095), transparent 520px),
+    radial-gradient(circle at 86% 28%, rgba(6,182,212,0.075), transparent 540px),
+    radial-gradient(circle at 56% 82%, rgba(234,179,8,0.035), transparent 620px),
+    linear-gradient(155deg, #08090d 0%, #0e0f15 48%, #071315 100%);
 }
 
 body.blog-page.dark-theme::before {

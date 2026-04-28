@@ -1,10 +1,10 @@
-Ôªø<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Acervo ‚Äî Animes RD</title>
-  <link rel="stylesheet" href="css/style.css?v=nav-logo-link-1" />
+  <title>Acervo ó Animes RD</title>
+  <link rel="stylesheet" href="css/style.css?v=nyx-widget-1" />
   <script type="module" src="./js/theme.js?v=dark-default-1"></script>
 </head>
 <body>
@@ -13,11 +13,11 @@
   <a class="nav-logo" href="index.html">Animes RD</a>
   <a href="index.html">Blog</a>
   <a href="acervo.html" class="active">Acervo</a>
-  <a href="charts.html">Gr√°ficos</a>
+  <a href="charts.html">Gr·ficos</a>
   <a href="compare.html">Comparar</a>
   <a href="suggest.html">Sugerir Anime</a>
-  <a href="pending.html">Fila de Aprova√ß√£o</a>
-  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar modo noturno" title="Modo noturno">‚òæ</button>
+  <a href="pending.html">Fila de AprovaÁ„o</a>
+  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar modo noturno" title="Modo noturno">?</button>
   <div class="nav-person">
     <a href="rafael.html"><span class="nav-avatar" style="background:rgba(124,58,237,0.18);color:#6f45d8">R</span>Rafael</a>
     <a href="fernando.html"><span class="nav-avatar" style="background:rgba(236,72,153,0.18);color:#d83182">F</span>Fernando</a>
@@ -46,11 +46,11 @@
         <thead>
           <tr>
             <th data-col="nome">Anime</th>
-            <th data-col="generos">G√™neros</th>
+            <th data-col="generos">GÍneros</th>
             <th data-col="quemAssistiu">Quem assistiu</th>
-            <th data-col="nota">Nota ‚≠ê</th>
+            <th data-col="nota">Nota ?</th>
             <th data-col="qtdVotos">Votos</th>
-            <th data-col="controversia">üå∂Ô∏è</th>
+            <th data-col="controversia">???</th>
           </tr>
         </thead>
         <tbody id="anime-tbody">
@@ -71,7 +71,7 @@
     // Updated at
     const d = new Date(updatedAt);
     document.getElementById("updated-at").textContent =
-      `${total} animes ¬∑ atualizado em ${d.toLocaleDateString("pt-BR")} √†s ${d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
+      `${total} animes ∑ atualizado em ${d.toLocaleDateString("pt-BR")} ‡s ${d.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" })}`;
 
     // Stats
     const withNota = animes.filter(a => a.nota !== null);
@@ -91,19 +91,19 @@
         <div class="stat-sub">na base de dados</div>
       </div>
       <div class="stat-card">
-        <div class="stat-label">M√©dia geral</div>
-        <div class="stat-value" style="color:#ff9dcc">${avgAll ? avgAll.toFixed(2) : "‚Äî"}</div>
+        <div class="stat-label">MÈdia geral</div>
+        <div class="stat-value" style="color:#ff9dcc">${avgAll ? avgAll.toFixed(2) : "ó"}</div>
         <div class="stat-sub">de 10</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Mais controverso</div>
-        <div class="stat-value" style="color:#86efac">${mostContr ? mostContr.controversia.toFixed(1) : "‚Äî"}</div>
-        <div class="stat-sub" title="${mostContr?.nome}">${mostContr?.nome?.slice(0, 22) || "‚Äî"}</div>
+        <div class="stat-value" style="color:#86efac">${mostContr ? mostContr.controversia.toFixed(1) : "ó"}</div>
+        <div class="stat-sub" title="${mostContr?.nome}">${mostContr?.nome?.slice(0, 22) || "ó"}</div>
       </div>
       <div class="stat-card">
         <div class="stat-label">Melhor nota</div>
-        <div class="stat-value" style="color:#67e8f9">${topRated ? Number(topRated.nota).toFixed(2) : "‚Äî"}</div>
-        <div class="stat-sub" title="${topRated?.nome}">${topRated?.nome?.slice(0, 22) || "‚Äî"}</div>
+        <div class="stat-value" style="color:#67e8f9">${topRated ? Number(topRated.nota).toFixed(2) : "ó"}</div>
+        <div class="stat-sub" title="${topRated?.nome}">${topRated?.nome?.slice(0, 22) || "ó"}</div>
       </div>
     `;
 
@@ -112,6 +112,7 @@
 
   init().catch(console.error);
 </script>
+<script type="module" src="js/nyx-widget.js?v=nyx-widget-1"></script>
 </body>
 </html>
 

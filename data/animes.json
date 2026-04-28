@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-28T05:09:43.437Z",
+  "updatedAt": "2026-04-28T08:03:11.733Z",
   "total": 176,
   "animes": [
     {
@@ -143,18 +143,12 @@
     {
       "id": "3416beab-c784-8141-878f-edc65a311ea1",
       "nome": "Konosuba",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Hacksuya"
-      ],
       "nota": "9.50",
       "generos": [
         "Isekai 🌍✨",
         "Comédia 😂",
         "Fantasia 🧙"
       ],
-      "comentarios": "",
       "files": [
         {
           "name": "Opening 1",
@@ -181,7 +175,22 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 30831
+      "malId": 30831,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "O anime é excepcional no que se propõe, minha comédia favorita e um dos meus animes favoritos."
+        }
+      ],
+      "comentarios": "Rafael: O anime é excepcional no que se propõe, minha comédia favorita e um dos meus animes favoritos.",
+      "updatedAt": {
+        "_seconds": 1777355302,
+        "_nanoseconds": 258000000
+      }
     },
     {
       "id": "3416beab-c784-8195-9eda-d6d1680f445a",
@@ -409,6 +418,44 @@
       "malId": 10087
     },
     {
+      "id": "3416beab-c784-81fb-8be1-ebdbccb1bc62",
+      "nome": "TONIKAWA: Over the Moon for You",
+      "quemAssistiu": [
+        "Rafael"
+      ],
+      "generos": [
+        "Romance 💖",
+        "Comédia 😂",
+        "Slice of Life 🍃"
+      ],
+      "files": [],
+      "notaFernando": null,
+      "notaDudu": null,
+      "notaHacksuya": null,
+      "maisDeUmVoto": "nao",
+      "controversia": 0,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 41389,
+      "qtdVotos": 1,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Um dos melhores animes de romance, sem enrolação nenhuma, inclui um mistério muitooo foda!"
+        }
+      ],
+      "notaSort": 9.4,
+      "notaRafael": 9.4,
+      "comentarios": "Rafael: Um dos melhores animes de romance, sem enrolação nenhuma, inclui um mistério muitooo foda!",
+      "nota": "9.40",
+      "updatedAt": {
+        "_seconds": 1777354681,
+        "_nanoseconds": 861000000
+      }
+    },
+    {
       "id": "3416beab-c784-8191-9b94-c56419f16a29",
       "nome": "Fullmetal Alchemist: Brotherhood",
       "quemAssistiu": [
@@ -442,18 +489,12 @@
     {
       "id": "3416beab-c784-8142-8f36-fe93636e2c44",
       "nome": "Solo Leveling",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu"
-      ],
       "nota": "9.33",
       "generos": [
         "Ação ⚔️",
         "Shounen 💥",
         "Fantasia 🧙"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": 9.5,
       "notaFernando": 9.5,
@@ -461,13 +502,29 @@
       "notaHacksuya": null,
       "maisDeUmVoto": "sim",
       "qtdVotos": 3,
-      "notaSort": 9.333333333333,
       "controversia": 0.5,
       "migratedAt": {
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 52299
+      "malId": 52299,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Do jeitinho que eu gosto: protagonista apelão, habilidades roubadas e cenas de luta em alta velocidade com facas/adagas. Um mel!"
+        }
+      ],
+      "notaSort": 9.33,
+      "comentarios": "Rafael: Do jeitinho que eu gosto: protagonista apelão, habilidades roubadas e cenas de luta em alta velocidade com facas/adagas. Um mel!",
+      "updatedAt": {
+        "_seconds": 1777355198,
+        "_nanoseconds": 537000000
+      }
     },
     {
       "id": "3416beab-c784-8193-8d95-ec2007cb4e4c",
@@ -824,37 +881,6 @@
       "malId": 28121
     },
     {
-      "id": "3416beab-c784-81b8-b86e-cc9ccb05f870",
-      "nome": "Overlord",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu",
-        "Hacksuya"
-      ],
-      "nota": "9.10",
-      "generos": [
-        "Ação ⚔️",
-        "Isekai 🌍✨",
-        "Fantasia 🧙"
-      ],
-      "comentarios": "",
-      "files": [],
-      "notaRafael": 10,
-      "notaFernando": 8.8,
-      "notaDudu": 8.5,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "sim",
-      "qtdVotos": 3,
-      "notaSort": 9.1,
-      "controversia": 1.5,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 29803
-    },
-    {
       "id": "3416beab-c784-81c6-a4ec-ec066b9464f0",
       "nome": "No Game, No Life",
       "quemAssistiu": [
@@ -1145,6 +1171,41 @@
         "_nanoseconds": 493000000
       },
       "malId": 40748
+    },
+    {
+      "id": "3416beab-c784-81b8-b86e-cc9ccb05f870",
+      "nome": "Overlord",
+      "generos": [
+        "Ação ⚔️",
+        "Isekai 🌍✨",
+        "Fantasia 🧙"
+      ],
+      "comentarios": "",
+      "files": [],
+      "notaFernando": 8.8,
+      "notaDudu": 8.5,
+      "notaHacksuya": null,
+      "maisDeUmVoto": "sim",
+      "qtdVotos": 3,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 29803,
+      "controversia": 1.1,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [],
+      "notaSort": 8.97,
+      "notaRafael": 9.6,
+      "nota": "8.97",
+      "updatedAt": {
+        "_seconds": 1777354467,
+        "_nanoseconds": 978000000
+      }
     },
     {
       "id": "3416beab-c784-8127-b096-e5bb98fd2bac",
@@ -1734,12 +1795,16 @@
         {
           "person": "Dudu",
           "text": "Só as tetas da Rias Gremory ja valem um 10, mas coloquei um 9 pra não aloprar"
+        },
+        {
+          "person": "Rafael",
+          "text": "Peitos gostosos!"
         }
       ],
-      "comentarios": "Dudu: Só as tetas da Rias Gremory ja valem um 10, mas coloquei um 9 pra não aloprar",
+      "comentarios": "Dudu: Só as tetas da Rias Gremory ja valem um 10, mas coloquei um 9 pra não aloprar\nRafael: Peitos gostosos!",
       "updatedAt": {
-        "_seconds": 1777351963,
-        "_nanoseconds": 87000000
+        "_seconds": 1777353180,
+        "_nanoseconds": 817000000
       }
     },
     {
@@ -1819,7 +1884,6 @@
         "Slice of Life 🍃",
         "Comédia 😂"
       ],
-      "comentarios": "",
       "files": [
         {
           "name": "Opening 1",
@@ -1838,7 +1902,18 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 54744
+      "malId": 54744,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Delicia, gata, gostosa, waifu perfeita, só não dou nota 10 porque o povo vai xiar."
+        }
+      ],
+      "comentarios": "Rafael: Delicia, gata, gostosa, waifu perfeita, só não dou nota 10 porque o povo vai xiar.",
+      "updatedAt": {
+        "_seconds": 1777354516,
+        "_nanoseconds": 426000000
+      }
     },
     {
       "id": "3416beab-c784-8147-add1-c91abe0de226",
@@ -1936,18 +2011,18 @@
       "nota": "8.63",
       "comments": [
         {
-          "person": "Rafael",
-          "text": "Bomba."
-        },
-        {
           "person": "Dudu",
           "text": "Melhor prota dos animes, não perdoa uma."
+        },
+        {
+          "person": "Rafael",
+          "text": "Obrigatório."
         }
       ],
-      "comentarios": "Rafael: Bomba.\nDudu: Melhor prota dos animes, não perdoa uma.",
+      "comentarios": "Dudu: Melhor prota dos animes, não perdoa uma.\nRafael: Obrigatório.",
       "updatedAt": {
-        "_seconds": 1777352464,
-        "_nanoseconds": 668000000
+        "_seconds": 1777353342,
+        "_nanoseconds": 313000000
       }
     },
     {
@@ -2036,6 +2111,44 @@
         "_nanoseconds": 493000000
       },
       "malId": 50346
+    },
+    {
+      "id": "3416beab-c784-81f1-a3d4-dcc59c9014b1",
+      "nome": "Bocchi the Rock!",
+      "quemAssistiu": [
+        "Rafael"
+      ],
+      "generos": [
+        "Comédia 😂",
+        "Slice of Life 🍃",
+        "Drama 😢"
+      ],
+      "files": [],
+      "notaFernando": null,
+      "notaDudu": null,
+      "notaHacksuya": null,
+      "maisDeUmVoto": "nao",
+      "controversia": 0,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 47917,
+      "qtdVotos": 1,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Muito bom para o que se propõe, um anime único. Para relaxar, é excelente. Para quem gosta de tocar algum instrumento musical, vai curtir demais."
+        }
+      ],
+      "notaSort": 8.6,
+      "notaRafael": 8.6,
+      "comentarios": "Rafael: Muito bom para o que se propõe, um anime único. Para relaxar, é excelente. Para quem gosta de tocar algum instrumento musical, vai curtir demais.",
+      "nota": "8.60",
+      "updatedAt": {
+        "_seconds": 1777354870,
+        "_nanoseconds": 425000000
+      }
     },
     {
       "id": "3416beab-c784-81db-84a5-f2e70b0214ee",
@@ -2272,7 +2385,6 @@
         "Drama 😢",
         "Terror 👻"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": 8.5,
       "notaFernando": null,
@@ -2286,7 +2398,18 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 43690
+      "malId": 43690,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Bom pakas, ecchi de qualidade e muito sangue."
+        }
+      ],
+      "comentarios": "Rafael: Bom pakas, ecchi de qualidade e muito sangue.",
+      "updatedAt": {
+        "_seconds": 1777355252,
+        "_nanoseconds": 638000000
+      }
     },
     {
       "id": "3416beab-c784-8123-8933-ede5e064437c",
@@ -2765,15 +2888,10 @@
     {
       "id": "f6e6beab-c784-83c0-b7a0-817ac90bf966",
       "nome": "Tsukimichi: Moonlit Fantasy",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael"
-      ],
       "nota": "8.15",
       "generos": [
         "Isekai 🌍✨"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": 8.8,
       "notaFernando": 7.5,
@@ -2787,7 +2905,22 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 43523
+      "malId": 43523,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Anime bom pra porra, protagonista forte e apelão."
+        }
+      ],
+      "comentarios": "Rafael: Anime bom pra porra, protagonista forte e apelão.",
+      "updatedAt": {
+        "_seconds": 1777355040,
+        "_nanoseconds": 435000000
+      }
     },
     {
       "id": "3416beab-c784-8102-bef7-fef94a13b099",
@@ -3882,7 +4015,6 @@
         "Comédia 😂",
         "Slice of Life 🍃"
       ],
-      "comentarios": "",
       "files": [
         {
           "name": "Opening 1",
@@ -3901,7 +4033,18 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 45613
+      "malId": 45613,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Um bom anime de romance, ele inverte os papéis tradicionais da função de cada gênero aceitos pela sociedade, a principal é gata. s2"
+        }
+      ],
+      "comentarios": "Rafael: Um bom anime de romance, ele inverte os papéis tradicionais da função de cada gênero aceitos pela sociedade, a principal é gata. s2",
+      "updatedAt": {
+        "_seconds": 1777355153,
+        "_nanoseconds": 400000000
+      }
     },
     {
       "id": "3416beab-c784-810c-8dc8-e48312849171",
@@ -4314,7 +4457,6 @@
         "Shounen 💥",
         "Comédia 😂"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": 7.2,
       "notaFernando": null,
@@ -4328,7 +4470,18 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 58939
+      "malId": 58939,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Anime com uma vibe bem parada, muito repetitivo, e os ganchos no final dos episódios não pegam como deveriam."
+        }
+      ],
+      "comentarios": "Rafael: Anime com uma vibe bem parada, muito repetitivo, e os ganchos no final dos episódios não pegam como deveriam.",
+      "updatedAt": {
+        "_seconds": 1777355228,
+        "_nanoseconds": 238000000
+      }
     },
     {
       "id": "3416beab-c784-81e0-bb29-db75c75e13a5",
@@ -4389,18 +4542,12 @@
     {
       "id": "3416beab-c784-8101-a93d-e960a59dda20",
       "nome": "Kaiju No. 8",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu"
-      ],
       "nota": "7.17",
       "generos": [
         "Ação ⚔️",
         "Shounen 💥",
         "Fantasia 🧙"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": 6.5,
       "notaFernando": 7,
@@ -4408,13 +4555,29 @@
       "notaHacksuya": null,
       "maisDeUmVoto": "sim",
       "qtdVotos": 3,
-      "notaSort": 7.166666666667,
       "controversia": 1.5,
       "migratedAt": {
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 52588
+      "malId": 52588,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "O anime em si é bom, porém os efeitos 3d e a fragilidade do protagonista irritam um pouco, anime mediano."
+        }
+      ],
+      "notaSort": 7.17,
+      "comentarios": "Rafael: O anime em si é bom, porém os efeitos 3d e a fragilidade do protagonista irritam um pouco, anime mediano.",
+      "updatedAt": {
+        "_seconds": 1777355074,
+        "_nanoseconds": 790000000
+      }
     },
     {
       "id": "3416beab-c784-8078-8a11-d87361de7a17",
@@ -4428,7 +4591,6 @@
         "Isekai 🌍✨",
         "Slice of Life 🍃"
       ],
-      "comentarios": "",
       "files": [
         {
           "name": "Opening 1",
@@ -4451,7 +4613,18 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 40586
+      "malId": 40586,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Anime isekai pra relaxar, bemmm lentinho, sem grandes objetivos ou trama muito trabalhada."
+        }
+      ],
+      "comentarios": "Rafael: Anime isekai pra relaxar, bemmm lentinho, sem grandes objetivos ou trama muito trabalhada.",
+      "updatedAt": {
+        "_seconds": 1777354959,
+        "_nanoseconds": 33000000
+      }
     },
     {
       "id": "3416beab-c784-8115-87a5-cbbc833efa18",
@@ -4482,6 +4655,49 @@
         "_nanoseconds": 493000000
       },
       "malId": 2116
+    },
+    {
+      "id": "3416beab-c784-80ac-b85d-edbb259d8ad7",
+      "nome": "Kenja no Mago",
+      "quemAssistiu": [
+        "Rafael"
+      ],
+      "generos": [
+        "Isekai 🌍✨",
+        "Fantasia 🧙",
+        "Romance 💖"
+      ],
+      "files": [
+        {
+          "name": "Opening 1",
+          "url": "https://www.youtube.com/watch?v=CcDLBSvik7A&list=RDCcDLBSvik7A&start_radio=1"
+        }
+      ],
+      "notaFernando": null,
+      "notaDudu": null,
+      "notaHacksuya": null,
+      "maisDeUmVoto": "nao",
+      "qtdVotos": 1,
+      "controversia": 0,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 36407,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Isekai Clássico, sem tirar nem por. Mas bom de assistir."
+        }
+      ],
+      "notaSort": 7,
+      "notaRafael": 7,
+      "comentarios": "Rafael: Isekai Clássico, sem tirar nem por. Mas bom de assistir.",
+      "nota": "7.00",
+      "updatedAt": {
+        "_seconds": 1777354933,
+        "_nanoseconds": 645000000
+      }
     },
     {
       "id": "3416beab-c784-8174-824c-e8f423e68f17",
@@ -4625,39 +4841,6 @@
       }
     },
     {
-      "id": "3416beab-c784-80ac-b85d-edbb259d8ad7",
-      "nome": "Kenja no Mago",
-      "quemAssistiu": [
-        "Rafael"
-      ],
-      "nota": "6.90",
-      "generos": [
-        "Isekai 🌍✨",
-        "Fantasia 🧙",
-        "Romance 💖"
-      ],
-      "comentarios": "",
-      "files": [
-        {
-          "name": "Opening 1",
-          "url": "https://www.youtube.com/watch?v=CcDLBSvik7A&list=RDCcDLBSvik7A&start_radio=1"
-        }
-      ],
-      "notaRafael": 6.9,
-      "notaFernando": null,
-      "notaDudu": null,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 1,
-      "notaSort": 6.9,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 36407
-    },
-    {
       "id": "3416beab-c784-81bf-a035-fc37b5b078c2",
       "nome": "To Your Eternity",
       "quemAssistiu": [
@@ -4759,7 +4942,6 @@
         "Esportes⚽",
         "Drama 😢"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": 1,
       "notaFernando": null,
@@ -4773,7 +4955,18 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 49596
+      "malId": 49596,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "lixo puro!"
+        }
+      ],
+      "comentarios": "Rafael: lixo puro!",
+      "updatedAt": {
+        "_seconds": 1777355171,
+        "_nanoseconds": 781000000
+      }
     },
     {
       "id": "3416beab-c784-8108-bb1f-e45cbf41bd4e",
@@ -5292,62 +5485,6 @@
         "_nanoseconds": 493000000
       },
       "malId": 5081
-    },
-    {
-      "id": "3416beab-c784-81f1-a3d4-dcc59c9014b1",
-      "nome": "Bocchi the Rock!",
-      "quemAssistiu": [
-        "Rafael"
-      ],
-      "nota": "0.00",
-      "generos": [
-        "Comédia 😂",
-        "Slice of Life 🍃",
-        "Drama 😢"
-      ],
-      "comentarios": "",
-      "files": [],
-      "notaRafael": null,
-      "notaFernando": null,
-      "notaDudu": null,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 0,
-      "notaSort": 0,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 47917
-    },
-    {
-      "id": "3416beab-c784-81fb-8be1-ebdbccb1bc62",
-      "nome": "TONIKAWA: Over the Moon for You",
-      "quemAssistiu": [
-        "Rafael"
-      ],
-      "nota": "0.00",
-      "generos": [
-        "Romance 💖",
-        "Comédia 😂",
-        "Slice of Life 🍃"
-      ],
-      "comentarios": "",
-      "files": [],
-      "notaRafael": null,
-      "notaFernando": null,
-      "notaDudu": null,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 0,
-      "notaSort": 0,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 41389
     }
   ]
 }

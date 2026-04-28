@@ -21,16 +21,16 @@
   <div class="nav-person">
     <a href="rafael.html"><span class="nav-avatar" style="background:rgba(124,58,237,0.18);color:#6f45d8">R</span>Rafael</a>
     <a href="fernando.html"><span class="nav-avatar" style="background:rgba(236,72,153,0.18);color:#d83182">F</span>Fernando</a>
-    <a href="dudu.html" class="active"><span class="nav-avatar" style="background:rgba(52,211,153,0.18);color:#179b73">D</span>Dudu</a>
+    <a href="dudu.html" class="active"><span class="nav-avatar" style="background:rgba(234,179,8,0.18);color:#b7791f">D</span>Dudu</a>
     <a href="hacksuya.html"><span class="nav-avatar" style="background:rgba(6,182,212,0.18);color:#0588a6">H</span>Hacksuya</a>
   </div>
 </nav>
 
 <main class="page">
   <div class="person-hero">
-    <div class="person-avatar-big" style="background:rgba(52,211,153,0.25);color:#6ee7b7;border:2px solid #34d399">D</div>
+    <div class="person-avatar-big" style="background:rgba(234,179,8,0.22);color:#fde68a;border:2px solid #eab308">D</div>
     <div>
-      <h1 style="color:#6ee7b7">Dudu</h1>
+      <h1 style="color:#fde68a">Dudu</h1>
       <p id="person-subtitle">Carregando...</p>
     </div>
   </div>
@@ -75,8 +75,8 @@
   } from "./js/data.js?v=dudu-yellow-1";
 
   const PERSON = "Dudu";
-  const COLOR = "#34d399";
-  const LIGHT = "#6ee7b7";
+  const COLOR = "#eab308";
+  const LIGHT = "#fde68a";
   function pNota(a) { return a.notaDudu; }
 
   const { animes } = await loadData();
@@ -100,7 +100,7 @@
     </div>
     <div class="stat-card">
       <div class="stat-label">Média de notas</div>
-      <div class="stat-value" style="color:#34d399">${avg ? avg.toFixed(2) : "—"}</div>
+      <div class="stat-value" style="color:${COLOR}">${avg ? avg.toFixed(2) : "—"}</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Anime favorito ⭐</div>

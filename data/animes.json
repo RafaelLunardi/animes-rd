@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-28T01:12:42.546Z",
+  "updatedAt": "2026-04-28T01:29:17.127Z",
   "total": 176,
   "animes": [
     {
@@ -44,32 +44,42 @@
     {
       "id": "3416beab-c784-8176-87fa-ce517e302b03",
       "nome": "That Time I Got Reincarnated as a Slime",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael"
-      ],
-      "nota": "9.60",
       "generos": [
         "Isekai 🌍✨",
         "Comédia 😂",
         "Ação ⚔️",
         "Fantasia 🧙"
       ],
-      "comentarios": "",
       "files": [],
-      "notaRafael": 9.8,
       "notaFernando": 9.4,
       "notaDudu": null,
       "notaHacksuya": null,
       "maisDeUmVoto": "sim",
       "qtdVotos": 2,
-      "notaSort": 9.6,
-      "controversia": 0.4,
       "migratedAt": {
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 37430
+      "malId": 37430,
+      "controversia": 0.5,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "GOAT!"
+        }
+      ],
+      "notaSort": 9.65,
+      "notaRafael": 9.9,
+      "comentarios": "Rafael: GOAT!",
+      "nota": "9.65",
+      "updatedAt": {
+        "_seconds": 1777339373,
+        "_nanoseconds": 943000000
+      }
     },
     {
       "id": "3416beab-c784-81d8-839d-c91b7dcf107a",
@@ -202,6 +212,45 @@
         "_nanoseconds": 493000000
       },
       "malId": 30831
+    },
+    {
+      "id": "3416beab-c784-8195-9eda-d6d1680f445a",
+      "nome": "My Dress-Up Darling",
+      "quemAssistiu": [
+        "Rafael"
+      ],
+      "generos": [
+        "Romance 💖",
+        "Comédia 😂",
+        "Slice of Life 🍃",
+        "Ecchi🔥"
+      ],
+      "files": [],
+      "notaFernando": null,
+      "notaDudu": null,
+      "notaHacksuya": null,
+      "maisDeUmVoto": "nao",
+      "controversia": 0,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 48736,
+      "qtdVotos": 1,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Anime de romance muito bom, com personagens bem legais e bastante fan service. Recomendo muito!"
+        }
+      ],
+      "notaSort": 9.5,
+      "notaRafael": 9.5,
+      "comentarios": "Rafael: Anime de romance muito bom, com personagens bem legais e bastante fan service. Recomendo muito!",
+      "nota": "9.50",
+      "updatedAt": {
+        "_seconds": 1777338998,
+        "_nanoseconds": 76000000
+      }
     },
     {
       "id": "3426beab-c784-80af-97eb-c0fb88171d54",
@@ -4960,35 +5009,6 @@
         "_nanoseconds": 493000000
       },
       "malId": 21855
-    },
-    {
-      "id": "3416beab-c784-8195-9eda-d6d1680f445a",
-      "nome": "My Dress-Up Darling",
-      "quemAssistiu": [
-        "Rafael"
-      ],
-      "nota": "0.00",
-      "generos": [
-        "Romance 💖",
-        "Comédia 😂",
-        "Slice of Life 🍃",
-        "Ecchi🔥"
-      ],
-      "comentarios": "",
-      "files": [],
-      "notaRafael": null,
-      "notaFernando": null,
-      "notaDudu": null,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 0,
-      "notaSort": 0,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 48736
     },
     {
       "id": "3416beab-c784-819b-832c-cd13d2da7c08",

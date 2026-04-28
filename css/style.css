@@ -2951,6 +2951,78 @@ body.suggest-page.dark-theme::before {
     linear-gradient(90deg, rgba(186,230,253,0.045) 1px, transparent 1px);
 }
 
+body.pending-page .page-header {
+  border-bottom-color: rgba(253,230,138,0.2);
+}
+
+body.pending-page .page-header h1 {
+  background: linear-gradient(90deg, #f7fee7 0%, #bbf7d0 42%, #fde68a 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+body.pending-page .vote-card {
+  background:
+    linear-gradient(145deg, rgba(187,247,208,0.1), rgba(24,23,29,0.88) 52%, rgba(253,230,138,0.08)) !important;
+  border: 1px solid rgba(220,252,231,0.22) !important;
+  border-radius: 26px !important;
+  box-shadow: 0 22px 70px rgba(0,0,0,0.28), 0 0 0 1px rgba(253,230,138,0.035) inset;
+  padding: 26px !important;
+}
+
+body.pending-page .vote-card > div:first-child {
+  gap: 18px;
+}
+
+body.pending-page .vote-card h3 {
+  color: var(--paper);
+  font-size: 19px;
+  line-height: 1.25;
+}
+
+body.pending-page .vote-card p {
+  color: var(--muted) !important;
+}
+
+body.pending-page .vote-card > div:last-child,
+body.pending-page .vote-card .vote-controls {
+  background:
+    linear-gradient(135deg, rgba(187,247,208,0.075), rgba(253,230,138,0.055)),
+    rgba(255,255,255,0.025) !important;
+  border: 1px solid rgba(220,252,231,0.12);
+  border-radius: 18px !important;
+  padding: 18px !important;
+}
+
+body.pending-page .vote-controls button {
+  background: linear-gradient(100deg, #bbf7d0 0%, #fde68a 100%) !important;
+  border-radius: 16px !important;
+  color: #142016 !important;
+  font-size: 15px;
+  min-height: 48px;
+  box-shadow: 0 14px 34px rgba(187,247,208,0.14);
+}
+
+body.pending-page .vote-controls input[type="number"],
+body.pending-page .vote-controls textarea,
+body.pending-page .vote-controls input[type="range"] {
+  accent-color: #bbf7d0;
+}
+
+body.pending-page .vote-controls input[type="number"],
+body.pending-page .vote-controls textarea {
+  background: rgba(8,8,12,0.7) !important;
+  border: 1px solid rgba(253,230,138,0.18) !important;
+  border-radius: 14px !important;
+  color: var(--paper) !important;
+}
+
+body.pending-page .nav-person span[title] {
+  box-shadow: 0 0 0 3px rgba(187,247,208,0.05);
+}
+
 body.dark-theme .modal-overlay,
 .modal-overlay {
   background:

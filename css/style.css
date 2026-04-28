@@ -2031,10 +2031,6 @@ tbody tr:hover {
   letter-spacing: 0.06em;
 }
 
-.post-hot-take {
-  margin-top: -8px;
-}
-
 .post-meta span,
 .post-tags span {
   background: rgba(255,255,255,0.5);

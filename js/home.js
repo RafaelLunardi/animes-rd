@@ -275,9 +275,6 @@ function renderMemberPosts(animes) {
             `).join("")}
           </div>
         </div>
-        <div class="post-tags post-hot-take">
-          <span>${controversial ? `hot take: ${shortName(controversial.nome, 18)}` : "sem controvérsia"}</span>
-        </div>
         <a href="${person.toLowerCase()}.html">Abrir perfil</a>
       </article>
     `;

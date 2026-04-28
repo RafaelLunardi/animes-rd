@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-28T17:45:10.847Z",
+  "updatedAt": "2026-04-28T18:07:02.955Z",
   "total": 180,
   "animes": [
     {
@@ -144,12 +144,16 @@
         {
           "person": "Fernando",
           "text": "se é plottwist q tu gosta, veja isso, historia pensada completamente desde o primeiro ep 👀"
+        },
+        {
+          "person": "Dudu",
+          "text": "AOT eleva a régua do que é considerado anime bom, assista sabendo que dificilmente você encontrara algo que vc achara tão bom quanto."
         }
       ],
-      "comentarios": "Fernando: se é plottwist q tu gosta, veja isso, historia pensada completamente desde o primeiro ep 👀",
+      "comentarios": "Fernando: se é plottwist q tu gosta, veja isso, historia pensada completamente desde o primeiro ep 👀\nDudu: AOT eleva a régua do que é considerado anime bom, assista sabendo que dificilmente você encontrara algo que vc achara tão bom quanto.",
       "updatedAt": {
-        "_seconds": 1777387647,
-        "_nanoseconds": 162000000
+        "_seconds": 1777398921,
+        "_nanoseconds": 771000000
       }
     },
     {
@@ -296,6 +300,11 @@
       "notaSort": 9.47,
       "notaRafael": 9.2,
       "nota": "9.47",
+      "generos": [
+        "Shounen 💥",
+        "Esportes ⚽",
+        "Drama 😢"
+      ],
       "comments": [
         {
           "person": "Rafael",
@@ -304,28 +313,21 @@
         {
           "person": "Fernando",
           "text": "Se você não gosta de anime de esportes é poruqe você nunca viu esse, pqp, perfeito"
+        },
+        {
+          "person": "Dudu",
+          "text": "Um amigo meu me recomendou por anos, e quando eu finalmente assisti, PQP, que anime BOM, só vai sem medo."
         }
       ],
-      "comentarios": "Rafael: Melhor anime de esportes!\nFernando: Se você não gosta de anime de esportes é poruqe você nunca viu esse, pqp, perfeito",
+      "comentarios": "Rafael: Melhor anime de esportes!\nFernando: Se você não gosta de anime de esportes é poruqe você nunca viu esse, pqp, perfeito\nDudu: Um amigo meu me recomendou por anos, e quando eu finalmente assisti, PQP, que anime BOM, só vai sem medo.",
       "updatedAt": {
-        "_seconds": 1777387985,
-        "_nanoseconds": 587000000
-      },
-      "generos": [
-        "Shounen 💥",
-        "Esportes ⚽",
-        "Drama 😢"
-      ]
+        "_seconds": 1777398994,
+        "_nanoseconds": 518000000
+      }
     },
     {
       "id": "3416beab-c784-8143-967e-f25e0ec01a07",
       "nome": "Demon Slayer: Kimetsu no Yaiba",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "9.45",
       "generos": [
         "Ação ⚔️",
@@ -333,7 +335,6 @@
         "Fantasia 🧙",
         "Drama 😢"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 9.7,
@@ -347,7 +348,22 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 38000
+      "malId": 38000,
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Anime muito bom, animação impecável."
+        }
+      ],
+      "comentarios": "Dudu: Anime muito bom, animação impecável.",
+      "updatedAt": {
+        "_seconds": 1777398988,
+        "_nanoseconds": 35000000
+      }
     },
     {
       "id": "3416beab-c784-8154-b481-e7ce9de61af7",
@@ -380,12 +396,16 @@
         {
           "person": "Fernando",
           "text": "Aquela maldita mentira, se tem pensamentos suicidas não veja esse anime, 10/10, animação desnecessáriamente boa"
+        },
+        {
+          "person": "Dudu",
+          "text": "KIMI DA YO, KIMI NAN DA YOOO, OSHIETE KURETAAAAAA\nKURAYAMI MO HIKARU NARA, HOSHIZORA NI NARUUUUUUUU!"
         }
       ],
-      "comentarios": "Fernando: Aquela maldita mentira, se tem pensamentos suicidas não veja esse anime, 10/10, animação desnecessáriamente boa",
+      "comentarios": "Fernando: Aquela maldita mentira, se tem pensamentos suicidas não veja esse anime, 10/10, animação desnecessáriamente boa\nDudu: KIMI DA YO, KIMI NAN DA YOOO, OSHIETE KURETAAAAAA\nKURAYAMI MO HIKARU NARA, HOSHIZORA NI NARUUUUUUUU!",
       "updatedAt": {
-        "_seconds": 1777387814,
-        "_nanoseconds": 20000000
+        "_seconds": 1777398444,
+        "_nanoseconds": 330000000
       }
     },
     {
@@ -487,11 +507,6 @@
     {
       "id": "3416beab-c784-8191-9b94-c56419f16a29",
       "nome": "Fullmetal Alchemist: Brotherhood",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu"
-      ],
       "nota": "9.37",
       "generos": [
         "Ação ⚔️",
@@ -499,7 +514,6 @@
         "Fantasia 🧙",
         "Drama 😢"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": 9.8,
       "notaFernando": 8.5,
@@ -507,13 +521,29 @@
       "notaHacksuya": null,
       "maisDeUmVoto": "sim",
       "qtdVotos": 3,
-      "notaSort": 9.366666666667,
       "controversia": 1.3,
       "migratedAt": {
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 5114
+      "malId": 5114,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Por muito tempo foi meu anime favorito, e facilmente esta no meu TOP 3 até hoje."
+        }
+      ],
+      "notaSort": 9.37,
+      "comentarios": "Dudu: Por muito tempo foi meu anime favorito, e facilmente esta no meu TOP 3 até hoje.",
+      "updatedAt": {
+        "_seconds": 1777399038,
+        "_nanoseconds": 449000000
+      }
     },
     {
       "id": "3416beab-c784-8142-8f36-fe93636e2c44",
@@ -542,17 +572,21 @@
         "Fernando",
         "Dudu"
       ],
+      "notaSort": 9.33,
       "comments": [
         {
           "person": "Rafael",
           "text": "Do jeitinho que eu gosto: protagonista apelão, habilidades roubadas e cenas de luta em alta velocidade com facas/adagas. Um mel!"
+        },
+        {
+          "person": "Dudu",
+          "text": "Prota apelão demais, muito bom, mas chega um ponto que ele fica tão OP que acaba caindo no mais do mesmo."
         }
       ],
-      "notaSort": 9.33,
-      "comentarios": "Rafael: Do jeitinho que eu gosto: protagonista apelão, habilidades roubadas e cenas de luta em alta velocidade com facas/adagas. Um mel!",
+      "comentarios": "Rafael: Do jeitinho que eu gosto: protagonista apelão, habilidades roubadas e cenas de luta em alta velocidade com facas/adagas. Um mel!\nDudu: Prota apelão demais, muito bom, mas chega um ponto que ele fica tão OP que acaba caindo no mais do mesmo.",
       "updatedAt": {
-        "_seconds": 1777355198,
-        "_nanoseconds": 537000000
+        "_seconds": 1777399075,
+        "_nanoseconds": 132000000
       }
     },
     {
@@ -581,30 +615,27 @@
         "Fernando",
         "Dudu"
       ],
+      "notaSort": 9.33,
       "comments": [
         {
           "person": "Rafael",
           "text": "Melhor anime da história!!!"
+        },
+        {
+          "person": "Dudu",
+          "text": "Marcou gerações, tanto o anime quanto os jogos, um clássico eterno."
         }
       ],
-      "notaSort": 9.33,
-      "comentarios": "Rafael: Melhor anime da história!!!",
+      "comentarios": "Rafael: Melhor anime da história!!!\nDudu: Marcou gerações, tanto o anime quanto os jogos, um clássico eterno.",
       "updatedAt": {
-        "_seconds": 1777333952,
-        "_nanoseconds": 466000000
+        "_seconds": 1777399120,
+        "_nanoseconds": 659000000
       }
     },
     {
       "id": "3416beab-c784-818f-899f-ce1f25e88a7e",
       "nome": "Highschool of the Dead",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "9.30",
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 9.4,
@@ -623,18 +654,27 @@
         "Ação ⚔️",
         "Terror 👻",
         "Ecchi 🔥"
-      ]
+      ],
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Anime muito bom, a história se passa em um apocalipse zumbi, e o ecchi presente no anime está na dose certa."
+        }
+      ],
+      "comentarios": "Dudu: Anime muito bom, a história se passa em um apocalipse zumbi, e o ecchi presente no anime está na dose certa.",
+      "updatedAt": {
+        "_seconds": 1777399199,
+        "_nanoseconds": 429000000
+      }
     },
     {
       "id": "3416beab-c784-81d7-8d27-d3d5f074c8ad",
       "nome": "Inazuma Eleven",
-      "quemAssistiu": [
-        "Rafael",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "9.30",
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": null,
@@ -652,16 +692,25 @@
       "generos": [
         "Shounen 💥",
         "Esportes ⚽"
-      ]
+      ],
+      "quemAssistiu": [
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Esse aqui é um clássico, se você não assistiu na época que passava na REDETV não teve infância."
+        }
+      ],
+      "comentarios": "Dudu: Esse aqui é um clássico, se você não assistiu na época que passava na REDETV não teve infância.",
+      "updatedAt": {
+        "_seconds": 1777399231,
+        "_nanoseconds": 867000000
+      }
     },
     {
       "id": "3416beab-c784-81db-914a-fecee9612fd4",
       "nome": "One Piece",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu"
-      ],
       "nota": "9.25",
       "generos": [
         "Ação ⚔️",
@@ -669,7 +718,6 @@
         "Fantasia 🧙",
         "Comédia 😂"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 9,
@@ -683,7 +731,22 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 459
+      "malId": 459,
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Por muito tempo tive preconceito com o anime do pirata que estica, mas na boa, esta em uma prateleira acima dos demais, o que pode afastar as pessoas é o tamanho do anime, mas mesmo assim diria que compensa, muitooo bom."
+        }
+      ],
+      "comentarios": "Dudu: Por muito tempo tive preconceito com o anime do pirata que estica, mas na boa, esta em uma prateleira acima dos demais, o que pode afastar as pessoas é o tamanho do anime, mas mesmo assim diria que compensa, muitooo bom.",
+      "updatedAt": {
+        "_seconds": 1777399288,
+        "_nanoseconds": 401000000
+      }
     },
     {
       "id": "3416beab-c784-8115-ad27-f0c2b85b2b54",
@@ -726,7 +789,6 @@
         "Ação ⚔️",
         "Drama 😢"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 8.8,
@@ -740,7 +802,18 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 37521
+      "malId": 37521,
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Masterpiece, vai fazer você refletir por um bom tempo depois de assistir, aquele anime que faz você ficar pensando sobre ele meses depois de ter terminado, bom demais."
+        }
+      ],
+      "comentarios": "Dudu: Masterpiece, vai fazer você refletir por um bom tempo depois de assistir, aquele anime que faz você ficar pensando sobre ele meses depois de ter terminado, bom demais.",
+      "updatedAt": {
+        "_seconds": 1777399328,
+        "_nanoseconds": 312000000
+      }
     },
     {
       "id": "3416beab-c784-8178-953e-de48e739f209",
@@ -886,18 +959,12 @@
     {
       "id": "3416beab-c784-81b0-aa04-edb1635d2ab1",
       "nome": "DanMachi",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu"
-      ],
       "nota": "9.10",
       "generos": [
         "Ação ⚔️",
         "Fantasia 🧙",
         "Romance 💖"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 9.2,
@@ -911,24 +978,32 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 28121
+      "malId": 28121,
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Bem gostosinho, tem um Q de ecchi na dose certa."
+        }
+      ],
+      "comentarios": "Dudu: Bem gostosinho, tem um Q de ecchi na dose certa.",
+      "updatedAt": {
+        "_seconds": 1777399351,
+        "_nanoseconds": 883000000
+      }
     },
     {
       "id": "3416beab-c784-81c6-a4ec-ec066b9464f0",
       "nome": "No Game, No Life",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "9.10",
       "generos": [
         "Isekai 🌍✨",
         "Fantasia 🧙",
         "Comédia 😂"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 9.2,
@@ -942,24 +1017,32 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 19815
+      "malId": 19815,
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Uma pena não terem continuado, muito bom. Fun fact: o autor é brasileiro."
+        }
+      ],
+      "comentarios": "Dudu: Uma pena não terem continuado, muito bom. Fun fact: o autor é brasileiro.",
+      "updatedAt": {
+        "_seconds": 1777399376,
+        "_nanoseconds": 147000000
+      }
     },
     {
       "id": "3dc6beab-c784-82df-be47-01cf93907b4f",
       "nome": "Death Note",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "9.07",
       "generos": [
         "Drama 😢",
         "Terror 👻",
         "Shounen 💥"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": 9,
       "notaFernando": 9.2,
@@ -967,13 +1050,29 @@
       "notaHacksuya": null,
       "maisDeUmVoto": "sim",
       "qtdVotos": 3,
-      "notaSort": 9.066666666667,
       "controversia": 0.2,
       "migratedAt": {
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 1535
+      "malId": 1535,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Um must watch pra todo bom fã de anime."
+        }
+      ],
+      "notaSort": 9.07,
+      "comentarios": "Dudu: Um must watch pra todo bom fã de anime.",
+      "updatedAt": {
+        "_seconds": 1777399403,
+        "_nanoseconds": 619000000
+      }
     },
     {
       "id": "3416beab-c784-8118-8c7c-ddfce1e7c19e",
@@ -1005,19 +1104,12 @@
     {
       "id": "3416beab-c784-8123-b4c2-cfe4c4c0c9a2",
       "nome": "One Punch Man",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "9.00",
       "generos": [
         "Ação ⚔️",
         "Shounen 💥",
         "Comédia 😂"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 8.9,
@@ -1031,7 +1123,22 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 30276
+      "malId": 30276,
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Primeira temporada fenomenal, mas acho que esse sofre do mesmo problema do Solo Leveling, só que no gênero de comédia. Acaba ficando mais do mesmo em certo ponto."
+        }
+      ],
+      "comentarios": "Dudu: Primeira temporada fenomenal, mas acho que esse sofre do mesmo problema do Solo Leveling, só que no gênero de comédia. Acaba ficando mais do mesmo em certo ponto.",
+      "updatedAt": {
+        "_seconds": 1777399439,
+        "_nanoseconds": 430000000
+      }
     },
     {
       "id": "3416beab-c784-8159-8c4a-f549a518fa71",
@@ -1040,7 +1147,6 @@
         "Dudu"
       ],
       "nota": "9.00",
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": null,
@@ -1058,7 +1164,18 @@
       "generos": [
         "Romance 💖",
         "Ecchi 🔥"
-      ]
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Esse prota ama muito a família dele."
+        }
+      ],
+      "comentarios": "Dudu: Esse prota ama muito a família dele.",
+      "updatedAt": {
+        "_seconds": 1777399459,
+        "_nanoseconds": 45000000
+      }
     },
     {
       "id": "3416beab-c784-8183-ac74-f6b222d9fc09",
@@ -1120,10 +1237,6 @@
     {
       "id": "3416beab-c784-81e8-9767-f30d1f1d5f7f",
       "nome": "Dan Da Dan",
-      "quemAssistiu": [
-        "Rafael",
-        "Dudu"
-      ],
       "nota": "9.00",
       "generos": [
         "Ação ⚔️",
@@ -1131,7 +1244,6 @@
         "Romance 💖",
         "Fantasia 🧙"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": null,
@@ -1145,7 +1257,21 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 57334
+      "malId": 57334,
+      "quemAssistiu": [
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Muito bom pro que se propõe, dos animes mais atuais esta bem gostosinho."
+        }
+      ],
+      "comentarios": "Dudu: Muito bom pro que se propõe, dos animes mais atuais esta bem gostosinho.",
+      "updatedAt": {
+        "_seconds": 1777399482,
+        "_nanoseconds": 241000000
+      }
     },
     {
       "id": "3416beab-c784-81f8-a37f-f5737daee6a0",
@@ -1178,18 +1304,12 @@
     {
       "id": "3416beab-c784-81fa-beb2-dbfa9238bf98",
       "nome": "Jujutsu Kaisen",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu"
-      ],
       "nota": "9.00",
       "generos": [
         "Ação ⚔️",
         "Shounen 💥",
         "Fantasia 🧙"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 9,
@@ -1203,7 +1323,22 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 40748
+      "malId": 40748,
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "NAH, I'D WIN."
+        }
+      ],
+      "comentarios": "Dudu: NAH, I'D WIN.",
+      "updatedAt": {
+        "_seconds": 1777399508,
+        "_nanoseconds": 904000000
+      }
     },
     {
       "id": "UttSCzqfHg43aHHh7FyR",
@@ -1273,14 +1408,7 @@
     {
       "id": "3416beab-c784-8127-b096-e5bb98fd2bac",
       "nome": "Shokugeki no Soma",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "8.95",
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 9,
@@ -1299,7 +1427,22 @@
         "Shounen 💥",
         "Comédia 😂",
         "Ecchi 🔥"
-      ]
+      ],
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Um anime que me fez gostar de culinária, mas não vou mentir, o que mais me atraiu foi o ecchi que misturaram no anime, ficou muito bom."
+        }
+      ],
+      "comentarios": "Dudu: Um anime que me fez gostar de culinária, mas não vou mentir, o que mais me atraiu foi o ecchi que misturaram no anime, ficou muito bom.",
+      "updatedAt": {
+        "_seconds": 1777399552,
+        "_nanoseconds": 751000000
+      }
     },
     {
       "id": "3416beab-c784-81d6-8d5d-c361251e6d01",
@@ -1422,26 +1565,30 @@
         "Dudu"
       ],
       "qtdVotos": 2,
-      "comments": [
-        {
-          "person": "Rafael",
-          "text": "Bom."
-        }
-      ],
       "maisDeUmVoto": "sim",
       "notaSort": 8.9,
       "notaRafael": 8.5,
-      "comentarios": "Rafael: Bom.",
       "nota": "8.90",
-      "updatedAt": {
-        "_seconds": 1777340058,
-        "_nanoseconds": 735000000
-      },
       "generos": [
         "Romance 💖",
         "Drama 😢",
         "Ecchi 🔥"
-      ]
+      ],
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Bom."
+        },
+        {
+          "person": "Dudu",
+          "text": "Esse aqui eu achei um dos melhores que ja vi, inclusive após eu finalizar o anime fui ler o Manhwa inteiro, recomendo."
+        }
+      ],
+      "comentarios": "Rafael: Bom.\nDudu: Esse aqui eu achei um dos melhores que ja vi, inclusive após eu finalizar o anime fui ler o Manhwa inteiro, recomendo.",
+      "updatedAt": {
+        "_seconds": 1777399580,
+        "_nanoseconds": 238000000
+      }
     },
     {
       "id": "3416beab-c784-81b7-8cfa-eede4cae2ec4",

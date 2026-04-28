@@ -256,8 +256,13 @@ function renderFilters() {
       ${genres.map((g) => `<option value="${g}">${g}</option>`).join("")}
     </select>
     <select id="filter-person">
-      <option value="">Todos</option>
+      <option value="">Todos os usuários</option>
       ${PEOPLE.map((p) => `<option value="${p}">${p}</option>`).join("")}
+    </select>
+    <select id="filter-status">
+      <option value="">Status (Qualquer)</option>
+      <option value="watched">Que eu assisti</option>
+      <option value="not-watched">Que eu NÃO assisti</option>
     </select>
     <select id="filter-votes">
       <option value="">Qtd. votos</option>
@@ -277,6 +282,7 @@ function applyFilters() {
   const search = document.getElementById("search")?.value.toLowerCase() || "";
   const genreSelected = document.getElementById("filter-genre")?.value || "";
   const person = document.getElementById("filter-person")?.value || "";
+  const status = document.getElementById("filter-status")?.value || "";
   const votes = document.getElementById("filter-votes")?.value || "";
 
   // Função auxiliar para limpar emoji para comparação
@@ -292,6 +298,18 @@ function applyFilters() {
     }
 
     if (person && !a.quemAssistiu.includes(person)) return false;
+
+    // Lógica do filtro de Status (Assistido/Não assistido por MIM)
+    if (status) {
+        if (!currentUser || !currentUser.personName) {
+            // Se o usuário não está logado, ignoramos o filtro de status mas poderíamos avisar
+            return true; 
+        }
+        const userWatched = a.quemAssistiu.includes(currentUser.personName);
+        if (status === "watched" && !userWatched) return false;
+        if (status === "not-watched" && userWatched) return false;
+    }
+
     if (votes && String(a.qtdVotos) !== votes) return false;
     return true;
   });

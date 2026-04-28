@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-28T04:57:03.027Z",
+  "updatedAt": "2026-04-28T05:02:30.779Z",
   "total": 176,
   "animes": [
     {
@@ -1941,13 +1941,13 @@
         },
         {
           "person": "Dudu",
-          "text": "Melhor prota dos animes, não perdoa uma"
+          "text": "Melhor prota dos animes, não perdoa uma."
         }
       ],
-      "comentarios": "Rafael: Bomba.\nDudu: Melhor prota dos animes, não perdoa uma",
+      "comentarios": "Rafael: Bomba.\nDudu: Melhor prota dos animes, não perdoa uma.",
       "updatedAt": {
-        "_seconds": 1777352012,
-        "_nanoseconds": 565000000
+        "_seconds": 1777352464,
+        "_nanoseconds": 668000000
       }
     },
     {
@@ -2169,7 +2169,6 @@
         "Ecchi🔥",
         "Fantasia 🧙"
       ],
-      "comentarios": "",
       "files": [
         {
           "name": "Opening 1",
@@ -2188,7 +2187,18 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 29786
+      "malId": 29786,
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Anime que o Rafa gostaria de assistir, certeza."
+        }
+      ],
+      "comentarios": "Dudu: Anime que o Rafa gostaria de assistir, certeza.",
+      "updatedAt": {
+        "_seconds": 1777352488,
+        "_nanoseconds": 920000000
+      }
     },
     {
       "id": "3416beab-c784-81c2-8ff3-de1e62f26648",
@@ -4700,13 +4710,13 @@
       "comments": [
         {
           "person": "Dudu",
-          "text": "Não lembro de muita coisa da época que assisti ele, ja faz bastante tempo, mas foi bem meh e o anime se eu não me engano só tem 1 temporada com 12 episódios, uma tentativa que não foi pra frente aparentemente. Mas os mechas no anime são legais"
+          "text": "Não lembro de muita coisa da época que assisti ele, ja faz bastante tempo, mas foi bem meh e o anime se eu não me engano só tem 1 temporada com 12 episódios, uma tentativa que não foi pra frente aparentemente. Mas os mechas no anime são legais."
         }
       ],
-      "comentarios": "Dudu: Não lembro de muita coisa da época que assisti ele, ja faz bastante tempo, mas foi bem meh e o anime se eu não me engano só tem 1 temporada com 12 episódios, uma tentativa que não foi pra frente aparentemente. Mas os mechas no anime são legais",
+      "comentarios": "Dudu: Não lembro de muita coisa da época que assisti ele, ja faz bastante tempo, mas foi bem meh e o anime se eu não me engano só tem 1 temporada com 12 episódios, uma tentativa que não foi pra frente aparentemente. Mas os mechas no anime são legais.",
       "updatedAt": {
-        "_seconds": 1777352147,
-        "_nanoseconds": 501000000
+        "_seconds": 1777352412,
+        "_nanoseconds": 572000000
       }
     },
     {

@@ -2997,12 +2997,12 @@ body.pending-page .vote-card .vote-controls {
 }
 
 body.pending-page .vote-controls button {
-  background: linear-gradient(100deg, #8fd9ad 0%, #d8bd57 100%) !important;
+  background: linear-gradient(100deg, #72b98e 0%, #b89c3e 100%) !important;
   border-radius: 16px !important;
   color: #142016 !important;
   font-size: 15px;
   min-height: 48px;
-  box-shadow: 0 14px 34px rgba(187,247,208,0.09);
+  box-shadow: 0 12px 28px rgba(187,247,208,0.055);
 }
 
 body.pending-page .vote-controls input[type="number"],

@@ -3051,13 +3051,13 @@ body.suggest-page.dark-theme::before {
   display: grid;
   gap: 14px;
   grid-template-rows: auto minmax(0, 1fr) auto;
-  height: min(560px, calc(100vh - 150px));
+  height: min(540px, calc(100vh - 190px));
   left: calc(50% + 620px);
   max-height: none;
   min-height: 0;
   padding: 18px;
   position: fixed;
-  top: 112px;
+  top: 150px;
   width: min(330px, calc(100vw - 32px));
   z-index: 2;
 }

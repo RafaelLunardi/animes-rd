@@ -267,8 +267,9 @@ function renderMemberPosts(animes) {
             </li>
           `).join("") || "<li><span>Sem notas ainda</span><strong>--</strong></li>"}
         </ol>
-        <div class="post-tags">
-          ${(OPENINGS[person] || []).slice(0, 2).map((opening) => `<span>${opening}</span>`).join("")}
+        <div class="post-tags post-openings" aria-label="Top 3 openings de ${person}">
+          <strong>Top 3 openings</strong>
+          ${(OPENINGS[person] || []).slice(0, 3).map((opening) => `<span>${opening}</span>`).join("")}
           <span>${controversial ? `hot take: ${shortName(controversial.nome, 18)}` : "sem controvérsia"}</span>
         </div>
         <a href="${person.toLowerCase()}.html">Abrir perfil</a>

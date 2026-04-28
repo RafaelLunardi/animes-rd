@@ -249,12 +249,14 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
 
   const slides = [
     {
+      tone: "blog",
       eyebrow: `Blog <span class="brand-gradient">Animes RD</span>`,
       title: "Criticas, rankings e guias para decidir o proximo anime.",
       text: subtitle,
       links: [{ label: "Abrir acervo", href: "acervo.html" }],
     },
     {
+      tone: "playlists",
       eyebrow: "Playlists do grupo",
       title: "Openings para deixar tocando enquanto escolhe.",
       text: "Duas playlists pra entrar no clima: YouTube e Spotify, com a vibe do Animes RD.",
@@ -264,12 +266,14 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
       ],
     },
     {
+      tone: "news",
       eyebrow: "Noticias",
       title: "Radar MyAnimeList para novidades da temporada.",
       text: "Um atalho para acompanhar anuncios, trailers, estreias e movimentacoes do mundo dos animes.",
       links: [{ label: "Ver noticias MAL", href: MAL_NEWS_URL }],
     },
     {
+      tone: "featured",
       eyebrow: "Dica em destaque",
       title: `Hoje o acervo esta puxando: ${featuredTitle}.`,
       text: featuredAnime
@@ -281,7 +285,7 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
 
   rotator.innerHTML = `
     ${slides.map((slide, index) => `
-      <section class="blog-hero-slide ${index === 0 ? "active" : ""}" data-hero-slide="${index}">
+      <section class="blog-hero-slide ${index === 0 ? "active" : ""}" data-hero-slide="${index}" data-hero-tone="${slide.tone}">
         <span class="eyebrow">${slide.eyebrow}</span>
         <h1>${escapeHTML(slide.title)}</h1>
         <p ${index === 0 ? 'id="home-subtitle"' : ""}>${escapeHTML(slide.text)}</p>
@@ -298,6 +302,8 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
   `;
 
   let active = 0;
+  const host = rotator.closest(".blog-hero-copy");
+  host?.setAttribute("data-hero-tone", slides[0].tone);
   const showSlide = (next) => {
     const slideEls = rotator.querySelectorAll("[data-hero-slide]");
     const dots = rotator.querySelectorAll("[data-hero-dot]");
@@ -306,6 +312,7 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
     active = next % slideEls.length;
     slideEls[active]?.classList.add("active");
     dots[active]?.classList.add("active");
+    host?.setAttribute("data-hero-tone", slides[active].tone);
   };
 
   heroInfoTimer = setInterval(() => showSlide(active + 1), 3000);

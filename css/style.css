@@ -1915,11 +1915,45 @@ body.blog-page::before {
   border: 2px solid #1f2933;
   border-radius: 18px;
   box-shadow: 10px 10px 0 rgba(31,41,51,0.12);
-  min-height: 470px;
+  height: 470px;
   padding: clamp(32px, 6vw, 70px);
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
+  transition: background 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease;
+}
+
+.blog-hero-copy[data-hero-tone="blog"] {
+  background:
+    linear-gradient(135deg, rgba(11,18,23,0.9), rgba(20,17,29,0.84)),
+    radial-gradient(circle at 16% 16%, rgba(187,247,208,0.18), transparent 34%),
+    radial-gradient(circle at 88% 70%, rgba(186,230,253,0.12), transparent 36%);
+  border-color: rgba(187,247,208,0.28);
+}
+
+.blog-hero-copy[data-hero-tone="playlists"] {
+  background:
+    linear-gradient(135deg, rgba(19,12,31,0.92), rgba(11,28,31,0.84)),
+    radial-gradient(circle at 20% 18%, rgba(216,180,254,0.24), transparent 36%),
+    radial-gradient(circle at 86% 78%, rgba(187,247,208,0.14), transparent 38%);
+  border-color: rgba(216,180,254,0.3);
+}
+
+.blog-hero-copy[data-hero-tone="news"] {
+  background:
+    linear-gradient(135deg, rgba(8,23,30,0.92), rgba(19,20,31,0.84)),
+    radial-gradient(circle at 22% 18%, rgba(186,230,253,0.2), transparent 36%),
+    radial-gradient(circle at 86% 76%, rgba(244,194,194,0.12), transparent 38%);
+  border-color: rgba(186,230,253,0.28);
+}
+
+.blog-hero-copy[data-hero-tone="featured"] {
+  background:
+    linear-gradient(135deg, rgba(22,17,10,0.9), rgba(10,29,25,0.84)),
+    radial-gradient(circle at 20% 18%, rgba(253,230,138,0.18), transparent 36%),
+    radial-gradient(circle at 86% 78%, rgba(187,247,208,0.14), transparent 38%);
+  border-color: rgba(253,230,138,0.24);
 }
 
 .blog-hero-copy h1 {
@@ -1943,6 +1977,7 @@ body.blog-page::before {
 
 .blog-hero-rotator {
   display: grid;
+  height: 100%;
   min-height: 100%;
   position: relative;
 }
@@ -1952,6 +1987,7 @@ body.blog-page::before {
   display: grid;
   gap: 16px;
   grid-area: 1 / 1;
+  max-width: 760px;
   opacity: 0;
   pointer-events: none;
   transform: translateY(12px);
@@ -1995,7 +2031,6 @@ body.blog-page::before {
   gap: 7px;
   grid-area: 1 / 1;
   justify-self: start;
-  margin-top: 24px;
   position: relative;
   z-index: 2;
 }
@@ -2773,6 +2808,34 @@ body.dark-theme .blog-hero-copy {
     url("https://images.unsplash.com/photo-1618331833071-ce81bd50d300?auto=format&fit=crop&w=1600&q=80");
   background-position: center;
   background-size: cover;
+}
+
+body.dark-theme .blog-hero-copy[data-hero-tone="blog"] {
+  background:
+    linear-gradient(135deg, rgba(11,18,23,0.9), rgba(20,17,29,0.84)),
+    radial-gradient(circle at 16% 16%, rgba(187,247,208,0.18), transparent 34%),
+    radial-gradient(circle at 88% 70%, rgba(186,230,253,0.12), transparent 36%);
+}
+
+body.dark-theme .blog-hero-copy[data-hero-tone="playlists"] {
+  background:
+    linear-gradient(135deg, rgba(19,12,31,0.92), rgba(11,28,31,0.84)),
+    radial-gradient(circle at 20% 18%, rgba(216,180,254,0.24), transparent 36%),
+    radial-gradient(circle at 86% 78%, rgba(187,247,208,0.14), transparent 38%);
+}
+
+body.dark-theme .blog-hero-copy[data-hero-tone="news"] {
+  background:
+    linear-gradient(135deg, rgba(8,23,30,0.92), rgba(19,20,31,0.84)),
+    radial-gradient(circle at 22% 18%, rgba(186,230,253,0.2), transparent 36%),
+    radial-gradient(circle at 86% 76%, rgba(244,194,194,0.12), transparent 38%);
+}
+
+body.dark-theme .blog-hero-copy[data-hero-tone="featured"] {
+  background:
+    linear-gradient(135deg, rgba(22,17,10,0.9), rgba(10,29,25,0.84)),
+    radial-gradient(circle at 20% 18%, rgba(253,230,138,0.18), transparent 36%),
+    radial-gradient(circle at 86% 78%, rgba(187,247,208,0.14), transparent 38%);
 }
 
 body.dark-theme .hero-copy,

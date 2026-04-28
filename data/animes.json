@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-28T22:04:39.415Z",
+  "updatedAt": "2026-04-28T22:27:32.197Z",
   "total": 180,
   "animes": [
     {
@@ -65,7 +65,6 @@
         "_nanoseconds": 493000000
       },
       "malId": 37430,
-      "controversia": 0.5,
       "quemAssistiu": [
         "Rafael",
         "Fernando"
@@ -76,13 +75,14 @@
           "text": "GOAT!"
         }
       ],
-      "notaSort": 9.65,
-      "notaRafael": 9.9,
       "comentarios": "Rafael: GOAT!",
-      "nota": "9.65",
+      "controversia": 0.4,
+      "notaSort": 9.6,
+      "notaRafael": 9.8,
+      "nota": "9.60",
       "updatedAt": {
-        "_seconds": 1777339373,
-        "_nanoseconds": 943000000
+        "_seconds": 1777414228,
+        "_nanoseconds": 677000000
       }
     },
     {

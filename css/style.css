@@ -588,15 +588,15 @@ body.suggest-page.dark-theme {
   --suggest-pink: #d9a6bf;
   --suggest-lilac: #b9a7df;
   background:
-    radial-gradient(circle at 18% 16%, rgba(185,167,223,0.22), transparent 340px),
-    radial-gradient(circle at 78% 8%, rgba(134,199,220,0.18), transparent 380px),
-    radial-gradient(circle at 50% 72%, rgba(217,166,191,0.1), transparent 420px),
-    linear-gradient(135deg, rgba(143,217,173,0.055), rgba(139,92,246,0.045) 45%, rgba(6,182,212,0.055)),
+    radial-gradient(circle at 18% 16%, rgba(185,167,223,0.15), transparent 330px),
+    radial-gradient(circle at 78% 8%, rgba(134,199,220,0.12), transparent 360px),
+    radial-gradient(circle at 50% 72%, rgba(217,166,191,0.07), transparent 400px),
+    linear-gradient(135deg, rgba(143,217,173,0.035), rgba(139,92,246,0.03) 45%, rgba(6,182,212,0.035)),
     var(--bg);
 }
 
 body.suggest-page::before {
-  opacity: 0.1;
+  opacity: 0.075;
   background-image:
     linear-gradient(rgba(143,217,173,0.08) 1px, transparent 1px),
     linear-gradient(90deg, rgba(134,199,220,0.08) 1px, transparent 1px);

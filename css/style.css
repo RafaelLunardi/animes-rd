@@ -3065,6 +3065,11 @@ body.suggest-page.dark-theme::before {
   width: 190px;
 }
 
+.nyx-hero img.nyx-hero-image {
+  border-radius: 24px;
+  object-position: center;
+}
+
 .nyx-hero h1,
 .nyx-panel h2 {
   background: linear-gradient(90deg, #f5d0fe, #c4b5fd 48%, #bae6fd);

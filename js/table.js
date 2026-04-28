@@ -200,6 +200,14 @@ export function initTable(animes) {
   renderFilters();
   renderTable();
   renderModal();
+  openAnimeFromUrl();
+}
+
+function openAnimeFromUrl() {
+  const animeId = new URLSearchParams(window.location.search).get("anime");
+  if (!animeId) return;
+  const index = allAnimes.findIndex((anime) => String(anime.id) === animeId);
+  if (index >= 0) window.openModal(index);
 }
 
 function renderFilters() {

@@ -1899,6 +1899,7 @@ tbody tr:hover {
   min-width: 190px;
   padding: 14px 16px;
   transform: translateY(0) rotate(var(--balloon-tilt));
+  text-decoration: none;
   width: 100%;
 }
 

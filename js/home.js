@@ -77,6 +77,7 @@ function commentsForAnime(anime) {
     return anime.comments
       .filter((comment) => comment?.text)
       .map((comment) => ({
+        animeId: anime.id,
         anime: anime.nome,
         person: comment.person || "Comentario",
         text: comment.text,
@@ -94,9 +95,9 @@ function commentsForAnime(anime) {
     .filter(Boolean)
     .map((line) => {
       const match = line.match(linePattern);
-      if (!match) return { anime: anime.nome, person: "Comentario", text: line };
+      if (!match) return { animeId: anime.id, anime: anime.nome, person: "Comentario", text: line };
       const person = PEOPLE.find((name) => name.toLowerCase() === match[1].toLowerCase()) || match[1];
-      return { anime: anime.nome, person, text: match[2].trim() };
+      return { animeId: anime.id, anime: anime.nome, person, text: match[2].trim() };
     })
     .filter((comment) => comment.text);
 }
@@ -109,7 +110,9 @@ function featuredComments(animes, featuredAnime) {
 
   return [...mainComments, ...otherComments]
     .filter((comment, index, list) =>
-      list.findIndex((item) => item.person === comment.person && item.text === comment.text) === index
+      list.findIndex((item) =>
+        item.animeId === comment.animeId && item.person === comment.person && item.text === comment.text
+      ) === index
     )
     .slice(0, 18);
 }
@@ -117,11 +120,12 @@ function featuredComments(animes, featuredAnime) {
 function renderCommentBalloons(comments) {
   return comments.map((comment, index) => {
     const personColor = PERSON_LIGHTS[comment.person] || "var(--dudu-light)";
+    const href = `acervo.html?anime=${encodeURIComponent(comment.animeId || "")}`;
     return `
-      <article class="comment-balloon comment-balloon-${index + 1}" style="--balloon-color:${personColor}">
+      <a class="comment-balloon comment-balloon-${index + 1}" href="${href}" style="--balloon-color:${personColor}" title="Abrir ${escapeHTML(comment.anime)} no acervo">
         <strong>${escapeHTML(comment.person)}</strong>
         <p>${escapeHTML(shortName(comment.text, 120))}</p>
-      </article>
+      </a>
     `;
   }).join("");
 }

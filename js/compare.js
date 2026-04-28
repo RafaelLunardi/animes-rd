@@ -87,9 +87,9 @@ function renderVenn4() {
                   parts.length === 1 ? `só ${parts[0]}` :
                   parts.join(" ∩ ");
     return `
-      <li style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border)">
+      <li style="display:flex;align-items:center;justify-content:space-between;gap:18px;padding:6px 0;border-bottom:1px solid var(--border)">
         <span style="display:flex;align-items:center;gap:8px">${badges}<span style="color:var(--muted);font-size:12px">${label}</span></span>
-        <span style="font-weight:600">${count}</span>
+        <span style="font-weight:600;min-width:28px;text-align:right">${count}</span>
       </li>
     `;
   }).join("");
@@ -112,7 +112,7 @@ function renderVenn4() {
       </div>
       <div>
         <div style="font-size:12px;color:var(--faint);margin-bottom:8px">Animes por grupo (${intersections.length} combinações)</div>
-        <ul style="list-style:none;padding:0;margin:0;max-height:340px;overflow-y:auto">
+        <ul class="compare-combo-list" style="list-style:none;padding:0 22px 0 0;margin:0;max-height:340px;overflow-y:auto">
           ${rowsHtml || '<li style="color:var(--faint)">Sem dados</li>'}
         </ul>
       </div>

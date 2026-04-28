@@ -43,6 +43,8 @@ const HERO_IMAGE_FALLBACKS = {
   52991: "https://cdn.myanimelist.net/images/anime/1015/138006l.jpg",
 };
 
+let featuredCommentTimer = null;
+
 function topAnimesByPerson(animes, person) {
   return animesOf(animes, person)
     .filter((anime) => getPersonNota(anime, person) !== null)
@@ -59,6 +61,103 @@ function sharedTop(animes) {
 
 function shortName(name, size = 44) {
   return name.length > size ? `${name.slice(0, size - 1)}...` : name;
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;",
+  })[char]);
+}
+
+function commentsForAnime(anime) {
+  if (Array.isArray(anime?.comments) && anime.comments.length) {
+    return anime.comments
+      .filter((comment) => comment?.text)
+      .map((comment) => ({
+        anime: anime.nome,
+        person: comment.person || "Comentario",
+        text: comment.text,
+      }));
+  }
+
+  if (!anime?.comentarios) return [];
+
+  const peoplePattern = PEOPLE.join("|");
+  const linePattern = new RegExp(`^\\s*(${peoplePattern})\\s*[:\\-–—]\\s*(.+)$`, "i");
+
+  return String(anime.comentarios)
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter(Boolean)
+    .map((line) => {
+      const match = line.match(linePattern);
+      if (!match) return { anime: anime.nome, person: "Comentario", text: line };
+      const person = PEOPLE.find((name) => name.toLowerCase() === match[1].toLowerCase()) || match[1];
+      return { anime: anime.nome, person, text: match[2].trim() };
+    })
+    .filter((comment) => comment.text);
+}
+
+function featuredComments(animes, featuredAnime) {
+  const mainComments = commentsForAnime(featuredAnime);
+  if (mainComments.length >= 3) return mainComments;
+
+  const otherComments = animes.flatMap((anime) => commentsForAnime(anime));
+
+  return [...mainComments, ...otherComments]
+    .filter((comment, index, list) =>
+      list.findIndex((item) => item.person === comment.person && item.text === comment.text) === index
+    )
+    .slice(0, 18);
+}
+
+function renderCommentBalloons(comments) {
+  return comments.map((comment, index) => {
+    const personColor = PERSON_LIGHTS[comment.person] || "var(--dudu-light)";
+    return `
+      <article class="comment-balloon comment-balloon-${index + 1}" style="--balloon-color:${personColor}">
+        <strong>${escapeHTML(comment.person)}</strong>
+        <p>${escapeHTML(shortName(comment.text, 120))}</p>
+      </article>
+    `;
+  }).join("");
+}
+
+function startFeaturedCommentRotation(comments) {
+  const wall = document.getElementById("featured-comments");
+  if (!wall) return;
+
+  if (featuredCommentTimer) {
+    clearInterval(featuredCommentTimer);
+    featuredCommentTimer = null;
+  }
+
+  const batches = [];
+  for (let index = 0; index < comments.length; index += 3) {
+    batches.push(comments.slice(index, index + 3));
+  }
+
+  if (!batches.length) {
+    wall.innerHTML = "";
+    wall.hidden = true;
+    return;
+  }
+
+  let index = 0;
+  const renderBatch = () => {
+    wall.hidden = false;
+    wall.innerHTML = renderCommentBalloons(batches[index]);
+    index = (index + 1) % batches.length;
+  };
+
+  renderBatch();
+  if (batches.length > 1) {
+    featuredCommentTimer = setInterval(renderBatch, 30000);
+  }
 }
 
 async function getAnimeHeroImage(anime) {
@@ -122,8 +221,11 @@ async function renderHero(data) {
 function renderFeaturedPost(animes) {
   const top = sharedTop(animes)[0];
   const genre = topGenres(animes, 1)[0]?.[0] || "Ranking";
+  const comments = featuredComments(animes, top);
 
   document.getElementById("featured-post").innerHTML = `
+    <div class="featured-comment-wall" id="featured-comments" aria-live="polite"></div>
+    <div class="featured-post-content">
     <span class="post-kicker">${genre}</span>
     <h2>${top ? `${top.nome}: o consenso atual do grupo` : "O anime mais querido do acervo"}</h2>
     <p>
@@ -136,7 +238,10 @@ function renderFeaturedPost(animes) {
       <span>Acervo RD</span>
     </div>
     <a class="post-link" href="acervo.html">Abrir acervo completo</a>
+    </div>
   `;
+
+  startFeaturedCommentRotation(comments);
 }
 
 function renderMemberPosts(animes) {

@@ -1861,6 +1861,73 @@ tbody tr:hover {
   justify-content: flex-end;
 }
 
+.featured-comment-wall {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-bottom: 28px;
+  max-width: 760px;
+  min-height: 118px;
+  position: relative;
+  z-index: 1;
+}
+
+.featured-post-content {
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+}
+
+.comment-balloon {
+  animation: balloonIn 0.55s ease both;
+  background: rgba(255,253,247,0.74);
+  border: 1px solid color-mix(in srgb, var(--balloon-color) 54%, transparent);
+  border-radius: 20px 20px 20px 6px;
+  box-shadow: 0 16px 34px rgba(23,23,23,0.12);
+  padding: 12px 14px;
+  transform: rotate(-1.5deg);
+}
+
+.comment-balloon-2 {
+  border-radius: 20px 20px 6px 20px;
+  margin-top: 18px;
+  transform: rotate(1.5deg);
+}
+
+.comment-balloon-3 {
+  margin-top: 4px;
+  transform: rotate(-0.5deg);
+}
+
+.comment-balloon strong {
+  color: var(--balloon-color);
+  display: block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+}
+
+.comment-balloon p {
+  color: #2f2b25;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.45;
+  margin: 0;
+  max-width: none;
+}
+
+@keyframes balloonIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .post-featured h2 {
   color: #1f2933;
   font-family: 'Newsreader', serif;
@@ -2044,6 +2111,14 @@ tbody tr:hover {
   .blog-hero-copy,
   .blog-hero-card,
   .post-featured { min-height: 340px; }
+  .featured-comment-wall {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .comment-balloon {
+    margin-top: 0;
+    transform: none;
+  }
   .post-grid { grid-template-columns: 1fr; }
 }
 
@@ -2437,6 +2512,15 @@ body.dark-theme .blog-hero-card.has-bg h2,
 body.dark-theme .blog-hero-card.has-bg p,
 body.dark-theme .blog-hero-card.has-bg a {
   color: #fff8e7;
+}
+
+body.dark-theme .comment-balloon {
+  background: rgba(24,23,29,0.82);
+  box-shadow: 0 16px 34px rgba(0,0,0,0.22);
+}
+
+body.dark-theme .comment-balloon p {
+  color: var(--paper);
 }
 
 body.dark-theme .table-wrap,

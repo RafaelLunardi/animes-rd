@@ -1862,12 +1862,14 @@ tbody tr:hover {
 }
 
 .featured-comment-wall {
-  display: grid;
-  gap: 12px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-bottom: 28px;
+  align-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 34px;
   max-width: 760px;
-  min-height: 118px;
+  min-height: 230px;
   position: relative;
   z-index: 1;
 }
@@ -1879,24 +1881,32 @@ tbody tr:hover {
 }
 
 .comment-balloon {
-  animation: balloonIn 0.55s ease both;
-  background: rgba(255,253,247,0.74);
-  border: 1px solid color-mix(in srgb, var(--balloon-color) 54%, transparent);
+  --balloon-drift: 8px;
+  --balloon-tilt: -1.5deg;
+  animation: balloonFloat 24s ease-in-out infinite;
+  background: linear-gradient(145deg, rgba(236,253,245,0.96), rgba(187,247,208,0.76));
+  border: 1px solid rgba(134,239,172,0.68);
   border-radius: 20px 20px 20px 6px;
-  box-shadow: 0 16px 34px rgba(23,23,23,0.12);
-  padding: 12px 14px;
-  transform: rotate(-1.5deg);
+  box-shadow: 0 16px 34px rgba(23,23,23,0.1);
+  flex: 0 1 auto;
+  max-width: min(100%, 320px);
+  min-width: 190px;
+  padding: 14px 16px;
+  transform: translateY(0) rotate(var(--balloon-tilt));
+  width: fit-content;
 }
 
 .comment-balloon-2 {
+  --balloon-drift: -7px;
+  --balloon-tilt: 1.5deg;
   border-radius: 20px 20px 6px 20px;
-  margin-top: 18px;
-  transform: rotate(1.5deg);
+  margin-top: 22px;
 }
 
 .comment-balloon-3 {
-  margin-top: 4px;
-  transform: rotate(-0.5deg);
+  --balloon-drift: 6px;
+  --balloon-tilt: -0.5deg;
+  margin-top: 8px;
 }
 
 .comment-balloon strong {
@@ -1910,7 +1920,7 @@ tbody tr:hover {
 }
 
 .comment-balloon p {
-  color: #2f2b25;
+  color: #20372c;
   font-size: 12px;
   font-weight: 700;
   line-height: 1.45;
@@ -1918,14 +1928,9 @@ tbody tr:hover {
   max-width: none;
 }
 
-@keyframes balloonIn {
-  from {
-    opacity: 0;
-    transform: translateY(8px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-  }
+@keyframes balloonFloat {
+  0%, 100% { transform: translateY(0) rotate(var(--balloon-tilt)); }
+  50% { transform: translateY(var(--balloon-drift)) rotate(var(--balloon-tilt)); }
 }
 
 .post-featured h2 {
@@ -2112,12 +2117,13 @@ tbody tr:hover {
   .blog-hero-card,
   .post-featured { min-height: 340px; }
   .featured-comment-wall {
-    grid-template-columns: 1fr;
     min-height: 0;
   }
   .comment-balloon {
     margin-top: 0;
-    transform: none;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
   }
   .post-grid { grid-template-columns: 1fr; }
 }
@@ -2515,7 +2521,8 @@ body.dark-theme .blog-hero-card.has-bg a {
 }
 
 body.dark-theme .comment-balloon {
-  background: rgba(24,23,29,0.82);
+  background: linear-gradient(145deg, rgba(187,247,208,0.2), rgba(24,23,29,0.86));
+  border-color: rgba(187,247,208,0.42);
   box-shadow: 0 16px 34px rgba(0,0,0,0.22);
 }
 

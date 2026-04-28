@@ -8,7 +8,6 @@ import {
   getPersonNota,
   loadData,
   mostControversial,
-  topGenres,
 } from "./data.js";
 
 const OPENINGS = {
@@ -220,24 +219,15 @@ async function renderHero(data) {
 
 function renderFeaturedPost(animes) {
   const top = sharedTop(animes)[0];
-  const genre = topGenres(animes, 1)[0]?.[0] || "Ranking";
   const comments = featuredComments(animes, top);
 
   document.getElementById("featured-post").innerHTML = `
     <div class="featured-comment-wall" id="featured-comments" aria-live="polite"></div>
     <div class="featured-post-content">
-    <span class="post-kicker">${genre}</span>
-    <h2>${top ? `${top.nome}: o consenso atual do grupo` : "O anime mais querido do acervo"}</h2>
-    <p>
-      A nota coletiva ajuda a separar hype de favorito real. Este destaque usa apenas animes
-      com mais de um voto para valorizar consenso, discordância e gosto compartilhado.
-    </p>
-    <div class="post-meta">
-      <span>${top ? `${formatNota(top.nota)} de média` : "Sem nota"}</span>
-      <span>${top ? `${top.qtdVotos} votos` : "0 votos"}</span>
-      <span>Acervo RD</span>
-    </div>
-    <a class="post-link" href="acervo.html">Abrir acervo completo</a>
+      <p>
+        A nota coletiva ajuda a separar hype de favorito real. Este destaque usa apenas animes
+        com mais de um voto para valorizar consenso, discordância e gosto compartilhado.
+      </p>
     </div>
   `;
 

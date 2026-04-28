@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-28T18:07:02.955Z",
+  "updatedAt": "2026-04-28T18:10:55.042Z",
   "total": 180,
   "animes": [
     {
@@ -1621,18 +1621,12 @@
     {
       "id": "3416beab-c784-81d0-8002-f71a26c4c7fd",
       "nome": "Rascal Does Not Dream of Bunny Girl Senpai",
-      "quemAssistiu": [
-        "Fernando",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "8.90",
       "generos": [
         "Romance 💖",
         "Drama 😢",
         "Slice of Life 🍃"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 8.5,
@@ -1646,23 +1640,32 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 37450
+      "malId": 37450,
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "KIMI NO SEI KIMI NO SEI KIMI NO SEI DE WATASHI OHH."
+        }
+      ],
+      "comentarios": "Dudu: KIMI NO SEI KIMI NO SEI KIMI NO SEI DE WATASHI OHH.",
+      "updatedAt": {
+        "_seconds": 1777399652,
+        "_nanoseconds": 720000000
+      }
     },
     {
       "id": "3416beab-c784-8108-b22d-d13ab1ba55a2",
       "nome": "Mushoku Tensei: Jobless Reincarnation",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu"
-      ],
       "nota": "8.85",
       "generos": [
         "Isekai 🌍✨",
         "Fantasia 🧙",
         "Drama 😢"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 8.8,
@@ -1676,22 +1679,31 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 39535
+      "malId": 39535,
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Isekai muito bom, uma pegada diferente dos demais, achei que inovaram na medida certa."
+        }
+      ],
+      "comentarios": "Dudu: Isekai muito bom, uma pegada diferente dos demais, achei que inovaram na medida certa.",
+      "updatedAt": {
+        "_seconds": 1777399676,
+        "_nanoseconds": 617000000
+      }
     },
     {
       "id": "3416beab-c784-81d1-b107-fe097e4d72fa",
       "nome": "Btooom!",
-      "quemAssistiu": [
-        "Fernando",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "8.85",
       "generos": [
         "Ação ⚔️",
         "Drama 😢"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 8.7,
@@ -1705,24 +1717,32 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 14345
+      "malId": 14345,
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Esse aqui é muito bom, a opening dele é muito boa, uma pena não terem continuado com o projeto, infelizmente tem apenas uma temporada com 12 episódios."
+        }
+      ],
+      "comentarios": "Dudu: Esse aqui é muito bom, a opening dele é muito boa, uma pena não terem continuado com o projeto, infelizmente tem apenas uma temporada com 12 episódios.",
+      "updatedAt": {
+        "_seconds": 1777399711,
+        "_nanoseconds": 688000000
+      }
     },
     {
       "id": "3416beab-c784-81d2-8228-dd19f2a20da9",
       "nome": "Sword Art Online",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "8.85",
       "generos": [
         "Ação ⚔️",
         "Isekai 🌍✨",
         "Romance 💖"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 9,
@@ -1736,7 +1756,22 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 11757
+      "malId": 11757,
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Um clássico, definiu o gold standard dos Isekais na época que lançou, hoje reconheço que ele tem muitos defeitos, mas ainda assim tem um lugar reservado no meu coração."
+        }
+      ],
+      "comentarios": "Dudu: Um clássico, definiu o gold standard dos Isekais na época que lançou, hoje reconheço que ele tem muitos defeitos, mas ainda assim tem um lugar reservado no meu coração.",
+      "updatedAt": {
+        "_seconds": 1777399750,
+        "_nanoseconds": 508000000
+      }
     },
     {
       "id": "3416beab-c784-8118-b6d2-c8061a6b3be0",
@@ -1798,13 +1833,7 @@
     {
       "id": "3416beab-c784-8183-a6e8-e927326befcc",
       "nome": "Rent-a-Girlfriend",
-      "quemAssistiu": [
-        "Rafael",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "8.80",
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": null,
@@ -1823,7 +1852,21 @@
         "Romance 💖",
         "Comédia 😂",
         "Ecchi 🔥"
-      ]
+      ],
+      "quemAssistiu": [
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Muito bom."
+        }
+      ],
+      "comentarios": "Dudu: Muito bom.",
+      "updatedAt": {
+        "_seconds": 1777399760,
+        "_nanoseconds": 738000000
+      }
     },
     {
       "id": "3416beab-c784-81ba-9f5f-f0422d934210",
@@ -1887,18 +1930,11 @@
     {
       "id": "3416beab-c784-814d-bf73-d714b38ad61f",
       "nome": "The Promised Neverland",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "8.75",
       "generos": [
         "Drama 😢",
         "Terror 👻"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 8.7,
@@ -1912,18 +1948,27 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 37779
+      "malId": 37779,
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Esse aqui achei a pegada bem legal quando assisti."
+        }
+      ],
+      "comentarios": "Dudu: Esse aqui achei a pegada bem legal quando assisti.",
+      "updatedAt": {
+        "_seconds": 1777399783,
+        "_nanoseconds": 24000000
+      }
     },
     {
       "id": "3416beab-c784-816f-be45-cd8df5bc682d",
       "nome": "Kuroko no Basket",
-      "quemAssistiu": [
-        "Fernando",
-        "Dudu",
-        "Hacksuya"
-      ],
       "nota": "8.75",
-      "comentarios": "",
       "files": [],
       "notaRafael": null,
       "notaFernando": 9,
@@ -1941,7 +1986,22 @@
       "generos": [
         "Shounen 💥",
         "Esportes ⚽"
-      ]
+      ],
+      "quemAssistiu": [
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Um dos primeiros animes de esporte atuais que assisti, achei muito bom, tão bom quanto Haikyu, vai na fé."
+        }
+      ],
+      "comentarios": "Dudu: Um dos primeiros animes de esporte atuais que assisti, achei muito bom, tão bom quanto Haikyu, vai na fé.",
+      "updatedAt": {
+        "_seconds": 1777399806,
+        "_nanoseconds": 873000000
+      }
     },
     {
       "id": "3416beab-c784-8134-9547-eae7f36f4184",

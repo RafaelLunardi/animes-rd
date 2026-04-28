@@ -3021,14 +3021,14 @@ body.suggest-page.dark-theme::before {
 }
 
 .nyx-left-art {
-  height: min(68vh, 660px);
+  height: min(72vh, 700px);
   left: calc((100vw - 1180px) / 4 - clamp(130px, 9.5vw, 180px) + 28px);
-  max-height: 660px;
-  min-height: 500px;
+  max-height: 700px;
+  min-height: 540px;
   pointer-events: none;
   position: fixed;
   top: 172px;
-  width: clamp(260px, 19vw, 360px);
+  width: clamp(285px, 20.5vw, 390px);
   z-index: 1;
 }
 

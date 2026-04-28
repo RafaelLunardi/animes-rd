@@ -177,7 +177,7 @@ async function renderSubmissionForm() {
     <div class="form-group"><label>Nome do Anime</label><input type="text" id="anime-name" placeholder="Ex: Death Note" required /><div id="official-title" style="font-size:12px; color:#34d399; margin-top:4px; min-height:16px"></div><div id="duplicate-warning" style="font-size:12px; color:#f59e0b; margin-top:4px; min-height:16px"></div></div>
     <div class="form-group"><label>Gêneros <span id="genres-status" style="font-size:12px; font-weight:normal; color:var(--faint)"></span></label><input type="text" id="anime-genres" placeholder="Ação, Drama..." /></div>
     <div class="form-group"><label>Submetido por</label><input type="text" value="${currentUser.personName}" readonly disabled style="background:rgba(255,255,255,0.05); color:var(--faint)" /></div>
-    <button id="submit-anime-button" style="width:100%; padding:12px; background:var(--accent); color:white; border:none; border-radius:8px; font-weight:bold; cursor:pointer">Submeter Anime</button>
+    <button id="submit-anime-button" class="suggest-submit">Submeter Anime</button>
   `;
 
   document.getElementById("submit-anime-button")?.addEventListener("click", handleSubmitAnime);

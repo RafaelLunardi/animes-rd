@@ -1356,6 +1356,20 @@ tbody td { padding: 12px 14px; vertical-align: middle; }
 
 .person-hero p { color: var(--muted); font-size: 14px; margin-top: 8px; }
 
+body.rafael-page .person-hero {
+  justify-content: space-between;
+}
+
+.rafael-hero-mascot {
+  align-self: center;
+  display: block;
+  filter: drop-shadow(0 16px 26px rgba(0,0,0,0.34)) drop-shadow(0 0 18px rgba(253,230,138,0.2));
+  height: clamp(82px, 8vw, 122px);
+  object-fit: contain;
+  pointer-events: none;
+  width: auto;
+}
+
 .anime-list { list-style: none; }
 
 .anime-list li {

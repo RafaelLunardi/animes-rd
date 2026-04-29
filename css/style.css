@@ -2264,6 +2264,7 @@ body.blog-page::before {
 
 .blog-hero-card {
   background: #ffc857;
+  background-clip: padding-box;
   min-height: 470px;
   overflow: hidden;
   padding: 30px;
@@ -2278,9 +2279,11 @@ body.blog-page::before {
     linear-gradient(180deg, rgba(16,16,20,0.52), rgba(16,16,20,0.82)),
     linear-gradient(90deg, rgba(16,16,20,0.76), rgba(16,16,20,0.34)),
     var(--hero-anime-bg);
+  background-clip: padding-box;
   background-position: center;
   background-size: cover;
   border-color: transparent;
+  clip-path: inset(0 round inherit);
 }
 
 .blog-hero-card.has-bg::before {
@@ -3314,9 +3317,11 @@ body.dark-theme .blog-hero-card.has-bg {
     linear-gradient(180deg, rgba(16,16,20,0.58), rgba(16,16,20,0.86)),
     linear-gradient(90deg, rgba(16,16,20,0.8), rgba(16,16,20,0.38)),
     var(--hero-anime-bg);
+  background-clip: padding-box;
   background-position: center;
   background-size: cover;
   border-color: transparent;
+  clip-path: inset(0 round inherit);
 }
 
 body.dark-theme .blog-hero-card.has-bg h2,

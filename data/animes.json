@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-28T23:09:07.422Z",
+  "updatedAt": "2026-04-29T01:45:16.911Z",
   "total": 180,
   "animes": [
     {
@@ -261,7 +261,6 @@
       "generos": [
         "Estratégia ♟️"
       ],
-      "comentarios": "",
       "files": [],
       "notaRafael": 9.5,
       "notaFernando": null,
@@ -275,7 +274,18 @@
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 47159
+      "malId": 47159,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Meu anime de estratégia favorito, vale muito a pena. Ninym 🤍"
+        }
+      ],
+      "comentarios": "Rafael: Meu anime de estratégia favorito, vale muito a pena. Ninym 🤍",
+      "updatedAt": {
+        "_seconds": 1777418290,
+        "_nanoseconds": 773000000
+      }
     },
     {
       "id": "3416beab-c784-81ed-8d10-fb70710e1958",
@@ -409,35 +419,6 @@
       }
     },
     {
-      "id": "3416beab-c784-815a-b830-c61e927ffd26",
-      "nome": "Diários de uma Apotecária",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael"
-      ],
-      "nota": "9.40",
-      "generos": [
-        "Fantasia 🧙",
-        "Drama 😢",
-        "Slice of Life 🍃"
-      ],
-      "comentarios": "",
-      "files": [],
-      "notaRafael": null,
-      "notaFernando": 9.4,
-      "notaDudu": null,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 1,
-      "notaSort": 9.4,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 54492
-    },
-    {
       "id": "3416beab-c784-81b7-8881-fc73defe7249",
       "nome": "Fate/Zero",
       "quemAssistiu": [
@@ -465,6 +446,49 @@
         "_nanoseconds": 493000000
       },
       "malId": 10087
+    },
+    {
+      "id": "3416beab-c784-81e6-a402-d03f1e1b1aba",
+      "nome": "Hunter x Hunter",
+      "generos": [
+        "Ação ⚔️",
+        "Shounen 💥",
+        "Fantasia 🧙"
+      ],
+      "files": [],
+      "notaFernando": 9.8,
+      "notaDudu": null,
+      "notaHacksuya": null,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 136,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "qtdVotos": 2,
+      "maisDeUmVoto": "sim",
+      "controversia": 0.8,
+      "comments": [
+        {
+          "person": "Fernando",
+          "text": "Melhor anime já feito, vários animes se inspiraram nele, Naruto, Jujutsu Kaisen, Shaman King, Solo Leveling entre outros"
+        },
+        {
+          "person": "Rafael",
+          "text": "Anime muito bom, gostei d+, rezemos por uma continuação. Entra na lista dos obrigatórios."
+        }
+      ],
+      "notaSort": 9.4,
+      "notaRafael": 9,
+      "comentarios": "Fernando: Melhor anime já feito, vários animes se inspiraram nele, Naruto, Jujutsu Kaisen, Shaman King, Solo Leveling entre outros\nRafael: Anime muito bom, gostei d+, rezemos por uma continuação. Entra na lista dos obrigatórios.",
+      "nota": "9.40",
+      "updatedAt": {
+        "_seconds": 1777418544,
+        "_nanoseconds": 628000000
+      }
     },
     {
       "id": "3416beab-c784-81fb-8be1-ebdbccb1bc62",
@@ -532,17 +556,21 @@
         "Fernando",
         "Dudu"
       ],
+      "notaSort": 9.37,
       "comments": [
         {
           "person": "Dudu",
           "text": "Por muito tempo foi meu anime favorito, e facilmente esta no meu TOP 3 até hoje."
+        },
+        {
+          "person": "Rafael",
+          "text": "Um dos melhores da história, sem +"
         }
       ],
-      "notaSort": 9.37,
-      "comentarios": "Dudu: Por muito tempo foi meu anime favorito, e facilmente esta no meu TOP 3 até hoje.",
+      "comentarios": "Dudu: Por muito tempo foi meu anime favorito, e facilmente esta no meu TOP 3 até hoje.\nRafael: Um dos melhores da história, sem +",
       "updatedAt": {
-        "_seconds": 1777399038,
-        "_nanoseconds": 449000000
+        "_seconds": 1777418416,
+        "_nanoseconds": 789000000
       }
     },
     {
@@ -709,6 +737,45 @@
       }
     },
     {
+      "id": "3416beab-c784-815a-b830-c61e927ffd26",
+      "nome": "Diários de uma Apotecária",
+      "generos": [
+        "Fantasia 🧙",
+        "Drama 😢",
+        "Slice of Life 🍃"
+      ],
+      "files": [],
+      "notaFernando": 9.4,
+      "notaDudu": null,
+      "notaHacksuya": null,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 54492,
+      "controversia": 0.3,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "qtdVotos": 2,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Muiito bom. Personagem feminina muito diferente dos demais animes, se não assistiu, assista!"
+        }
+      ],
+      "maisDeUmVoto": "sim",
+      "notaSort": 9.25,
+      "notaRafael": 9.1,
+      "comentarios": "Rafael: Muiito bom. Personagem feminina muito diferente dos demais animes, se não assistiu, assista!",
+      "nota": "9.25",
+      "updatedAt": {
+        "_seconds": 1777418383,
+        "_nanoseconds": 687000000
+      }
+    },
+    {
       "id": "3416beab-c784-81db-914a-fecee9612fd4",
       "nome": "One Piece",
       "nota": "9.25",
@@ -816,107 +883,126 @@
       }
     },
     {
-      "id": "3416beab-c784-8178-953e-de48e739f209",
-      "nome": "Hell's Paradise",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael"
-      ],
-      "nota": "9.20",
+      "id": "3416beab-c784-81d3-a126-ed92ef2eedc6",
+      "nome": "Classroom of the Elite",
       "generos": [
-        "Ação ⚔️",
-        "Shounen 💥",
-        "Fantasia 🧙"
-      ],
-      "comentarios": "",
-      "files": [],
-      "notaRafael": null,
-      "notaFernando": 9.2,
-      "notaDudu": null,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 1,
-      "notaSort": 9.2,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 46569
-    },
-    {
-      "id": "3416beab-c784-81e6-a402-d03f1e1b1aba",
-      "nome": "Hunter x Hunter",
-      "generos": [
-        "Ação ⚔️",
-        "Shounen 💥",
-        "Fantasia 🧙"
+        "Drama 😢",
+        "Slice of Life 🍃"
       ],
       "files": [],
-      "notaFernando": 9.8,
+      "notaFernando": 9,
       "notaDudu": null,
       "notaHacksuya": null,
       "migratedAt": {
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 136,
-      "controversia": 1.3,
+      "malId": 35507,
+      "controversia": 0.4,
       "quemAssistiu": [
         "Rafael",
         "Fernando"
       ],
       "qtdVotos": 2,
-      "maisDeUmVoto": "sim",
-      "notaSort": 9.15,
-      "notaRafael": 8.5,
-      "nota": "9.15",
       "comments": [
         {
           "person": "Rafael",
-          "text": "Bom anime"
-        },
-        {
-          "person": "Fernando",
-          "text": "Melhor anime já feito, vários animes se inspiraram nele, Naruto, Jujutsu Kaisen, Shaman King, Solo Leveling entre outros"
+          "text": "Frio e calculista, Um dos melhores protas da história!"
         }
       ],
-      "comentarios": "Rafael: Bom anime\nFernando: Melhor anime já feito, vários animes se inspiraram nele, Naruto, Jujutsu Kaisen, Shaman King, Solo Leveling entre outros",
+      "maisDeUmVoto": "sim",
+      "notaSort": 9.2,
+      "notaRafael": 9.4,
+      "comentarios": "Rafael: Frio e calculista, Um dos melhores protas da história!",
+      "nota": "9.20",
       "updatedAt": {
-        "_seconds": 1777387917,
-        "_nanoseconds": 57000000
+        "_seconds": 1777418707,
+        "_nanoseconds": 988000000
       }
     },
     {
       "id": "3416beab-c784-8162-8533-f1789d92b00f",
       "nome": "Spy x Family",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Hacksuya"
-      ],
-      "nota": "9.10",
       "generos": [
         "Ação ⚔️",
         "Comédia 😂",
         "Shounen 💥",
         "Romance 💖"
       ],
-      "comentarios": "",
       "files": [],
-      "notaRafael": null,
       "notaFernando": 9.1,
       "notaDudu": null,
       "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 1,
-      "notaSort": 9.1,
-      "controversia": 0,
       "migratedAt": {
         "_seconds": 1777314441,
         "_nanoseconds": 493000000
       },
-      "malId": 50265
+      "malId": 50265,
+      "controversia": 0.1,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "qtdVotos": 2,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Anime pra aquecer o coração, bemm calminho e engraçado."
+        }
+      ],
+      "maisDeUmVoto": "sim",
+      "notaSort": 9.15,
+      "notaRafael": 9.2,
+      "comentarios": "Rafael: Anime pra aquecer o coração, bemm calminho e engraçado.",
+      "nota": "9.15",
+      "updatedAt": {
+        "_seconds": 1777418620,
+        "_nanoseconds": 864000000
+      }
+    },
+    {
+      "id": "3dc6beab-c784-82df-be47-01cf93907b4f",
+      "nome": "Death Note",
+      "generos": [
+        "Drama 😢",
+        "Terror 👻",
+        "Shounen 💥"
+      ],
+      "files": [],
+      "notaFernando": 9.2,
+      "notaDudu": 9,
+      "notaHacksuya": null,
+      "maisDeUmVoto": "sim",
+      "qtdVotos": 3,
+      "controversia": 0.2,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 1535,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando",
+        "Dudu"
+      ],
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Um must watch pra todo bom fã de anime."
+        },
+        {
+          "person": "Rafael",
+          "text": "Donald Trump"
+        }
+      ],
+      "notaSort": 9.13,
+      "notaRafael": 9.2,
+      "comentarios": "Dudu: Um must watch pra todo bom fã de anime.\nRafael: Donald Trump",
+      "nota": "9.13",
+      "updatedAt": {
+        "_seconds": 1777418663,
+        "_nanoseconds": 304000000
+      }
     },
     {
       "id": "3416beab-c784-8180-946e-eab169d95644",
@@ -1032,46 +1118,6 @@
       "updatedAt": {
         "_seconds": 1777399376,
         "_nanoseconds": 147000000
-      }
-    },
-    {
-      "id": "3dc6beab-c784-82df-be47-01cf93907b4f",
-      "nome": "Death Note",
-      "nota": "9.07",
-      "generos": [
-        "Drama 😢",
-        "Terror 👻",
-        "Shounen 💥"
-      ],
-      "files": [],
-      "notaRafael": 9,
-      "notaFernando": 9.2,
-      "notaDudu": 9,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "sim",
-      "qtdVotos": 3,
-      "controversia": 0.2,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 1535,
-      "quemAssistiu": [
-        "Rafael",
-        "Fernando",
-        "Dudu"
-      ],
-      "comments": [
-        {
-          "person": "Dudu",
-          "text": "Um must watch pra todo bom fã de anime."
-        }
-      ],
-      "notaSort": 9.07,
-      "comentarios": "Dudu: Um must watch pra todo bom fã de anime.",
-      "updatedAt": {
-        "_seconds": 1777399403,
-        "_nanoseconds": 619000000
       }
     },
     {
@@ -1250,35 +1296,6 @@
       ]
     },
     {
-      "id": "3416beab-c784-81d3-a126-ed92ef2eedc6",
-      "nome": "Classroom of the Elite",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Hacksuya"
-      ],
-      "nota": "9.00",
-      "generos": [
-        "Drama 😢",
-        "Slice of Life 🍃"
-      ],
-      "comentarios": "",
-      "files": [],
-      "notaRafael": null,
-      "notaFernando": 9,
-      "notaDudu": null,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 1,
-      "notaSort": 9,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 35507
-    },
-    {
       "id": "3416beab-c784-81e8-9767-f30d1f1d5f7f",
       "nome": "Dan Da Dan",
       "nota": "9.00",
@@ -1422,7 +1439,6 @@
         "Isekai 🌍✨",
         "Fantasia 🧙"
       ],
-      "comentarios": "",
       "files": [],
       "notaFernando": 8.8,
       "notaDudu": 8.5,
@@ -1440,13 +1456,19 @@
         "Fernando",
         "Dudu"
       ],
-      "comments": [],
       "notaSort": 8.97,
       "notaRafael": 9.6,
       "nota": "8.97",
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Um dos meus animes favoritos, o prota não é bomzinho, muitooo pelo contrário kkkk Obrigatório, assista!"
+        }
+      ],
+      "comentarios": "Rafael: Um dos meus animes favoritos, o prota não é bomzinho, muitooo pelo contrário kkkk Obrigatório, assista!",
       "updatedAt": {
-        "_seconds": 1777354467,
-        "_nanoseconds": 978000000
+        "_seconds": 1777418796,
+        "_nanoseconds": 108000000
       }
     },
     {
@@ -1526,37 +1548,6 @@
         "_seconds": 1777337620,
         "_nanoseconds": 79000000
       }
-    },
-    {
-      "id": "3416beab-c784-8197-b350-c58ecfdc1042",
-      "nome": "Re:ZERO",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Hacksuya"
-      ],
-      "nota": "8.90",
-      "generos": [
-        "Ação ⚔️",
-        "Isekai 🌍✨",
-        "Drama 😢",
-        "Fantasia 🧙"
-      ],
-      "comentarios": "",
-      "files": [],
-      "notaRafael": null,
-      "notaFernando": 8.9,
-      "notaDudu": null,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 1,
-      "notaSort": 8.9,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 61316
     },
     {
       "id": "3416beab-c784-819c-834b-e881284b0bc9",
@@ -1704,20 +1695,16 @@
     {
       "id": "3416beab-c784-8108-b22d-d13ab1ba55a2",
       "nome": "Mushoku Tensei: Jobless Reincarnation",
-      "nota": "8.85",
       "generos": [
         "Isekai 🌍✨",
         "Fantasia 🧙",
         "Drama 😢"
       ],
       "files": [],
-      "notaRafael": null,
       "notaFernando": 8.8,
       "notaDudu": 8.9,
       "notaHacksuya": null,
       "maisDeUmVoto": "sim",
-      "qtdVotos": 2,
-      "notaSort": 8.85,
       "controversia": 0.1,
       "migratedAt": {
         "_seconds": 1777314441,
@@ -1725,19 +1712,28 @@
       },
       "malId": 39535,
       "quemAssistiu": [
+        "Rafael",
         "Fernando",
         "Dudu"
       ],
+      "qtdVotos": 3,
       "comments": [
         {
           "person": "Dudu",
           "text": "Isekai muito bom, uma pegada diferente dos demais, achei que inovaram na medida certa."
+        },
+        {
+          "person": "Rafael",
+          "text": "Anime muito bom, porémm, o ecchi é exagerado em certas situações,  se não fosse isso, seria 9+"
         }
       ],
-      "comentarios": "Dudu: Isekai muito bom, uma pegada diferente dos demais, achei que inovaram na medida certa.",
+      "notaSort": 8.87,
+      "notaRafael": 8.9,
+      "comentarios": "Dudu: Isekai muito bom, uma pegada diferente dos demais, achei que inovaram na medida certa.\nRafael: Anime muito bom, porémm, o ecchi é exagerado em certas situações,  se não fosse isso, seria 9+",
+      "nota": "8.87",
       "updatedAt": {
-        "_seconds": 1777399676,
-        "_nanoseconds": 617000000
+        "_seconds": 1777418179,
+        "_nanoseconds": 984000000
       }
     },
     {
@@ -1903,36 +1899,6 @@
       "malId": 38101
     },
     {
-      "id": "3416beab-c784-81d8-9d4b-cb871e2fcbf6",
-      "nome": "Assassination Classroom",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael"
-      ],
-      "nota": "8.80",
-      "generos": [
-        "Ação ⚔️",
-        "Shounen 💥",
-        "Comédia 😂",
-        "Drama 😢"
-      ],
-      "comentarios": "",
-      "files": [],
-      "notaRafael": null,
-      "notaFernando": 8.8,
-      "notaDudu": null,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 1,
-      "notaSort": 8.8,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 24833
-    },
-    {
       "id": "3416beab-c784-814d-bf73-d714b38ad61f",
       "nome": "The Promised Neverland",
       "nota": "8.75",
@@ -2006,6 +1972,45 @@
       "updatedAt": {
         "_seconds": 1777399806,
         "_nanoseconds": 873000000
+      }
+    },
+    {
+      "id": "3416beab-c784-8178-953e-de48e739f209",
+      "nome": "Hell's Paradise",
+      "generos": [
+        "Ação ⚔️",
+        "Shounen 💥",
+        "Fantasia 🧙"
+      ],
+      "files": [],
+      "notaFernando": 9.2,
+      "notaDudu": null,
+      "notaHacksuya": null,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 46569,
+      "controversia": 0.9,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "qtdVotos": 2,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Prota apelão, lembra animes de shounen antigos."
+        }
+      ],
+      "maisDeUmVoto": "sim",
+      "notaSort": 8.75,
+      "notaRafael": 8.3,
+      "comentarios": "Rafael: Prota apelão, lembra animes de shounen antigos.",
+      "nota": "8.75",
+      "updatedAt": {
+        "_seconds": 1777418481,
+        "_nanoseconds": 374000000
       }
     },
     {
@@ -2091,6 +2096,46 @@
         "Comédia 😂",
         "Romance 💖"
       ]
+    },
+    {
+      "id": "3416beab-c784-8197-b350-c58ecfdc1042",
+      "nome": "Re:ZERO",
+      "generos": [
+        "Ação ⚔️",
+        "Isekai 🌍✨",
+        "Drama 😢",
+        "Fantasia 🧙"
+      ],
+      "files": [],
+      "notaFernando": 8.9,
+      "notaDudu": null,
+      "notaHacksuya": null,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 61316,
+      "controversia": 0.4,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "qtdVotos": 2,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Não gostei muito da proposta do anime, mas é muito bem feito, e bem animado."
+        }
+      ],
+      "maisDeUmVoto": "sim",
+      "notaSort": 8.7,
+      "notaRafael": 8.5,
+      "comentarios": "Rafael: Não gostei muito da proposta do anime, mas é muito bem feito, e bem animado.",
+      "nota": "8.70",
+      "updatedAt": {
+        "_seconds": 1777418979,
+        "_nanoseconds": 380000000
+      }
     },
     {
       "id": "3416beab-c784-81b6-830d-dbf66b57ab4e",
@@ -2462,6 +2507,46 @@
       }
     },
     {
+      "id": "3416beab-c784-81d8-9d4b-cb871e2fcbf6",
+      "nome": "Assassination Classroom",
+      "generos": [
+        "Ação ⚔️",
+        "Shounen 💥",
+        "Comédia 😂",
+        "Drama 😢"
+      ],
+      "files": [],
+      "notaFernando": 8.8,
+      "notaDudu": null,
+      "notaHacksuya": null,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 24833,
+      "controversia": 0.5,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "qtdVotos": 2,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Anime muito bom, a história é unica e muito bem construida!"
+        }
+      ],
+      "maisDeUmVoto": "sim",
+      "notaSort": 8.55,
+      "notaRafael": 8.3,
+      "comentarios": "Rafael: Anime muito bom, a história é unica e muito bem construida!",
+      "nota": "8.55",
+      "updatedAt": {
+        "_seconds": 1777419101,
+        "_nanoseconds": 202000000
+      }
+    },
+    {
       "id": "3416beab-c784-81db-84a5-f2e70b0214ee",
       "nome": "Bleach",
       "nota": "8.55",
@@ -2682,45 +2767,6 @@
       }
     },
     {
-      "id": "3416beab-c784-81d4-af65-fbcfea3f7265",
-      "nome": "Date a Live",
-      "nota": "8.50",
-      "files": [],
-      "notaRafael": null,
-      "notaFernando": null,
-      "notaDudu": 8.5,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 1,
-      "notaSort": 8.5,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 15583,
-      "generos": [
-        "Ação ⚔️",
-        "Romance 💖",
-        "Fantasia 🧙",
-        "Ecchi 🔥"
-      ],
-      "quemAssistiu": [
-        "Dudu"
-      ],
-      "comments": [
-        {
-          "person": "Dudu",
-          "text": "Aquele ecchi muito bom, nada de especial, mas gostosinho."
-        }
-      ],
-      "comentarios": "Dudu: Aquele ecchi muito bom, nada de especial, mas gostosinho.",
-      "updatedAt": {
-        "_seconds": 1777400122,
-        "_nanoseconds": 617000000
-      }
-    },
-    {
       "id": "3416beab-c784-81eb-857a-c4280805559d",
       "nome": "High Rise Invasion",
       "quemAssistiu": [
@@ -2756,6 +2802,46 @@
       "updatedAt": {
         "_seconds": 1777355252,
         "_nanoseconds": 638000000
+      }
+    },
+    {
+      "id": "3416beab-c784-814b-96cd-fb07d0e1f3e1",
+      "nome": "Darling in the Franxx",
+      "generos": [
+        "Ação ⚔️",
+        "Mecha 🤖",
+        "Drama 😢",
+        "Romance 💖"
+      ],
+      "files": [],
+      "notaFernando": 8,
+      "notaDudu": null,
+      "notaHacksuya": null,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 35849,
+      "controversia": 0.9,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando"
+      ],
+      "qtdVotos": 2,
+      "comments": [
+        {
+          "person": "Rafael",
+          "text": "Zero Two delicinha dms!"
+        }
+      ],
+      "maisDeUmVoto": "sim",
+      "notaSort": 8.45,
+      "notaRafael": 8.9,
+      "comentarios": "Rafael: Zero Two delicinha dms!",
+      "nota": "8.45",
+      "updatedAt": {
+        "_seconds": 1777420194,
+        "_nanoseconds": 150000000
       }
     },
     {
@@ -2919,6 +3005,50 @@
       "updatedAt": {
         "_seconds": 1777400165,
         "_nanoseconds": 315000000
+      }
+    },
+    {
+      "id": "3416beab-c784-81d4-af65-fbcfea3f7265",
+      "nome": "Date a Live",
+      "files": [],
+      "notaFernando": null,
+      "notaDudu": 8.5,
+      "notaHacksuya": null,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 15583,
+      "generos": [
+        "Ação ⚔️",
+        "Romance 💖",
+        "Fantasia 🧙",
+        "Ecchi 🔥"
+      ],
+      "quemAssistiu": [
+        "Rafael",
+        "Dudu"
+      ],
+      "qtdVotos": 2,
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Aquele ecchi muito bom, nada de especial, mas gostosinho."
+        },
+        {
+          "person": "Rafael",
+          "text": "Kurumi Tokisaki é pika!"
+        }
+      ],
+      "maisDeUmVoto": "sim",
+      "comentarios": "Dudu: Aquele ecchi muito bom, nada de especial, mas gostosinho.\nRafael: Kurumi Tokisaki é pika!",
+      "controversia": 0.3,
+      "notaSort": 8.35,
+      "notaRafael": 8.2,
+      "nota": "8.35",
+      "updatedAt": {
+        "_seconds": 1777420424,
+        "_nanoseconds": 923000000
       }
     },
     {
@@ -3588,37 +3718,6 @@
         "_seconds": 1777400617,
         "_nanoseconds": 567000000
       }
-    },
-    {
-      "id": "3416beab-c784-814b-96cd-fb07d0e1f3e1",
-      "nome": "Darling in the Franxx",
-      "quemAssistiu": [
-        "Fernando",
-        "Rafael",
-        "Hacksuya"
-      ],
-      "nota": "8.00",
-      "generos": [
-        "Ação ⚔️",
-        "Mecha 🤖",
-        "Drama 😢",
-        "Romance 💖"
-      ],
-      "comentarios": "",
-      "files": [],
-      "notaRafael": null,
-      "notaFernando": 8,
-      "notaDudu": null,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 1,
-      "notaSort": 8,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 35849
     },
     {
       "id": "3416beab-c784-814c-a2d2-f9d1c51ad0e1",

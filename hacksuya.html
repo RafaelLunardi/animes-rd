@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hacksuya — Animes RD</title>
-  <link rel="stylesheet" href="css/style.css?v=copy-fix-1" />
+  <link rel="stylesheet" href="css/style.css?v=profile-polish-1" />
   <script type="module" src="./js/theme.js?v=dark-default-1"></script>
 </head>
-<body>
+<body class="person-profile-page hacksuya-page">
 
 <nav class="nav">
   <a class="nav-logo" href="index.html">Animes RD</a>
@@ -77,6 +77,15 @@
   const PERSON = "Hacksuya";
   const COLOR = "#06b6d4";
   const LIGHT = "#67e8f9";
+  const GENRE_PALETTE = [
+    "#67e8f9", "#a78bfa", "#f9a8d4", "#86efac",
+    "#fde68a", "#5eead4", "#c4b5fd", "#fb7185",
+  ];
+  const BAR_PALETTE = [
+    "#67e8f9", "#6fdff5", "#78d7ef", "#82cfe8",
+    "#8dc8e1", "#99c1db", "#a6bad5", "#b3b5d1",
+    "#c1b1cf", "#ceadcd",
+  ];
   function pNota(a) { return a.notaHacksuya; }
 
   const { animes } = await loadData();
@@ -92,24 +101,27 @@
   document.getElementById("person-stats").innerHTML = `
     <div class="stat-card">
       <div class="stat-label">Animes assistidos</div>
-      <div class="stat-value" style="color:${LIGHT}">${mine.length}</div>
+      <div class="stat-value stat-value-number">${mine.length}</div>
+      <div class="stat-sub" aria-hidden="true">&nbsp;</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Gênero favorito</div>
-      <div class="stat-value" style="font-size:16px;color:${LIGHT}">${genre}</div>
+      <div class="stat-value stat-value-text">${genre}</div>
+      <div class="stat-sub" aria-hidden="true">&nbsp;</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Média de notas</div>
-      <div class="stat-value" style="color:#34d399">${avg ? avg.toFixed(2) : "—"}</div>
+      <div class="stat-value stat-value-number">${avg ? avg.toFixed(2) : "—"}</div>
+      <div class="stat-sub" aria-hidden="true">&nbsp;</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Anime favorito</div>
-      <div class="stat-value" style="font-size:15px;color:${LIGHT}" title="${fav?.nome}">${fav ? fav.nome.slice(0,18) : "—"}</div>
+      <div class="stat-value stat-value-text" title="${fav?.nome}">${fav ? fav.nome : "—"}</div>
       <div class="stat-sub">${fav ? pNota(fav)?.toFixed(1) : ""}</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Mais controverso</div>
-      <div class="stat-value" style="font-size:15px;color:#ef4444" title="${contr?.nome}">${contr ? contr.nome.slice(0,18) : "—"}</div>
+      <div class="stat-value stat-value-text" title="${contr?.nome}">${contr ? contr.nome : "—"}</div>
       <div class="stat-sub">${contr ? "diff " + contr.controversia.toFixed(1) : ""}</div>
     </div>
   `;
@@ -127,13 +139,27 @@
       labels: entries.map(([g]) => cleanGenreLabel(g)),
       datasets: [{
         data: entries.map(([,c]) => c),
-        backgroundColor: entries.map((_,i) => hexAlpha(COLOR, Math.max(0.25, 1-i*0.1))),
-        borderColor: "#1a1a2e", borderWidth: 2, hoverOffset: 6,
+        backgroundColor: entries.map((_, i) => GENRE_PALETTE[i % GENRE_PALETTE.length]),
+        borderColor: "rgba(10,10,15,0.92)", borderWidth: 4, hoverOffset: 8,
       }],
     },
     options: {
       responsive: true, maintainAspectRatio: false,
-      plugins: { legend: { position: "right", labels: { boxWidth: 10, padding: 10, font: { size: 11 } } } },
+      cutout: "58%",
+      plugins: {
+        legend: {
+          position: "right",
+          labels: {
+            boxWidth: 10,
+            boxHeight: 10,
+            color: "#ded7c8",
+            padding: 13,
+            usePointStyle: true,
+            pointStyle: "circle",
+            font: { size: 12, weight: "700" },
+          },
+        },
+      },
       animation: { duration: 800 },
     },
   });
@@ -144,17 +170,28 @@
     data: {
       labels: top10.length ? top10.map(a => a.nome.length > 20 ? a.nome.slice(0,18)+"—" : a.nome) : ["Nenhum dado"],
       datasets: [{
-        data: top10.map(a => pNota(a)),
-        backgroundColor: hexAlpha(COLOR, 0.75),
-        borderColor: COLOR, borderWidth: 1, borderRadius: 6,
+        data: top10.length ? top10.map(a => pNota(a)) : [0],
+        backgroundColor: top10.length ? top10.map((_, i) => BAR_PALETTE[i % BAR_PALETTE.length]) : [BAR_PALETTE[0]],
+        borderColor: top10.length ? top10.map((_, i) => BAR_PALETTE[i % BAR_PALETTE.length]) : [BAR_PALETTE[0]],
+        borderWidth: 1,
+        borderRadius: 999,
+        barThickness: 14,
       }],
     },
     options: {
       indexAxis: "y", responsive: true, maintainAspectRatio: false,
       plugins: { legend: { display: false } },
       scales: {
-        x: { grid: { color: "rgba(255,255,255,0.06)" }, min: 5, max: 10 },
-        y: { grid: { display: false } },
+        x: {
+          grid: { color: "rgba(255,255,255,0.06)" },
+          min: 5,
+          max: 10,
+          ticks: { color: "#b8ae9d", font: { weight: "700" } },
+        },
+        y: {
+          grid: { display: false },
+          ticks: { color: "#ded7c8", font: { weight: "800" } },
+        },
       },
       animation: { duration: 800, easing: "easeOutQuart" },
     },

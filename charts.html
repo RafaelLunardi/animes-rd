@@ -1,86 +1,105 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gráficos — Animes RD</title>
-  <link rel="stylesheet" href="css/style.css?v=copy-fix-1" />
-  <script type="module" src="./js/theme.js?v=dark-default-1"></script>
-</head>
-<body>
-
-<nav class="nav">
-  <a class="nav-logo" href="index.html">Animes RD</a>
-  <a href="index.html">Blog</a>
-  <a href="acervo.html">Acervo</a>
-  <a href="charts.html" class="active">Gráficos</a>
-  <a href="compare.html">Comparar</a>
-  <a href="suggest.html">Sugerir Anime</a>
-  <a href="pending.html">Fila de Aprovação</a>
-  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar modo noturno" title="Modo noturno">☾</button>
-  <div class="nav-person">
-    <a href="rafael.html"><span class="nav-avatar" style="background:rgba(124,58,237,0.18);color:#6f45d8">R</span>Rafael</a>
-    <a href="fernando.html"><span class="nav-avatar" style="background:rgba(236,72,153,0.18);color:#d83182">F</span>Fernando</a>
-    <a href="dudu.html"><span class="nav-avatar" style="background:rgba(234,179,8,0.18);color:#b7791f">D</span>Dudu</a>
-    <a href="hacksuya.html"><span class="nav-avatar" style="background:rgba(6,182,212,0.18);color:#0588a6">H</span>Hacksuya</a>
-  </div>
-</nav>
-
-<main class="page">
-  <div class="page-header">
-    <h1>Gráficos Gerais</h1>
-    <p>Visão geral de todos os dados — Rafael, Fernando, Dudu e Hacksuya</p>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">Top gêneros assistidos</div>
-      <div class="chart-container" style="height:320px">
-        <canvas id="chartTopGenres"></canvas>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gráficos — Animes RD</title>
+    <link rel="stylesheet" href="css/style.css?v=cleanup-1" />
+    <script type="module" src="./js/theme.js?v=cleanup-1"></script>
+  </head>
+  <body>
+    <nav class="nav">
+      <a class="nav-logo" href="index.html">Animes RD</a>
+      <a href="index.html">Blog</a>
+      <a href="acervo.html">Acervo</a>
+      <a href="charts.html" class="active">Gráficos</a>
+      <a href="compare.html">Comparar</a>
+      <a href="suggest.html">Sugerir Anime</a>
+      <a href="pending.html">Fila de Aprovação</a>
+      <button
+        class="theme-toggle"
+        type="button"
+        data-theme-toggle
+        aria-label="Ativar modo noturno"
+        title="Modo noturno"
+      >
+        ☾
+      </button>
+      <div class="nav-person">
+        <a href="rafael.html"
+          ><span class="nav-avatar" style="background: rgba(124, 58, 237, 0.18); color: #6f45d8"
+            >R</span
+          >Rafael</a
+        >
+        <a href="fernando.html"
+          ><span class="nav-avatar" style="background: rgba(236, 72, 153, 0.18); color: #d83182"
+            >F</span
+          >Fernando</a
+        >
+        <a href="dudu.html"
+          ><span class="nav-avatar" style="background: rgba(234, 179, 8, 0.18); color: #b7791f"
+            >D</span
+          >Dudu</a
+        >
+        <a href="hacksuya.html"
+          ><span class="nav-avatar" style="background: rgba(6, 182, 212, 0.18); color: #0588a6"
+            >H</span
+          >Hacksuya</a
+        >
       </div>
-    </div>
-    <div class="card">
-      <div class="card-title">Proporção por qtd. de espectadores</div>
-      <div class="chart-container" style="height:320px">
-        <canvas id="chartVotesPie"></canvas>
+    </nav>
+
+    <main class="page">
+      <div class="page-header">
+        <h1>Gráficos Gerais</h1>
+        <p>Visão geral de todos os dados — Rafael, Fernando, Dudu e Hacksuya</p>
       </div>
-    </div>
-  </div>
 
-  <div class="card" style="margin-bottom:28px">
-    <div class="card-title">Gêneros por pessoa (top 8)</div>
-    <div class="chart-container" style="height:300px">
-      <canvas id="chartGenreByPerson"></canvas>
-    </div>
-  </div>
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">Top gêneros assistidos</div>
+          <div class="chart-container" style="height: 320px">
+            <canvas id="chartTopGenres"></canvas>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Proporção por qtd. de espectadores</div>
+          <div class="chart-container" style="height: 320px">
+            <canvas id="chartVotesPie"></canvas>
+          </div>
+        </div>
+      </div>
 
-  <div class="card" style="margin-bottom:28px">
-    <div class="card-title">Top 10 melhores notas gerais</div>
-    <div class="chart-container" style="height:320px">
-      <canvas id="chartVotesRanking"></canvas>
-    </div>
-  </div>
+      <div class="card" style="margin-bottom: 28px">
+        <div class="card-title">Gêneros por pessoa (top 8)</div>
+        <div class="chart-container" style="height: 300px">
+          <canvas id="chartGenreByPerson"></canvas>
+        </div>
+      </div>
 
-  <div class="card" style="margin-bottom:28px">
-    <div class="card-title">Nota média — Controvérsia (hover para ver o nome)</div>
-    <div class="chart-container" style="height:340px">
-      <canvas id="chartScatter"></canvas>
-    </div>
-  </div>
-</main>
+      <div class="card" style="margin-bottom: 28px">
+        <div class="card-title">Top 10 melhores notas gerais</div>
+        <div class="chart-container" style="height: 320px">
+          <canvas id="chartVotesRanking"></canvas>
+        </div>
+      </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-<script type="module">
-  import { loadData } from "./js/data.js?v=dudu-yellow-1";
-  import { renderAllCharts } from "./js/charts.js?v=dudu-yellow-1";
+      <div class="card" style="margin-bottom: 28px">
+        <div class="card-title">Nota média — Controvérsia (hover para ver o nome)</div>
+        <div class="chart-container" style="height: 340px">
+          <canvas id="chartScatter"></canvas>
+        </div>
+      </div>
+    </main>
 
-  const { animes } = await loadData();
-  renderAllCharts(animes);
-</script>
-<script type="module" src="js/nyx-widget.js?v=nyx-icon-only-1"></script>
-</body>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script type="module">
+      import { loadData } from "./js/data.js?v=cleanup-1";
+      import { renderAllCharts } from "./js/charts.js?v=cleanup-1";
+
+      const { animes } = await loadData();
+      renderAllCharts(animes);
+    </script>
+    <script type="module" src="js/nyx-widget.js?v=cleanup-1"></script>
+  </body>
 </html>
-
-
-
-

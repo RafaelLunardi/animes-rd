@@ -1,0 +1,14 @@
+{
+  "name": "animes-rd",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write \"*.html\" \"css/*.css\" \"js/*.js\" \"README.md\"",
+    "format:check": "prettier --check \"*.html\" \"css/*.css\" \"js/*.js\" \"README.md\"",
+    "check:js": "node --check js/charts.js && node --check js/compare.js && node --check js/data.js && node --check js/home.js && node --check js/nyx-widget.js && node --check js/nyx.js && node --check js/suggest.js && node --check js/table.js && node --check js/theme.js && node --check js/utils.js"
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

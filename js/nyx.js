@@ -5,27 +5,12 @@ import {
   formatNota,
   loadData,
   missedAnimes,
-} from "./data.js?v=dudu-yellow-1";
-
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;",
-  })[char]);
-}
-
-function cleanGenre(genre) {
-  return String(genre || "")
-    .replace(/[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]/gu, "")
-    .trim();
-}
+} from "./data.js?v=cleanup-1";
+import { escapeHTML, stripEmoji } from "./utils.js";
 
 function scoreAnime(anime, favorite) {
   const genreBonus = (anime.generos || []).some(
-    (genre) => cleanGenre(genre) === cleanGenre(favorite)
+    (genre) => stripEmoji(genre) === stripEmoji(favorite),
   )
     ? 0.35
     : 0;
@@ -36,9 +21,9 @@ function scoreAnime(anime, favorite) {
 function recommendationReason(anime, person, favorite) {
   const watchers = (anime.quemAssistiu || []).filter((name) => name !== person);
   const genreMatch = (anime.generos || []).some(
-    (genre) => cleanGenre(genre) === cleanGenre(favorite)
+    (genre) => stripEmoji(genre) === stripEmoji(favorite),
   );
-  if (genreMatch) return `combina com seu gosto por ${cleanGenre(favorite)}`;
+  if (genreMatch) return `combina com seu gosto por ${stripEmoji(favorite)}`;
   if (watchers.length) return `${watchers.join(", ")} ja viu e a nota geral esta forte`;
   return "tem uma nota geral alta no acervo";
 }
@@ -79,7 +64,7 @@ function renderPeople(current) {
     <button type="button" class="${person === current ? "active" : ""}" data-person="${person}">
       ${person}
     </button>
-  `
+  `,
   ).join("");
 }
 
@@ -88,7 +73,8 @@ function renderRecommendations(data, person) {
   const recommendations = pickRecommendations(data.animes, person);
   const output = document.getElementById("nyx-results");
 
-  document.getElementById("nyx-summary").textContent = `${person} ja assistiu ${watched} animes. A Nyx separou dicas que ainda nao estao na lista dessa pessoa.`;
+  document.getElementById("nyx-summary").textContent =
+    `${person} ja assistiu ${watched} animes. A Nyx separou dicas que ainda nao estao na lista dessa pessoa.`;
 
   output.innerHTML =
     recommendations
@@ -102,7 +88,7 @@ function renderRecommendations(data, person) {
         <small>Nota geral ${formatNota(anime.nota)} · ${anime.qtdVotos || 0} voto(s)</small>
       </div>
     </a>
-  `
+  `,
       )
       .join("") || `<p class="nyx-empty">A Nyx nao encontrou recomendacoes novas agora.</p>`;
 }

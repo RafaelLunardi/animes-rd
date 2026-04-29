@@ -1,10 +1,17 @@
-// js/compare.js — lógica de comparação, Venn e radar
+// js/compare.js?v=cleanup-1 — lógica de comparação, Venn e radar
 
 import {
-  PEOPLE, PERSON_COLORS, PERSON_LIGHTS,
-  animesOf, commonAnimes, countGenres,
-  topGenres, cleanGenreLabel, formatNota, notaColor
-} from "./data.js?v=dudu-yellow-1";
+  PEOPLE,
+  PERSON_COLORS,
+  PERSON_LIGHTS,
+  animesOf,
+  commonAnimes,
+  countGenres,
+  topGenres,
+  cleanGenreLabel,
+  formatNota,
+  notaColor,
+} from "./data.js?v=cleanup-1";
 
 Chart.defaults.color = "#94a3b8";
 Chart.defaults.font.family = "'Poppins', sans-serif";
@@ -50,54 +57,59 @@ function renderVenn4() {
   // Conta cada subset não-vazio (2^4 - 1 = 15 regiões possíveis)
   const subsetCounts = new Map();
   for (const a of allAnimes) {
-    const key = members.filter(m => a.quemAssistiu.includes(m)).join("+");
+    const key = members.filter((m) => a.quemAssistiu.includes(m)).join("+");
     if (!key) continue;
     subsetCounts.set(key, (subsetCounts.get(key) || 0) + 1);
   }
 
   const totals = {};
-  members.forEach(m => totals[m] = animesOf(allAnimes, m).length);
+  members.forEach((m) => (totals[m] = animesOf(allAnimes, m).length));
 
   // 4 elipses sobrepostas (layout clássico de Venn-4 com rotação ±45°/±135°)
   const ellipses = [
-    { person: "Rafael",   cx: 170, cy: 200, rx: 135, ry: 70, rot: -50 },
+    { person: "Rafael", cx: 170, cy: 200, rx: 135, ry: 70, rot: -50 },
     { person: "Fernando", cx: 200, cy: 170, rx: 135, ry: 70, rot: -10 },
-    { person: "Dudu",     cx: 200, cy: 230, rx: 135, ry: 70, rot:  10 },
-    { person: "Hacksuya", cx: 230, cy: 200, rx: 135, ry: 70, rot:  50 },
+    { person: "Dudu", cx: 200, cy: 230, rx: 135, ry: 70, rot: 10 },
+    { person: "Hacksuya", cx: 230, cy: 200, rx: 135, ry: 70, rot: 50 },
   ];
 
-  const svgEllipses = ellipses.map(e => {
-    const color = PERSON_COLORS[e.person];
-    return `<ellipse cx="${e.cx}" cy="${e.cy}" rx="${e.rx}" ry="${e.ry}"
+  const svgEllipses = ellipses
+    .map((e) => {
+      const color = PERSON_COLORS[e.person];
+      return `<ellipse cx="${e.cx}" cy="${e.cy}" rx="${e.rx}" ry="${e.ry}"
       transform="rotate(${e.rot} ${e.cx} ${e.cy})"
       fill="${color}26" stroke="${color}" stroke-width="2"/>`;
-  }).join("");
+    })
+    .join("");
 
   // Legenda de intersecções, ordenada por tamanho do subset depois por contagem
   const intersections = [...subsetCounts.entries()]
     .map(([key, count]) => ({ key, count, size: key.split("+").length }))
     .sort((a, b) => b.size - a.size || b.count - a.count);
 
-  const rowsHtml = intersections.map(({ key, count }) => {
-    const parts = key.split("+");
-    const badges = parts.map(p =>
-      `<span class="badge badge-${p.toLowerCase()}">${initials[p]}</span>`
-    ).join(" ");
-    const label = parts.length === 4 ? "todos" :
-                  parts.length === 1 ? `só ${parts[0]}` :
-                  parts.join(" ∩ ");
-    return `
+  const rowsHtml = intersections
+    .map(({ key, count }) => {
+      const parts = key.split("+");
+      const badges = parts
+        .map((p) => `<span class="badge badge-${p.toLowerCase()}">${initials[p]}</span>`)
+        .join(" ");
+      const label =
+        parts.length === 4 ? "todos" : parts.length === 1 ? `só ${parts[0]}` : parts.join(" ∩ ");
+      return `
       <li style="display:flex;align-items:center;justify-content:space-between;gap:18px;padding:6px 0;border-bottom:1px solid var(--border)">
         <span style="display:flex;align-items:center;gap:8px">${badges}<span style="color:var(--muted);font-size:12px">${label}</span></span>
         <span style="font-weight:600;min-width:28px;text-align:right">${count}</span>
       </li>
     `;
-  }).join("");
+    })
+    .join("");
 
-  const legendHtml = members.map(m => {
-    const light = PERSON_LIGHTS[m];
-    return `<span style="color:${light}">● ${m}: ${totals[m]}</span>`;
-  }).join("");
+  const legendHtml = members
+    .map((m) => {
+      const light = PERSON_LIGHTS[m];
+      return `<span style="color:${light}">● ${m}: ${totals[m]}</span>`;
+    })
+    .join("");
 
   wrap.innerHTML = `
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center">
@@ -249,8 +261,7 @@ function renderCommonTable(p1, p2) {
   const wrap = document.getElementById("common-table-wrap");
   if (!wrap) return;
 
-  const common = commonAnimes(allAnimes, p1, p2)
-    .sort((a, b) => (b.nota || 0) - (a.nota || 0));
+  const common = commonAnimes(allAnimes, p1, p2).sort((a, b) => (b.nota || 0) - (a.nota || 0));
 
   if (!common.length) {
     wrap.innerHTML = `<div class="empty-state"><p>Nenhum anime em comum entre ${p1} e ${p2}.</p></div>`;
@@ -280,13 +291,14 @@ function renderCommonTable(p1, p2) {
           </tr>
         </thead>
         <tbody>
-          ${common.map((a) => {
-            const n1 = pNota(a, p1);
-            const n2 = pNota(a, p2);
-            const diff = (n1 !== null && n2 !== null) ? Math.abs(n1 - n2) : null;
-            const diffStr = diff !== null ? diff.toFixed(1) : "—";
-            const rowClass = diff !== null && diff >= 2 ? ' class="diff-highlight"' : "";
-            return `
+          ${common
+            .map((a) => {
+              const n1 = pNota(a, p1);
+              const n2 = pNota(a, p2);
+              const diff = n1 !== null && n2 !== null ? Math.abs(n1 - n2) : null;
+              const diffStr = diff !== null ? diff.toFixed(1) : "—";
+              const rowClass = diff !== null && diff >= 2 ? ' class="diff-highlight"' : "";
+              return `
               <tr${rowClass}>
                 <td>${a.nome}</td>
                 <td style="color:${c1};font-weight:600">${n1 !== null ? n1.toFixed(1) : "—"}</td>
@@ -294,7 +306,8 @@ function renderCommonTable(p1, p2) {
                 <td>${diff !== null && diff >= 2 ? "⚡ " : ""}${diffStr}</td>
               </tr>
             `;
-          }).join("")}
+            })
+            .join("")}
         </tbody>
       </table>
     </div>

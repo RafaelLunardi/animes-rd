@@ -1,4 +1,6 @@
-// js/data.js — carrega e processa animes.json
+// js/data.js?v=cleanup-1 — carrega e processa animes.json
+
+import { normalizeText, stripEmoji } from "./utils.js";
 
 let _data = null;
 
@@ -16,7 +18,7 @@ export function formatNota(nota) {
 }
 
 export function personKey(name) {
-  return name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  return normalizeText(name);
 }
 
 export const PEOPLE = ["Rafael", "Fernando", "Dudu", "Hacksuya"];
@@ -47,7 +49,7 @@ export function getPersonNota(anime, person) {
 export function countGenres(animes) {
   const map = {};
   for (const a of animes) {
-    for (const g of (a.generos || [])) {
+    for (const g of a.generos || []) {
       map[g] = (map[g] || 0) + 1;
     }
   }
@@ -78,7 +80,7 @@ export function favoriteAnime(animes, person) {
 // Animes exclusivos de uma pessoa (só ela assistiu)
 export function exclusiveAnimes(animes, person) {
   return animesOf(animes, person).filter(
-    (a) => a.quemAssistiu.length === 1 && a.quemAssistiu[0] === person
+    (a) => a.quemAssistiu.length === 1 && a.quemAssistiu[0] === person,
   );
 }
 
@@ -91,8 +93,7 @@ export function topGenres(animes, topN = 10) {
 }
 
 export function cleanGenreLabel(g) {
-  // Remove emoji para usar como label curta em gráficos
-  return g.replace(/[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]|[\u{2702}-\u{27B0}]/gu, "").trim();
+  return stripEmoji(g);
 }
 
 export function notaColor(nota) {
@@ -121,14 +122,10 @@ export function mostControversial(animes, person) {
 
 // Animes que a pessoa não assistiu mas outros sim
 export function missedAnimes(animes, person) {
-  return animes.filter(
-    (a) => !a.quemAssistiu.includes(person) && a.quemAssistiu.length > 0
-  );
+  return animes.filter((a) => !a.quemAssistiu.includes(person) && a.quemAssistiu.length > 0);
 }
 
 // Animes em comum entre duas pessoas
 export function commonAnimes(animes, p1, p2) {
-  return animes.filter(
-    (a) => a.quemAssistiu.includes(p1) && a.quemAssistiu.includes(p2)
-  );
+  return animes.filter((a) => a.quemAssistiu.includes(p1) && a.quemAssistiu.includes(p2));
 }

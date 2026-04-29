@@ -1,83 +1,102 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Comparar — Animes RD</title>
-  <link rel="stylesheet" href="css/style.css?v=copy-fix-1" />
-  <script type="module" src="./js/theme.js?v=dark-default-1"></script>
-</head>
-<body>
-
-<nav class="nav">
-  <a class="nav-logo" href="index.html">Animes RD</a>
-  <a href="index.html">Blog</a>
-  <a href="acervo.html">Acervo</a>
-  <a href="charts.html">Gráficos</a>
-  <a href="compare.html" class="active">Comparar</a>
-  <a href="suggest.html">Sugerir Anime</a>
-  <a href="pending.html">Fila de Aprovação</a>
-  <button class="theme-toggle" type="button" data-theme-toggle aria-label="Ativar modo noturno" title="Modo noturno">☾</button>
-  <div class="nav-person">
-    <a href="rafael.html"><span class="nav-avatar" style="background:rgba(124,58,237,0.18);color:#6f45d8">R</span>Rafael</a>
-    <a href="fernando.html"><span class="nav-avatar" style="background:rgba(236,72,153,0.18);color:#d83182">F</span>Fernando</a>
-    <a href="dudu.html"><span class="nav-avatar" style="background:rgba(234,179,8,0.18);color:#b7791f">D</span>Dudu</a>
-    <a href="hacksuya.html"><span class="nav-avatar" style="background:rgba(6,182,212,0.18);color:#0588a6">H</span>Hacksuya</a>
-  </div>
-</nav>
-
-<main class="page">
-  <div class="page-header">
-    <h1>Comparar</h1>
-    <p>Compare gosto, gêneros e notas entre dois membros</p>
-  </div>
-
-  <div class="compare-selectors">
-    <label style="color:var(--muted);font-size:13px">Comparar</label>
-    <select id="person1"></select>
-    <label style="color:var(--muted);font-size:13px">com</label>
-    <select id="person2"></select>
-  </div>
-
-  <div class="card" style="margin-bottom:28px">
-    <div class="card-title">Diagrama de Venn — os 4</div>
-    <div id="venn4-container"></div>
-  </div>
-
-  <div class="grid-2" style="margin-bottom:28px">
-    <div class="card">
-      <div class="card-title">Animes em comum — diagrama de Venn</div>
-      <div id="venn-container"></div>
-    </div>
-    <div class="card">
-      <div class="card-title">Perfil de gêneros — radar</div>
-      <div class="chart-container" style="height:280px">
-        <canvas id="chartRadar"></canvas>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comparar — Animes RD</title>
+    <link rel="stylesheet" href="css/style.css?v=cleanup-1" />
+    <script type="module" src="./js/theme.js?v=cleanup-1"></script>
+  </head>
+  <body>
+    <nav class="nav">
+      <a class="nav-logo" href="index.html">Animes RD</a>
+      <a href="index.html">Blog</a>
+      <a href="acervo.html">Acervo</a>
+      <a href="charts.html">Gráficos</a>
+      <a href="compare.html" class="active">Comparar</a>
+      <a href="suggest.html">Sugerir Anime</a>
+      <a href="pending.html">Fila de Aprovação</a>
+      <button
+        class="theme-toggle"
+        type="button"
+        data-theme-toggle
+        aria-label="Ativar modo noturno"
+        title="Modo noturno"
+      >
+        ☾
+      </button>
+      <div class="nav-person">
+        <a href="rafael.html"
+          ><span class="nav-avatar" style="background: rgba(124, 58, 237, 0.18); color: #6f45d8"
+            >R</span
+          >Rafael</a
+        >
+        <a href="fernando.html"
+          ><span class="nav-avatar" style="background: rgba(236, 72, 153, 0.18); color: #d83182"
+            >F</span
+          >Fernando</a
+        >
+        <a href="dudu.html"
+          ><span class="nav-avatar" style="background: rgba(234, 179, 8, 0.18); color: #b7791f"
+            >D</span
+          >Dudu</a
+        >
+        <a href="hacksuya.html"
+          ><span class="nav-avatar" style="background: rgba(6, 182, 212, 0.18); color: #0588a6"
+            >H</span
+          >Hacksuya</a
+        >
       </div>
-    </div>
-  </div>
+    </nav>
 
-  <div class="card">
-    <div class="card-title">Animes em comum — notas comparadas</div>
-    <p style="font-size:12px;color:var(--faint);margin-bottom:12px">
-      ? linhas em destaque = diferença de 2+ pontos
-    </p>
-    <div id="common-table-wrap"></div>
-  </div>
-</main>
+    <main class="page">
+      <div class="page-header">
+        <h1>Comparar</h1>
+        <p>Compare gosto, gêneros e notas entre dois membros</p>
+      </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-<script type="module">
-  import { loadData } from "./js/data.js?v=dudu-yellow-1";
-  import { initCompare } from "./js/compare.js?v=compare-scrollbar-1";
+      <div class="compare-selectors">
+        <label style="color: var(--muted); font-size: 13px">Comparar</label>
+        <select id="person1"></select>
+        <label style="color: var(--muted); font-size: 13px">com</label>
+        <select id="person2"></select>
+      </div>
 
-  const { animes } = await loadData();
-  initCompare(animes);
-</script>
-<script type="module" src="js/nyx-widget.js?v=nyx-icon-only-1"></script>
-</body>
+      <div class="card" style="margin-bottom: 28px">
+        <div class="card-title">Diagrama de Venn — os 4</div>
+        <div id="venn4-container"></div>
+      </div>
+
+      <div class="grid-2" style="margin-bottom: 28px">
+        <div class="card">
+          <div class="card-title">Animes em comum — diagrama de Venn</div>
+          <div id="venn-container"></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Perfil de gêneros — radar</div>
+          <div class="chart-container" style="height: 280px">
+            <canvas id="chartRadar"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Animes em comum — notas comparadas</div>
+        <p style="font-size: 12px; color: var(--faint); margin-bottom: 12px">
+          ? linhas em destaque = diferença de 2+ pontos
+        </p>
+        <div id="common-table-wrap"></div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+    <script type="module">
+      import { loadData } from "./js/data.js?v=cleanup-1";
+      import { initCompare } from "./js/compare.js?v=cleanup-1";
+
+      const { animes } = await loadData();
+      initCompare(animes);
+    </script>
+    <script type="module" src="js/nyx-widget.js?v=cleanup-1"></script>
+  </body>
 </html>
-
-
-
-

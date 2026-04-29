@@ -7,5 +7,5 @@ export const firebaseConfig = {
   storageBucket: "animes-rd.firebasestorage.app",
   messagingSenderId: "946477366584",
   appId: "1:946477366584:web:00c20f8dc60bfb538615cd",
-  measurementId: "G-8N94F55WKY"
+  measurementId: "G-8N94F55WKY",
 };

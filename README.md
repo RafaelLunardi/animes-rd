@@ -4,16 +4,16 @@ Site estático hospedado no GitHub Pages que exibe gráficos, rankings e compara
 
 ## 🔗 Páginas
 
-| Página | Descrição |
-|---|---|
-| `index.html` | Tabela geral com busca, filtros e rankings |
-| `suggest.html` | **Nova!** Sugira animes, vote (Assisti/Não Assisti) e avalie |
-| `charts.html` | Gráficos gerais: gêneros, notas, controversia |
-| `compare.html` | Comparação entre 2 pessoas: Venn, radar, notas |
-| `rafael.html` | Perfil individual do Rafael |
-| `fernando.html` | Perfil individual do Fernando |
-| `dudu.html` | Perfil individual do Dudu |
-| `hacksuya.html` | Perfil individual do Hacksuya |
+| Página          | Descrição                                                    |
+| --------------- | ------------------------------------------------------------ |
+| `index.html`    | Tabela geral com busca, filtros e rankings                   |
+| `suggest.html`  | **Nova!** Sugira animes, vote (Assisti/Não Assisti) e avalie |
+| `charts.html`   | Gráficos gerais: gêneros, notas, controversia                |
+| `compare.html`  | Comparação entre 2 pessoas: Venn, radar, notas               |
+| `rafael.html`   | Perfil individual do Rafael                                  |
+| `fernando.html` | Perfil individual do Fernando                                |
+| `dudu.html`     | Perfil individual do Dudu                                    |
+| `hacksuya.html` | Perfil individual do Hacksuya                                |
 
 ---
 
@@ -21,10 +21,10 @@ Site estático hospedado no GitHub Pages que exibe gráficos, rankings e compara
 
 1.  **Sugestão**: Qualquer membro logado (via Google) pode sugerir um anime em `suggest.html`.
 2.  **Votação**: Todos os membros (`Rafael`, `Fernando`, `Dudu`, `Hacksuya`) devem votar no anime pendente.
-    *   Opções: "Assisti" (com nota e comentário) ou "Não Assisti".
+    - Opções: "Assisti" (com nota e comentário) ou "Não Assisti".
 3.  **Aprovação**: Uma GitHub Action roda periodicamente (ou manualmente).
-    *   Se todos votaram, o anime é movido para a coleção principal.
-    *   O arquivo `data/animes.json` é atualizado e o site sofre o deploy.
+    - Se todos votaram, o anime é movido para a coleção principal.
+    - O arquivo `data/animes.json` é atualizado e o site sofre o deploy.
 
 ---
 
@@ -41,8 +41,8 @@ Site estático hospedado no GitHub Pages que exibe gráficos, rankings e compara
 
 Adicione o seguinte Secret no seu repositório (**Settings > Secrets > Actions**):
 
-| Nome | Valor |
-|---|---|
+| Nome                           | Valor                                                 |
+| ------------------------------ | ----------------------------------------------------- |
 | `FIREBASE_SERVICE_ACCOUNT_KEY` | Conteúdo completo do arquivo JSON da chave de serviço |
 
 ### 3. Migração Inicial (Opcional)
@@ -86,3 +86,14 @@ npx serve .
 ```
 
 Abra `http://localhost:3000` no navegador.
+
+### Qualidade do código
+
+```bash
+npm install
+npm run format
+npm run format:check
+npm run check:js
+```
+
+Use `format` antes de subir alterações grandes. O `check:js` valida a sintaxe dos módulos principais sem precisar abrir o navegador.

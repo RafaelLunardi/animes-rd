@@ -8,7 +8,8 @@ import {
   getPersonNota,
   loadData,
   mostControversial,
-} from "./data.js?v=dudu-yellow-1";
+} from "./data.js?v=cleanup-1";
+import { escapeHTML, shortText, shuffleItems } from "./utils.js";
 
 const OPENINGS = {
   Rafael: ["again", "Unravel", "Gurenge"],
@@ -44,8 +45,10 @@ const HERO_IMAGE_FALLBACKS = {
 
 const FEATURED_ROTATION_HOURS = 5;
 const FEATURED_ROTATION_SALT = "test-swap-1";
-const YOUTUBE_PLAYLIST_URL = "https://youtube.com/playlist?list=PLjNlQ2vXx1xbt30X8TcUfNzw_akVISXEu&si=sjrgOdNP3MwdhC6D";
-const SPOTIFY_PLAYLIST_URL = "https://open.spotify.com/playlist/2Uz95kBY93CizCzICWnx3d?si=ae6d73f6c6934528";
+const YOUTUBE_PLAYLIST_URL =
+  "https://youtube.com/playlist?list=PLjNlQ2vXx1xbt30X8TcUfNzw_akVISXEu&si=sjrgOdNP3MwdhC6D";
+const SPOTIFY_PLAYLIST_URL =
+  "https://open.spotify.com/playlist/2Uz95kBY93CizCzICWnx3d?si=ae6d73f6c6934528";
 const MAL_NEWS_URL = "https://myanimelist.net/news";
 
 let featuredCommentTimer = null;
@@ -66,9 +69,11 @@ function sharedTop(animes) {
 }
 
 function hashText(value) {
-  return String(value).split("").reduce((hash, char) => {
-    return ((hash << 5) - hash + char.charCodeAt(0)) | 0;
-  }, 0);
+  return String(value)
+    .split("")
+    .reduce((hash, char) => {
+      return ((hash << 5) - hash + char.charCodeAt(0)) | 0;
+    }, 0);
 }
 
 function featuredAnimeForNow(animes) {
@@ -82,29 +87,6 @@ function featuredAnimeForNow(animes) {
   const rotationBlock = Math.floor(Date.now() / rotationMs);
   const seed = Math.abs(hashText(`animes-rd-featured-${FEATURED_ROTATION_SALT}-${rotationBlock}`));
   return candidates[seed % candidates.length];
-}
-
-function shortName(name, size = 44) {
-  return name.length > size ? `${name.slice(0, size - 1)}...` : name;
-}
-
-function shuffleItems(items) {
-  const shuffled = [...items];
-  for (let index = shuffled.length - 1; index > 0; index -= 1) {
-    const randomIndex = Math.floor(Math.random() * (index + 1));
-    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
-  }
-  return shuffled;
-}
-
-function escapeHTML(value) {
-  return String(value ?? "").replace(/[&<>"']/g, (char) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;",
-  })[char]);
 }
 
 function commentsForAnime(anime) {
@@ -130,9 +112,21 @@ function commentsForAnime(anime) {
     .filter(Boolean)
     .map((line) => {
       const match = line.match(linePattern);
-      if (!match) return { animeId: anime.id, anime: anime.nome, person: "Comentário", text: line };
-      const person = PEOPLE.find((name) => name.toLowerCase() === match[1].toLowerCase()) || match[1];
-      return { animeId: anime.id, anime: anime.nome, person, text: match[2].trim() };
+      if (!match)
+        return {
+          animeId: anime.id,
+          anime: anime.nome,
+          person: "Comentário",
+          text: line,
+        };
+      const person =
+        PEOPLE.find((name) => name.toLowerCase() === match[1].toLowerCase()) || match[1];
+      return {
+        animeId: anime.id,
+        anime: anime.nome,
+        person,
+        text: match[2].trim(),
+      };
     })
     .filter((comment) => comment.text);
 }
@@ -141,25 +135,32 @@ function featuredComments(animes, featuredAnime) {
   const mainComments = commentsForAnime(featuredAnime);
   const otherComments = animes.flatMap((anime) => commentsForAnime(anime));
 
-  return shuffleItems([...mainComments, ...otherComments]
-    .filter((comment, index, list) =>
-      list.findIndex((item) =>
-        item.animeId === comment.animeId && item.person === comment.person && item.text === comment.text
-      ) === index
-    ));
+  return shuffleItems(
+    [...mainComments, ...otherComments].filter(
+      (comment, index, list) =>
+        list.findIndex(
+          (item) =>
+            item.animeId === comment.animeId &&
+            item.person === comment.person &&
+            item.text === comment.text,
+        ) === index,
+    ),
+  );
 }
 
 function renderCommentBalloons(comments) {
-  return comments.map((comment, index) => {
-    const personColor = PERSON_LIGHTS[comment.person] || "var(--dudu-light)";
-    const href = `acervo.html?anime=${encodeURIComponent(comment.animeId || "")}`;
-    return `
+  return comments
+    .map((comment, index) => {
+      const personColor = PERSON_LIGHTS[comment.person] || "var(--dudu-light)";
+      const href = `acervo.html?anime=${encodeURIComponent(comment.animeId || "")}`;
+      return `
       <a class="comment-balloon comment-balloon-${index + 1}" href="${href}" style="--balloon-color:${personColor}" title="Abrir ${escapeHTML(comment.anime)} no acervo">
         <strong>${escapeHTML(comment.person)}</strong>
-        <p>${escapeHTML(shortName(comment.text, 120))}</p>
+        <p>${escapeHTML(shortText(comment.text, 120))}</p>
       </a>
     `;
-  }).join("");
+    })
+    .join("");
 }
 
 function startFeaturedCommentRotation(comments) {
@@ -245,7 +246,9 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
 
   const subtitle = `${data.total} animes catalogados, atualizado em ${date.toLocaleDateString("pt-BR")}. Um blog para transformar nota, treta e recomendacao em leitura.`;
   const featuredTitle = featuredAnime?.nome || "o proximo anime";
-  const featuredHref = featuredAnime?.id ? `acervo.html?anime=${encodeURIComponent(featuredAnime.id)}` : "acervo.html";
+  const featuredHref = featuredAnime?.id
+    ? `acervo.html?anime=${encodeURIComponent(featuredAnime.id)}`
+    : "acervo.html";
 
   const slides = [
     {
@@ -261,8 +264,16 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
       title: "Openings para deixar tocando enquanto escolhe.",
       text: "Duas playlists pra entrar no clima: YouTube e Spotify, com a vibe do Animes RD.",
       visuals: [
-        { label: "YouTube", src: "https://cdn.simpleicons.org/youtube/FF0033", href: YOUTUBE_PLAYLIST_URL },
-        { label: "Spotify", src: "https://cdn.simpleicons.org/spotify/1ED760", href: SPOTIFY_PLAYLIST_URL },
+        {
+          label: "YouTube",
+          src: "https://cdn.simpleicons.org/youtube/FF0033",
+          href: YOUTUBE_PLAYLIST_URL,
+        },
+        {
+          label: "Spotify",
+          src: "https://cdn.simpleicons.org/spotify/1ED760",
+          href: SPOTIFY_PLAYLIST_URL,
+        },
       ],
     },
     {
@@ -270,7 +281,13 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
       eyebrow: "Noticias",
       title: "Radar MyAnimeList para novidades da temporada.",
       text: "Um atalho para acompanhar anuncios, trailers, estreias e movimentacoes do mundo dos animes.",
-      visuals: [{ label: "MyAnimeList", src: "https://cdn.simpleicons.org/myanimelist/2E51A2", href: MAL_NEWS_URL }],
+      visuals: [
+        {
+          label: "MyAnimeList",
+          src: "https://cdn.simpleicons.org/myanimelist/2E51A2",
+          href: MAL_NEWS_URL,
+        },
+      ],
     },
     {
       tone: "featured",
@@ -284,26 +301,38 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
   ];
 
   rotator.innerHTML = `
-    ${slides.map((slide, index) => `
+    ${slides
+      .map(
+        (slide, index) => `
       <section class="blog-hero-slide ${index === 0 ? "active" : ""}" data-hero-slide="${index}" data-hero-tone="${slide.tone}">
         <div class="blog-hero-slide-copy">
           <span class="eyebrow">${slide.eyebrow}</span>
           <h1>${escapeHTML(slide.title)}</h1>
           <p ${index === 0 ? 'id="home-subtitle"' : ""}>${escapeHTML(slide.text)}</p>
         </div>
-        ${slide.visuals.length ? `
+        ${
+          slide.visuals.length
+            ? `
           <div class="blog-hero-slide-footer">
             <div class="blog-hero-visual" aria-hidden="true">
-              ${slide.visuals.map((visual) => `
+              ${slide.visuals
+                .map(
+                  (visual) => `
                 <a href="${escapeHTML(visual.href)}" ${visual.href.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""} title="${escapeHTML(visual.label)}" aria-label="${escapeHTML(visual.label)}">
                   <img src="${escapeHTML(visual.src)}" alt="" />
                 </a>
-              `).join("")}
+              `,
+                )
+                .join("")}
             </div>
           </div>
-        ` : ""}
+        `
+            : ""
+        }
       </section>
-    `).join("")}
+    `,
+      )
+      .join("")}
     <div class="blog-hero-dots">
       ${slides.map((_, index) => `<button class="${index === 0 ? "active" : ""}" type="button" data-hero-dot="${index}" aria-label="Abrir aba ${index + 1}"></button>`).join("")}
     </div>
@@ -391,19 +420,30 @@ function renderMemberPosts(animes) {
         <h3><span>Top 3</span>${person}</h3>
         <p>${watched.length} animes vistos, média ${avg ? avg.toFixed(2) : "--"} e gênero mais recorrente: ${favoriteGenre(animes, person)}.</p>
         <ol>
-          ${topAnimes.map((anime) => `
+          ${
+            topAnimes
+              .map(
+                (anime) => `
             <li>
-              <span>${shortName(anime.nome, 36)}</span>
+              <span>${shortText(anime.nome, 36)}</span>
               <strong>${formatNota(getPersonNota(anime, person))}</strong>
             </li>
-          `).join("") || "<li><span>Sem notas ainda</span><strong>--</strong></li>"}
+          `,
+              )
+              .join("") || "<li><span>Sem notas ainda</span><strong>--</strong></li>"
+          }
         </ol>
         <div class="post-tags post-openings" aria-label="Top 3 openings de ${person}">
           <strong>Top 3 openings</strong>
           <div class="opening-list">
-            ${(OPENINGS[person] || []).slice(0, 3).map((opening, index) => `
+            ${(OPENINGS[person] || [])
+              .slice(0, 3)
+              .map(
+                (opening, index) => `
               <span><b>${String(index + 1).padStart(2, "0")}</b>${opening}</span>
-            `).join("")}
+            `,
+              )
+              .join("")}
           </div>
         </div>
         <a href="${person.toLowerCase()}.html">Abrir perfil</a>
@@ -422,25 +462,31 @@ function renderPulse(animes) {
     <span class="eyebrow">Mais controversos</span>
     <h2>Onde a conversa esquenta</h2>
     <div class="hot-list">
-      ${hottest.map((anime) => `
+      ${hottest
+        .map(
+          (anime) => `
         <a href="acervo.html" title="${anime.nome}">
-          <span>${shortName(anime.nome, 30)}</span>
+          <span>${shortText(anime.nome, 30)}</span>
           <strong>${anime.controversia.toFixed(1)}</strong>
         </a>
-      `).join("")}
+      `,
+        )
+        .join("")}
     </div>
   `;
 }
 
 function renderNews() {
-  document.getElementById("news-grid").innerHTML = NEWS_PLACEHOLDER.map((item) => `
+  document.getElementById("news-grid").innerHTML = NEWS_PLACEHOLDER.map(
+    (item) => `
     <article class="news-card">
       <span class="news-source">${item.source}</span>
       <h3>${item.title}</h3>
       <p>${item.summary}</p>
       <a href="${item.url}" ${item.url === "#" ? 'aria-disabled="true"' : ""}>Ler notícia</a>
     </article>
-  `).join("");
+  `,
+  ).join("");
 }
 
 async function init() {
@@ -454,5 +500,6 @@ async function init() {
 
 init().catch((error) => {
   console.error(error);
-  document.getElementById("home-subtitle").textContent = "Não foi possível carregar os dados agora.";
+  document.getElementById("home-subtitle").textContent =
+    "Não foi possível carregar os dados agora.";
 });

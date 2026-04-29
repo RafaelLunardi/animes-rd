@@ -1,11 +1,23 @@
-// js/table.js — tabela com filtros, ordenação e modal
+// js/table.js?v=cleanup-1 — tabela com filtros, ordenação e modal
 
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
-import { getFirestore, doc, runTransaction, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+import {
+  getFirestore,
+  doc,
+  runTransaction,
+  serverTimestamp,
+} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
 
 import { firebaseConfig } from "./firebase-config.js";
-import { formatNota, notaColor, PEOPLE, PERSON_COLORS, PERSON_LIGHTS } from "./data.js?v=dudu-yellow-1";
+import { formatNota, notaColor, PEOPLE, PERSON_COLORS, PERSON_LIGHTS } from "./data.js?v=cleanup-1";
+import { escapeHTML, normalizeText, stripEmoji } from "./utils.js";
 
 let allAnimes = [];
 let filtered = [];
@@ -19,7 +31,7 @@ const imageCache = new Map();
 const queuedImageMalIds = new Set();
 
 const isFirebaseConfigured = firebaseConfig.apiKey !== "SUA_API_KEY";
-const app = isFirebaseConfigured ? (getApps()[0] || initializeApp(firebaseConfig)) : null;
+const app = isFirebaseConfigured ? getApps()[0] || initializeApp(firebaseConfig) : null;
 const auth = app ? getAuth(app) : null;
 const db = app ? getFirestore(app) : null;
 
@@ -32,22 +44,6 @@ const NOTE_FIELDS = {
 
 const FALLBACK_IMAGE =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Crect width='56' height='56' rx='8' fill='%2318171d'/%3E%3Cpath d='M16 36h24M18 18h20v20H18z' stroke='%237b7165' stroke-width='2' fill='none'/%3E%3Ccircle cx='23' cy='24' r='3' fill='%237b7165'/%3E%3Cpath d='M19 35l8-8 5 5 3-3 4 6' stroke='%237b7165' stroke-width='2' fill='none'/%3E%3C/svg%3E";
-
-function escapeHTML(value) {
-  return String(value ?? "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
-
-function normalizeName(value) {
-  return String(value ?? "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
-}
 
 function commentsForAnime(anime) {
   if (Array.isArray(anime.comments) && anime.comments.length) {
@@ -65,7 +61,7 @@ function commentsForAnime(anime) {
     .map((line) => {
       const match = line.match(linePattern);
       if (!match) return { person: null, text: line };
-      const person = PEOPLE.find((p) => normalizeName(p) === normalizeName(match[1]));
+      const person = PEOPLE.find((p) => normalizeText(p) === normalizeText(match[1]));
       return { person, text: match[2].trim() };
     })
     .filter((comment) => comment.text);
@@ -83,9 +79,12 @@ function setPersonComment(anime, person, text) {
 }
 
 function recalculateAnime(anime) {
-  const notes = PEOPLE
-    .map((person) => ({ person, score: anime[NOTE_FIELDS[person]] }))
-    .filter((item) => item.score !== null && item.score !== undefined && !Number.isNaN(Number(item.score)));
+  const notes = PEOPLE.map((person) => ({
+    person,
+    score: anime[NOTE_FIELDS[person]],
+  })).filter(
+    (item) => item.score !== null && item.score !== undefined && !Number.isNaN(Number(item.score)),
+  );
 
   const scores = notes.map((item) => Number(item.score));
   const avg = scores.length ? scores.reduce((sum, score) => sum + score, 0) / scores.length : null;
@@ -137,9 +136,7 @@ function setCachedImage(malId, imageUrl) {
 function renderAnimeIdentity(anime) {
   const malId = anime.malId;
   const imageUrl = getCachedImage(malId) || FALLBACK_IMAGE;
-  const imgAttrs = malId
-    ? `data-mal-id="${escapeHTML(malId)}" data-anime-img`
-    : "";
+  const imgAttrs = malId ? `data-mal-id="${escapeHTML(malId)}" data-anime-img` : "";
 
   return `
     <span class="anime-identity">
@@ -197,11 +194,10 @@ async function runImageQueue() {
 export function initTable(animes) {
   // 1. Cria um mapa mestre de Gênero Limpo -> Gênero com Emoji
   const prettyMap = new Map();
-  const cleanStr = (s) => s.replace(/[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]|[\u{2702}-\u{27B0}]/gu, "").trim();
 
-  animes.forEach(a => {
-    (a.generos || []).forEach(g => {
-      const cleaned = cleanStr(g);
+  animes.forEach((a) => {
+    (a.generos || []).forEach((g) => {
+      const cleaned = stripEmoji(g);
       // Se a versão atual tem emoji (é maior que a versão limpa), guarda no mapa
       if (g.length > cleaned.length) {
         if (!prettyMap.has(cleaned) || g.length > prettyMap.get(cleaned).length) {
@@ -212,9 +208,9 @@ export function initTable(animes) {
   });
 
   // 2. Padroniza todos os animes na memória para usar a versão com emoji
-  allAnimes = animes.map(a => ({
+  allAnimes = animes.map((a) => ({
     ...a,
-    generos: (a.generos || []).map(g => prettyMap.get(cleanStr(g)) || g)
+    generos: (a.generos || []).map((g) => prettyMap.get(stripEmoji(g)) || g),
   }));
 
   filtered = [...allAnimes];
@@ -237,10 +233,10 @@ function renderFilters() {
 
   // Coleta gêneros únicos e resolve duplicatas (com/sem emoji)
   const genreMap = new Map(); // limpo -> original (preferencialmente com emoji)
-  
+
   allAnimes.forEach((a) => {
     (a.generos || []).forEach((g) => {
-      const clean = g.replace(/[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]|[\u{2702}-\u{27B0}]/gu, "").trim();
+      const clean = stripEmoji(g);
       if (!genreMap.has(clean) || g.length > genreMap.get(clean).length) {
         genreMap.set(clean, g);
       }
@@ -286,28 +282,27 @@ function applyFilters() {
   const votes = document.getElementById("filter-votes")?.value || "";
 
   // Função auxiliar para limpar emoji para comparação
-  const cleanStr = (s) => s.replace(/[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]|[\u{2702}-\u{27B0}]/gu, "").trim();
-  const cleanedSelectedGenre = genreSelected ? cleanStr(genreSelected) : "";
+  const cleanedSelectedGenre = genreSelected ? stripEmoji(genreSelected) : "";
 
   filtered = allAnimes.filter((a) => {
     if (search && !a.nome.toLowerCase().includes(search)) return false;
-    
+
     if (cleanedSelectedGenre) {
-        const hasGenre = (a.generos || []).some(g => cleanStr(g) === cleanedSelectedGenre);
-        if (!hasGenre) return false;
+      const hasGenre = (a.generos || []).some((g) => stripEmoji(g) === cleanedSelectedGenre);
+      if (!hasGenre) return false;
     }
 
     if (person && !a.quemAssistiu.includes(person)) return false;
 
     // Lógica do filtro de Status (Assistido/Não assistido por MIM)
     if (status) {
-        if (!currentUser || !currentUser.personName) {
-            // Se o usuário não está logado, ignoramos o filtro de status mas poderíamos avisar
-            return true; 
-        }
-        const userWatched = a.quemAssistiu.includes(currentUser.personName);
-        if (status === "watched" && !userWatched) return false;
-        if (status === "not-watched" && userWatched) return false;
+      if (!currentUser || !currentUser.personName) {
+        // Se o usuário não está logado, ignoramos o filtro de status mas poderíamos avisar
+        return true;
+      }
+      const userWatched = a.quemAssistiu.includes(currentUser.personName);
+      if (status === "watched" && !userWatched) return false;
+      if (status === "not-watched" && userWatched) return false;
     }
 
     if (votes && String(a.qtdVotos) !== votes) return false;
@@ -338,16 +333,25 @@ function renderTable() {
     return;
   }
 
-  tbody.innerHTML = filtered.map((a, i) => {
-    const nota = a.nota !== null ? Number(a.nota).toFixed(2) : "—";
-    const notaCls = notaColor(a.nota);
-    const genres = a.generos.slice(0, 2).map((g) => `<span class="badge badge-genre">${g}</span>`).join("");
-    const moreGenres = a.generos.length > 2 ? `<span class="badge badge-genre">+${a.generos.length - 2}</span>` : "";
-    const viewers = a.quemAssistiu.map((p) => `<span class="badge badge-${p.toLowerCase()}">${p}</span>`).join("");
-    const contr = a.controversia !== null ? Number(a.controversia).toFixed(1) : "—";
-    const contrCls = a.controversia > 1.5 ? "controversia-hot" : "controversia";
+  tbody.innerHTML = filtered
+    .map((a, i) => {
+      const nota = a.nota !== null ? Number(a.nota).toFixed(2) : "—";
+      const notaCls = notaColor(a.nota);
+      const genres = a.generos
+        .slice(0, 2)
+        .map((g) => `<span class="badge badge-genre">${g}</span>`)
+        .join("");
+      const moreGenres =
+        a.generos.length > 2
+          ? `<span class="badge badge-genre">+${a.generos.length - 2}</span>`
+          : "";
+      const viewers = a.quemAssistiu
+        .map((p) => `<span class="badge badge-${p.toLowerCase()}">${p}</span>`)
+        .join("");
+      const contr = a.controversia !== null ? Number(a.controversia).toFixed(1) : "—";
+      const contrCls = a.controversia > 1.5 ? "controversia-hot" : "controversia";
 
-    return `
+      return `
       <tr data-idx="${i}" onclick="openModal(${allAnimes.indexOf(a)})">
         <td>${renderAnimeIdentity(a)}</td>
         <td>${genres}${moreGenres}</td>
@@ -357,7 +361,8 @@ function renderTable() {
         <td><span class="${contrCls}">${contr > 0 ? "🌶️ " + contr : contr}</span></td>
       </tr>
     `;
-  }).join("");
+    })
+    .join("");
 
   filtered.forEach((anime) => queueAnimeImage(anime.malId));
 }
@@ -381,19 +386,22 @@ function renderModal() {
       <div id="modal-edit"></div>
     </div>
   `;
-  div.addEventListener("click", (e) => { if (e.target === div) closeModal(); });
+  div.addEventListener("click", (e) => {
+    if (e.target === div) closeModal();
+  });
   document.body.appendChild(div);
 }
 
-window.openModal = function(idx) {
+window.openModal = function (idx) {
   const a = allAnimes[idx];
   if (!a) return;
   currentModalIndex = idx;
 
   document.getElementById("modal-title").textContent = a.nome;
 
-  document.getElementById("modal-genres").innerHTML =
-    a.generos.map((g) => `<span class="badge badge-genre">${g}</span>`).join(" ");
+  document.getElementById("modal-genres").innerHTML = a.generos
+    .map((g) => `<span class="badge badge-genre">${g}</span>`)
+    .join(" ");
 
   const notas = [
     { person: "Rafael", nota: a.notaRafael, color: PERSON_LIGHTS.Rafael },
@@ -402,14 +410,18 @@ window.openModal = function(idx) {
     { person: "Hacksuya", nota: a.notaHacksuya, color: PERSON_LIGHTS.Hacksuya },
   ];
 
-  document.getElementById("modal-notes").innerHTML = notas.map((n) => `
+  document.getElementById("modal-notes").innerHTML = notas
+    .map(
+      (n) => `
     <div class="note-box" style="--note-color:${n.color}">
       <div class="person" style="color:${n.color}">${n.person}</div>
-      <div class="score ${n.nota === null ? 'empty' : notaColor(n.nota)}">
+      <div class="score ${n.nota === null ? "empty" : notaColor(n.nota)}">
         ${n.nota !== null ? Number(n.nota).toFixed(1) : "—"}
       </div>
     </div>
-  `).join("");
+  `,
+    )
+    .join("");
 
   const metaItems = [];
   if (a.nota !== null) metaItems.push(`Média: <span>${Number(a.nota).toFixed(2)}</span>`);
@@ -419,8 +431,9 @@ window.openModal = function(idx) {
   }
   if (a.qtdVotos !== null) metaItems.push(`Votos: <span>${a.qtdVotos}</span>`);
 
-  document.getElementById("modal-meta").innerHTML =
-    metaItems.map((m) => `<span class="meta-item">${m}</span>`).join("");
+  document.getElementById("modal-meta").innerHTML = metaItems
+    .map((m) => `<span class="meta-item">${m}</span>`)
+    .join("");
 
   document.getElementById("modal-links").innerHTML = renderAnimeLinks(a);
 
@@ -468,11 +481,15 @@ function renderAnimeLinks(anime) {
     <section class="modal-links">
       <h3>Links úteis</h3>
       <div class="modal-link-list">
-        ${links.map((link) => `
+        ${links
+          .map(
+            (link) => `
           <a class="modal-link-chip modal-link-${link.kind}" href="${escapeHTML(link.href)}" target="_blank" rel="noopener noreferrer">
             ${escapeHTML(link.label)}
           </a>
-        `).join("")}
+        `,
+          )
+          .join("")}
       </div>
     </section>
   `;
@@ -486,16 +503,18 @@ function renderComments(anime) {
     <section class="modal-comments">
       <h3>Comentários</h3>
       <div class="comment-list">
-        ${comments.map((comment) => {
-          const person = comment.person || "Comentário";
-          const color = PERSON_LIGHTS[person] || "var(--muted)";
-          return `
+        ${comments
+          .map((comment) => {
+            const person = comment.person || "Comentário";
+            const color = PERSON_LIGHTS[person] || "var(--muted)";
+            return `
             <article class="comment-item">
               <strong style="color:${color}">${escapeHTML(person)}</strong>
               <p>${escapeHTML(comment.text)}</p>
             </article>
           `;
-        }).join("")}
+          })
+          .join("")}
       </div>
     </section>
   `;
@@ -590,12 +609,14 @@ function showUserSelectionModal() {
       <h3>Quem é você?</h3>
       <p>Essa escolha define qual nota e comentário você pode editar.</p>
       <div class="person-select-list">
-        ${PEOPLE.map((person) => `
+        ${PEOPLE.map(
+          (person) => `
           <button type="button" data-person-name="${person}">
             <span style="background:${PERSON_COLORS[person]}"></span>
             ${person}
           </button>
-        `).join("")}
+        `,
+        ).join("")}
       </div>
     </div>
   `;
@@ -623,8 +644,8 @@ async function handleLogout() {
 }
 
 function updateAnimeLocally(id, nextAnime) {
-  allAnimes = allAnimes.map((anime) => anime.id === id ? nextAnime : anime);
-  filtered = filtered.map((anime) => anime.id === id ? nextAnime : anime);
+  allAnimes = allAnimes.map((anime) => (anime.id === id ? nextAnime : anime));
+  filtered = filtered.map((anime) => (anime.id === id ? nextAnime : anime));
   sortData();
   renderTable();
   currentModalIndex = allAnimes.findIndex((anime) => anime.id === id);
@@ -691,7 +712,7 @@ async function saveAnimeEdit(anime) {
   }
 }
 
-window.closeModal = function() {
+window.closeModal = function () {
   document.getElementById("modal-overlay")?.classList.remove("open");
   document.body.style.overflow = "";
   currentModalIndex = null;
@@ -728,12 +749,14 @@ document.addEventListener("keydown", (e) => {
 
 if (auth) {
   onAuthStateChanged(auth, (user) => {
-    currentUser = user ? {
-      uid: user.uid,
-      displayName: user.displayName,
-      email: user.email,
-      personName: getStoredPersonName(user.uid),
-    } : null;
+    currentUser = user
+      ? {
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          personName: getStoredPersonName(user.uid),
+        }
+      : null;
     refreshOpenModal();
   });
 }

@@ -725,19 +725,27 @@ body.suggest-page .suggest-form-card .form-group input[disabled] {
 
 #person-stats .stat-card {
   --stat-color: var(--paper);
+  --stat-label-color: var(--stat-color);
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   min-height: 122px;
   overflow: hidden;
   padding: 18px 22px;
+  text-align: center;
 }
 
-#person-stats .stat-card:nth-child(1) { --stat-color: #a78bfa; }
-#person-stats .stat-card:nth-child(2) { --stat-color: #ff9dcc; }
-#person-stats .stat-card:nth-child(3) { --stat-color: #34d399; }
-#person-stats .stat-card:nth-child(4) { --stat-color: #67e8f9; }
-#person-stats .stat-card:nth-child(5) { --stat-color: #fb7185; }
+#person-stats .stat-card:nth-child(1) { --stat-color: #a78bfa; --stat-label-color: #8b5cf6; }
+#person-stats .stat-card:nth-child(2) { --stat-color: #ff9dcc; --stat-label-color: #ec4899; }
+#person-stats .stat-card:nth-child(3) { --stat-color: #34d399; --stat-label-color: #10b981; }
+#person-stats .stat-card:nth-child(4) { --stat-color: #67e8f9; --stat-label-color: #06b6d4; }
+#person-stats .stat-card:nth-child(5) { --stat-color: #fb7185; --stat-label-color: #ef4444; }
+
+#person-stats .stat-label {
+  color: var(--stat-label-color);
+  margin-bottom: 10px;
+}
 
 #person-stats .stat-value {
   color: var(--stat-color);

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rafael — Animes RD</title>
-  <link rel="stylesheet" href="css/style.css?v=person-stats-1" />
+  <link rel="stylesheet" href="css/style.css?v=person-stats-2" />
   <script type="module" src="./js/theme.js?v=dark-default-1"></script>
 </head>
 <body>
@@ -95,24 +95,24 @@
   document.getElementById("person-stats").innerHTML = `
     <div class="stat-card">
       <div class="stat-label">Animes assistidos</div>
-      <div class="stat-value">${mine.length}</div>
+      <div class="stat-value stat-value-number">${mine.length}</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Gênero favorito</div>
-      <div class="stat-value">${genre}</div>
+      <div class="stat-value stat-value-text">${genre}</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Média de notas</div>
-      <div class="stat-value">${avg ? avg.toFixed(2) : "—"}</div>
+      <div class="stat-value stat-value-number">${avg ? avg.toFixed(2) : "—"}</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Anime favorito</div>
-      <div class="stat-value" title="${fav?.nome}">${fav ? fav.nome : "—"}</div>
+      <div class="stat-value stat-value-text" title="${fav?.nome}">${fav ? fav.nome : "—"}</div>
       <div class="stat-sub">${fav ? pNota(fav)?.toFixed(1) : ""}</div>
     </div>
     <div class="stat-card">
       <div class="stat-label">Mais controverso</div>
-      <div class="stat-value" title="${contr?.nome}">${contr ? contr.nome : "—"}</div>
+      <div class="stat-value stat-value-text" title="${contr?.nome}">${contr ? contr.nome : "—"}</div>
       <div class="stat-sub">${contr ? "diff " + contr.controversia.toFixed(1) : ""}</div>
     </div>
   `;

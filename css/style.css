@@ -728,7 +728,9 @@ body.suggest-page .suggest-form-card .form-group input[disabled] {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 104px;
+  min-height: 122px;
+  overflow: hidden;
+  padding: 18px 22px;
 }
 
 #person-stats .stat-card:nth-child(1) { --stat-color: #a78bfa; }
@@ -740,15 +742,31 @@ body.suggest-page .suggest-form-card .form-group input[disabled] {
 #person-stats .stat-value {
   color: var(--stat-color);
   font-family: inherit;
-  font-size: clamp(26px, 2.05vw, 34px);
   font-weight: 900;
-  line-height: 1.06;
+  letter-spacing: 0;
+  line-height: 1.08;
   overflow-wrap: anywhere;
+}
+
+#person-stats .stat-value-number {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(38px, 3vw, 46px);
+  line-height: 0.95;
+}
+
+#person-stats .stat-value-text {
+  display: -webkit-box;
+  font-size: clamp(17px, 1.25vw, 20px);
+  line-height: 1.16;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 #person-stats .stat-sub {
   color: color-mix(in srgb, var(--stat-color) 72%, var(--muted));
   font-weight: 800;
+  margin-top: 10px;
 }
 
 .grid-2 { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; margin-bottom: 28px; }

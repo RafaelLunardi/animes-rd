@@ -723,6 +723,34 @@ body.suggest-page .suggest-form-card .form-group input[disabled] {
   white-space: nowrap;
 }
 
+#person-stats .stat-card {
+  --stat-color: var(--paper);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 104px;
+}
+
+#person-stats .stat-card:nth-child(1) { --stat-color: #a78bfa; }
+#person-stats .stat-card:nth-child(2) { --stat-color: #ff9dcc; }
+#person-stats .stat-card:nth-child(3) { --stat-color: #34d399; }
+#person-stats .stat-card:nth-child(4) { --stat-color: #67e8f9; }
+#person-stats .stat-card:nth-child(5) { --stat-color: #fb7185; }
+
+#person-stats .stat-value {
+  color: var(--stat-color);
+  font-family: inherit;
+  font-size: clamp(26px, 2.05vw, 34px);
+  font-weight: 900;
+  line-height: 1.06;
+  overflow-wrap: anywhere;
+}
+
+#person-stats .stat-sub {
+  color: color-mix(in srgb, var(--stat-color) 72%, var(--muted));
+  font-weight: 800;
+}
+
 .grid-2 { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; margin-bottom: 28px; }
 .grid-3 { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); margin-bottom: 28px; }
 

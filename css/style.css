@@ -764,8 +764,9 @@ body.suggest-page .suggest-form-card .form-group input[disabled] {
 
 #person-stats .stat-value-number {
   font-family: 'Newsreader', serif;
-  font-size: clamp(26px, 1.9vw, 32px);
+  font-size: clamp(24px, 1.7vw, 29px);
   line-height: 0.95;
+  transform: translateY(3px);
 }
 
 #person-stats .stat-value-text {

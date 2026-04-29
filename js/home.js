@@ -293,18 +293,22 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
   rotator.innerHTML = `
     ${slides.map((slide, index) => `
       <section class="blog-hero-slide ${index === 0 ? "active" : ""}" data-hero-slide="${index}" data-hero-tone="${slide.tone}">
-        <div class="blog-hero-visual" aria-hidden="true">
-          ${slide.visuals.map((visual) => `
-            <img src="${escapeHTML(visual.src)}" alt="" title="${escapeHTML(visual.label)}" />
-          `).join("")}
+        <div class="blog-hero-slide-copy">
+          <span class="eyebrow">${slide.eyebrow}</span>
+          <h1>${escapeHTML(slide.title)}</h1>
+          <p ${index === 0 ? 'id="home-subtitle"' : ""}>${escapeHTML(slide.text)}</p>
         </div>
-        <span class="eyebrow">${slide.eyebrow}</span>
-        <h1>${escapeHTML(slide.title)}</h1>
-        <p ${index === 0 ? 'id="home-subtitle"' : ""}>${escapeHTML(slide.text)}</p>
-        <div class="blog-hero-slide-links">
-          ${slide.links.map((link) => `
-            <a href="${escapeHTML(link.href)}" ${link.href.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""}>${escapeHTML(link.label)}</a>
-          `).join("")}
+        <div class="blog-hero-slide-footer">
+          <div class="blog-hero-visual" aria-hidden="true">
+            ${slide.visuals.map((visual) => `
+              <img src="${escapeHTML(visual.src)}" alt="" title="${escapeHTML(visual.label)}" />
+            `).join("")}
+          </div>
+          <div class="blog-hero-slide-links">
+            ${slide.links.map((link) => `
+              <a href="${escapeHTML(link.href)}" ${link.href.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""}>${escapeHTML(link.label)}</a>
+            `).join("")}
+          </div>
         </div>
       </section>
     `).join("")}

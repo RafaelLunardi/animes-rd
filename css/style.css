@@ -727,10 +727,10 @@ body.suggest-page .suggest-form-card .form-group input[disabled] {
   --stat-color: var(--paper);
   --stat-label-color: var(--stat-color);
   align-items: center;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 16px 42px 14px;
   height: 112px;
-  justify-content: center;
+  justify-items: center;
   min-height: 0;
   overflow: hidden;
   padding: 18px 22px;
@@ -744,11 +744,14 @@ body.suggest-page .suggest-form-card .form-group input[disabled] {
 #person-stats .stat-card:nth-child(5) { --stat-color: #fb7185; --stat-label-color: #ef4444; }
 
 #person-stats .stat-label {
+  align-self: start;
   color: var(--stat-label-color);
-  margin-bottom: 10px;
+  line-height: 1;
+  margin-bottom: 0;
 }
 
 #person-stats .stat-value {
+  align-self: center;
   color: var(--stat-color);
   font-family: inherit;
   font-weight: 900;
@@ -773,9 +776,12 @@ body.suggest-page .suggest-form-card .form-group input[disabled] {
 }
 
 #person-stats .stat-sub {
+  align-self: end;
   color: color-mix(in srgb, var(--stat-color) 72%, var(--muted));
   font-weight: 800;
-  margin-top: 10px;
+  line-height: 1;
+  margin-top: 0;
+  min-height: 12px;
 }
 
 .grid-2 { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; margin-bottom: 28px; }

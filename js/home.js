@@ -253,8 +253,7 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
       eyebrow: `Blog <span class="brand-gradient">Animes RD</span>`,
       title: "Criticas, rankings e guias para decidir o proximo anime.",
       text: subtitle,
-      visuals: [{ label: "Animes RD", src: "assets/nyx-icon.png" }],
-      links: [{ label: "Abrir acervo", href: "acervo.html" }],
+      visuals: [{ label: "Animes RD", src: "assets/nyx-icon.png", href: "acervo.html" }],
     },
     {
       tone: "playlists",
@@ -262,12 +261,8 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
       title: "Openings para deixar tocando enquanto escolhe.",
       text: "Duas playlists pra entrar no clima: YouTube e Spotify, com a vibe do Animes RD.",
       visuals: [
-        { label: "YouTube", src: "https://cdn.simpleicons.org/youtube/FF0033" },
-        { label: "Spotify", src: "https://cdn.simpleicons.org/spotify/1ED760" },
-      ],
-      links: [
-        { label: "YouTube", href: YOUTUBE_PLAYLIST_URL },
-        { label: "Spotify", href: SPOTIFY_PLAYLIST_URL },
+        { label: "YouTube", src: "https://cdn.simpleicons.org/youtube/FF0033", href: YOUTUBE_PLAYLIST_URL },
+        { label: "Spotify", src: "https://cdn.simpleicons.org/spotify/1ED760", href: SPOTIFY_PLAYLIST_URL },
       ],
     },
     {
@@ -275,8 +270,7 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
       eyebrow: "Noticias",
       title: "Radar MyAnimeList para novidades da temporada.",
       text: "Um atalho para acompanhar anuncios, trailers, estreias e movimentacoes do mundo dos animes.",
-      visuals: [{ label: "MyAnimeList", src: "https://cdn.simpleicons.org/myanimelist/2E51A2" }],
-      links: [{ label: "Ver noticias MAL", href: MAL_NEWS_URL }],
+      visuals: [{ label: "MyAnimeList", src: "https://cdn.simpleicons.org/myanimelist/2E51A2", href: MAL_NEWS_URL }],
     },
     {
       tone: "featured",
@@ -285,8 +279,7 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
       text: featuredAnime
         ? `Nota geral ${formatNota(featuredAnime.nota)} com ${featuredAnime.qtdVotos} votos no grupo.`
         : "Assim que houver dados, a recomendacao aparece por aqui.",
-      visuals: [{ label: "Acervo", src: "assets/nyx-profile.png" }],
-      links: [{ label: "Ler no acervo", href: featuredHref }],
+      visuals: [{ label: "Acervo", src: "assets/nyx-profile.png", href: featuredHref }],
     },
   ];
 
@@ -301,12 +294,9 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
         <div class="blog-hero-slide-footer">
           <div class="blog-hero-visual" aria-hidden="true">
             ${slide.visuals.map((visual) => `
-              <img src="${escapeHTML(visual.src)}" alt="" title="${escapeHTML(visual.label)}" />
-            `).join("")}
-          </div>
-          <div class="blog-hero-slide-links">
-            ${slide.links.map((link) => `
-              <a href="${escapeHTML(link.href)}" ${link.href.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""}>${escapeHTML(link.label)}</a>
+              <a href="${escapeHTML(visual.href)}" ${visual.href.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""} title="${escapeHTML(visual.label)}" aria-label="${escapeHTML(visual.label)}">
+                <img src="${escapeHTML(visual.src)}" alt="" />
+              </a>
             `).join("")}
           </div>
         </div>

@@ -2032,6 +2032,17 @@ body.blog-page::before {
   min-height: 48px;
 }
 
+.blog-hero-visual a {
+  border-radius: 22px;
+  display: inline-flex;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.blog-hero-visual a:hover {
+  filter: brightness(1.12);
+  transform: translateY(-2px) scale(1.03);
+}
+
 .blog-hero-visual img {
   background:
     linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04)),
@@ -2048,32 +2059,6 @@ body.blog-page::before {
 .blog-hero-visual img[src*="nyx"] {
   border-radius: 50%;
   padding: 0;
-}
-
-.blog-hero-slide-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-  margin-top: 0;
-}
-
-.blog-hero-slide-links a {
-  background:
-    linear-gradient(135deg, rgba(187,247,208,0.16), rgba(186,230,253,0.1)),
-    rgba(16,16,20,0.52);
-  border: 1px solid rgba(187,247,208,0.24);
-  border-radius: 999px;
-  color: var(--paper);
-  font-size: 13px;
-  font-weight: 900;
-  padding: 8px 12px;
-  transition: border-color 0.18s ease, transform 0.18s ease;
-}
-
-.blog-hero-slide-links a:hover {
-  border-color: rgba(186,230,253,0.54);
-  transform: translateY(-1px);
 }
 
 .blog-hero-dots {

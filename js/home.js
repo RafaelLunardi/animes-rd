@@ -325,7 +325,7 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
 
   const restartTimer = () => {
     if (heroInfoTimer) clearInterval(heroInfoTimer);
-    heroInfoTimer = setInterval(() => showSlide(active + 1), 3000);
+    heroInfoTimer = setInterval(() => showSlide(active + 1), 10000);
   };
 
   rotator.querySelectorAll("[data-hero-dot]").forEach((dot) => {

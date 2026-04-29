@@ -253,7 +253,7 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
       eyebrow: `Blog <span class="brand-gradient">Animes RD</span>`,
       title: "Criticas, rankings e guias para decidir o proximo anime.",
       text: subtitle,
-      visuals: [{ label: "Animes RD", src: "assets/nyx-icon.png", href: "acervo.html" }],
+      visuals: [],
     },
     {
       tone: "playlists",
@@ -279,7 +279,7 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
       text: featuredAnime
         ? `Nota geral ${formatNota(featuredAnime.nota)} com ${featuredAnime.qtdVotos} votos no grupo.`
         : "Assim que houver dados, a recomendacao aparece por aqui.",
-      visuals: [{ label: "Acervo", src: "assets/nyx-profile.png", href: featuredHref }],
+      visuals: [],
     },
   ];
 
@@ -291,15 +291,17 @@ function renderHeroInfoRotator(data, date, featuredAnime) {
           <h1>${escapeHTML(slide.title)}</h1>
           <p ${index === 0 ? 'id="home-subtitle"' : ""}>${escapeHTML(slide.text)}</p>
         </div>
-        <div class="blog-hero-slide-footer">
-          <div class="blog-hero-visual" aria-hidden="true">
-            ${slide.visuals.map((visual) => `
-              <a href="${escapeHTML(visual.href)}" ${visual.href.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""} title="${escapeHTML(visual.label)}" aria-label="${escapeHTML(visual.label)}">
-                <img src="${escapeHTML(visual.src)}" alt="" />
-              </a>
-            `).join("")}
+        ${slide.visuals.length ? `
+          <div class="blog-hero-slide-footer">
+            <div class="blog-hero-visual" aria-hidden="true">
+              ${slide.visuals.map((visual) => `
+                <a href="${escapeHTML(visual.href)}" ${visual.href.startsWith("http") ? 'target="_blank" rel="noopener noreferrer"' : ""} title="${escapeHTML(visual.label)}" aria-label="${escapeHTML(visual.label)}">
+                  <img src="${escapeHTML(visual.src)}" alt="" />
+                </a>
+              `).join("")}
+            </div>
           </div>
-        </div>
+        ` : ""}
       </section>
     `).join("")}
     <div class="blog-hero-dots">

@@ -2056,11 +2056,6 @@ body.blog-page::before {
   width: 50px;
 }
 
-.blog-hero-visual img[src*="nyx"] {
-  border-radius: 50%;
-  padding: 0;
-}
-
 .blog-hero-dots {
   align-self: end;
   display: flex;

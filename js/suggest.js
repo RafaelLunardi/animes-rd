@@ -34,7 +34,7 @@ import {
   getPersonNota,
   formatNota,
   notaColor,
-} from "./data.js?v=calendar-seven-1";
+} from "./data.js?v=ciel-soft-1";
 import { normalizeText } from "./utils.js";
 
 const GENRE_TRANSLATION = {
@@ -80,9 +80,7 @@ const GENRE_TRANSLATION = {
 };
 
 async function fetchAnimeData(name) {
-  const res = await fetch(
-    `https://api.jikan.moe/v4/anime?q=${encodeURIComponent(name)}&limit=5`,
-  );
+  const res = await fetch(`https://api.jikan.moe/v4/anime?q=${encodeURIComponent(name)}&limit=5`);
   if (!res.ok) throw new Error("Jikan API error");
   const data = await res.json();
   const animes = data.data || [];
@@ -147,9 +145,7 @@ async function checkDuplicates(malId, inputName) {
     if (malId) {
       const [animesSnap, pendingSnap] = await Promise.all([
         getDocs(query(collection(db, "animes"), where("malId", "==", malId))),
-        getDocs(
-          query(collection(db, "pending_animes"), where("malId", "==", malId)),
-        ),
+        getDocs(query(collection(db, "pending_animes"), where("malId", "==", malId))),
       ]);
       animesSnap.forEach((d) => found.push(d.data().nome));
       pendingSnap.forEach((d) => found.push(d.data().nome));
@@ -158,16 +154,14 @@ async function checkDuplicates(malId, inputName) {
     if (found.length === 0) {
       const pendingAll = await getDocs(collection(db, "pending_animes"));
       pendingAll.forEach((d) => {
-        if (normalizeName(d.data().nome) === normInput)
-          found.push(d.data().nome);
+        if (normalizeName(d.data().nome) === normInput) found.push(d.data().nome);
       });
     }
 
     if (found.length === 0) {
       const animesAll = await getDocs(collection(db, "animes"));
       animesAll.forEach((d) => {
-        if (normalizeName(d.data().nome) === normInput)
-          found.push(d.data().nome);
+        if (normalizeName(d.data().nome) === normInput) found.push(d.data().nome);
       });
     }
   }
@@ -196,15 +190,9 @@ if (isFirebaseConfigured) {
   db = getFirestore(app);
 }
 
-const pendingAnimesRef = isFirebaseConfigured
-  ? collection(db, "pending_animes")
-  : null;
-const submissionFormContainer = document.getElementById(
-  "submission-form-container",
-);
-const pendingAnimesContainer = document.getElementById(
-  "pending-animes-container",
-);
+const pendingAnimesRef = isFirebaseConfigured ? collection(db, "pending_animes") : null;
+const submissionFormContainer = document.getElementById("submission-form-container");
+const pendingAnimesContainer = document.getElementById("pending-animes-container");
 const userNavContainer = document.getElementById("user-nav");
 
 function renderLoginLogoutButton() {
@@ -222,16 +210,12 @@ function renderLoginLogoutButton() {
         <button id="logout-button" style="background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.2); color: #ef4444; cursor: pointer; padding: 4px 8px; border-radius: 4px; font-size: 12px;">Sair</button>
       </div>
     `;
-    document
-      .getElementById("logout-button")
-      ?.addEventListener("click", handleLogout);
+    document.getElementById("logout-button")?.addEventListener("click", handleLogout);
     if (!currentUser.personName) {
-      document
-        .getElementById("user-profile-link")
-        ?.addEventListener("click", (e) => {
-          e.preventDefault();
-          showUserSelectionModal();
-        });
+      document.getElementById("user-profile-link")?.addEventListener("click", (e) => {
+        e.preventDefault();
+        showUserSelectionModal();
+      });
     } else {
       document
         .getElementById("user-profile-link")
@@ -240,9 +224,7 @@ function renderLoginLogoutButton() {
   } else {
     userNavContainer.innerHTML =
       "<button id='login-button' style='padding: 6px 12px; background: var(--accent); color: white; border: none; border-radius: 4px; cursor: pointer;'>Login com Google</button>";
-    document
-      .getElementById("login-button")
-      ?.addEventListener("click", handleLogin);
+    document.getElementById("login-button")?.addEventListener("click", handleLogin);
   }
 }
 
@@ -286,9 +268,7 @@ async function renderSubmissionForm() {
   if (!submissionFormContainer) return;
   if (!currentUser) {
     submissionFormContainer.innerHTML = `<div style="text-align:center; padding:20px; border:1px dashed var(--border); border-radius:8px"><p style="color:var(--faint)">Faça login para sugerir novos animes.</p><button id="login-prompt-btn" style="margin-top:10px; padding:8px 16px; background:var(--accent); color:white; border:none; border-radius:4px; cursor:pointer">Fazer Login</button></div>`;
-    document
-      .getElementById("login-prompt-btn")
-      ?.addEventListener("click", handleLogin);
+    document.getElementById("login-prompt-btn")?.addEventListener("click", handleLogin);
     return;
   }
   if (!currentUser.personName) {
@@ -340,10 +320,7 @@ async function renderSubmissionForm() {
     }
     resultsDropdown.style.display = "none";
 
-    const duplicates = await checkDuplicates(
-      animeData.malId,
-      animeData.displayTitle,
-    );
+    const duplicates = await checkDuplicates(animeData.malId, animeData.displayTitle);
     if (duplicates.length > 0) {
       duplicateEl.textContent = `🚫 "${duplicates[0]}" já existe`;
       submitBtn.disabled = true;
@@ -407,10 +384,7 @@ async function renderSubmissionForm() {
 
   // Fecha o dropdown ao clicar fora
   document.addEventListener("click", (e) => {
-    if (
-      !animeNameInput.contains(e.target) &&
-      !resultsDropdown.contains(e.target)
-    ) {
+    if (!animeNameInput.contains(e.target) && !resultsDropdown.contains(e.target)) {
       resultsDropdown.style.display = "none";
     }
   });
@@ -427,9 +401,7 @@ function renderPendingAnimes(animes) {
   pendingAnimesContainer.innerHTML = animes
     .map((anime) => {
       const isVoted = anime.votedUserIds?.includes(currentUser?.uid);
-      const userVote = currentUser?.personName
-        ? anime.votes?.[currentUser.personName]
-        : null;
+      const userVote = currentUser?.personName ? anime.votes?.[currentUser.personName] : null;
 
       let dots = PEOPLE.map((p) => {
         const hasVoted = anime.votes && anime.votes[p];
@@ -491,17 +463,13 @@ function renderPendingAnimes(animes) {
 
 window.handleCastVote = async (animeId) => {
   if (!currentUser?.personName) return;
-  const watchStatus = document.querySelector(
-    `input[name="watch-status-${animeId}"]:checked`,
-  ).value;
+  const watchStatus = document.querySelector(`input[name="watch-status-${animeId}"]:checked`).value;
   const score =
     watchStatus === "watched"
       ? parseFloat(document.getElementById(`score-${animeId}`).value)
       : null;
   const comment =
-    watchStatus === "watched"
-      ? document.getElementById(`comment-${animeId}`).value
-      : "";
+    watchStatus === "watched" ? document.getElementById(`comment-${animeId}`).value : "";
   try {
     const docRef = doc(db, "pending_animes", animeId);
     await runTransaction(db, async (t) => {
@@ -510,8 +478,7 @@ window.handleCastVote = async (animeId) => {
       const votes = data.votes || {};
       const votedUserIds = data.votedUserIds || [];
       votes[currentUser.personName] = { score, comment, votedAt: new Date() };
-      if (!votedUserIds.includes(currentUser.uid))
-        votedUserIds.push(currentUser.uid);
+      if (!votedUserIds.includes(currentUser.uid)) votedUserIds.push(currentUser.uid);
       t.update(docRef, { votes, votedUserIds });
     });
     alert("Voto registrado!");
@@ -525,9 +492,7 @@ window.handleEditVote = (animeId) => {
   if (animeIdx === -1) return;
   const updatedAnime = {
     ...lastAnimesData[animeIdx],
-    votedUserIds: lastAnimesData[animeIdx].votedUserIds.filter(
-      (id) => id !== currentUser.uid,
-    ),
+    votedUserIds: lastAnimesData[animeIdx].votedUserIds.filter((id) => id !== currentUser.uid),
   };
   const newAnimes = [...lastAnimesData];
   newAnimes[animeIdx] = updatedAnime;

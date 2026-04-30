@@ -1,4 +1,4 @@
-// js/compare.js?v=calendar-seven-1 — lógica de comparação, Venn e radar
+// js/compare.js?v=ciel-soft-1 — lógica de comparação, Venn e radar
 
 import {
   PEOPLE,
@@ -12,7 +12,7 @@ import {
   formatNota,
   notaColor,
   getPersonNota, // Importa a função centralizada
-} from "./data.js?v=calendar-seven-1";
+} from "./data.js?v=ciel-soft-1";
 
 Chart.defaults.color = "#94a3b8";
 Chart.defaults.font.family = "'Poppins', sans-serif";
@@ -54,7 +54,7 @@ function renderVennAll() {
   if (!wrap) return;
 
   const members = PEOPLE; // Usa a lista importada de 5 membros
-  const initials = Object.fromEntries(members.map(p => [p, p[0]]));
+  const initials = Object.fromEntries(members.map((p) => [p, p[0]]));
 
   const subsetCounts = new Map();
   for (const a of allAnimes) {
@@ -78,7 +78,11 @@ function renderVennAll() {
         .map((p) => `<span class="badge badge-${p.toLowerCase()}">${initials[p]}</span>`)
         .join(" ");
       const label =
-        parts.length === members.length ? "todos" : parts.length === 1 ? `só ${parts[0]}` : parts.join(" ∩ ");
+        parts.length === members.length
+          ? "todos"
+          : parts.length === 1
+            ? `só ${parts[0]}`
+            : parts.join(" ∩ ");
       return `
       <li style="display:flex;align-items:center;justify-content:space-between;gap:18px;padding:6px 0;border-bottom:1px solid var(--border)">
         <span style="display:flex;align-items:center;gap:8px">${badges}<span style="color:var(--muted);font-size:12px">${label}</span></span>
@@ -172,8 +176,24 @@ function renderRadar(p1, p2) {
     data: {
       labels,
       datasets: [
-        { label: p1, data: data1, backgroundColor: c1 + "33", borderColor: c1, borderWidth: 2, pointBackgroundColor: c1, pointRadius: 4, },
-        { label: p2, data: data2, backgroundColor: c2 + "33", borderColor: c2, borderWidth: 2, pointBackgroundColor: c2, pointRadius: 4, },
+        {
+          label: p1,
+          data: data1,
+          backgroundColor: c1 + "33",
+          borderColor: c1,
+          borderWidth: 2,
+          pointBackgroundColor: c1,
+          pointRadius: 4,
+        },
+        {
+          label: p2,
+          data: data2,
+          backgroundColor: c2 + "33",
+          borderColor: c2,
+          borderWidth: 2,
+          pointBackgroundColor: c2,
+          pointRadius: 4,
+        },
       ],
     },
     options: {
@@ -185,7 +205,9 @@ function renderRadar(p1, p2) {
       },
       scales: {
         r: {
-          beginAtZero: true, max: 100, ticks: { display: false },
+          beginAtZero: true,
+          max: 100,
+          ticks: { display: false },
           grid: { color: "rgba(255,255,255,0.08)" },
           angleLines: { color: "rgba(255,255,255,0.06)" },
           pointLabels: { font: { size: 11 }, color: "#94a3b8" },
@@ -217,7 +239,8 @@ function renderCommonTable(p1, p2) {
           <tr><th>Anime</th><th style="color:${c1}">${p1}</th><th style="color:${c2}">${p2}</th><th>Diferença</th></tr>
         </thead>
         <tbody>
-          ${common.map((a) => {
+          ${common
+            .map((a) => {
               const n1 = getPersonNota(a, p1);
               const n2 = getPersonNota(a, p2);
               const diff = n1 !== null && n2 !== null ? Math.abs(n1 - n2) : null;
@@ -231,7 +254,8 @@ function renderCommonTable(p1, p2) {
                 <td>${diff !== null && diff >= 2 ? "⚡ " : ""}${diffStr}</td>
               </tr>
             `;
-            }).join("")}
+            })
+            .join("")}
         </tbody>
       </table>
     </div>

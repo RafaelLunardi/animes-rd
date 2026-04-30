@@ -4144,32 +4144,42 @@ body.suggest-page.dark-theme::before {
 
 body.ciel-page {
   background:
-    radial-gradient(circle at 18% 12%, rgba(251,191,36,0.1), transparent 36%),
-    radial-gradient(circle at 82% 80%, rgba(217,119,6,0.08), transparent 34%),
-    linear-gradient(180deg, rgba(253,230,138,0.04), transparent 280px), var(--bg);
+    radial-gradient(circle at 12% 18%, rgba(196, 181, 253, 0.11), transparent 34%),
+    radial-gradient(circle at 78% 16%, rgba(125, 211, 252, 0.08), transparent 36%),
+    radial-gradient(circle at 88% 82%, rgba(253, 230, 138, 0.08), transparent 32%),
+    linear-gradient(180deg, rgba(10, 11, 18, 0.2), transparent 360px), var(--bg);
 }
 
 .ciel-shell {
   display: grid;
-  gap: 24px;
-  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  grid-template-columns: 300px 1fr;
   margin: 0 auto;
-  max-width: 1180px;
+  max-width: 1220px;
   min-height: calc(100vh - 130px);
-  padding: 40px 22px 80px;
+  padding: 44px 22px 84px;
 }
 
 /* Sidebar */
 .ciel-sidebar {
   background:
-    linear-gradient(160deg, rgba(251,191,36,0.07), rgba(217,119,6,0.05)) padding-box,
-    linear-gradient(135deg, rgba(251,191,36,0.45), rgba(245,158,11,0.35), rgba(253,230,138,0.3)) border-box;
+    linear-gradient(160deg, rgba(22, 18, 36, 0.9), rgba(9, 24, 30, 0.86)) padding-box,
+    linear-gradient(
+        135deg,
+        rgba(253, 230, 138, 0.34),
+        rgba(196, 181, 253, 0.28),
+        rgba(125, 211, 252, 0.24)
+      )
+      border-box;
   border: 1px solid transparent;
-  border-radius: 32px;
+  border-radius: 34px;
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
   display: flex;
   flex-direction: column;
-  gap: 22px;
-  padding: 28px 22px;
+  gap: 20px;
+  padding: 30px 24px;
   position: sticky;
   top: 100px;
   align-self: start;
@@ -4184,21 +4194,25 @@ body.ciel-page {
 
 .ciel-avatar-ring {
   align-items: center;
-  background: linear-gradient(135deg, rgba(251,191,36,0.18), rgba(245,158,11,0.12));
-  border: 2px solid rgba(251,191,36,0.55);
+  background:
+    linear-gradient(135deg, rgba(253, 230, 138, 0.16), rgba(196, 181, 253, 0.12)) padding-box,
+    linear-gradient(135deg, rgba(253, 230, 138, 0.6), rgba(125, 211, 252, 0.34)) border-box;
+  border: 2px solid transparent;
   border-radius: 50%;
   box-shadow:
-    0 0 28px rgba(251,191,36,0.3),
-    0 0 56px rgba(245,158,11,0.12);
+    0 0 26px rgba(253, 230, 138, 0.18),
+    0 18px 40px rgba(0, 0, 0, 0.24);
   display: flex;
-  height: 88px;
+  height: 104px;
   justify-content: center;
   overflow: hidden;
-  width: 88px;
-  animation: cielPulse 3s ease-in-out infinite;
+  padding: 5px;
+  width: 104px;
+  animation: cielPulse 5s ease-in-out infinite;
 }
 
 .ciel-avatar-img {
+  border-radius: 50%;
   height: 100%;
   object-fit: cover;
   width: 100%;
@@ -4213,8 +4227,17 @@ body.ciel-page {
 }
 
 @keyframes cielPulse {
-  0%, 100% { box-shadow: 0 0 28px rgba(251,191,36,0.3), 0 0 56px rgba(245,158,11,0.1); }
-  50%       { box-shadow: 0 0 42px rgba(251,191,36,0.55), 0 0 80px rgba(245,158,11,0.25); }
+  0%,
+  100% {
+    box-shadow:
+      0 0 24px rgba(253, 230, 138, 0.16),
+      0 18px 40px rgba(0, 0, 0, 0.24);
+  }
+  50% {
+    box-shadow:
+      0 0 34px rgba(196, 181, 253, 0.22),
+      0 18px 46px rgba(0, 0, 0, 0.28);
+  }
 }
 
 .ciel-id-block {
@@ -4222,11 +4245,11 @@ body.ciel-page {
 }
 
 .ciel-id-block h2 {
-  background: linear-gradient(135deg, #fef08a, #fbbf24);
+  background: linear-gradient(135deg, #fef3c7, #ddd6fe, #bae6fd);
   background-clip: text;
   -webkit-background-clip: text;
   font-family: "Newsreader", serif;
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 750;
   letter-spacing: -0.02em;
   margin-bottom: 2px;
@@ -4247,7 +4270,7 @@ body.ciel-page {
   font-size: 11px;
   font-weight: 800;
   gap: 5px;
-  color: #fbbf24;
+  color: #fef3c7;
   letter-spacing: 0.06em;
   margin-top: 6px;
   text-transform: uppercase;
@@ -4255,7 +4278,7 @@ body.ciel-page {
 
 .ciel-dot {
   animation: cielDotBlink 1.8s ease-in-out infinite;
-  background: #fbbf24;
+  background: #fcd34d;
   border-radius: 50%;
   display: inline-block;
   height: 7px;
@@ -4263,12 +4286,17 @@ body.ciel-page {
 }
 
 @keyframes cielDotBlink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.3; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 
 .ciel-info-list {
-  border-top: 1px solid rgba(251,191,36,0.18);
+  border-top: 1px solid rgba(253, 230, 138, 0.14);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -4276,13 +4304,17 @@ body.ciel-page {
 }
 
 .ciel-info-item {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.055);
+  border-radius: 18px;
   display: flex;
   flex-direction: column;
   gap: 2px;
+  padding: 11px 12px;
 }
 
 .ciel-info-item small {
-  color: var(--muted);
+  color: #d9c8ff;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -4296,7 +4328,7 @@ body.ciel-page {
 }
 
 .ciel-profile-section {
-  border-top: 1px solid rgba(251,191,36,0.18);
+  border-top: 1px solid rgba(253, 230, 138, 0.14);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -4304,7 +4336,7 @@ body.ciel-page {
 }
 
 .ciel-profile-label {
-  color: var(--muted);
+  color: #d9c8ff;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.12em;
@@ -4318,10 +4350,10 @@ body.ciel-page {
 }
 
 .ciel-people button {
-  background: rgba(251,191,36,0.06);
-  border: 1px solid rgba(251,191,36,0.2);
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(196, 181, 253, 0.18);
   border-radius: 16px;
-  color: var(--muted);
+  color: #d9d4c8;
   cursor: pointer;
   font-size: 13px;
   font-weight: 800;
@@ -4331,24 +4363,33 @@ body.ciel-page {
 }
 
 .ciel-people button:hover {
-  background: rgba(251,191,36,0.12);
-  border-color: rgba(251,191,36,0.45);
+  background: rgba(196, 181, 253, 0.1);
+  border-color: rgba(253, 230, 138, 0.32);
   color: var(--paper);
 }
 
 .ciel-people button.active {
-  background: linear-gradient(135deg, rgba(251,191,36,0.22), rgba(245,158,11,0.14));
-  border-color: rgba(251,191,36,0.6);
-  color: #fde68a;
+  background: linear-gradient(135deg, rgba(253, 230, 138, 0.18), rgba(196, 181, 253, 0.14));
+  border-color: rgba(253, 230, 138, 0.44);
+  color: #fef3c7;
 }
 
 /* Chat area */
 .ciel-chat-wrap {
   background:
-    linear-gradient(160deg, rgba(20,12,2,0.92), rgba(16,10,2,0.88)) padding-box,
-    linear-gradient(135deg, rgba(251,191,36,0.38), rgba(245,158,11,0.28), rgba(253,230,138,0.3)) border-box;
+    linear-gradient(160deg, rgba(17, 18, 29, 0.92), rgba(9, 27, 31, 0.9)) padding-box,
+    linear-gradient(
+        135deg,
+        rgba(253, 230, 138, 0.28),
+        rgba(196, 181, 253, 0.25),
+        rgba(125, 211, 252, 0.22)
+      )
+      border-box;
   border: 1px solid transparent;
-  border-radius: 32px;
+  border-radius: 34px;
+  box-shadow:
+    0 26px 80px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
   display: flex;
   flex-direction: column;
   height: calc(100vh - 160px);
@@ -4359,19 +4400,20 @@ body.ciel-page {
 
 .ciel-chat-topbar {
   align-items: center;
-  border-bottom: 1px solid rgba(251,191,36,0.15);
+  background: rgba(255, 255, 255, 0.025);
+  border-bottom: 1px solid rgba(253, 230, 138, 0.11);
   display: flex;
   font-size: 13px;
   font-weight: 800;
   justify-content: space-between;
-  color: #fde68a;
-  padding: 16px 22px;
+  color: #fef3c7;
+  padding: 17px 22px;
   letter-spacing: 0.04em;
 }
 
 .ciel-topbar-status {
   align-items: center;
-  color: #fbbf24;
+  color: #bae6fd;
   display: flex;
   font-size: 11px;
   gap: 5px;
@@ -4385,14 +4427,16 @@ body.ciel-page {
   flex-direction: column;
   gap: 14px;
   overflow-y: auto;
-  padding: 20px;
-  scrollbar-color: rgba(251,191,36,0.35) transparent;
+  padding: 22px;
+  scrollbar-color: rgba(196, 181, 253, 0.34) transparent;
   scrollbar-width: thin;
 }
 
-.ciel-messages::-webkit-scrollbar { width: 6px; }
+.ciel-messages::-webkit-scrollbar {
+  width: 6px;
+}
 .ciel-messages::-webkit-scrollbar-thumb {
-  background: rgba(251,191,36,0.4);
+  background: linear-gradient(180deg, rgba(253, 230, 138, 0.5), rgba(196, 181, 253, 0.42));
   border-radius: 999px;
 }
 
@@ -4403,14 +4447,19 @@ body.ciel-page {
   max-width: 85%;
 }
 
-.ciel-msg-ciel { align-self: flex-start; }
-.ciel-msg-user { align-self: flex-end; flex-direction: row-reverse; }
+.ciel-msg-ciel {
+  align-self: flex-start;
+}
+.ciel-msg-user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
 
 .ciel-msg-avatar {
   align-items: center;
-  border: 1px solid rgba(251,191,36,0.5);
+  border: 1px solid rgba(253, 230, 138, 0.38);
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(251,191,36,0.25);
+  box-shadow: 0 0 12px rgba(253, 230, 138, 0.14);
   display: flex;
   flex-shrink: 0;
   height: 34px;
@@ -4427,11 +4476,11 @@ body.ciel-page {
 
 .ciel-msg-bubble {
   background:
-    linear-gradient(135deg, rgba(251,191,36,0.12), rgba(245,158,11,0.06)),
-    rgba(22,12,2,0.82);
-  border: 1px solid rgba(251,191,36,0.22);
+    linear-gradient(135deg, rgba(253, 230, 138, 0.09), rgba(196, 181, 253, 0.07)),
+    rgba(18, 20, 29, 0.82);
+  border: 1px solid rgba(253, 230, 138, 0.16);
   border-radius: 22px 22px 22px 8px;
-  color: #fef9c3;
+  color: #fff7dd;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.55;
@@ -4441,8 +4490,8 @@ body.ciel-page {
 }
 
 .ciel-msg-user .ciel-msg-bubble {
-  background: rgba(30,20,6,0.72);
-  border: 1px solid rgba(217,119,6,0.3);
+  background: rgba(12, 33, 39, 0.72);
+  border: 1px solid rgba(125, 211, 252, 0.2);
   border-radius: 22px 22px 8px 22px;
   color: var(--paper);
 }
@@ -4457,19 +4506,31 @@ body.ciel-page {
 
 .ciel-typing span {
   animation: cielTypeDot 1.2s ease-in-out infinite;
-  background: #fbbf24;
+  background: #fcd34d;
   border-radius: 50%;
   display: block;
   height: 7px;
   width: 7px;
 }
 
-.ciel-typing span:nth-child(2) { animation-delay: 0.2s; }
-.ciel-typing span:nth-child(3) { animation-delay: 0.4s; }
+.ciel-typing span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.ciel-typing span:nth-child(3) {
+  animation-delay: 0.4s;
+}
 
 @keyframes cielTypeDot {
-  0%, 80%, 100% { opacity: 0.25; transform: scale(0.8); }
-  40%           { opacity: 1;    transform: scale(1.1); }
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
 }
 
 /* Recommendation cards in chat */
@@ -4485,8 +4546,8 @@ body.ciel-page {
 
 .ciel-rec-card {
   align-items: flex-start;
-  background: rgba(20,12,2,0.75);
-  border: 1px solid rgba(251,191,36,0.2);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(196, 181, 253, 0.18);
   border-radius: 22px;
   color: var(--paper);
   display: grid;
@@ -4494,20 +4555,22 @@ body.ciel-page {
   grid-template-columns: auto 1fr;
   padding: 14px;
   text-decoration: none;
-  transition: border-color 0.15s ease, transform 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
 }
 
 .ciel-rec-card:hover {
-  border-color: rgba(251,191,36,0.55);
+  border-color: rgba(253, 230, 138, 0.38);
   transform: translateY(-2px);
 }
 
 .ciel-rec-rank {
   align-items: center;
-  background: rgba(251,191,36,0.12);
-  border: 1px solid rgba(251,191,36,0.35);
+  background: rgba(253, 230, 138, 0.12);
+  border: 1px solid rgba(253, 230, 138, 0.26);
   border-radius: 50%;
-  color: #fbbf24;
+  color: #fef3c7;
   display: inline-flex;
   font-size: 11px;
   font-weight: 900;
@@ -4530,14 +4593,14 @@ body.ciel-page {
 }
 
 .ciel-rec-body small {
-  color: rgba(251,191,36,0.85);
+  color: rgba(253, 230, 138, 0.82);
   font-size: 11px;
   font-weight: 700;
 }
 
 /* Quick actions */
 .ciel-quick-actions {
-  border-top: 1px solid rgba(251,191,36,0.12);
+  border-top: 1px solid rgba(253, 230, 138, 0.11);
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -4545,10 +4608,10 @@ body.ciel-page {
 }
 
 .ciel-quick-btn {
-  background: rgba(251,191,36,0.08);
-  border: 1px solid rgba(251,191,36,0.28);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(253, 230, 138, 0.2);
   border-radius: 999px;
-  color: #fcd34d;
+  color: #fef3c7;
   cursor: pointer;
   font-size: 12px;
   font-weight: 800;
@@ -4557,22 +4620,22 @@ body.ciel-page {
 }
 
 .ciel-quick-btn:hover {
-  background: rgba(251,191,36,0.18);
-  border-color: rgba(251,191,36,0.6);
-  color: #fef08a;
+  background: rgba(253, 230, 138, 0.1);
+  border-color: rgba(186, 230, 253, 0.35);
+  color: #bae6fd;
 }
 
 /* Input bar */
 .ciel-input-bar {
-  border-top: 1px solid rgba(251,191,36,0.15);
+  border-top: 1px solid rgba(253, 230, 138, 0.11);
   display: flex;
   gap: 10px;
   padding: 14px 20px;
 }
 
 #ciel-input {
-  background: rgba(20,12,2,0.7);
-  border: 1px solid rgba(251,191,36,0.25);
+  background: rgba(8, 10, 18, 0.7);
+  border: 1px solid rgba(196, 181, 253, 0.18);
   border-radius: 18px;
   color: var(--paper);
   flex: 1;
@@ -4584,7 +4647,7 @@ body.ciel-page {
 }
 
 #ciel-input:focus {
-  border-color: rgba(251,191,36,0.65);
+  border-color: rgba(253, 230, 138, 0.42);
 }
 
 #ciel-input::placeholder {
@@ -4593,21 +4656,24 @@ body.ciel-page {
 
 #ciel-send {
   align-items: center;
-  background: linear-gradient(135deg, #d97706, #f59e0b);
+  background: linear-gradient(135deg, #fef3c7, #ddd6fe, #bae6fd);
   border: 0;
-  border-radius: 18px;
-  color: #1c0f00;
+  border-radius: 999px;
+  color: #17131f;
   cursor: pointer;
   display: flex;
-  font-size: 20px;
+  font-size: 12px;
   font-weight: 900;
   height: 46px;
   justify-content: center;
   transition: opacity 0.15s ease;
-  width: 46px;
+  padding: 0 18px;
+  width: auto;
 }
 
-#ciel-send:hover { opacity: 0.85; }
+#ciel-send:hover {
+  opacity: 0.85;
+}
 
 @media (max-width: 900px) {
   .ciel-shell {

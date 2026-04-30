@@ -5,7 +5,7 @@ import {
   formatNota,
   loadData,
   missedAnimes,
-} from "./data.js?v=ciel-1";
+} from "./data.js?v=ciel-soft-1";
 import { escapeHTML, stripEmoji } from "./utils.js";
 
 // ── Recommendation engine ────────────────────────────────────────────────────
@@ -27,8 +27,8 @@ function pickRecommendations(animes, person, genreFilter) {
     .filter((anime) => {
       if (Number(anime.nota) < 8) return false;
       if (genreFilter) {
-        return (anime.generos || []).some(
-          (g) => stripEmoji(g).toLowerCase().includes(genreFilter.toLowerCase()),
+        return (anime.generos || []).some((g) =>
+          stripEmoji(g).toLowerCase().includes(genreFilter.toLowerCase()),
         );
       }
       return true;
@@ -52,39 +52,46 @@ function pickRecommendations(animes, person, genreFilter) {
 // ── Intent parser ────────────────────────────────────────────────────────────
 
 const GENRE_KEYWORDS = [
-  "ação", "acao", "fantasia", "drama", "comedia", "comédia", "romance",
-  "shounen", "isekai", "terror", "mecha", "slice of life", "ecchi",
-  "esportes", "sci-fi", "sobrenatural", "psicológico", "psicologico",
+  "ação",
+  "acao",
+  "fantasia",
+  "drama",
+  "comedia",
+  "comédia",
+  "romance",
+  "shounen",
+  "isekai",
+  "terror",
+  "mecha",
+  "slice of life",
+  "ecchi",
+  "esportes",
+  "sci-fi",
+  "sobrenatural",
+  "psicológico",
+  "psicologico",
 ];
 
 function parseIntent(text, person) {
-  const lower = text
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "");
+  const lower = text.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 
   const foundPerson = PEOPLE.find((p) => lower.includes(p.toLowerCase()));
   const foundGenre = GENRE_KEYWORDS.find((g) =>
     lower.includes(g.normalize("NFD").replace(/[̀-ͯ]/g, "")),
   );
 
-  if (/^(oi|ola|ei|bom|boa|alo|hey|hello|salve)/.test(lower))
-    return { type: "greet" };
+  if (/^(oi|ola|ei|bom|boa|alo|hey|hello|salve)/.test(lower)) return { type: "greet" };
 
-  if (/quant|total|acervo|quanto|estatistica|base de dados/.test(lower))
-    return { type: "stats" };
+  if (/quant|total|acervo|quanto|estatistica|base de dados/.test(lower)) return { type: "stats" };
 
-  if (/top|melhor|mais visto|nota alta|ranking|melhores/.test(lower))
-    return { type: "top" };
+  if (/top|melhor|mais visto|nota alta|ranking|melhores/.test(lower)) return { type: "top" };
 
-  if (foundGenre)
-    return { type: "recommend", genre: foundGenre, person: foundPerson || person };
+  if (foundGenre) return { type: "recommend", genre: foundGenre, person: foundPerson || person };
 
   if (/recomend|indica|sugere|assistir|ver|proximo|proxim/.test(lower))
     return { type: "recommend", person: foundPerson || person };
 
-  if (foundPerson)
-    return { type: "recommend", person: foundPerson };
+  if (foundPerson) return { type: "recommend", person: foundPerson };
 
   return { type: "unknown" };
 }
@@ -120,7 +127,8 @@ function buildTopResponse(data) {
     .filter((a) => a.nota !== null && a.qtdVotos > 1)
     .sort((a, b) => Number(b.nota) - Number(a.nota))
     .slice(0, 5);
-  if (!top.length) return "Dados insuficientes para ranking. Nenhum anime com múltiplos votos encontrado.";
+  if (!top.length)
+    return "Dados insuficientes para ranking. Nenhum anime com múltiplos votos encontrado.";
   const list = top.map((a, i) => `${i + 1}. ${a.nome} (${formatNota(a.nota)})`).join("\n");
   return `Protocolo de ranking executado. Top 5 do acervo:\n\n${list}`;
 }
@@ -139,7 +147,7 @@ function addMessage(role, html) {
   wrap.className = role === "ciel" ? "ciel-msg ciel-msg-ciel" : "ciel-msg ciel-msg-user";
   if (role === "ciel") {
     wrap.innerHTML = `
-      <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png" alt="Ciel" /></div>
+      <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png?v=ciel-soft-1" alt="Ciel" /></div>
       <div class="ciel-msg-bubble">${html}</div>
     `;
   } else {
@@ -176,7 +184,7 @@ function addRecCards(picks) {
     )
     .join("");
   wrap.innerHTML = `
-    <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png" alt="Ciel" /></div>
+    <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png?v=ciel-soft-1" alt="Ciel" /></div>
     <div class="ciel-rec-list">${cards}</div>
   `;
   log.appendChild(wrap);
@@ -239,15 +247,15 @@ async function init() {
 
   function updatePersonCount() {
     const n = animesOf(data.animes, selectedPerson).length;
-    document.getElementById("ciel-person-count").textContent =
-      `${selectedPerson}: ${n} assistidos`;
+    document.getElementById("ciel-person-count").textContent = `${selectedPerson}: ${n} assistidos`;
   }
 
   // Member selector
   function renderPeople() {
     const el = document.getElementById("ciel-people");
     el.innerHTML = PEOPLE.map(
-      (p) => `<button type="button" class="${p === selectedPerson ? "active" : ""}" data-person="${p}">${p}</button>`,
+      (p) =>
+        `<button type="button" class="${p === selectedPerson ? "active" : ""}" data-person="${p}">${p}</button>`,
     ).join("");
   }
 

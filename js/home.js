@@ -8,7 +8,7 @@ import {
   getPersonNota,
   loadData,
   mostControversial,
-} from "./data.js?v=calendar-seven-1";
+} from "./data.js?v=ciel-soft-1";
 import { escapeHTML, shortText, shuffleItems } from "./utils.js";
 
 const OPENINGS = {

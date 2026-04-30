@@ -139,7 +139,7 @@ function addMessage(role, html) {
   wrap.className = role === "ciel" ? "ciel-msg ciel-msg-ciel" : "ciel-msg ciel-msg-user";
   if (role === "ciel") {
     wrap.innerHTML = `
-      <div class="ciel-msg-avatar">◈</div>
+      <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png" alt="Ciel" /></div>
       <div class="ciel-msg-bubble">${html}</div>
     `;
   } else {
@@ -176,7 +176,7 @@ function addRecCards(picks) {
     )
     .join("");
   wrap.innerHTML = `
-    <div class="ciel-msg-avatar">◈</div>
+    <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png" alt="Ciel" /></div>
     <div class="ciel-rec-list">${cards}</div>
   `;
   log.appendChild(wrap);

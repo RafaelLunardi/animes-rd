@@ -4191,10 +4191,17 @@ body.ciel-page {
     0 0 28px rgba(251,191,36,0.3),
     0 0 56px rgba(245,158,11,0.12);
   display: flex;
-  height: 80px;
+  height: 88px;
   justify-content: center;
-  width: 80px;
+  overflow: hidden;
+  width: 88px;
   animation: cielPulse 3s ease-in-out infinite;
+}
+
+.ciel-avatar-img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
 .ciel-avatar-glyph {
@@ -4401,16 +4408,21 @@ body.ciel-page {
 
 .ciel-msg-avatar {
   align-items: center;
-  background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(245,158,11,0.12));
   border: 1px solid rgba(251,191,36,0.5);
   border-radius: 50%;
-  color: #fbbf24;
+  box-shadow: 0 0 12px rgba(251,191,36,0.25);
   display: flex;
   flex-shrink: 0;
-  font-size: 16px;
   height: 34px;
   justify-content: center;
+  overflow: hidden;
   width: 34px;
+}
+
+.ciel-msg-avatar img {
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
 
 .ciel-msg-bubble {

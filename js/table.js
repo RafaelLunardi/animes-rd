@@ -1,4 +1,4 @@
-// js/table.js?v=featured-30min-1 — tabela com filtros, ordenação e modal
+// js/table.js?v=pokemon-image-1 — tabela com filtros, ordenação e modal
 
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import {
@@ -22,7 +22,7 @@ import {
   PEOPLE,
   PERSON_COLORS,
   PERSON_LIGHTS,
-} from "./data.js?v=featured-30min-1";
+} from "./data.js?v=pokemon-image-1";
 import { escapeHTML, normalizeText, stripEmoji } from "./utils.js";
 
 let allAnimes = [];
@@ -50,6 +50,10 @@ const NOTE_FIELDS = {
 
 const FALLBACK_IMAGE =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Crect width='56' height='56' rx='8' fill='%2318171d'/%3E%3Cpath d='M16 36h24M18 18h20v20H18z' stroke='%237b7165' stroke-width='2' fill='none'/%3E%3Ccircle cx='23' cy='24' r='3' fill='%237b7165'/%3E%3Cpath d='M19 35l8-8 5 5 3-3 4 6' stroke='%237b7165' stroke-width='2' fill='none'/%3E%3C/svg%3E";
+
+const IMAGE_OVERRIDES = {
+  49730: "https://myanimelist.net/images/anime/1787/140239l.webp",
+};
 
 function commentsForAnime(anime) {
   if (Array.isArray(anime.comments) && anime.comments.length) {
@@ -118,6 +122,7 @@ function setStoredPersonName(uid, personName) {
 
 function getCachedImage(malId) {
   if (!malId) return null;
+  if (IMAGE_OVERRIDES[malId]) return IMAGE_OVERRIDES[malId];
   if (imageCache.has(malId)) return imageCache.get(malId);
 
   const cached = localStorage.getItem(`jikan-image-${malId}`);

@@ -8,7 +8,7 @@ import {
   getPersonNota,
   loadData,
   mostControversial,
-} from "./data.js?v=featured-30min-1";
+} from "./data.js?v=pokemon-image-1";
 import { escapeHTML, shortText, shuffleItems } from "./utils.js";
 
 const OPENINGS = {
@@ -40,6 +40,7 @@ const NEWS_PLACEHOLDER = [
 ];
 
 const HERO_IMAGE_FALLBACKS = {
+  49730: "https://myanimelist.net/images/anime/1787/140239l.webp",
   52991: "https://cdn.myanimelist.net/images/anime/1015/138006l.jpg",
 };
 

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-30T09:12:02.919Z",
+  "updatedAt": "2026-04-30T09:15:53.875Z",
   "total": 180,
   "animes": [
     {
@@ -39,16 +39,20 @@
         }
       ],
       "comentarios": "Rafael: Um bom anime\nFernando: Não desista depois de 3 eps, o ritmo é lento mesmo no inicio mas a história é PIKA",
-      "updatedAt": {
-        "_seconds": 1777387432,
-        "_nanoseconds": 359000000
-      },
       "files": [
         {
           "name": "Opening 1",
           "url": "https://www.youtube.com/results?search_query=Frieren%3A%20Beyond%20Journey's%20End%20opening%201"
+        },
+        {
+          "name": "Opening 2",
+          "url": "https://www.youtube.com/watch?v=wfmYSuPiYEQ&list=RDwfmYSuPiYEQ&start_radio=1"
         }
-      ]
+      ],
+      "updatedAt": {
+        "_seconds": 1777540436,
+        "_nanoseconds": 318000000
+      }
     },
     {
       "id": "3416beab-c784-8176-87fa-ce517e302b03",

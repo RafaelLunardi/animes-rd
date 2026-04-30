@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Animes Pendentes | Animes RD</title>
+    <link rel="stylesheet" href="css/style.css?v=pokemon-image-1" />
+    <style>
+      .vote-card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 20px;
+        background-color: var(--card-bg);
+      }
+      .vote-controls input[type="range"] {
+        width: 100%;
+        cursor: pointer;
+      }
+      .vote-controls button {
+        padding: 10px;
+        background-color: var(--accent);
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        width: 100%;
+      }
+      .vote-controls button:hover {
+        filter: brightness(1.1);
+      }
+      .person-dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        margin-right: 4px;
+      }
+    </style>
+    <script type="module" src="./js/theme.js?v=pokemon-image-1"></script>
+    <script type="module" src="./js/utils.js?v=pokemon-image-1"></script>
+  </head>
+  <body class="pending-page">
+    <nav class="nav"></nav>
+
+    <main class="page">
+      <div class="page-header">
+        <h1>Fila de Aprovação</h1>
+        <p style="color: var(--faint)">Animes que aguardam votos de todos os membros.</p>
+      </div>
+
+      <div id="pending-animes-container">
+        <p style="color: var(--faint); text-align: center; padding: 40px">
+          Carregando animes pendentes...
+        </p>
+      </div>
+    </main>
+
+    <script type="module" src="./js/suggest.js?v=pokemon-image-1"></script>
+    <script type="module" src="js/nyx-widget.js?v=pokemon-image-1"></script>
+  </body>
+</html>

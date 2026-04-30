@@ -1,4 +1,6 @@
-// js/data.js — carrega e processa animes.json
+// js/data.js?v=pokemon-image-1 — carrega e processa animes.json
+
+import { normalizeText, stripEmoji } from "./utils.js";
 
 let _data = null;
 
@@ -10,20 +12,13 @@ export async function loadData() {
   return _data;
 }
 
-export function notaColor(nota) {
-  if (nota === null || nota === undefined) return "";
-  if (nota >= 8.5) return "nota-high";
-  if (nota >= 7) return "nota-mid";
-  return "nota-low";
-}
-
 export function formatNota(nota) {
   if (nota === null || nota === undefined) return "—";
   return Number(nota).toFixed(1);
 }
 
 export function personKey(name) {
-  return name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  return normalizeText(name);
 }
 
 export const PEOPLE = ["Rafael", "Fernando", "Dudu", "Hacksuya"];
@@ -31,14 +26,14 @@ export const PEOPLE = ["Rafael", "Fernando", "Dudu", "Hacksuya"];
 export const PERSON_COLORS = {
   Rafael: "#7c3aed",
   Fernando: "#ec4899",
-  Dudu: "#34d399",
+  Dudu: "#eab308",
   Hacksuya: "#06b6d4",
 };
 
 export const PERSON_LIGHTS = {
   Rafael: "#a78bfa",
   Fernando: "#f9a8d4",
-  Dudu: "#6ee7b7",
+  Dudu: "#fde68a",
   Hacksuya: "#67e8f9",
 };
 
@@ -54,7 +49,7 @@ export function getPersonNota(anime, person) {
 export function countGenres(animes) {
   const map = {};
   for (const a of animes) {
-    for (const g of (a.generos || [])) {
+    for (const g of a.generos || []) {
       map[g] = (map[g] || 0) + 1;
     }
   }
@@ -74,15 +69,6 @@ export function favoriteGenre(animes, person) {
   return Object.entries(map).sort((a, b) => b[1] - a[1])[0][0];
 }
 
-// Média de notas de uma pessoa
-export function avgNota(animes, person) {
-  const notes = animesOf(animes, person)
-    .map((a) => getPersonNota(a, person))
-    .filter((n) => n !== null);
-  if (!notes.length) return null;
-  return notes.reduce((s, n) => s + n, 0) / notes.length;
-}
-
 // Anime favorito de uma pessoa (nota mais alta)
 export function favoriteAnime(animes, person) {
   const mine = animesOf(animes, person)
@@ -91,25 +77,10 @@ export function favoriteAnime(animes, person) {
   return mine[0] || null;
 }
 
-// Anime mais controverso que uma pessoa avaliou
-export function mostControversial(animes, person) {
-  const mine = animesOf(animes, person)
-    .filter((a) => a.controversia !== null)
-    .sort((a, b) => b.controversia - a.controversia);
-  return mine[0] || null;
-}
-
 // Animes exclusivos de uma pessoa (só ela assistiu)
 export function exclusiveAnimes(animes, person) {
   return animesOf(animes, person).filter(
-    (a) => a.quemAssistiu.length === 1 && a.quemAssistiu[0] === person
-  );
-}
-
-// Animes que a pessoa não assistiu mas outros sim
-export function missedAnimes(animes, person) {
-  return animes.filter(
-    (a) => !a.quemAssistiu.includes(person) && a.quemAssistiu.length > 0
+    (a) => a.quemAssistiu.length === 1 && a.quemAssistiu[0] === person,
   );
 }
 
@@ -121,14 +92,40 @@ export function topGenres(animes, topN = 10) {
     .slice(0, topN);
 }
 
-// Animes em comum entre duas pessoas
-export function commonAnimes(animes, p1, p2) {
-  return animes.filter(
-    (a) => a.quemAssistiu.includes(p1) && a.quemAssistiu.includes(p2)
-  );
+export function cleanGenreLabel(g) {
+  return stripEmoji(g);
 }
 
-export function cleanGenreLabel(g) {
-  // Remove emoji para usar como label curta em gráficos
-  return g.replace(/[\u{1F300}-\u{1FAFF}]|[\u{2600}-\u{27BF}]|[\u{2702}-\u{27B0}]/gu, "").trim();
+export function notaColor(nota) {
+  if (nota === null || nota === undefined) return "";
+  if (nota >= 8.5) return "nota-high";
+  if (nota >= 7) return "nota-mid";
+  return "nota-low";
+}
+
+// Média de notas de uma pessoa
+export function avgNota(animes, person) {
+  const notes = animesOf(animes, person)
+    .map((a) => getPersonNota(a, person))
+    .filter((n) => n !== null);
+  if (!notes.length) return null;
+  return notes.reduce((s, n) => s + n, 0) / notes.length;
+}
+
+// Anime mais controverso que uma pessoa avaliou
+export function mostControversial(animes, person) {
+  const mine = animesOf(animes, person)
+    .filter((a) => a.controversia !== null)
+    .sort((a, b) => b.controversia - a.controversia);
+  return mine[0] || null;
+}
+
+// Animes que a pessoa não assistiu mas outros sim
+export function missedAnimes(animes, person) {
+  return animes.filter((a) => !a.quemAssistiu.includes(person) && a.quemAssistiu.length > 0);
+}
+
+// Animes em comum entre duas pessoas
+export function commonAnimes(animes, p1, p2) {
+  return animes.filter((a) => a.quemAssistiu.includes(p1) && a.quemAssistiu.includes(p2));
 }

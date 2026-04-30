@@ -1,4 +1,4 @@
-// js/table.js?v=pokemon-image-1 — tabela com filtros, ordenação e modal
+// js/table.js?v=comments-fill-1 — tabela com filtros, ordenação e modal
 
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import {
@@ -22,7 +22,7 @@ import {
   PEOPLE,
   PERSON_COLORS,
   PERSON_LIGHTS,
-} from "./data.js?v=pokemon-image-1";
+} from "./data.js?v=comments-fill-1";
 import { escapeHTML, normalizeText, stripEmoji } from "./utils.js";
 
 let allAnimes = [];
@@ -504,7 +504,9 @@ function renderAnimeLinks(anime) {
         ${customChips}
         ${canEdit ? `<button class="modal-link-add-btn" onclick="toggleAddLinkForm('${id}')" title="Adicionar link">+</button>` : ""}
       </div>
-      ${canEdit ? `
+      ${
+        canEdit
+          ? `
       <div id="add-link-form-${id}" class="add-link-form" hidden>
         <input id="add-link-name-${id}" class="add-link-input" type="text" placeholder="Nome do link" maxlength="60" />
         <input id="add-link-url-${id}" class="add-link-input" type="url" placeholder="https://..." maxlength="500" />
@@ -522,7 +524,9 @@ function renderAnimeLinks(anime) {
           <button class="edit-link-button" type="button" onclick="cancelEditLink('${id}')">Cancelar</button>
           <span id="edit-link-status-${id}" class="edit-status"></span>
         </div>
-      </div>` : ""}
+      </div>`
+          : ""
+      }
     </section>
   `;
 }
@@ -626,8 +630,16 @@ window.saveEditLink = async function (animeId) {
   const name = nameInput.value.trim();
   const url = urlInput.value.trim();
 
-  if (!name || !url) { statusEl.textContent = "Preencha nome e URL."; return; }
-  try { new URL(url); } catch { statusEl.textContent = "URL inválida."; return; }
+  if (!name || !url) {
+    statusEl.textContent = "Preencha nome e URL.";
+    return;
+  }
+  try {
+    new URL(url);
+  } catch {
+    statusEl.textContent = "URL inválida.";
+    return;
+  }
 
   saveBtn.disabled = true;
   statusEl.textContent = "Salvando...";
@@ -670,7 +682,9 @@ window.deleteAnimeLink = async function (animeId, fileIdx) {
       const snap = await transaction.get(docRef);
       if (!snap.exists()) throw new Error("Anime não encontrado.");
       const current = { ...anime, ...snap.data(), id: anime.id };
-      const newFiles = (Array.isArray(current.files) ? current.files : []).filter((_, i) => i !== fileIdx);
+      const newFiles = (Array.isArray(current.files) ? current.files : []).filter(
+        (_, i) => i !== fileIdx,
+      );
       updatedAnime = { ...current, files: newFiles };
       transaction.update(docRef, { files: newFiles, updatedAt: serverTimestamp() });
     });

@@ -8,7 +8,7 @@ import {
   getPersonNota,
   loadData,
   mostControversial,
-} from "./data.js?v=pokemon-image-1";
+} from "./data.js?v=comments-fill-1";
 import { escapeHTML, shortText, shuffleItems } from "./utils.js";
 
 const OPENINGS = {
@@ -158,7 +158,7 @@ function renderCommentBalloons(comments) {
       return `
       <a class="comment-balloon comment-balloon-${index + 1}" href="${href}" style="--balloon-color:${personColor}" title="Abrir ${escapeHTML(comment.anime)} no acervo">
         <strong>${escapeHTML(comment.person)}</strong>
-        <p>${escapeHTML(shortText(comment.text, 120))}</p>
+        <p>${escapeHTML(shortText(comment.text, 112))}</p>
       </a>
     `;
     })
@@ -176,8 +176,8 @@ function startFeaturedCommentRotation(comments) {
 
   const batches = [];
   const shuffledComments = shuffleItems(comments);
-  for (let index = 0; index < shuffledComments.length; index += 6) {
-    batches.push(shuffledComments.slice(index, index + 6));
+  for (let index = 0; index < shuffledComments.length; index += 8) {
+    batches.push(shuffledComments.slice(index, index + 8));
   }
 
   if (!batches.length) {
@@ -194,8 +194,8 @@ function startFeaturedCommentRotation(comments) {
     if (index === 0 && batches.length > 1) {
       const reshuffled = shuffleItems(comments);
       batches.splice(0, batches.length);
-      for (let nextIndex = 0; nextIndex < reshuffled.length; nextIndex += 6) {
-        batches.push(reshuffled.slice(nextIndex, nextIndex + 6));
+      for (let nextIndex = 0; nextIndex < reshuffled.length; nextIndex += 8) {
+        batches.push(reshuffled.slice(nextIndex, nextIndex + 8));
       }
     }
   };
@@ -486,7 +486,15 @@ function renderNews() {
 }
 
 const SCHEDULE_DAYS_PT = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
-const SCHEDULE_DAYS_EN = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+const SCHEDULE_DAYS_EN = [
+  "sunday",
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+];
 
 async function renderCalendar() {
   const card = document.getElementById("calendar-card");
@@ -511,7 +519,9 @@ async function renderCalendar() {
       if (res.ok) {
         const payload = await res.json();
         items = (payload.data || []).slice(0, 10);
-        try { localStorage.setItem(cacheKey, JSON.stringify(items)); } catch {}
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify(items));
+        } catch {}
       }
     }
   } catch {}
@@ -530,17 +540,19 @@ async function renderCalendar() {
     <h2>No ar hoje</h2>
     <p class="calendar-day">${dayPt.charAt(0).toUpperCase() + dayPt.slice(1)} · ${dateStr}</p>
     <div class="calendar-list">
-      ${items.map((anime) => {
-        const time = anime.broadcast?.time ? anime.broadcast.time + " JST" : "";
-        const href = `https://myanimelist.net/anime/${anime.mal_id}`;
-        const title = anime.title_english || anime.title || "";
-        return `
+      ${items
+        .map((anime) => {
+          const time = anime.broadcast?.time ? anime.broadcast.time + " JST" : "";
+          const href = `https://myanimelist.net/anime/${anime.mal_id}`;
+          const title = anime.title_english || anime.title || "";
+          return `
           <a class="calendar-item" href="${href}" target="_blank" rel="noopener noreferrer">
             <span class="calendar-dot"></span>
             <span class="calendar-title">${title}</span>
             ${time ? `<span class="calendar-time">${time}</span>` : ""}
           </a>`;
-      }).join("")}
+        })
+        .join("")}
     </div>
     <a class="calendar-mal-link" href="https://myanimelist.net/anime/season" target="_blank" rel="noopener noreferrer">Ver temporada completa →</a>
   `;

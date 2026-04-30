@@ -4163,7 +4163,7 @@ body.ciel-page {
 
 /* ── Sidebar ─────────────────────────────────────────────────────────────── */
 .ciel-sidebar {
-  align-self: start;
+  align-self: stretch;
   background: #1a1408;
   border: 1px solid rgba(251,191,36,0.22);
   border-radius: 28px;
@@ -4174,10 +4174,10 @@ body.ciel-page {
   display: flex;
   flex-direction: column;
   gap: 0;
-  height: fit-content;
   overflow: hidden;
   position: sticky;
   top: 96px;
+  max-height: calc(100vh - 156px);
 }
 
 /* Avatar section — warm dark */

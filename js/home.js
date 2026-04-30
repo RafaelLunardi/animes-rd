@@ -378,13 +378,7 @@ async function renderHero(data) {
 
   const heroPanel = document.getElementById("hero-panel");
   if (heroImage) {
-    heroPanel.style.background = `
-      linear-gradient(180deg, rgba(16,16,20,0.34), rgba(16,16,20,0.66)),
-      linear-gradient(90deg, rgba(16,16,20,0.58), rgba(16,16,20,0.16)),
-      url("${heroImage}")
-    `;
-    heroPanel.style.backgroundPosition = "center";
-    heroPanel.style.backgroundSize = "cover";
+    heroPanel.style.setProperty("--hero-anime-bg", `url("${heroImage}")`);
     heroPanel.classList.add("has-bg");
   }
 

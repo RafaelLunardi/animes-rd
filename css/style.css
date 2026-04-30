@@ -3214,25 +3214,26 @@ body.blog-page::before {
 
 .member-scroll-btn {
   align-items: center;
-  background: rgba(16, 16, 20, 0.88);
-  border: 2px solid rgba(134, 239, 172, 0.55);
+  background:
+    rgba(16, 16, 20, 0.88) padding-box,
+    linear-gradient(135deg, #86efac, #60a5fa, #f9a8d4) border-box;
+  border: 2px solid transparent;
   border-radius: 50%;
-  color: #86efac;
+  color: var(--paper);
   cursor: pointer;
   display: flex;
   font-size: 20px;
   height: 38px;
   justify-content: center;
   line-height: 1;
-  transition:
-    background 0.15s ease,
-    border-color 0.15s ease;
+  transition: background 0.18s ease;
   width: 38px;
 }
 
 .member-scroll-btn:hover {
-  background: rgba(24, 24, 30, 0.98);
-  border-color: rgba(134, 239, 172, 0.9);
+  background:
+    rgba(24, 24, 30, 0.98) padding-box,
+    linear-gradient(135deg, #86efac, #60a5fa, #f9a8d4) border-box;
 }
 
 .post-card {

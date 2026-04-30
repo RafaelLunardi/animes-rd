@@ -42,6 +42,7 @@ const NEWS_PLACEHOLDER = [
 const HERO_IMAGE_FALLBACKS = {
   49730: "https://myanimelist.net/images/anime/1787/140239l.webp",
   52991: "https://cdn.myanimelist.net/images/anime/1015/138006l.jpg",
+  50265: "https://cdn.myanimelist.net/images/anime/1441/122795l.jpg",
 };
 
 const FEATURED_ROTATION_MINUTES = 30;

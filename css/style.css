@@ -4163,13 +4163,12 @@ body.ciel-page {
 /* Sidebar */
 .ciel-sidebar {
   background:
-    radial-gradient(circle at 18% 8%, rgba(253, 230, 138, 0.2), transparent 34%),
-    radial-gradient(circle at 78% 74%, rgba(245, 158, 11, 0.14), transparent 38%),
     linear-gradient(
-        150deg,
-        rgba(48, 38, 22, 0.86),
-        rgba(26, 24, 34, 0.9) 44%,
-        rgba(10, 27, 31, 0.86)
+        145deg,
+        rgba(63, 49, 22, 0.72) 0%,
+        rgba(43, 36, 27, 0.78) 34%,
+        rgba(29, 28, 33, 0.86) 68%,
+        rgba(11, 27, 31, 0.86) 100%
       )
       padding-box,
     linear-gradient(
@@ -4399,13 +4398,12 @@ body.ciel-page {
 /* Chat area */
 .ciel-chat-wrap {
   background:
-    radial-gradient(circle at 14% 10%, rgba(253, 230, 138, 0.22), transparent 36%),
-    radial-gradient(circle at 68% 54%, rgba(245, 158, 11, 0.11), transparent 42%),
     linear-gradient(
-        150deg,
-        rgba(48, 39, 22, 0.84),
-        rgba(18, 22, 29, 0.92) 42%,
-        rgba(9, 27, 31, 0.9)
+        145deg,
+        rgba(64, 50, 22, 0.72) 0%,
+        rgba(45, 39, 29, 0.76) 30%,
+        rgba(27, 31, 34, 0.88) 64%,
+        rgba(9, 28, 32, 0.9) 100%
       )
       padding-box,
     linear-gradient(

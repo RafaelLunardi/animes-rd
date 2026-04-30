@@ -32,3 +32,7 @@ document.addEventListener("click", (event) => {
   const nextTheme = document.body.classList.contains(DARK_CLASS) ? "light" : "dark";
   setTheme(nextTheme);
 });
+
+document.addEventListener("navbar-loaded", () => {
+  applyTheme(getPreferredTheme());
+});

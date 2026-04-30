@@ -4144,10 +4144,8 @@ body.suggest-page.dark-theme::before {
 
 body.ciel-page {
   background:
-    radial-gradient(ellipse 60% 40% at 5% 10%,  rgba(253,230,138,0.18), transparent),
-    radial-gradient(ellipse 50% 60% at 95% 5%,  rgba(180,83,9,0.12),   transparent),
-    radial-gradient(ellipse 40% 50% at 80% 95%, rgba(251,191,36,0.1),   transparent),
-    radial-gradient(ellipse 30% 40% at 15% 90%, rgba(245,158,11,0.08),  transparent),
+    radial-gradient(ellipse 55% 45% at 5% 8%,   rgba(253,230,138,0.16), transparent),
+    radial-gradient(ellipse 45% 55% at 92% 92%, rgba(180,83,9,0.1),     transparent),
     #050300;
 }
 
@@ -4193,34 +4191,22 @@ body.ciel-page {
   position: relative;
 }
 
-.ciel-avatar-wrap::after {
-  background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(251,191,36,0.14), transparent);
-  bottom: 0;
-  content: "";
-  left: 0;
-  pointer-events: none;
-  position: absolute;
-  right: 0;
-  top: 0;
-}
 
 .ciel-avatar-ring {
   align-items: center;
   background: #0d0902;
-  border: 2px solid transparent;
-  border-image: linear-gradient(135deg, #fef08a, #b45309, #fbbf24, #78350f) 1;
+  border: 2.5px solid #b45309;
   border-radius: 50%;
   box-shadow:
     0 0 0 4px rgba(251,191,36,0.07),
-    0 0 24px rgba(251,191,36,0.3),
-    0 0 60px rgba(251,191,36,0.12),
     0 16px 40px rgba(0,0,0,0.5);
   display: flex;
   height: 108px;
   justify-content: center;
-  overflow: visible;
+  overflow: hidden;
   position: relative;
   width: 108px;
+  will-change: filter;
   animation: cielPulse 4s ease-in-out infinite;
   z-index: 1;
 }
@@ -4252,8 +4238,8 @@ body.ciel-page {
 }
 
 @keyframes cielPulse {
-  0%, 100% { box-shadow: 0 0 0 4px rgba(251,191,36,0.07), 0 0 24px rgba(251,191,36,0.28), 0 0 60px rgba(251,191,36,0.1),  0 16px 40px rgba(0,0,0,0.5); }
-  50%       { box-shadow: 0 0 0 6px rgba(251,191,36,0.1),  0 0 36px rgba(251,191,36,0.44), 0 0 80px rgba(251,191,36,0.18), 0 16px 44px rgba(0,0,0,0.55); }
+  0%, 100% { filter: brightness(1)   drop-shadow(0 0 12px rgba(251,191,36,0.3)); }
+  50%       { filter: brightness(1.06) drop-shadow(0 0 22px rgba(251,191,36,0.55)); }
 }
 
 /* ID block inside avatar section */
@@ -4303,8 +4289,8 @@ body.ciel-page {
 }
 
 @keyframes cielDotBlink {
-  0%, 100% { opacity: 1;   box-shadow: 0 0 6px rgba(251,191,36,0.7); }
-  50%       { opacity: 0.3; box-shadow: none; }
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
 }
 
 /* Info list */
@@ -4465,10 +4451,11 @@ body.ciel-page {
 
 .ciel-msg {
   align-items: flex-start;
-  animation: cielMsgIn 0.22s cubic-bezier(0.34,1.56,0.64,1);
+  animation: cielMsgIn 0.2s ease-out;
   display: flex;
   gap: 10px;
   max-width: 88%;
+  will-change: transform, opacity;
 }
 
 @keyframes cielMsgIn {

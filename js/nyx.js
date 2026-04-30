@@ -308,44 +308,39 @@ function buildUnknownResponse() {
 
 // ── DOM helpers ──────────────────────────────────────────────────────────────
 
+const AVATAR_HTML = `<div class="ciel-msg-avatar"><img src="assets/ciel-icon.png" alt="Ciel" loading="lazy" /></div>`;
+
+let $log = null;
+function getLog() { return $log || ($log = document.getElementById("ciel-messages")); }
+
 function scrollToBottom() {
-  const log = document.getElementById("ciel-messages");
+  const log = getLog();
   if (log) log.scrollTop = log.scrollHeight;
 }
 
 function addMessage(role, html) {
-  const log = document.getElementById("ciel-messages");
+  const log = getLog();
   if (!log) return;
   const wrap = document.createElement("div");
   wrap.className = role === "ciel" ? "ciel-msg ciel-msg-ciel" : "ciel-msg ciel-msg-user";
-  if (role === "ciel") {
-    wrap.innerHTML = `
-      <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png" alt="Ciel" /></div>
-      <div class="ciel-msg-bubble">${html}</div>
-    `;
-  } else {
-    wrap.innerHTML = `<div class="ciel-msg-bubble">${html}</div>`;
-  }
+  wrap.innerHTML = role === "ciel"
+    ? `${AVATAR_HTML}<div class="ciel-msg-bubble">${html}</div>`
+    : `<div class="ciel-msg-bubble">${html}</div>`;
   log.appendChild(wrap);
   scrollToBottom();
   return wrap;
 }
 
 function addTypingIndicator() {
-  return addMessage(
-    "ciel",
-    `<span class="ciel-typing"><span></span><span></span><span></span></span>`,
-  );
+  return addMessage("ciel", `<span class="ciel-typing"><span></span><span></span><span></span></span>`);
 }
 
 function addRecCards(picks) {
-  const log = document.getElementById("ciel-messages");
+  const log = getLog();
   if (!log) return;
   const wrap = document.createElement("div");
   wrap.className = "ciel-msg ciel-msg-ciel ciel-msg-cards";
-  const cards = picks
-    .map(
-      (anime, i) => `
+  const cards = picks.map((anime, i) => `
     <a class="ciel-rec-card" href="acervo.html?anime=${encodeURIComponent(anime.id)}">
       <span class="ciel-rec-rank">${String(i + 1).padStart(2, "0")}</span>
       <div class="ciel-rec-body">
@@ -353,13 +348,8 @@ function addRecCards(picks) {
         <p>${escapeHTML(anime.reason)}.</p>
         <small>Nota ${formatNota(anime.nota)} · ${anime.qtdVotos || 0} voto(s)</small>
       </div>
-    </a>`,
-    )
-    .join("");
-  wrap.innerHTML = `
-    <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png" alt="Ciel" /></div>
-    <div class="ciel-rec-list">${cards}</div>
-  `;
+    </a>`).join("");
+  wrap.innerHTML = `${AVATAR_HTML}<div class="ciel-rec-list">${cards}</div>`;
   log.appendChild(wrap);
   scrollToBottom();
 }
@@ -412,26 +402,29 @@ async function init() {
   const data = await loadData();
   let selectedPerson = PEOPLE[0];
 
-  document.getElementById("ciel-count").textContent = `${data.animes.length} títulos`;
+  const $count       = document.getElementById("ciel-count");
+  const $personCount = document.getElementById("ciel-person-count");
+  const $people      = document.getElementById("ciel-people");
+  const $quickArea   = document.querySelector(".ciel-quick-actions");
+  const $input       = document.getElementById("ciel-input");
+  const $send        = document.getElementById("ciel-send");
+
+  $count.textContent = `${data.animes.length} títulos`;
 
   function updatePersonCount() {
-    const n = animesOf(data.animes, selectedPerson).length;
-    document.getElementById("ciel-person-count").textContent =
-      `${selectedPerson}: ${n} assistidos`;
+    $personCount.textContent = `${selectedPerson}: ${animesOf(data.animes, selectedPerson).length} assistidos`;
   }
 
   function renderPeople() {
-    const el = document.getElementById("ciel-people");
-    el.innerHTML = PEOPLE.map(
-      (p) =>
-        `<button type="button" class="${p === selectedPerson ? "active" : ""}" data-person="${p}">${p}</button>`,
+    $people.innerHTML = PEOPLE.map(
+      (p) => `<button type="button" class="${p === selectedPerson ? "active" : ""}" data-person="${p}">${p}</button>`,
     ).join("");
   }
 
   renderPeople();
   updatePersonCount();
 
-  document.getElementById("ciel-people").addEventListener("click", (e) => {
+  $people.addEventListener("click", (e) => {
     const btn = e.target.closest("button[data-person]");
     if (!btn) return;
     selectedPerson = btn.dataset.person;
@@ -448,7 +441,7 @@ async function init() {
     "Sistema inicializado. Protocolos ativos.<br><br>Sou <strong>Ciel</strong> — entidade analítica com acesso completo ao acervo do grupo. Opero com base em dados, padrões e compatibilidade.<br><br>Informe o perfil de análise desejado ou formule uma solicitação.",
   );
 
-  document.querySelector(".ciel-quick-actions").addEventListener("click", (e) => {
+  $quickArea.addEventListener("click", (e) => {
     const btn = e.target.closest("[data-quick]");
     if (!btn) return;
     const actions = {
@@ -460,20 +453,15 @@ async function init() {
     handleMessage(actions[btn.dataset.quick], data, selectedPerson);
   });
 
-  const input = document.getElementById("ciel-input");
-  document.getElementById("ciel-send").addEventListener("click", () => {
-    const val = input.value.trim();
+  function send() {
+    const val = $input.value.trim();
     if (!val) return;
     handleMessage(val, data, selectedPerson);
-    input.value = "";
-  });
-  input.addEventListener("keydown", (e) => {
-    if (e.key !== "Enter") return;
-    const val = input.value.trim();
-    if (!val) return;
-    handleMessage(val, data, selectedPerson);
-    input.value = "";
-  });
+    $input.value = "";
+  }
+
+  $send.addEventListener("click", send);
+  $input.addEventListener("keydown", (e) => { if (e.key === "Enter") send(); });
 }
 
 init().catch((err) => {

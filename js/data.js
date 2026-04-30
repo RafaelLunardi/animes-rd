@@ -1,4 +1,4 @@
-// js/data.js?v=nav-fix-1 — carrega e processa animes.json
+// js/data.js?v=pending-title-1 — carrega e processa animes.json
 
 import { normalizeText, stripEmoji } from "./utils.js";
 

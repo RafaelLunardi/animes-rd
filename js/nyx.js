@@ -5,7 +5,7 @@ import {
   formatNota,
   loadData,
   missedAnimes,
-} from "./data.js?v=ciel-1";
+} from "./data.js?v=ciel-gold-3";
 import { escapeHTML, stripEmoji } from "./utils.js";
 
 // ── Recommendation engine ────────────────────────────────────────────────────
@@ -27,8 +27,8 @@ function pickRecommendations(animes, person, genreFilter) {
     .filter((anime) => {
       if (Number(anime.nota) < 7.5) return false;
       if (genreFilter) {
-        return (anime.generos || []).some(
-          (g) => stripEmoji(g).toLowerCase().includes(genreFilter.toLowerCase()),
+        return (anime.generos || []).some((g) =>
+          stripEmoji(g).toLowerCase().includes(genreFilter.toLowerCase()),
         );
       }
       return true;
@@ -96,7 +96,6 @@ const GENRE_KEYWORDS = [
   "ação", "acao", "fantasia", "drama", "comedia", "comédia", "romance",
   "shounen", "isekai", "terror", "mecha", "slice of life", "ecchi",
   "esportes", "sci-fi", "sobrenatural", "psicológico", "psicologico",
-  "ação", "psicologic",
 ];
 
 function normalize(str) {
@@ -172,7 +171,8 @@ function buildStatsResponse(data, person) {
     ? `\n\nIntervenção automática: backlog acima do ideal (${p.missed.length} títulos pendentes). Sugestão estratégica: priorizar animes de 12 episódios para otimizar taxa de conclusão.`
     : "";
 
-  return `${rand(OPENERS)}\n\nAnálise de perfil concluída para <strong>${person}</strong>.\n\n` +
+  return (
+    `${rand(OPENERS)}\n\nAnálise de perfil concluída para <strong>${person}</strong>.\n\n` +
     `Resumo estatístico do acervo:\n` +
     `→ Total catalogado: ${p.total}\n` +
     `→ Assistidos: ${p.watched.length}\n` +
@@ -181,7 +181,8 @@ function buildStatsResponse(data, person) {
     (p.avgNota ? `→ Média de notas atribuídas: ${p.avgNota}\n` : "") +
     `\nGênero dominante identificado: <strong>${p.fav}</strong>\n` +
     `Distribuição atual (top 3): ${p.topGenres.join(" · ") || "dados insuficientes"}` +
-    backlogNote;
+    backlogNote
+  );
 }
 
 function buildTopResponse(data) {
@@ -194,7 +195,10 @@ function buildTopResponse(data) {
     return "Dados insuficientes para ranking. Nenhum anime com múltiplos votos registrados.";
 
   const list = top
-    .map((a, i) => `→ ${i + 1}. <strong>${escapeHTML(a.nome)}</strong> — ${formatNota(a.nota)} (${a.qtdVotos} votos)`)
+    .map(
+      (a, i) =>
+        `→ ${i + 1}. <strong>${escapeHTML(a.nome)}</strong> — ${formatNota(a.nota)} (${a.qtdVotos} votos)`,
+    )
     .join("\n");
 
   return `${rand(OPENERS)}\n\nProtocolo de ranking executado.\n\nTop 5 do acervo por nota média:\n\n${list}\n\nObservação adicional: ranking gerado com base exclusiva em títulos com múltiplos votos — elimina viés de avaliação individual.`;
@@ -206,10 +210,15 @@ function buildRecommendResponse(data, person, genreFilter) {
     return `Análise concluída para <strong>${person}</strong>.\n\nResultado: nenhum título compatível disponível no acervo. Todos os animes qualificados já foram consumidos.\n\nSugestão: ampliar critério de busca ou aguardar novos títulos no acervo.`;
   }
   const p = analyzeProfile(data.animes, person);
-  const genreCtx = genreFilter ? `\n\nContexto do gênero selecionado — ${genreFilter}: ${getGenreContext(genreFilter)}` : "";
+  const genreCtx = genreFilter
+    ? `\n\nContexto do gênero selecionado — ${genreFilter}: ${getGenreContext(genreFilter)}`
+    : "";
   const patternNote = `\n\nPadrão identificado: preferência consolidada por <strong>${p.fav}</strong>. Recomendações calibradas para compatibilidade máxima.`;
 
-  return { picks, prefix: `${rand(OPENERS)}${genreCtx}${patternNote}\n\nRecomendação otimizada com base no perfil de <strong>${person}</strong>:` };
+  return {
+    picks,
+    prefix: `${rand(OPENERS)}${genreCtx}${patternNote}\n\nRecomendação otimizada com base no perfil de <strong>${person}</strong>:`,
+  };
 }
 
 function buildUnknownResponse() {
@@ -353,7 +362,6 @@ async function init() {
     updatePersonCount();
   });
 
-  // Boot message
   await new Promise((r) => setTimeout(r, 500));
   const typing = addTypingIndicator();
   await new Promise((r) => setTimeout(r, 1400));
@@ -363,7 +371,6 @@ async function init() {
     "Sistema inicializado. Protocolos ativos.<br><br>Sou <strong>Ciel</strong> — entidade analítica com acesso completo ao acervo do grupo. Opero com base em dados, padrões e compatibilidade.<br><br>Informe o perfil de análise desejado ou formule uma solicitação.",
   );
 
-  // Quick actions
   document.querySelector(".ciel-quick-actions").addEventListener("click", (e) => {
     const btn = e.target.closest("[data-quick]");
     if (!btn) return;
@@ -376,7 +383,6 @@ async function init() {
     handleMessage(actions[btn.dataset.quick], data, selectedPerson);
   });
 
-  // Input
   const input = document.getElementById("ciel-input");
   document.getElementById("ciel-send").addEventListener("click", () => {
     const val = input.value.trim();

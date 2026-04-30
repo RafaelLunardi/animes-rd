@@ -1,4 +1,4 @@
-// js/table.js?v=calendar-seven-1 — tabela com filtros, ordenação e modal
+// js/table.js?v=ciel-gold-3 — tabela com filtros, ordenação e modal
 
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import {
@@ -22,7 +22,7 @@ import {
   PEOPLE,
   PERSON_COLORS,
   PERSON_LIGHTS,
-} from "./data.js?v=calendar-seven-1";
+} from "./data.js?v=ciel-gold-3";
 import { escapeHTML, normalizeText, stripEmoji } from "./utils.js";
 
 let allAnimes = [];
@@ -47,7 +47,7 @@ const NOTE_FIELDS = {
   Fernando: "notaFernando",
   Dudu: "notaDudu",
   Hacksuya: "notaHacksuya",
-  Zana: "notaZana"
+  Zana: "notaZana",
 };
 
 const FALLBACK_IMAGE =
@@ -886,9 +886,7 @@ async function saveAnimeEdit(anime) {
       const current = { ...anime, ...snap.data(), id: anime.id };
       current[noteField] = score;
       current.comments = setPersonComment(current, person, comment);
-      current.comentarios = current.comments
-        .map((item) => `${item.person}: ${item.text}`)
-        .join("");
+      current.comentarios = current.comments.map((item) => `${item.person}: ${item.text}`).join("");
       updatedAnime = recalculateAnime(current);
 
       transaction.update(docRef, {

@@ -1257,6 +1257,10 @@ tbody td {
   padding-top: 12px;
 }
 
+.add-link-form[hidden] {
+  display: none;
+}
+
 .add-link-input {
   background: rgba(16, 16, 20, 0.7);
   border: 1px solid rgba(216, 180, 254, 0.28);

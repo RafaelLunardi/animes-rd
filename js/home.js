@@ -485,6 +485,67 @@ function renderNews() {
   ).join("");
 }
 
+const SCHEDULE_DAYS_PT = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];
+const SCHEDULE_DAYS_EN = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+
+async function renderCalendar() {
+  const card = document.getElementById("calendar-card");
+  if (!card) return;
+
+  const today = new Date();
+  const dayIndex = today.getDay();
+  const dayEn = SCHEDULE_DAYS_EN[dayIndex];
+  const dayPt = SCHEDULE_DAYS_PT[dayIndex];
+  const dateStr = today.toLocaleDateString("pt-BR", { day: "numeric", month: "short" });
+  const cacheKey = `jikan-schedule-${dayEn}-${today.toISOString().slice(0, 10)}`;
+
+  let items = null;
+  try {
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      items = JSON.parse(cached);
+    } else {
+      const res = await fetch(
+        `https://api.jikan.moe/v4/schedules?filter=${dayEn}&limit=10&sfw=true`,
+      );
+      if (res.ok) {
+        const payload = await res.json();
+        items = (payload.data || []).slice(0, 10);
+        try { localStorage.setItem(cacheKey, JSON.stringify(items)); } catch {}
+      }
+    }
+  } catch {}
+
+  if (!items || !items.length) {
+    card.innerHTML = `
+      <span class="eyebrow">Calendário MAL</span>
+      <h2>No ar hoje</h2>
+      <p class="calendar-empty">Não foi possível carregar os lançamentos agora.</p>
+    `;
+    return;
+  }
+
+  card.innerHTML = `
+    <span class="eyebrow">Calendário MAL</span>
+    <h2>No ar hoje</h2>
+    <p class="calendar-day">${dayPt.charAt(0).toUpperCase() + dayPt.slice(1)} · ${dateStr}</p>
+    <div class="calendar-list">
+      ${items.map((anime) => {
+        const time = anime.broadcast?.time ? anime.broadcast.time + " JST" : "";
+        const href = `https://myanimelist.net/anime/${anime.mal_id}`;
+        const title = anime.title_english || anime.title || "";
+        return `
+          <a class="calendar-item" href="${href}" target="_blank" rel="noopener noreferrer">
+            <span class="calendar-dot"></span>
+            <span class="calendar-title">${title}</span>
+            ${time ? `<span class="calendar-time">${time}</span>` : ""}
+          </a>`;
+      }).join("")}
+    </div>
+    <a class="calendar-mal-link" href="https://myanimelist.net/anime/season" target="_blank" rel="noopener noreferrer">Ver temporada completa →</a>
+  `;
+}
+
 async function init() {
   const data = await loadData();
   await renderHero(data);
@@ -492,6 +553,7 @@ async function init() {
   renderMemberPosts(data.animes);
   renderPulse(data.animes);
   renderNews();
+  renderCalendar();
 }
 
 init().catch((error) => {

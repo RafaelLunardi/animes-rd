@@ -3021,6 +3021,75 @@ body.blog-page::before {
   gap: 12px;
 }
 
+.calendar-day {
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 4px;
+  margin-top: -6px;
+}
+
+.calendar-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.calendar-item {
+  align-items: center;
+  border-bottom: 1px solid rgba(243, 239, 230, 0.08);
+  color: var(--paper);
+  display: flex;
+  font-size: 12px;
+  gap: 8px;
+  padding: 7px 0;
+  transition: color 0.15s ease;
+}
+
+.calendar-item:hover {
+  color: var(--hacksuya-light);
+}
+
+.calendar-dot {
+  background: var(--hacksuya-light);
+  border-radius: 50%;
+  flex-shrink: 0;
+  height: 5px;
+  width: 5px;
+}
+
+.calendar-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.calendar-time {
+  color: var(--muted);
+  flex-shrink: 0;
+  font-size: 10px;
+}
+
+.calendar-mal-link {
+  color: var(--muted);
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 12px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.calendar-mal-link:hover {
+  color: var(--hacksuya-light);
+}
+
+.calendar-empty {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 8px;
+}
+
 .blog-section {
   border-top: 2px solid #1f2933;
   margin-top: 42px;

@@ -187,6 +187,7 @@ select {
   border-radius: 8px;
   box-shadow: var(--shadow);
   min-height: 390px;
+  overflow: hidden;
 }
 
 .hero-copy {

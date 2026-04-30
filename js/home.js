@@ -506,7 +506,16 @@ async function renderCalendar() {
   const dayEn = SCHEDULE_DAYS_EN[dayIndex];
   const dayPt = SCHEDULE_DAYS_PT[dayIndex];
   const dateStr = today.toLocaleDateString("pt-BR", { day: "numeric", month: "short" });
-  const cacheKey = `jikan-schedule-7-${dayEn}-${today.toISOString().slice(0, 10)}`;
+  const cacheKey = `jikan-schedule-brt-${dayEn}-${today.toISOString().slice(0, 10)}`;
+
+  function jstToBrt(timeStr) {
+    if (!timeStr) return "";
+    const [h, m] = timeStr.split(":").map(Number);
+    if (isNaN(h) || isNaN(m)) return "";
+    // JST = UTC+9, BRT = UTC-3 → subtract 12h
+    let brtH = (h - 12 + 24) % 24;
+    return `${String(brtH).padStart(2, "0")}:${String(m).padStart(2, "0")} BRT`;
+  }
 
   let items = null;
   try {
@@ -515,11 +524,19 @@ async function renderCalendar() {
       items = JSON.parse(cached);
     } else {
       const res = await fetch(
-        `https://api.jikan.moe/v4/schedules?filter=${dayEn}&limit=7&sfw=true`,
+        `https://api.jikan.moe/v4/schedules?filter=${dayEn}&limit=25&sfw=true`,
       );
       if (res.ok) {
         const payload = await res.json();
-        items = (payload.data || []).slice(0, 7);
+        const seen = new Set();
+        items = (payload.data || [])
+          .filter((a) => {
+            const key = a.mal_id;
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+          })
+          .slice(0, 8);
         try {
           localStorage.setItem(cacheKey, JSON.stringify(items));
         } catch {}
@@ -543,7 +560,7 @@ async function renderCalendar() {
     <div class="calendar-list">
       ${items
         .map((anime) => {
-          const time = anime.broadcast?.time ? anime.broadcast.time + " JST" : "";
+          const time = jstToBrt(anime.broadcast?.time);
           const href = `https://myanimelist.net/anime/${anime.mal_id}`;
           const title = anime.title_english || anime.title || "";
           return `

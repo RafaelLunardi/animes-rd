@@ -34,7 +34,7 @@ import {
   getPersonNota,
   formatNota,
   notaColor,
-} from "./data.js?v=ciel-gold-1";
+} from "./data.js?v=ciel-gold-2";
 import { normalizeText } from "./utils.js";
 
 const GENRE_TRANSLATION = {

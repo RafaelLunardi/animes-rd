@@ -61,7 +61,7 @@ export async function loadNavbar() {
   if (!nav) return;
 
   try {
-    const response = await fetch("navbar.html?v=ciel-gold-1");
+    const response = await fetch("navbar.html?v=ciel-gold-2");
     if (!response.ok) throw new Error("Falha ao carregar navbar.html");
 
     nav.innerHTML = await response.text();

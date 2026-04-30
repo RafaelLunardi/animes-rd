@@ -29,7 +29,7 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-const PEOPLE = ["Rafael", "Fernando", "Dudu", "Hacksuya"];
+const PEOPLE = ["Rafael", "Fernando", "Dudu", "Hacksuya", "Zana"];
 
 async function exportAndApproveAnimes() {
   console.log("Iniciando aprovação de animes pendentes e exportação para JSON...");
@@ -70,6 +70,7 @@ async function exportAndApproveAnimes() {
           notaFernando: null,
           notaDudu: null,
           notaHacksuya: null,
+          notaZana: null, // Novo campo para Zana
           quemAssistiu: [],
         };
 
@@ -89,6 +90,7 @@ async function exportAndApproveAnimes() {
             if (personName === "Fernando") finalAnime.notaFernando = vote.score;
             if (personName === "Dudu") finalAnime.notaDudu = vote.score;
             if (personName === "Hacksuya") finalAnime.notaHacksuya = vote.score;
+            if (personName === "Zana") finalAnime.notaZana = vote.score; // Adiciona a nota da Zana
 
             if (vote.comment && vote.comment.trim()) {
               allComments.push(`${personName}: ${vote.comment.trim()}`);

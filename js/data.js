@@ -21,20 +21,22 @@ export function personKey(name) {
   return normalizeText(name);
 }
 
-export const PEOPLE = ["Rafael", "Fernando", "Dudu", "Hacksuya"];
+export const PEOPLE = ["Rafael", "Fernando", "Dudu", "Hacksuya", "Zana"];
 
 export const PERSON_COLORS = {
   Rafael: "#7c3aed",
   Fernando: "#ec4899",
-  Dudu: "#eab308",
+  Dudu: "#f59e0b",
   Hacksuya: "#06b6d4",
+  Zana: "#f97316", // Laranja
 };
 
 export const PERSON_LIGHTS = {
   Rafael: "#a78bfa",
   Fernando: "#f9a8d4",
-  Dudu: "#fde68a",
+  Dudu: "#fcd34d",
   Hacksuya: "#67e8f9",
+  Zana: "#fdba74", // Laranja claro
 };
 
 export function getPersonNota(anime, person) {
@@ -42,6 +44,7 @@ export function getPersonNota(anime, person) {
   if (person === "Fernando") return anime.notaFernando;
   if (person === "Dudu") return anime.notaDudu;
   if (person === "Hacksuya") return anime.notaHacksuya;
+  if (person === "Zana") return anime.notaZana;
   return null;
 }
 

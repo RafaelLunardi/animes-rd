@@ -16,6 +16,7 @@ const OPENINGS = {
   Fernando: ["Departure!", "Haruka Kanata", "Kaikai Kitan"],
   Dudu: ["The Rumbling", "Blue Bird", "Silhouette"],
   Hacksuya: ["Kyouran Hey Kids!!", "Inferno", "Kick Back"],
+  Zana: ["Guren no Yumiya", "Bling-Bang-Bang-Born", "Colors"],
 };
 
 const NEWS_PLACEHOLDER = [

@@ -11,6 +11,7 @@ import {
   cleanGenreLabel,
   formatNota,
   notaColor,
+  getPersonNota, // Importa a função centralizada
 } from "./data.js?v=calendar-seven-1";
 
 Chart.defaults.color = "#94a3b8";
@@ -26,6 +27,7 @@ export function initCompare(animes) {
   const s2 = document.getElementById("person2");
   if (!s1 || !s2) return;
 
+  // Popula os seletores dinamicamente
   PEOPLE.forEach((p, i) => {
     s1.innerHTML += `<option value="${p}" ${i === 0 ? "selected" : ""}>${p}</option>`;
     s2.innerHTML += `<option value="${p}" ${i === 1 ? "selected" : ""}>${p}</option>`;
@@ -34,7 +36,7 @@ export function initCompare(animes) {
   s1.addEventListener("change", renderCompare);
   s2.addEventListener("change", renderCompare);
 
-  renderVenn4();
+  renderVennAll(); // Renomeado para refletir que é para todos
   renderCompare();
 }
 
@@ -47,14 +49,13 @@ function renderCompare() {
   renderCommonTable(p1, p2);
 }
 
-function renderVenn4() {
+function renderVennAll() {
   const wrap = document.getElementById("venn4-container");
   if (!wrap) return;
 
-  const members = ["Rafael", "Fernando", "Dudu", "Hacksuya"];
-  const initials = { Rafael: "R", Fernando: "F", Dudu: "D", Hacksuya: "H" };
+  const members = PEOPLE; // Usa a lista importada de 5 membros
+  const initials = Object.fromEntries(members.map(p => [p, p[0]]));
 
-  // Conta cada subset não-vazio (2^4 - 1 = 15 regiões possíveis)
   const subsetCounts = new Map();
   for (const a of allAnimes) {
     const key = members.filter((m) => a.quemAssistiu.includes(m)).join("+");
@@ -65,24 +66,7 @@ function renderVenn4() {
   const totals = {};
   members.forEach((m) => (totals[m] = animesOf(allAnimes, m).length));
 
-  // 4 elipses sobrepostas (layout clássico de Venn-4 com rotação ±45°/±135°)
-  const ellipses = [
-    { person: "Rafael", cx: 170, cy: 200, rx: 135, ry: 70, rot: -50 },
-    { person: "Fernando", cx: 200, cy: 170, rx: 135, ry: 70, rot: -10 },
-    { person: "Dudu", cx: 200, cy: 230, rx: 135, ry: 70, rot: 10 },
-    { person: "Hacksuya", cx: 230, cy: 200, rx: 135, ry: 70, rot: 50 },
-  ];
-
-  const svgEllipses = ellipses
-    .map((e) => {
-      const color = PERSON_COLORS[e.person];
-      return `<ellipse cx="${e.cx}" cy="${e.cy}" rx="${e.rx}" ry="${e.ry}"
-      transform="rotate(${e.rot} ${e.cx} ${e.cy})"
-      fill="${color}26" stroke="${color}" stroke-width="2"/>`;
-    })
-    .join("");
-
-  // Legenda de intersecções, ordenada por tamanho do subset depois por contagem
+  // O layout visual do Venn com elipses é complexo para 5, então vamos focar na lista
   const intersections = [...subsetCounts.entries()]
     .map(([key, count]) => ({ key, count, size: key.split("+").length }))
     .sort((a, b) => b.size - a.size || b.count - a.count);
@@ -94,7 +78,7 @@ function renderVenn4() {
         .map((p) => `<span class="badge badge-${p.toLowerCase()}">${initials[p]}</span>`)
         .join(" ");
       const label =
-        parts.length === 4 ? "todos" : parts.length === 1 ? `só ${parts[0]}` : parts.join(" ∩ ");
+        parts.length === members.length ? "todos" : parts.length === 1 ? `só ${parts[0]}` : parts.join(" ∩ ");
       return `
       <li style="display:flex;align-items:center;justify-content:space-between;gap:18px;padding:6px 0;border-bottom:1px solid var(--border)">
         <span style="display:flex;align-items:center;gap:8px">${badges}<span style="color:var(--muted);font-size:12px">${label}</span></span>
@@ -112,21 +96,13 @@ function renderVenn4() {
     .join("");
 
   wrap.innerHTML = `
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center">
-      <div style="display:flex;flex-direction:column;align-items:center">
-        <svg viewBox="0 0 400 400" style="width:100%;max-width:380px" xmlns="http://www.w3.org/2000/svg">
-          <defs><style>ellipse{mix-blend-mode:screen}</style></defs>
-          ${svgEllipses}
-        </svg>
-        <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;font-size:12px;color:var(--muted);justify-content:center">
+    <div style="display:flex;flex-direction:column;align-items:center">
+      <div style="font-size:12px;color:var(--faint);margin-bottom:8px">Animes por grupo (${intersections.length} combinações)</div>
+      <ul class="compare-combo-list" style="list-style:none;padding:0 22px 0 0;margin:0;max-height:340px;overflow-y:auto; width: 100%;">
+        ${rowsHtml || '<li style="color:var(--faint)">Sem dados</li>'}
+      </ul>
+      <div style="display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;font-size:12px;color:var(--muted);justify-content:center">
           ${legendHtml}
-        </div>
-      </div>
-      <div>
-        <div style="font-size:12px;color:var(--faint);margin-bottom:8px">Animes por grupo (${intersections.length} combinações)</div>
-        <ul class="compare-combo-list" style="list-style:none;padding:0 22px 0 0;margin:0;max-height:340px;overflow-y:auto">
-          ${rowsHtml || '<li style="color:var(--faint)">Sem dados</li>'}
-        </ul>
       </div>
     </div>
   `;
@@ -150,30 +126,15 @@ function renderVenn(p1, p2) {
 
   wrap.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:center;gap:0;padding:8px 0">
-      <div style="
-        width:130px;height:130px;border-radius:50%;
-        background:${c1}33;border:2px solid ${c1};
-        display:flex;flex-direction:column;align-items:center;justify-content:center;
-        margin-right:-32px;z-index:1;
-      ">
+      <div style="width:130px;height:130px;border-radius:50%;background:${c1}33;border:2px solid ${c1};display:flex;flex-direction:column;align-items:center;justify-content:center;margin-right:-32px;z-index:1;">
         <span style="font-size:30px;font-weight:700;color:${l1}">${only1}</span>
         <span style="font-size:11px;color:${l1};margin-top:2px">só ${p1}</span>
       </div>
-      <div style="
-        width:110px;height:110px;border-radius:50%;
-        background:rgba(160,80,200,0.35);border:2px solid #a855f7;
-        display:flex;flex-direction:column;align-items:center;justify-content:center;
-        z-index:2;
-      ">
+      <div style="width:110px;height:110px;border-radius:50%;background:rgba(160,80,200,0.35);border:2px solid #a855f7;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2;">
         <span style="font-size:26px;font-weight:700;color:#e9d5ff">${common.length}</span>
         <span style="font-size:10px;color:#c4b5fd;margin-top:2px">em comum</span>
       </div>
-      <div style="
-        width:130px;height:130px;border-radius:50%;
-        background:${c2}33;border:2px solid ${c2};
-        display:flex;flex-direction:column;align-items:center;justify-content:center;
-        margin-left:-32px;z-index:1;
-      ">
+      <div style="width:130px;height:130px;border-radius:50%;background:${c2}33;border:2px solid ${c2};display:flex;flex-direction:column;align-items:center;justify-content:center;margin-left:-32px;z-index:1;">
         <span style="font-size:30px;font-weight:700;color:${l2}">${only2}</span>
         <span style="font-size:11px;color:${l2};margin-top:2px">só ${p2}</span>
       </div>
@@ -211,24 +172,8 @@ function renderRadar(p1, p2) {
     data: {
       labels,
       datasets: [
-        {
-          label: p1,
-          data: data1,
-          backgroundColor: c1 + "33",
-          borderColor: c1,
-          borderWidth: 2,
-          pointBackgroundColor: c1,
-          pointRadius: 4,
-        },
-        {
-          label: p2,
-          data: data2,
-          backgroundColor: c2 + "33",
-          borderColor: c2,
-          borderWidth: 2,
-          pointBackgroundColor: c2,
-          pointRadius: 4,
-        },
+        { label: p1, data: data1, backgroundColor: c1 + "33", borderColor: c1, borderWidth: 2, pointBackgroundColor: c1, pointRadius: 4, },
+        { label: p2, data: data2, backgroundColor: c2 + "33", borderColor: c2, borderWidth: 2, pointBackgroundColor: c2, pointRadius: 4, },
       ],
     },
     options: {
@@ -236,17 +181,11 @@ function renderRadar(p1, p2) {
       maintainAspectRatio: false,
       plugins: {
         legend: { position: "top", labels: { boxWidth: 12, padding: 16 } },
-        tooltip: {
-          callbacks: {
-            label: (c) => ` ${c.dataset.label}: ${c.raw}%`,
-          },
-        },
+        tooltip: { callbacks: { label: (c) => ` ${c.dataset.label}: ${c.raw}%` } },
       },
       scales: {
         r: {
-          beginAtZero: true,
-          max: 100,
-          ticks: { display: false },
+          beginAtZero: true, max: 100, ticks: { display: false },
           grid: { color: "rgba(255,255,255,0.08)" },
           angleLines: { color: "rgba(255,255,255,0.06)" },
           pointLabels: { font: { size: 11 }, color: "#94a3b8" },
@@ -268,14 +207,6 @@ function renderCommonTable(p1, p2) {
     return;
   }
 
-  function pNota(a, person) {
-    if (person === "Rafael") return a.notaRafael;
-    if (person === "Fernando") return a.notaFernando;
-    if (person === "Dudu") return a.notaDudu;
-    if (person === "Hacksuya") return a.notaHacksuya;
-    return null;
-  }
-
   const c1 = PERSON_LIGHTS[p1];
   const c2 = PERSON_LIGHTS[p2];
 
@@ -283,18 +214,12 @@ function renderCommonTable(p1, p2) {
     <div class="table-wrap">
       <table>
         <thead>
-          <tr>
-            <th>Anime</th>
-            <th style="color:${c1}">${p1}</th>
-            <th style="color:${c2}">${p2}</th>
-            <th>Diferença</th>
-          </tr>
+          <tr><th>Anime</th><th style="color:${c1}">${p1}</th><th style="color:${c2}">${p2}</th><th>Diferença</th></tr>
         </thead>
         <tbody>
-          ${common
-            .map((a) => {
-              const n1 = pNota(a, p1);
-              const n2 = pNota(a, p2);
+          ${common.map((a) => {
+              const n1 = getPersonNota(a, p1);
+              const n2 = getPersonNota(a, p2);
               const diff = n1 !== null && n2 !== null ? Math.abs(n1 - n2) : null;
               const diffStr = diff !== null ? diff.toFixed(1) : "—";
               const rowClass = diff !== null && diff >= 2 ? ' class="diff-highlight"' : "";
@@ -306,8 +231,7 @@ function renderCommonTable(p1, p2) {
                 <td>${diff !== null && diff >= 2 ? "⚡ " : ""}${diffStr}</td>
               </tr>
             `;
-            })
-            .join("")}
+            }).join("")}
         </tbody>
       </table>
     </div>

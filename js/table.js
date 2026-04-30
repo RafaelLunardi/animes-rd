@@ -47,6 +47,7 @@ const NOTE_FIELDS = {
   Fernando: "notaFernando",
   Dudu: "notaDudu",
   Hacksuya: "notaHacksuya",
+  Zana: "notaZana"
 };
 
 const FALLBACK_IMAGE =
@@ -64,9 +65,9 @@ function commentsForAnime(anime) {
   if (!anime.comentarios) return [];
 
   const peoplePattern = PEOPLE.join("|");
-  const linePattern = new RegExp(`^\\s*(${peoplePattern})\\s*[:\\-–—]\\s*(.+)$`, "i");
+  const linePattern = new RegExp(`^\s*(${peoplePattern})\s*[:\-–—]\s*(.+)$`, "i");
   return String(anime.comentarios)
-    .split(/\r?\n/)
+    .split(/?/)
     .map((line) => line.trim())
     .filter(Boolean)
     .map((line) => {
@@ -420,6 +421,7 @@ window.openModal = function (idx) {
     { person: "Fernando", nota: a.notaFernando, color: PERSON_LIGHTS.Fernando },
     { person: "Dudu", nota: a.notaDudu, color: PERSON_LIGHTS.Dudu },
     { person: "Hacksuya", nota: a.notaHacksuya, color: PERSON_LIGHTS.Hacksuya },
+    { person: "Zana", nota: a.notaZana, color: PERSON_LIGHTS.Zana },
   ];
 
   document.getElementById("modal-notes").innerHTML = notas
@@ -886,7 +888,7 @@ async function saveAnimeEdit(anime) {
       current.comments = setPersonComment(current, person, comment);
       current.comentarios = current.comments
         .map((item) => `${item.person}: ${item.text}`)
-        .join("\n");
+        .join("");
       updatedAnime = recalculateAnime(current);
 
       transaction.update(docRef, {

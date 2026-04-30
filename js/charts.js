@@ -184,22 +184,23 @@ function renderVotesRankingChart(animes) {
 function renderVotesPieChart(animes) {
   const ctx = document.getElementById("chartVotesPie");
   if (!ctx) return;
-  const counts = { 1: 0, 2: 0, 3: 0, 4: 0 };
+  const counts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
   animes.forEach((a) => {
-    if (a.qtdVotos >= 1 && a.qtdVotos <= 4) counts[a.qtdVotos]++;
+    if (a.qtdVotos >= 1 && a.qtdVotos <= 5) counts[a.qtdVotos]++;
   });
   new Chart(ctx, {
     type: "doughnut",
     data: {
-      labels: ["1 pessoa", "2 pessoas", "3 pessoas", "4 pessoas (todos)"],
+      labels: ["1 pessoa", "2 pessoas", "3 pessoas", "4 pessoas", "5 pessoas (todos)"],
       datasets: [
         {
-          data: [counts[1], counts[2], counts[3], counts[4]],
+          data: [counts[1], counts[2], counts[3], counts[4], counts[5]],
           backgroundColor: [
             "rgba(124,58,237,0.8)",
             "rgba(236,72,153,0.8)",
             "rgba(52,211,153,0.8)",
             "rgba(6,182,212,0.8)",
+            "rgba(252, 175, 9, 0.8)",
           ],
           borderColor: "#0f0f1a",
           borderWidth: 3,
@@ -262,6 +263,7 @@ export function renderPersonNotasChart(canvasId, animes, person, color) {
     if (person === "Fernando") return a.notaFernando;
     if (person === "Dudu") return a.notaDudu;
     if (person === "Hacksuya") return a.notaHacksuya;
+    if (person === "Zana") return a.notaZana;
     return null;
   }
   const top = animesOf(animes, person)

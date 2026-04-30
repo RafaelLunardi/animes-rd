@@ -4304,7 +4304,14 @@ body.ciel-page {
 }
 
 .ciel-info-item {
-  background: rgba(255, 255, 255, 0.035);
+  background:
+    radial-gradient(circle at 12% 10%, rgba(253, 230, 138, 0.12), transparent 52%),
+    linear-gradient(
+      135deg,
+      rgba(253, 230, 138, 0.085),
+      rgba(245, 158, 11, 0.035) 46%,
+      rgba(255, 255, 255, 0.032)
+    );
   border: 1px solid rgba(255, 255, 255, 0.055);
   border-radius: 18px;
   display: flex;
@@ -4350,7 +4357,14 @@ body.ciel-page {
 }
 
 .ciel-people button {
-  background: rgba(255, 255, 255, 0.045);
+  background:
+    radial-gradient(circle at 12% 20%, rgba(253, 230, 138, 0.105), transparent 52%),
+    linear-gradient(
+      135deg,
+      rgba(253, 230, 138, 0.06),
+      rgba(245, 158, 11, 0.026) 46%,
+      rgba(255, 255, 255, 0.036)
+    );
   border: 1px solid rgba(196, 181, 253, 0.18);
   border-radius: 16px;
   color: #d9d4c8;
@@ -4377,6 +4391,7 @@ body.ciel-page {
 /* Chat area */
 .ciel-chat-wrap {
   background:
+    radial-gradient(circle at 16% 12%, rgba(253, 230, 138, 0.105), transparent 34%),
     linear-gradient(160deg, rgba(17, 18, 29, 0.92), rgba(9, 27, 31, 0.9)) padding-box,
     linear-gradient(
         135deg,
@@ -4476,7 +4491,13 @@ body.ciel-page {
 
 .ciel-msg-bubble {
   background:
-    linear-gradient(135deg, rgba(253, 230, 138, 0.09), rgba(196, 181, 253, 0.07)),
+    radial-gradient(circle at 10% 8%, rgba(253, 230, 138, 0.16), transparent 58%),
+    linear-gradient(
+      135deg,
+      rgba(253, 230, 138, 0.12),
+      rgba(245, 158, 11, 0.05) 48%,
+      rgba(196, 181, 253, 0.07)
+    ),
     rgba(18, 20, 29, 0.82);
   border: 1px solid rgba(253, 230, 138, 0.16);
   border-radius: 22px 22px 22px 8px;
@@ -4546,7 +4567,14 @@ body.ciel-page {
 
 .ciel-rec-card {
   align-items: flex-start;
-  background: rgba(255, 255, 255, 0.04);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(253, 230, 138, 0.12), transparent 54%),
+    linear-gradient(
+      135deg,
+      rgba(253, 230, 138, 0.075),
+      rgba(245, 158, 11, 0.03) 50%,
+      rgba(255, 255, 255, 0.035)
+    );
   border: 1px solid rgba(196, 181, 253, 0.18);
   border-radius: 22px;
   color: var(--paper);

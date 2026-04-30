@@ -5,7 +5,7 @@ import {
   formatNota,
   loadData,
   missedAnimes,
-} from "./data.js?v=ciel-soft-1";
+} from "./data.js?v=ciel-gold-1";
 import { escapeHTML, stripEmoji } from "./utils.js";
 
 // ── Recommendation engine ────────────────────────────────────────────────────
@@ -147,7 +147,7 @@ function addMessage(role, html) {
   wrap.className = role === "ciel" ? "ciel-msg ciel-msg-ciel" : "ciel-msg ciel-msg-user";
   if (role === "ciel") {
     wrap.innerHTML = `
-      <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png?v=ciel-soft-1" alt="Ciel" /></div>
+      <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png?v=ciel-gold-1" alt="Ciel" /></div>
       <div class="ciel-msg-bubble">${html}</div>
     `;
   } else {
@@ -184,7 +184,7 @@ function addRecCards(picks) {
     )
     .join("");
   wrap.innerHTML = `
-    <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png?v=ciel-soft-1" alt="Ciel" /></div>
+    <div class="ciel-msg-avatar"><img src="assets/ciel-icon.png?v=ciel-gold-1" alt="Ciel" /></div>
     <div class="ciel-rec-list">${cards}</div>
   `;
   log.appendChild(wrap);

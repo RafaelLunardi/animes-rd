@@ -58,19 +58,23 @@
       </section>
 
       <section class="blog-section" id="colunistas">
-        <div class="blog-section-head">
-          <span class="eyebrow">Colunistas da casa</span>
-          <h2>Top 3 favoritos de cada membro.</h2>
+        <div class="blog-section-head member-section-head">
+          <div>
+            <span class="eyebrow">Colunistas da casa</span>
+            <h2>Top 3 favoritos de cada membro.</h2>
+          </div>
+          <div class="member-scroll-arrows">
+            <button class="member-scroll-btn" onclick="scrollMemberGrid(-1)" aria-label="Anterior">&#8592;</button>
+            <button class="member-scroll-btn" onclick="scrollMemberGrid(1)" aria-label="Próximo">&#8594;</button>
+          </div>
         </div>
         <div class="member-scroll-wrap">
-          <button class="member-scroll-btn member-scroll-left" onclick="scrollMemberGrid(-1)" aria-label="Anterior">&#8592;</button>
           <div class="post-grid" id="member-grid">
             <div class="skeleton" style="height: 280px"></div>
             <div class="skeleton" style="height: 280px"></div>
             <div class="skeleton" style="height: 280px"></div>
             <div class="skeleton" style="height: 280px"></div>
           </div>
-          <button class="member-scroll-btn member-scroll-right" onclick="scrollMemberGrid(1)" aria-label="Próximo">&#8594;</button>
         </div>
       </section>
 

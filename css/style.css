@@ -3180,10 +3180,6 @@ body.blog-page::before {
 }
 
 /* Member cards scroll */
-.member-scroll-wrap {
-  position: relative;
-}
-
 #member-grid.post-grid {
   display: flex;
   flex-wrap: nowrap;
@@ -3201,6 +3197,19 @@ body.blog-page::before {
   min-width: 220px;
 }
 
+.member-section-head {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+}
+
+.member-scroll-arrows {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+  padding-bottom: 4px;
+}
+
 .member-scroll-btn {
   align-items: center;
   background: rgba(16, 16, 20, 0.88);
@@ -3210,30 +3219,18 @@ body.blog-page::before {
   cursor: pointer;
   display: flex;
   font-size: 20px;
-  height: 42px;
+  height: 38px;
   justify-content: center;
   line-height: 1;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
   transition:
     background 0.15s ease,
     border-color 0.15s ease;
-  width: 42px;
-  z-index: 10;
+  width: 38px;
 }
 
 .member-scroll-btn:hover {
   background: rgba(24, 24, 30, 0.98);
   border-color: rgba(134, 239, 172, 0.9);
-}
-
-.member-scroll-left {
-  left: -21px;
-}
-
-.member-scroll-right {
-  right: -21px;
 }
 
 .post-card {

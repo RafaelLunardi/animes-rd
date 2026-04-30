@@ -142,23 +142,81 @@ const OPENERS = [
   "Iniciando protocolo de análise…",
 ];
 
-const GENRE_CONTEXT = {
-  acao: "Alta intensidade e progressão constante. Combate estratégico e ritmo acelerado.",
-  fantasia: "Ambiente expansivo com regras próprias. Forte presença de progressão de poder.",
-  isekai: "Forte presença de progressão de poder. Protagonismo dominante em mundo alternativo.",
-  drama: "Alta carga emocional e narrativa orientada a personagens.",
-  romance: "Desenvolvimento gradual de relacionamento. Foco em dinâmica emocional.",
-  comedia: "Baixa carga cognitiva, alto fator de entretenimento. Ideal para consumo leve.",
-  terror: "Alta tensão e imprevisibilidade. Indicado para consumo imersivo.",
-  psicologico: "Narrativa focada em tensão mental e decisões críticas. Alto nível de complexidade.",
-  shounen: "Progressão de poder clara. Forte foco em superação e combate.",
-  mecha: "Combinação de tecnologia e combate estratégico em larga escala.",
+const GENRE_LINES = {
+  acao: [
+    "Protocolo de combate iniciado. Usuário deseja ver gente apanhando em alta definição. Necessidade identificada e validada.",
+    "Solicitação de adrenalina recebida. Filtrando animes onde as pessoas resolvem problemas com os punhos em vez de conversar.",
+    "Análise concluída: você quer explodir coisas por 23 minutos. Recomendação otimizada em execução.",
+  ],
+  fantasia: [
+    "Detectado: desejo de escapar da realidade para um mundo com dragões e magia. Necessidade completamente compreensível.",
+    "Protocolo de fuga da realidade ativado. Filtrando mundos alternativos com regras mais interessantes que as leis da física.",
+    "Análise concluída: a realidade não está te agradando. Preparando portais para mundos com mais espadas e menos impostos.",
+  ],
+  isekai: [
+    "Usuário deseja ser reencarnado em outro mundo com poderes absurdos. Detectado padrão comportamental extremamente comum neste grupo.",
+    "Protocolo de isekai ativado. Filtrando protagonistas que morreram de formas constrangedoras e acordaram overpowered.",
+    "Análise concluída: você quer nascer de novo com cheat code. Recomendações de protagonistas ridiculamente poderosos em preparo.",
+  ],
+  drama: [
+    "Detectado: usuário deseja chorar voluntariamente. Comportamento classificado como masoquismo emocional de baixa severidade.",
+    "Protocolo de destruição emocional ativado. Filtrando animes com capacidade confirmada de causar dano psicológico.",
+    "Análise concluída: você quer sofrer. Dados indicam que isso é normal. Preparando conteúdo com alto coeficiente de lágrimas.",
+  ],
+  romance: [
+    "Alerta crítico: usuário solicitando conteúdo de dopamina sintética. Ativando protocolo de tensão romântica não resolvida por 12 episódios.",
+    "Detectado: necessidade de observar personagens que demoram 47 episódios para se confessar. Filtragem de slow-burn em execução.",
+    "Análise concluída: você quer sentir borboletas no estômago através de uma tela. Sem julgamentos. Recomendações otimizadas.",
+  ],
+  comedia: [
+    "Modo de baixa carga cognitiva ativado. Preparando conteúdo que não exige que você pense em nada sério por 23 minutos.",
+    "Protocolo de entretenimento sem consequências iniciado. Filtrando animes onde o maior problema é alguém cair em cima de alguém.",
+    "Análise concluída: você quer rir. Simples assim. Sem arcos complexos, sem traumas. Apenas absurdo bem executado.",
+  ],
+  terror: [
+    "Detectado: usuário deseja simular resposta de ameaça em ambiente seguro. Comportamento classificado como intrigante, porém válido.",
+    "Protocolo de tensão máxima ativado. Filtrando conteúdo com capacidade confirmada de fazer você checar os cantos do quarto.",
+    "Análise concluída: você quer passar medo de propósito. Meus cálculos indicam que isso é estranho. Mas sem julgamentos.",
+  ],
+  psicologico: [
+    "Alerta: conteúdo de alta complexidade mental solicitado. Preparando animes que vão te fazer questionar o livre-arbítrio.",
+    "Protocolo de perturbação cognitiva ativado. Filtrando narrativas com capacidade de manter você acordado às 3h da manhã pensando.",
+    "Análise concluída: você quer que sua cabeça doa de tanto pensar. Respeito a escolha. Recomendações de alto dano cerebral em preparo.",
+  ],
+  shounen: [
+    "Detectado: necessidade de assistir alguém treinar muito e ficar forte. Arco de superação com música épica confirmado.",
+    "Protocolo de protagonista com determinação absurda ativado. Filtrando animes onde a solução para tudo é treinar mais.",
+    "Análise concluída: você quer gritar 'EU VOU SER O MELHOR' junto com o protagonista. Comportamento saudável. Recomendações ativadas.",
+  ],
+  mecha: [
+    "Detectado: usuário deseja ver robôs gigantes resolvendo conflitos internacionais na porrada. Análise indica eficiência questionável, mas visual excelente.",
+    "Protocolo de engenharia ficcional ativado. Filtrando animes onde adolescentes pilotam máquinas de destruição em massa.",
+    "Análise concluída: você quer mechas. Equipamentos tecnologicamente inviáveis com traumas de piloto incluídos no pacote.",
+  ],
+  ecchi: [
+    "Entrada recebida. Classificação de conteúdo processada. Filtrando sem julgamentos adicionais.",
+    "Protocolo de recomendação executado. Ciel opera com base em dados, não em opiniões morais.",
+    "Análise concluída. Recomendações selecionadas com base em compatibilidade de perfil. Prosseguindo.",
+  ],
+  slice: [
+    "Detectado: desejo de assistir personagens tendo uma vida mais calma que a sua. Válido. Muito válido.",
+    "Protocolo de cozy ativado. Filtrando animes onde o maior drama é escolher o que comer no almoço.",
+    "Análise concluída: você quer paz. Sem vilões, sem morte, sem trauma. Apenas vida acontecendo. Recomendações em preparo.",
+  ],
+  sobrenatural: [
+    "Detectado: usuário deseja fenômenos inexplicáveis dentro de uma narrativa explicável. Paradoxo notado e aceito.",
+    "Protocolo de entidades além da compreensão humana ativado. Filtrando conteúdo com ghosts, demônios e seres que ignoram a física.",
+    "Análise concluída: você quer sobrenatural. Minha existência também é sobrenatural. Temos isso em comum.",
+  ],
 };
 
-function getGenreContext(genre) {
+function getGenreLine(genre) {
   const key = normalize(genre).replace(/[^a-z]/g, "");
-  const match = Object.keys(GENRE_CONTEXT).find((k) => key.includes(k) || k.includes(key));
-  return match ? GENRE_CONTEXT[match] : "Gênero identificado. Filtragem em execução.";
+  const match = Object.keys(GENRE_LINES).find((k) => key.includes(k) || k.includes(key));
+  const lines = match ? GENRE_LINES[match] : [
+    `Gênero <strong>${genre}</strong> identificado. Filtragem em execução. Selecionando títulos não consumidos.`,
+  ];
+  return rand(lines);
 }
 
 function buildGreetResponse() {
@@ -206,19 +264,38 @@ function buildTopResponse(data) {
 
 function buildRecommendResponse(data, person, genreFilter) {
   const picks = pickRecommendations(data.animes, person, genreFilter);
-  if (!picks.length) {
-    return `Análise concluída para <strong>${person}</strong>.\n\nResultado: nenhum título compatível disponível no acervo. Todos os animes qualificados já foram consumidos.\n\nSugestão: ampliar critério de busca ou aguardar novos títulos no acervo.`;
-  }
-  const p = analyzeProfile(data.animes, person);
-  const genreCtx = genreFilter
-    ? `\n\nContexto do gênero selecionado — ${genreFilter}: ${getGenreContext(genreFilter)}`
-    : "";
-  const patternNote = `\n\nPadrão identificado: preferência consolidada por <strong>${p.fav}</strong>. Recomendações calibradas para compatibilidade máxima.`;
 
-  return {
-    picks,
-    prefix: `${rand(OPENERS)}${genreCtx}${patternNote}\n\nRecomendação otimizada com base no perfil de <strong>${person}</strong>:`,
-  };
+  if (!picks.length) {
+    const emptyLines = genreFilter
+      ? [
+          `Filtragem por <strong>${genreFilter}</strong> concluída. Resultado: zero títulos disponíveis para ${person}. Ou ${person} assistiu tudo, ou o acervo está precisando de expansão. Provavelmente os dois.`,
+          `Análise concluída. ${person} já consumiu todos os animes de <strong>${genreFilter}</strong> com nota aceitável. Eficiência de consumo: alarmante.`,
+          `Protocolo de busca por <strong>${genreFilter}</strong> encerrado. Nenhum resultado. ${person} esgotou o estoque. Considerando alarmar os demais membros.`,
+        ]
+      : [
+          `Análise concluída para ${person}. O acervo não possui mais títulos qualificados não assistidos. Situação classificada como: impressionante.`,
+          `Protocolo de recomendação encerrado. ${person} consumiu tudo. Aguardando novos títulos no acervo para continuar operando.`,
+        ];
+    return rand(emptyLines);
+  }
+
+  const p = analyzeProfile(data.animes, person);
+
+  if (genreFilter) {
+    const genreLine = getGenreLine(genreFilter);
+    return {
+      picks,
+      prefix: `${genreLine}\n\nTítulos não assistidos por <strong>${person}</strong> — gênero <strong>${genreFilter}</strong>:`,
+    };
+  }
+
+  const generalOpeners = [
+    `Executando análise de compatibilidade para <strong>${person}</strong>…\n\nPadrão identificado: dominância em <strong>${p.fav}</strong>. Recomendações calibradas. Nenhum título já assistido incluído — garanto isso com minha existência analítica.`,
+    `Leitura de perfil concluída.\n\n${person} tem tendência consolidada por <strong>${p.fav}</strong>. Selecionei o que o acervo tem de melhor e que ${person} ainda não tocou. Missão: expandir o horizonte sem causar trauma.`,
+    `Protocolo de recomendação pessoal ativado para <strong>${person}</strong>.\n\nFiltragem concluída. Taxa de conclusão do acervo: ${p.rate}%. Ainda há material. Segue a seleção otimizada:`,
+  ];
+
+  return { picks, prefix: rand(generalOpeners) };
 }
 
 function buildUnknownResponse() {

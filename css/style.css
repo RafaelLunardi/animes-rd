@@ -2659,8 +2659,8 @@ body.blog-page::before {
 
 .blog-hero-card.has-bg::before {
   background:
-    linear-gradient(180deg, rgba(16, 16, 20, 0.52), rgba(16, 16, 20, 0.82)),
-    linear-gradient(90deg, rgba(16, 16, 20, 0.76), rgba(16, 16, 20, 0.34)), var(--hero-anime-bg);
+    linear-gradient(180deg, rgba(16, 16, 20, 0.40), rgba(16, 16, 20, 0.70)),
+    linear-gradient(90deg, rgba(16, 16, 20, 0.62), rgba(16, 16, 20, 0.22)), var(--hero-anime-bg);
   background-position: center;
   background-size: cover;
   border-radius: inherit;

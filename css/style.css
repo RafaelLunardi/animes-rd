@@ -4144,11 +4144,11 @@ body.suggest-page.dark-theme::before {
 
 body.ciel-page {
   background:
-    radial-gradient(circle at 8% 14%, rgba(253, 230, 138, 0.15), transparent 32%),
-    radial-gradient(circle at 92% 8%, rgba(251, 191, 36, 0.09), transparent 30%),
-    radial-gradient(circle at 78% 88%, rgba(217, 119, 6, 0.07), transparent 34%),
-    radial-gradient(circle at 22% 78%, rgba(245, 158, 11, 0.08), transparent 28%),
-    linear-gradient(180deg, rgba(12, 8, 2, 0.5), transparent 320px), var(--bg);
+    radial-gradient(ellipse 60% 40% at 5% 10%,  rgba(253,230,138,0.18), transparent),
+    radial-gradient(ellipse 50% 60% at 95% 5%,  rgba(180,83,9,0.12),   transparent),
+    radial-gradient(ellipse 40% 50% at 80% 95%, rgba(251,191,36,0.1),   transparent),
+    radial-gradient(ellipse 30% 40% at 15% 90%, rgba(245,158,11,0.08),  transparent),
+    #050300;
 }
 
 .ciel-shell {
@@ -4164,84 +4164,87 @@ body.ciel-page {
 /* ── Sidebar ─────────────────────────────────────────────────────────────── */
 .ciel-sidebar {
   align-self: start;
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  background:
-    linear-gradient(160deg, rgba(50,36,10,0.7), rgba(28,22,8,0.82) 55%, rgba(12,18,24,0.88)) padding-box,
-    linear-gradient(135deg, #fef08a 0%, #fbbf24 45%, #d97706 100%) border-box;
-  border: 1.5px solid transparent;
-  border-radius: 40px;
+  background: #0d0902;
+  border: 1px solid rgba(251,191,36,0.22);
+  border-radius: 28px;
   box-shadow:
-    0 32px 80px rgba(0,0,0,0.32),
-    0 0 0 1px rgba(255,255,255,0.04) inset,
-    0 1px 0 rgba(255,255,255,0.06) inset;
+    0 0 0 1px rgba(251,191,36,0.06) inset,
+    0 40px 80px rgba(0,0,0,0.5),
+    0 0 60px rgba(251,191,36,0.05);
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 0;
   height: fit-content;
-  padding: 32px 24px;
+  overflow: hidden;
   position: sticky;
   top: 96px;
 }
 
-/* Avatar */
+/* Avatar section — warm dark */
 .ciel-avatar-wrap {
   align-items: center;
+  background: linear-gradient(180deg, rgba(120,53,15,0.22), rgba(10,7,2,0) 80%);
+  border-bottom: 1px solid rgba(251,191,36,0.1);
   display: flex;
+  flex-direction: column;
+  gap: 14px;
   justify-content: center;
-  padding: 8px 0 4px;
+  padding: 32px 24px 24px;
   position: relative;
 }
 
-.ciel-avatar-wrap::before {
-  animation: cielAuroraOrb 6s ease-in-out infinite;
-  background: radial-gradient(circle, rgba(253,230,138,0.22), rgba(217,119,6,0.1) 55%, transparent 75%);
-  border-radius: 50%;
+.ciel-avatar-wrap::after {
+  background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(251,191,36,0.14), transparent);
+  bottom: 0;
   content: "";
-  height: 160px;
-  left: 50%;
+  left: 0;
   pointer-events: none;
   position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  width: 160px;
-}
-
-@keyframes cielAuroraOrb {
-  0%, 100% { transform: translate(-50%, -50%) scale(1);   opacity: 0.7; }
-  50%       { transform: translate(-50%, -50%) scale(1.12); opacity: 1;   }
+  right: 0;
+  top: 0;
 }
 
 .ciel-avatar-ring {
   align-items: center;
-  background:
-    linear-gradient(135deg, rgba(253,230,138,0.14), rgba(217,119,6,0.08)) padding-box,
-    conic-gradient(from 0deg, #fef08a, #fbbf24, #d97706, #f59e0b, #fef08a) border-box;
-  border: 2.5px solid transparent;
+  background: #0d0902;
+  border: 2px solid transparent;
+  border-image: linear-gradient(135deg, #fef08a, #b45309, #fbbf24, #78350f) 1;
   border-radius: 50%;
   box-shadow:
-    0 0 0 6px rgba(253,230,138,0.07),
-    0 0 32px rgba(253,230,138,0.22),
-    0 20px 48px rgba(0,0,0,0.3);
+    0 0 0 4px rgba(251,191,36,0.07),
+    0 0 24px rgba(251,191,36,0.3),
+    0 0 60px rgba(251,191,36,0.12),
+    0 16px 40px rgba(0,0,0,0.5);
   display: flex;
-  height: 112px;
+  height: 108px;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
-  width: 112px;
+  width: 108px;
   animation: cielPulse 4s ease-in-out infinite;
   z-index: 1;
 }
 
+/* inner clip for image */
+.ciel-avatar-ring::before {
+  border-radius: 50%;
+  content: "";
+  inset: 2px;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
 .ciel-avatar-img {
   border-radius: 50%;
-  height: 100%;
+  height: calc(100% - 4px);
+  margin: 2px;
   object-fit: cover;
-  width: 100%;
+  width: calc(100% - 4px);
 }
 
 .ciel-avatar-glyph {
-  background: linear-gradient(135deg, #fef08a, #fbbf24, #f59e0b);
+  background: linear-gradient(135deg, #fef08a, #f59e0b);
   background-clip: text;
   -webkit-background-clip: text;
   font-size: 36px;
@@ -4249,21 +4252,19 @@ body.ciel-page {
 }
 
 @keyframes cielPulse {
-  0%, 100% { box-shadow: 0 0 0 6px rgba(253,230,138,0.07), 0 0 28px rgba(253,230,138,0.2),  0 20px 48px rgba(0,0,0,0.3); }
-  50%       { box-shadow: 0 0 0 8px rgba(251,191,36,0.1),   0 0 42px rgba(251,191,36,0.22),   0 20px 52px rgba(0,0,0,0.34); }
+  0%, 100% { box-shadow: 0 0 0 4px rgba(251,191,36,0.07), 0 0 24px rgba(251,191,36,0.28), 0 0 60px rgba(251,191,36,0.1),  0 16px 40px rgba(0,0,0,0.5); }
+  50%       { box-shadow: 0 0 0 6px rgba(251,191,36,0.1),  0 0 36px rgba(251,191,36,0.44), 0 0 80px rgba(251,191,36,0.18), 0 16px 44px rgba(0,0,0,0.55); }
 }
 
-/* ID block */
-.ciel-id-block {
-  text-align: center;
-}
+/* ID block inside avatar section */
+.ciel-id-block { text-align: center; position: relative; z-index: 1; }
 
 .ciel-id-block h2 {
-  background: linear-gradient(135deg, #fefce8 10%, #fef08a 50%, #fbbf24 100%);
+  background: linear-gradient(160deg, #fefce8, #fde68a 40%, #f59e0b);
   background-clip: text;
   -webkit-background-clip: text;
   font-family: "Newsreader", serif;
-  font-size: 36px;
+  font-size: 34px;
   font-weight: 750;
   letter-spacing: -0.02em;
   line-height: 1;
@@ -4272,138 +4273,133 @@ body.ciel-page {
 }
 
 .ciel-id-block p {
-  color: rgba(253,230,138,0.6);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.14em;
+  color: rgba(251,191,36,0.45);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
 }
 
 .ciel-online-badge {
   align-items: center;
-  color: #fde68a;
+  color: rgba(253,230,138,0.7);
   display: inline-flex;
-  font-size: 11px;
-  font-weight: 800;
+  font-size: 10px;
+  font-weight: 900;
   gap: 5px;
-  letter-spacing: 0.08em;
-  margin-top: 7px;
+  letter-spacing: 0.12em;
+  margin-top: 6px;
   text-transform: uppercase;
 }
 
 .ciel-dot {
-  animation: cielDotBlink 2s ease-in-out infinite;
+  animation: cielDotBlink 2.4s ease-in-out infinite;
   background: #fbbf24;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(251,191,36,0.55);
+  box-shadow: 0 0 6px rgba(251,191,36,0.7);
   display: inline-block;
-  height: 7px;
-  width: 7px;
+  height: 6px;
+  width: 6px;
 }
 
 @keyframes cielDotBlink {
-  0%, 100% { opacity: 1;   box-shadow: 0 0 8px rgba(251,191,36,0.55); }
-  50%       { opacity: 0.35; box-shadow: none; }
+  0%, 100% { opacity: 1;   box-shadow: 0 0 6px rgba(251,191,36,0.7); }
+  50%       { opacity: 0.3; box-shadow: none; }
 }
 
 /* Info list */
 .ciel-info-list {
-  border-top: 1px solid rgba(253,230,138,0.12);
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding-top: 16px;
+  gap: 0;
+  padding: 0;
 }
 
 .ciel-info-item {
-  background: rgba(255,255,255,0.035);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 20px;
+  border-bottom: 1px solid rgba(251,191,36,0.08);
   display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 10px 14px;
+  flex-direction: row;
+  gap: 0;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 11px 22px;
 }
 
+.ciel-info-item:last-child { border-bottom: none; }
+
 .ciel-info-item small {
-  color: rgba(253,230,138,0.55);
+  color: rgba(251,191,36,0.4);
   font-size: 10px;
   font-weight: 800;
-  letter-spacing: 0.13em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
 }
 
 .ciel-info-item span {
-  color: #fef3c7;
+  color: rgba(253,230,138,0.9);
   font-size: 12px;
   font-weight: 700;
+  text-align: right;
 }
 
 /* Profile section */
 .ciel-profile-section {
-  border-top: 1px solid rgba(253,230,138,0.12);
+  border-top: 1px solid rgba(251,191,36,0.1);
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding-top: 16px;
+  padding: 16px 20px 20px;
 }
 
 .ciel-profile-label {
-  color: rgba(253,230,138,0.55);
+  color: rgba(251,191,36,0.4);
   font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.13em;
+  font-weight: 900;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .ciel-people {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 6px;
+  grid-template-columns: 1fr 1fr;
 }
 
 .ciel-people button {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 18px;
-  color: rgba(253,230,138,0.65);
+  background: transparent;
+  border: 1px solid rgba(251,191,36,0.15);
+  border-radius: 12px;
+  color: rgba(251,191,36,0.5);
   cursor: pointer;
-  font-size: 13px;
-  font-weight: 800;
-  padding: 10px 14px;
-  text-align: left;
-  transition: all 0.18s ease;
+  font-size: 12px;
+  font-weight: 900;
+  padding: 8px 10px;
+  text-align: center;
+  transition: all 0.16s ease;
 }
 
 .ciel-people button:hover {
-  background: rgba(253,230,138,0.08);
-  border-color: rgba(253,230,138,0.3);
-  color: #fef3c7;
-  transform: translateX(3px);
+  background: rgba(251,191,36,0.07);
+  border-color: rgba(251,191,36,0.4);
+  color: #fde68a;
 }
 
 .ciel-people button.active {
-  background:
-    linear-gradient(135deg, rgba(253,230,138,0.18), rgba(217,119,6,0.1)) padding-box,
-    linear-gradient(135deg, rgba(253,230,138,0.65), rgba(217,119,6,0.45)) border-box;
-  border: 1px solid transparent;
-  border-radius: 18px;
-  color: #fef3c7;
+  background: rgba(251,191,36,0.14);
+  border-color: #fbbf24;
+  box-shadow: 0 0 10px rgba(251,191,36,0.2);
+  color: #fef9c3;
 }
 
 /* ── Chat area ───────────────────────────────────────────────────────────── */
 .ciel-chat-wrap {
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  background:
-    linear-gradient(160deg, rgba(50,36,10,0.65), rgba(22,18,8,0.78) 45%, rgba(8,20,26,0.9)) padding-box,
-    linear-gradient(135deg, #fef08a 0%, #fbbf24 45%, #d97706 100%) border-box;
-  border: 1.5px solid transparent;
-  border-radius: 40px;
+  background: #0a0700;
+  border: 1px solid rgba(251,191,36,0.2);
+  border-radius: 28px;
   box-shadow:
-    0 32px 80px rgba(0,0,0,0.32),
-    0 0 0 1px rgba(255,255,255,0.03) inset,
-    0 1px 0 rgba(255,255,255,0.055) inset;
+    0 0 0 1px rgba(251,191,36,0.05) inset,
+    0 40px 80px rgba(0,0,0,0.5),
+    0 0 40px rgba(251,191,36,0.04);
   display: flex;
   flex-direction: column;
   height: calc(100vh - 156px);
@@ -4414,24 +4410,38 @@ body.ciel-page {
 
 .ciel-chat-topbar {
   align-items: center;
-  background: rgba(255,255,255,0.03);
-  border-bottom: 1px solid rgba(255,255,255,0.07);
-  color: #fef3c7;
+  background: linear-gradient(90deg, rgba(120,53,15,0.18), rgba(10,7,2,0));
+  border-bottom: 1px solid rgba(251,191,36,0.1);
+  color: #fde68a;
   display: flex;
   font-size: 13px;
   font-weight: 800;
+  gap: 10px;
   justify-content: space-between;
-  letter-spacing: 0.05em;
-  padding: 18px 26px;
+  letter-spacing: 0.06em;
+  padding: 16px 24px;
+}
+
+.ciel-chat-topbar::before {
+  background: #fbbf24;
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(251,191,36,0.8);
+  content: "";
+  display: inline-block;
+  flex-shrink: 0;
+  height: 8px;
+  width: 8px;
 }
 
 .ciel-topbar-status {
   align-items: center;
-  color: #fde68a;
+  color: rgba(251,191,36,0.5);
   display: flex;
-  font-size: 11px;
-  gap: 6px;
-  letter-spacing: 0.1em;
+  font-size: 10px;
+  font-weight: 800;
+  gap: 5px;
+  letter-spacing: 0.12em;
+  margin-left: auto;
   text-transform: uppercase;
 }
 
@@ -4440,30 +4450,30 @@ body.ciel-page {
   display: flex;
   flex: 1;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
   overflow-y: auto;
-  padding: 24px 22px;
-  scrollbar-color: rgba(251,191,36,0.28) transparent;
+  padding: 22px 20px;
+  scrollbar-color: rgba(251,191,36,0.2) transparent;
   scrollbar-width: thin;
 }
 
-.ciel-messages::-webkit-scrollbar { width: 5px; }
+.ciel-messages::-webkit-scrollbar { width: 4px; }
 .ciel-messages::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(253,230,138,0.5),  rgba(217,119,6,0.38));
+  background: linear-gradient(180deg, rgba(251,191,36,0.45), rgba(180,83,9,0.3));
   border-radius: 999px;
 }
 
 .ciel-msg {
   align-items: flex-start;
-  animation: cielMsgIn 0.25s ease;
+  animation: cielMsgIn 0.22s cubic-bezier(0.34,1.56,0.64,1);
   display: flex;
   gap: 10px;
   max-width: 88%;
 }
 
 @keyframes cielMsgIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0);   }
+  from { opacity: 0; transform: translateY(10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
 }
 
 .ciel-msg-ciel { align-self: flex-start; }
@@ -4471,9 +4481,12 @@ body.ciel-page {
 
 .ciel-msg-avatar {
   align-items: center;
-  border: 1.5px solid rgba(253,230,138,0.45);
+  background: #120c02;
+  border: 1.5px solid rgba(251,191,36,0.5);
   border-radius: 50%;
-  box-shadow: 0 0 14px rgba(253,230,138,0.2);
+  box-shadow:
+    0 0 12px rgba(251,191,36,0.25),
+    0 2px 8px rgba(0,0,0,0.4);
   display: flex;
   flex-shrink: 0;
   height: 36px;
@@ -4488,59 +4501,57 @@ body.ciel-page {
   width: 100%;
 }
 
+/* Ciel bubble — deep black + gold left stripe */
 .ciel-msg-bubble {
-  background:
-    radial-gradient(circle at 8% 10%, rgba(253,230,138,0.14), transparent 55%),
-    linear-gradient(135deg, rgba(253,230,138,0.1), rgba(217,119,6,0.04) 55%, rgba(180,83,9,0.03)),
-    rgba(18,14,5,0.8);
-  border: 1px solid rgba(253,230,138,0.15);
-  border-left: 2px solid rgba(253,230,138,0.45);
-  border-radius: 4px 24px 24px 24px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.18);
+  background: #0f0b03;
+  border: 1px solid rgba(251,191,36,0.12);
+  border-left: 3px solid #fbbf24;
+  border-radius: 2px 20px 20px 20px;
+  box-shadow:
+    0 2px 16px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(251,191,36,0.04) inset;
   color: #fef9ec;
   font-size: 14px;
-  font-weight: 550;
-  line-height: 1.6;
-  padding: 13px 17px;
+  font-weight: 500;
+  line-height: 1.65;
+  padding: 12px 16px;
   white-space: pre-wrap;
   word-break: break-word;
 }
 
+/* User bubble — warm dark amber */
 .ciel-msg-user .ciel-msg-bubble {
-  background:
-    linear-gradient(135deg, rgba(217,119,6,0.1), rgba(180,83,9,0.06)),
-    rgba(8,20,30,0.78);
-  border: 1px solid rgba(217,119,6,0.22);
+  background: rgba(120,53,15,0.2);
+  border: 1px solid rgba(180,83,9,0.3);
   border-left: none;
-  border-right: 2px solid rgba(251,191,36,0.42);
-  border-radius: 24px 4px 24px 24px;
-  color: var(--paper);
+  border-right: 3px solid rgba(251,191,36,0.55);
+  border-radius: 20px 2px 20px 20px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.3);
+  color: #fef3c7;
 }
 
 /* Typing */
 .ciel-typing {
-  align-items: center;
+  align-items: flex-end;
   display: flex;
-  gap: 5px;
-  height: 18px;
-  padding: 0 2px;
+  gap: 4px;
+  height: 20px;
+  padding: 0 4px 2px;
 }
 
 .ciel-typing span {
-  animation: cielTypeDot 1.4s ease-in-out infinite;
-  background: linear-gradient(135deg, #fef08a, #d97706);
+  animation: cielTypeDot 1.2s ease-in-out infinite;
   border-radius: 50%;
   display: block;
-  height: 8px;
-  width: 8px;
 }
 
-.ciel-typing span:nth-child(2) { animation-delay: 0.22s; }
-.ciel-typing span:nth-child(3) { animation-delay: 0.44s; }
+.ciel-typing span:nth-child(1) { background: #fef08a; height: 6px;  width: 6px; }
+.ciel-typing span:nth-child(2) { animation-delay: 0.18s; background: #fbbf24; height: 8px;  width: 8px; }
+.ciel-typing span:nth-child(3) { animation-delay: 0.36s; background: #d97706; height: 6px;  width: 6px; }
 
 @keyframes cielTypeDot {
-  0%, 80%, 100% { opacity: 0.2; transform: translateY(0)    scale(0.75); }
-  40%            { opacity: 1;   transform: translateY(-5px) scale(1.1);  }
+  0%, 80%, 100% { opacity: 0.25; transform: translateY(0); }
+  40%            { opacity: 1;   transform: translateY(-6px); }
 }
 
 /* Rec cards */
@@ -4548,43 +4559,43 @@ body.ciel-page {
 
 .ciel-rec-list {
   display: grid;
-  gap: 10px;
+  gap: 8px;
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .ciel-rec-card {
   align-items: flex-start;
-  backdrop-filter: blur(8px);
-  background:
-    linear-gradient(135deg, rgba(253,230,138,0.07), rgba(217,119,6,0.03)),
-    rgba(12,10,4,0.7);
-  border: 1px solid rgba(253,230,138,0.16);
-  border-radius: 24px;
-  box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+  background: #100d04;
+  border: 1px solid rgba(251,191,36,0.15);
+  border-top: 2px solid rgba(251,191,36,0.35);
+  border-radius: 16px;
   color: var(--paper);
   display: grid;
   gap: 10px;
   grid-template-columns: auto 1fr;
-  padding: 14px 16px;
+  padding: 13px 14px;
   text-decoration: none;
-  transition: border-color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  transition: all 0.18s ease;
 }
 
 .ciel-rec-card:hover {
-  border-color: rgba(253,230,138,0.45);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.28), 0 0 16px rgba(253,230,138,0.1);
+  background: #181005;
+  border-color: rgba(251,191,36,0.45);
+  border-top-color: #fbbf24;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.35), 0 0 16px rgba(251,191,36,0.1);
   transform: translateY(-3px);
 }
 
 .ciel-rec-rank {
   align-items: center;
-  background: linear-gradient(135deg, rgba(253,230,138,0.2), rgba(217,119,6,0.1));
-  border: 1px solid rgba(253,230,138,0.3);
-  border-radius: 50%;
-  color: #fef3c7;
+  background: rgba(251,191,36,0.1);
+  border: 1px solid rgba(251,191,36,0.3);
+  border-radius: 8px;
+  color: #fbbf24;
   display: inline-flex;
-  font-size: 11px;
-  font-weight: 900;
+  font-family: "Newsreader", serif;
+  font-size: 13px;
+  font-weight: 750;
   height: 32px;
   justify-content: center;
   width: 32px;
@@ -4594,104 +4605,100 @@ body.ciel-page {
   color: #fef9ec;
   display: block;
   font-size: 13px;
+  line-height: 1.3;
   margin-bottom: 4px;
 }
 
 .ciel-rec-body p {
-  color: var(--muted);
-  font-size: 12px;
+  color: rgba(253,230,138,0.45);
+  font-size: 11px;
   line-height: 1.4;
-  margin: 0 0 5px;
+  margin: 0 0 4px;
 }
 
 .ciel-rec-body small {
-  color: rgba(253,230,138,0.75);
+  color: rgba(251,191,36,0.65);
   font-size: 11px;
   font-weight: 700;
 }
 
 /* Quick actions */
 .ciel-quick-actions {
-  border-top: 1px solid rgba(255,255,255,0.06);
+  background: rgba(251,191,36,0.03);
+  border-top: 1px solid rgba(251,191,36,0.08);
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
-  padding: 12px 22px;
+  gap: 6px;
+  padding: 10px 18px;
 }
 
 .ciel-quick-btn {
-  background:
-    linear-gradient(rgba(12,10,4,0.7), rgba(12,10,4,0.7)) padding-box,
-    linear-gradient(135deg, rgba(253,230,138,0.4), rgba(217,119,6,0.3), rgba(180,83,9,0.2)) border-box;
-  border: 1px solid transparent;
+  background: transparent;
+  border: 1px solid rgba(251,191,36,0.22);
   border-radius: 999px;
-  color: rgba(253,230,138,0.85);
+  color: rgba(253,230,138,0.65);
   cursor: pointer;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
-  padding: 7px 16px;
-  transition: all 0.18s ease;
+  letter-spacing: 0.03em;
+  padding: 6px 14px;
+  transition: all 0.16s ease;
 }
 
 .ciel-quick-btn:hover {
-  background:
-    linear-gradient(rgba(30,22,6,0.8), rgba(30,22,6,0.8)) padding-box,
-    linear-gradient(135deg, #fef08a, #fbbf24, #d97706) border-box;
-  color: #fef3c7;
-  transform: translateY(-1px);
+  background: rgba(251,191,36,0.1);
+  border-color: #fbbf24;
+  box-shadow: 0 0 10px rgba(251,191,36,0.15);
+  color: #fef08a;
 }
 
 /* Input bar */
 .ciel-input-bar {
-  border-top: 1px solid rgba(255,255,255,0.06);
+  border-top: 1px solid rgba(251,191,36,0.1);
   display: flex;
   gap: 10px;
-  padding: 14px 22px 18px;
+  padding: 12px 18px 16px;
 }
 
 #ciel-input {
-  background: rgba(8,6,2,0.65);
-  border: 1.5px solid rgba(253,230,138,0.18);
-  border-radius: 22px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.18) inset;
+  background: #08060100;
+  border: none;
+  border-bottom: 2px solid rgba(251,191,36,0.2);
+  border-radius: 0;
   color: #fef9ec;
   flex: 1;
   font-size: 14px;
-  font-weight: 550;
+  font-weight: 500;
   outline: none;
-  padding: 13px 18px;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  padding: 10px 4px;
+  transition: border-color 0.16s ease;
 }
 
-#ciel-input:focus {
-  border-color: rgba(253,230,138,0.5);
-  box-shadow: 0 0 0 3px rgba(253,230,138,0.08), 0 2px 12px rgba(0,0,0,0.18) inset;
-}
-
-#ciel-input::placeholder { color: rgba(253,230,138,0.3); }
+#ciel-input:focus { border-bottom-color: #fbbf24; }
+#ciel-input::placeholder { color: rgba(251,191,36,0.25); }
 
 #ciel-send {
   align-items: center;
-  background: linear-gradient(135deg, #fef08a, #fbbf24 50%, #d97706);
+  background: #fbbf24;
   border: none;
-  border-radius: 999px;
-  box-shadow: 0 4px 16px rgba(253,230,138,0.25);
-  color: #16120a;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(251,191,36,0.3);
+  color: #0d0902;
   cursor: pointer;
   display: flex;
   font-size: 13px;
   font-weight: 900;
-  height: 48px;
+  height: 44px;
   justify-content: center;
-  letter-spacing: 0.03em;
-  padding: 0 22px;
-  transition: opacity 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  letter-spacing: 0.04em;
+  padding: 0 20px;
+  transition: all 0.16s ease;
   white-space: nowrap;
 }
 
 #ciel-send:hover {
-  box-shadow: 0 6px 22px rgba(253,230,138,0.38);
-  opacity: 0.92;
+  background: #fde68a;
+  box-shadow: 0 6px 20px rgba(251,191,36,0.45);
   transform: translateY(-1px);
 }
 
@@ -4700,6 +4707,8 @@ body.ciel-page {
   .ciel-sidebar { position: static; }
   .ciel-rec-list { grid-template-columns: 1fr; }
   .ciel-chat-wrap { height: 72vh; }
+  .ciel-info-item { flex-direction: column; gap: 2px; }
+  .ciel-people { grid-template-columns: repeat(3, 1fr); }
 }
 
 /* ── Nyx shell (legacy kept for backward compat) ───────────────────────────── */

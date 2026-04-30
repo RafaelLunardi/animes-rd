@@ -4174,7 +4174,6 @@ body.ciel-page {
   display: flex;
   flex-direction: column;
   gap: 0;
-  justify-content: space-between;
   max-height: calc(100vh - 156px);
   overflow: hidden;
   position: sticky;
@@ -4311,10 +4310,8 @@ body.ciel-page {
 /* Info list */
 .ciel-info-list {
   display: flex;
-  flex: 1;
   flex-direction: column;
   gap: 0;
-  justify-content: space-evenly;
   padding: 0;
 }
 
@@ -4363,9 +4360,9 @@ body.ciel-page {
 }
 
 .ciel-people {
-  display: grid;
-  gap: 6px;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .ciel-people button {
@@ -4711,7 +4708,7 @@ body.ciel-page {
   .ciel-rec-list { grid-template-columns: 1fr; }
   .ciel-chat-wrap { height: 72vh; }
   .ciel-info-item { flex-direction: column; gap: 2px; }
-  .ciel-people { grid-template-columns: repeat(3, 1fr); }
+  .ciel-people { flex-direction: column; }
 }
 
 /* ── Nyx shell (legacy kept for backward compat) ───────────────────────────── */

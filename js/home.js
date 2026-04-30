@@ -536,7 +536,7 @@ async function renderCalendar() {
             seen.add(key);
             return true;
           })
-          .slice(0, 8);
+          .slice(0, 7);
         try {
           localStorage.setItem(cacheKey, JSON.stringify(items));
         } catch {}

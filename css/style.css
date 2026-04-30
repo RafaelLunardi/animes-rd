@@ -3179,6 +3179,64 @@ body.blog-page::before {
   grid-template-columns: repeat(4, 1fr);
 }
 
+/* Member cards scroll */
+.member-scroll-wrap {
+  padding: 0 28px;
+  position: relative;
+}
+
+#member-grid.post-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+#member-grid.post-grid::-webkit-scrollbar {
+  display: none;
+}
+
+#member-grid.post-grid .post-card {
+  flex: 0 0 calc((100% - 54px) / 4);
+  min-width: 220px;
+}
+
+.member-scroll-btn {
+  align-items: center;
+  background: rgba(16, 16, 20, 0.88);
+  border: 2px solid rgba(134, 239, 172, 0.55);
+  border-radius: 50%;
+  color: #86efac;
+  cursor: pointer;
+  display: flex;
+  font-size: 20px;
+  height: 42px;
+  justify-content: center;
+  line-height: 1;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+  width: 42px;
+  z-index: 10;
+}
+
+.member-scroll-btn:hover {
+  background: rgba(24, 24, 30, 0.98);
+  border-color: rgba(134, 239, 172, 0.9);
+}
+
+.member-scroll-left {
+  left: 0;
+}
+
+.member-scroll-right {
+  right: 0;
+}
+
 .post-card {
   min-height: 420px;
   padding: 24px;

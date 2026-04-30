@@ -559,6 +559,14 @@ async function renderCalendar() {
   `;
 }
 
+window.scrollMemberGrid = function (dir) {
+  const grid = document.getElementById("member-grid");
+  if (!grid) return;
+  const card = grid.querySelector(".post-card");
+  const cardWidth = card ? card.offsetWidth + 18 : 300;
+  grid.scrollBy({ left: dir * cardWidth, behavior: "smooth" });
+};
+
 async function init() {
   const data = await loadData();
   await renderHero(data);

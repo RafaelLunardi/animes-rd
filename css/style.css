@@ -4144,9 +4144,9 @@ body.suggest-page.dark-theme::before {
 
 body.ciel-page {
   background:
-    radial-gradient(circle at 18% 12%, rgba(96, 165, 250, 0.12), transparent 36%),
-    radial-gradient(circle at 82% 80%, rgba(129, 140, 248, 0.1), transparent 34%),
-    linear-gradient(180deg, rgba(243,239,230,0.03), transparent 280px), var(--bg);
+    radial-gradient(circle at 18% 12%, rgba(251,191,36,0.1), transparent 36%),
+    radial-gradient(circle at 82% 80%, rgba(217,119,6,0.08), transparent 34%),
+    linear-gradient(180deg, rgba(253,230,138,0.04), transparent 280px), var(--bg);
 }
 
 .ciel-shell {
@@ -4162,10 +4162,10 @@ body.ciel-page {
 /* Sidebar */
 .ciel-sidebar {
   background:
-    linear-gradient(160deg, rgba(96,165,250,0.08), rgba(129,140,248,0.06)) padding-box,
-    linear-gradient(135deg, rgba(96,165,250,0.35), rgba(129,140,248,0.28), rgba(34,211,238,0.22)) border-box;
+    linear-gradient(160deg, rgba(251,191,36,0.07), rgba(217,119,6,0.05)) padding-box,
+    linear-gradient(135deg, rgba(251,191,36,0.45), rgba(245,158,11,0.35), rgba(253,230,138,0.3)) border-box;
   border: 1px solid transparent;
-  border-radius: 26px;
+  border-radius: 32px;
   display: flex;
   flex-direction: column;
   gap: 22px;
@@ -4184,12 +4184,12 @@ body.ciel-page {
 
 .ciel-avatar-ring {
   align-items: center;
-  background: linear-gradient(135deg, rgba(96,165,250,0.18), rgba(34,211,238,0.12));
-  border: 2px solid rgba(96,165,250,0.5);
+  background: linear-gradient(135deg, rgba(251,191,36,0.18), rgba(245,158,11,0.12));
+  border: 2px solid rgba(251,191,36,0.55);
   border-radius: 50%;
   box-shadow:
-    0 0 28px rgba(96,165,250,0.25),
-    0 0 56px rgba(96,165,250,0.1);
+    0 0 28px rgba(251,191,36,0.3),
+    0 0 56px rgba(245,158,11,0.12);
   display: flex;
   height: 80px;
   justify-content: center;
@@ -4198,7 +4198,7 @@ body.ciel-page {
 }
 
 .ciel-avatar-glyph {
-  background: linear-gradient(135deg, #60a5fa, #22d3ee, #818cf8);
+  background: linear-gradient(135deg, #fef08a, #fbbf24, #f59e0b);
   background-clip: text;
   -webkit-background-clip: text;
   font-size: 32px;
@@ -4206,8 +4206,8 @@ body.ciel-page {
 }
 
 @keyframes cielPulse {
-  0%, 100% { box-shadow: 0 0 28px rgba(96,165,250,0.25), 0 0 56px rgba(96,165,250,0.08); }
-  50%       { box-shadow: 0 0 38px rgba(96,165,250,0.45), 0 0 72px rgba(96,165,250,0.2); }
+  0%, 100% { box-shadow: 0 0 28px rgba(251,191,36,0.3), 0 0 56px rgba(245,158,11,0.1); }
+  50%       { box-shadow: 0 0 42px rgba(251,191,36,0.55), 0 0 80px rgba(245,158,11,0.25); }
 }
 
 .ciel-id-block {
@@ -4215,7 +4215,7 @@ body.ciel-page {
 }
 
 .ciel-id-block h2 {
-  background: linear-gradient(135deg, #60a5fa, #22d3ee);
+  background: linear-gradient(135deg, #fef08a, #fbbf24);
   background-clip: text;
   -webkit-background-clip: text;
   font-family: "Newsreader", serif;
@@ -4240,7 +4240,7 @@ body.ciel-page {
   font-size: 11px;
   font-weight: 800;
   gap: 5px;
-  color: #4ade80;
+  color: #fbbf24;
   letter-spacing: 0.06em;
   margin-top: 6px;
   text-transform: uppercase;
@@ -4248,7 +4248,7 @@ body.ciel-page {
 
 .ciel-dot {
   animation: cielDotBlink 1.8s ease-in-out infinite;
-  background: #4ade80;
+  background: #fbbf24;
   border-radius: 50%;
   display: inline-block;
   height: 7px;
@@ -4261,7 +4261,7 @@ body.ciel-page {
 }
 
 .ciel-info-list {
-  border-top: 1px solid rgba(96,165,250,0.15);
+  border-top: 1px solid rgba(251,191,36,0.18);
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -4289,7 +4289,7 @@ body.ciel-page {
 }
 
 .ciel-profile-section {
-  border-top: 1px solid rgba(96,165,250,0.15);
+  border-top: 1px solid rgba(251,191,36,0.18);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -4311,9 +4311,9 @@ body.ciel-page {
 }
 
 .ciel-people button {
-  background: rgba(96,165,250,0.06);
-  border: 1px solid rgba(96,165,250,0.2);
-  border-radius: 10px;
+  background: rgba(251,191,36,0.06);
+  border: 1px solid rgba(251,191,36,0.2);
+  border-radius: 16px;
   color: var(--muted);
   cursor: pointer;
   font-size: 13px;
@@ -4324,24 +4324,24 @@ body.ciel-page {
 }
 
 .ciel-people button:hover {
-  background: rgba(96,165,250,0.12);
-  border-color: rgba(96,165,250,0.45);
+  background: rgba(251,191,36,0.12);
+  border-color: rgba(251,191,36,0.45);
   color: var(--paper);
 }
 
 .ciel-people button.active {
-  background: linear-gradient(135deg, rgba(96,165,250,0.22), rgba(34,211,238,0.14));
-  border-color: rgba(96,165,250,0.55);
-  color: #bfdbfe;
+  background: linear-gradient(135deg, rgba(251,191,36,0.22), rgba(245,158,11,0.14));
+  border-color: rgba(251,191,36,0.6);
+  color: #fde68a;
 }
 
 /* Chat area */
 .ciel-chat-wrap {
   background:
-    linear-gradient(160deg, rgba(15,18,28,0.9), rgba(10,20,30,0.85)) padding-box,
-    linear-gradient(135deg, rgba(96,165,250,0.28), rgba(34,211,238,0.18), rgba(129,140,248,0.22)) border-box;
+    linear-gradient(160deg, rgba(20,12,2,0.92), rgba(16,10,2,0.88)) padding-box,
+    linear-gradient(135deg, rgba(251,191,36,0.38), rgba(245,158,11,0.28), rgba(253,230,138,0.3)) border-box;
   border: 1px solid transparent;
-  border-radius: 26px;
+  border-radius: 32px;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 160px);
@@ -4352,19 +4352,19 @@ body.ciel-page {
 
 .ciel-chat-topbar {
   align-items: center;
-  border-bottom: 1px solid rgba(96,165,250,0.15);
+  border-bottom: 1px solid rgba(251,191,36,0.15);
   display: flex;
   font-size: 13px;
   font-weight: 800;
   justify-content: space-between;
-  color: #bfdbfe;
+  color: #fde68a;
   padding: 16px 22px;
   letter-spacing: 0.04em;
 }
 
 .ciel-topbar-status {
   align-items: center;
-  color: #4ade80;
+  color: #fbbf24;
   display: flex;
   font-size: 11px;
   gap: 5px;
@@ -4379,13 +4379,13 @@ body.ciel-page {
   gap: 14px;
   overflow-y: auto;
   padding: 20px;
-  scrollbar-color: rgba(96,165,250,0.35) transparent;
+  scrollbar-color: rgba(251,191,36,0.35) transparent;
   scrollbar-width: thin;
 }
 
 .ciel-messages::-webkit-scrollbar { width: 6px; }
 .ciel-messages::-webkit-scrollbar-thumb {
-  background: rgba(96,165,250,0.4);
+  background: rgba(251,191,36,0.4);
   border-radius: 999px;
 }
 
@@ -4401,10 +4401,10 @@ body.ciel-page {
 
 .ciel-msg-avatar {
   align-items: center;
-  background: linear-gradient(135deg, rgba(96,165,250,0.18), rgba(34,211,238,0.12));
-  border: 1px solid rgba(96,165,250,0.42);
+  background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(245,158,11,0.12));
+  border: 1px solid rgba(251,191,36,0.5);
   border-radius: 50%;
-  color: #60a5fa;
+  color: #fbbf24;
   display: flex;
   flex-shrink: 0;
   font-size: 16px;
@@ -4415,11 +4415,11 @@ body.ciel-page {
 
 .ciel-msg-bubble {
   background:
-    linear-gradient(135deg, rgba(96,165,250,0.14), rgba(34,211,238,0.07)),
-    rgba(12,16,24,0.8);
-  border: 1px solid rgba(96,165,250,0.26);
-  border-radius: 18px 18px 18px 6px;
-  color: #e0f2fe;
+    linear-gradient(135deg, rgba(251,191,36,0.12), rgba(245,158,11,0.06)),
+    rgba(22,12,2,0.82);
+  border: 1px solid rgba(251,191,36,0.22);
+  border-radius: 22px 22px 22px 8px;
+  color: #fef9c3;
   font-size: 14px;
   font-weight: 600;
   line-height: 1.55;
@@ -4429,9 +4429,9 @@ body.ciel-page {
 }
 
 .ciel-msg-user .ciel-msg-bubble {
-  background: rgba(30,32,46,0.7);
-  border: 1px solid rgba(129,140,248,0.28);
-  border-radius: 18px 18px 6px 18px;
+  background: rgba(30,20,6,0.72);
+  border: 1px solid rgba(217,119,6,0.3);
+  border-radius: 22px 22px 8px 22px;
   color: var(--paper);
 }
 
@@ -4445,7 +4445,7 @@ body.ciel-page {
 
 .ciel-typing span {
   animation: cielTypeDot 1.2s ease-in-out infinite;
-  background: #60a5fa;
+  background: #fbbf24;
   border-radius: 50%;
   display: block;
   height: 7px;
@@ -4473,9 +4473,9 @@ body.ciel-page {
 
 .ciel-rec-card {
   align-items: flex-start;
-  background: rgba(12,18,28,0.72);
-  border: 1px solid rgba(96,165,250,0.22);
-  border-radius: 16px;
+  background: rgba(20,12,2,0.75);
+  border: 1px solid rgba(251,191,36,0.2);
+  border-radius: 22px;
   color: var(--paper);
   display: grid;
   gap: 10px;
@@ -4486,16 +4486,16 @@ body.ciel-page {
 }
 
 .ciel-rec-card:hover {
-  border-color: rgba(96,165,250,0.55);
+  border-color: rgba(251,191,36,0.55);
   transform: translateY(-2px);
 }
 
 .ciel-rec-rank {
   align-items: center;
-  background: rgba(96,165,250,0.12);
-  border: 1px solid rgba(96,165,250,0.3);
+  background: rgba(251,191,36,0.12);
+  border: 1px solid rgba(251,191,36,0.35);
   border-radius: 50%;
-  color: #60a5fa;
+  color: #fbbf24;
   display: inline-flex;
   font-size: 11px;
   font-weight: 900;
@@ -4518,14 +4518,14 @@ body.ciel-page {
 }
 
 .ciel-rec-body small {
-  color: rgba(96,165,250,0.8);
+  color: rgba(251,191,36,0.85);
   font-size: 11px;
   font-weight: 700;
 }
 
 /* Quick actions */
 .ciel-quick-actions {
-  border-top: 1px solid rgba(96,165,250,0.12);
+  border-top: 1px solid rgba(251,191,36,0.12);
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -4533,35 +4533,35 @@ body.ciel-page {
 }
 
 .ciel-quick-btn {
-  background: rgba(96,165,250,0.08);
-  border: 1px solid rgba(96,165,250,0.25);
+  background: rgba(251,191,36,0.08);
+  border: 1px solid rgba(251,191,36,0.28);
   border-radius: 999px;
-  color: #93c5fd;
+  color: #fcd34d;
   cursor: pointer;
   font-size: 12px;
   font-weight: 800;
-  padding: 7px 14px;
+  padding: 7px 16px;
   transition: all 0.15s ease;
 }
 
 .ciel-quick-btn:hover {
-  background: rgba(96,165,250,0.18);
-  border-color: rgba(96,165,250,0.55);
-  color: #bfdbfe;
+  background: rgba(251,191,36,0.18);
+  border-color: rgba(251,191,36,0.6);
+  color: #fef08a;
 }
 
 /* Input bar */
 .ciel-input-bar {
-  border-top: 1px solid rgba(96,165,250,0.15);
+  border-top: 1px solid rgba(251,191,36,0.15);
   display: flex;
   gap: 10px;
   padding: 14px 20px;
 }
 
 #ciel-input {
-  background: rgba(12,16,24,0.7);
-  border: 1px solid rgba(96,165,250,0.25);
-  border-radius: 14px;
+  background: rgba(20,12,2,0.7);
+  border: 1px solid rgba(251,191,36,0.25);
+  border-radius: 18px;
   color: var(--paper);
   flex: 1;
   font-size: 14px;
@@ -4572,7 +4572,7 @@ body.ciel-page {
 }
 
 #ciel-input:focus {
-  border-color: rgba(96,165,250,0.6);
+  border-color: rgba(251,191,36,0.65);
 }
 
 #ciel-input::placeholder {
@@ -4581,13 +4581,14 @@ body.ciel-page {
 
 #ciel-send {
   align-items: center;
-  background: linear-gradient(135deg, #3b82f6, #06b6d4);
+  background: linear-gradient(135deg, #d97706, #f59e0b);
   border: 0;
-  border-radius: 14px;
-  color: #fff;
+  border-radius: 18px;
+  color: #1c0f00;
   cursor: pointer;
   display: flex;
   font-size: 20px;
+  font-weight: 900;
   height: 46px;
   justify-content: center;
   transition: opacity 0.15s ease;

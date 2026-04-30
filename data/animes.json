@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-04-30T22:37:55.653Z",
+  "updatedAt": "2026-04-30T22:49:32.597Z",
   "total": 180,
   "animes": [
     {
@@ -202,6 +202,62 @@
       "notaZana": null
     },
     {
+      "id": "3416beab-c784-8143-967e-f25e0ec01a07",
+      "nome": "Demon Slayer: Kimetsu no Yaiba",
+      "generos": [
+        "Ação ⚔️",
+        "Shounen 💥",
+        "Fantasia 🧙",
+        "Drama 😢"
+      ],
+      "notaFernando": 9.7,
+      "notaDudu": 9.2,
+      "notaHacksuya": null,
+      "maisDeUmVoto": "sim",
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 38000,
+      "files": [
+        {
+          "name": "Opening 1",
+          "url": "https://www.youtube.com/results?search_query=Demon%20Slayer%3A%20Kimetsu%20no%20Yaiba%20opening%201"
+        }
+      ],
+      "notaZana": 9.5,
+      "controversia": 0.6,
+      "quemAssistiu": [
+        "Rafael",
+        "Fernando",
+        "Dudu",
+        "Zana"
+      ],
+      "qtdVotos": 4,
+      "notaSort": 9.55,
+      "notaRafael": 9.8,
+      "nota": "9.55",
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Anime muito bom, animação impecável."
+        },
+        {
+          "person": "Zana",
+          "text": "Às vezes dá uma drageada, mas arte linda, batalhas fodas, premissas bem construídas"
+        },
+        {
+          "person": "Rafael",
+          "text": "GOAT da pandemia, um dos melhores já feitos!\n\nMelhor animação já feita!"
+        }
+      ],
+      "comentarios": "Dudu: Anime muito bom, animação impecável.Zana: Às vezes dá uma drageada, mas arte linda, batalhas fodas, premissas bem construídasRafael: GOAT da pandemia, um dos melhores já feitos!\n\nMelhor animação já feita!",
+      "updatedAt": {
+        "_seconds": 1777589366,
+        "_nanoseconds": 94000000
+      }
+    },
+    {
       "id": "3416beab-c784-8141-878f-edc65a311ea1",
       "nome": "Konosuba",
       "nota": "9.50",
@@ -336,57 +392,6 @@
         }
       ],
       "notaZana": null
-    },
-    {
-      "id": "3416beab-c784-8143-967e-f25e0ec01a07",
-      "nome": "Demon Slayer: Kimetsu no Yaiba",
-      "generos": [
-        "Ação ⚔️",
-        "Shounen 💥",
-        "Fantasia 🧙",
-        "Drama 😢"
-      ],
-      "notaRafael": null,
-      "notaFernando": 9.7,
-      "notaDudu": 9.2,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "sim",
-      "controversia": 0.5,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 38000,
-      "files": [
-        {
-          "name": "Opening 1",
-          "url": "https://www.youtube.com/results?search_query=Demon%20Slayer%3A%20Kimetsu%20no%20Yaiba%20opening%201"
-        }
-      ],
-      "notaZana": 9.5,
-      "quemAssistiu": [
-        "Fernando",
-        "Dudu",
-        "Zana"
-      ],
-      "qtdVotos": 3,
-      "comments": [
-        {
-          "person": "Dudu",
-          "text": "Anime muito bom, animação impecável."
-        },
-        {
-          "person": "Zana",
-          "text": "Às vezes dá uma drageada, mas arte linda, batalhas fodas, premissas bem construídas"
-        }
-      ],
-      "notaSort": 9.47,
-      "comentarios": "Dudu: Anime muito bom, animação impecável.Zana: Às vezes dá uma drageada, mas arte linda, batalhas fodas, premissas bem construídas",
-      "nota": "9.47",
-      "updatedAt": {
-        "_seconds": 1777585667,
-        "_nanoseconds": 768000000
-      }
     },
     {
       "id": "3416beab-c784-81ed-8d10-fb70710e1958",

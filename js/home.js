@@ -479,7 +479,7 @@ async function renderNews(animes) {
 
   const BLOCK_MS = 5 * 60 * 60 * 1000;
   const block = Math.floor(Date.now() / BLOCK_MS);
-  const cacheKey = `mal-news-v2-${block}`;
+  const cacheKey = `mal-news-v3-${block}`;
 
   let items = null;
   try {
@@ -501,24 +501,28 @@ async function renderNews(animes) {
         picks.push(pool[(block + i * 5) % pool.length]);
       }
 
+      const cutoff = Date.now() - 90 * 24 * 60 * 60 * 1000; // 3 meses atrás
+
       const results = await Promise.all(
         picks.map(async (anime) => {
           try {
             const res = await fetch(
-              `https://api.jikan.moe/v4/anime/${anime.malId}/news?limit=1`,
+              `https://api.jikan.moe/v4/anime/${anime.malId}/news?limit=10`,
             );
             if (!res.ok) return null;
             const payload = await res.json();
-            const news = payload.data?.[0];
+            const news = (payload.data || []).find(
+              (n) => n.date && new Date(n.date).getTime() >= cutoff,
+            );
             if (!news) return null;
             return {
               animeName: anime.nome,
               title: news.title,
               excerpt: news.excerpt?.slice(0, 160) || "",
               url: news.url,
-              date: news.date
-                ? new Date(news.date).toLocaleDateString("pt-BR", { day: "numeric", month: "short", year: "numeric" })
-                : "",
+              date: new Date(news.date).toLocaleDateString("pt-BR", {
+                day: "numeric", month: "short", year: "numeric",
+              }),
             };
           } catch {
             return null;

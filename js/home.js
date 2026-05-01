@@ -479,7 +479,7 @@ async function renderNews() {
 
   const BLOCK_MS = 5 * 60 * 60 * 1000;
   const block = Math.floor(Date.now() / BLOCK_MS);
-  const cacheKey = `gnews-anime-v2-${block}`;
+  const cacheKey = `gnews-anime-v3-${block}`;
 
   let items = null;
   try {
@@ -490,17 +490,22 @@ async function renderNews() {
       const rssUrl = encodeURIComponent(
         "https://news.google.com/rss/search?q=anime&hl=en-US&gl=US&ceid=US:en",
       );
-      const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}&count=10`);
+      const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}&count=25`);
       if (!res.ok) throw new Error("rss failed");
       const payload = await res.json();
 
-      const seenTitles = new Set();
+      // Extrai o nome do anime/tópico principal do título (primeiras 2 palavras)
+      function topicKey(title) {
+        return title.toLowerCase().split(/[\s:,\-–|]/g).filter(Boolean).slice(0, 2).join(" ");
+      }
+
+      const seenTopics = new Set();
       items = (payload.items || [])
         .filter((item) => {
           if (!item.title || !item.link) return false;
-          const key = item.title.slice(0, 40).toLowerCase();
-          if (seenTitles.has(key)) return false;
-          seenTitles.add(key);
+          const key = topicKey(item.title);
+          if (seenTopics.has(key)) return false;
+          seenTopics.add(key);
           return true;
         })
         .slice(0, 3)

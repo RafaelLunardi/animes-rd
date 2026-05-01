@@ -4177,11 +4177,12 @@ body.suggest-page.dark-theme::before {
 
 .nyx-floating-link img {
   aspect-ratio: 1;
-  background: rgba(18, 12, 28, 0.72);
-  border: 2px solid rgba(216, 180, 254, 0.78);
+  background: #0d0902;
+  border: 2px solid rgba(251, 191, 36, 0.75);
   border-radius: 999px;
   box-shadow:
-    0 16px 42px rgba(88, 28, 135, 0.42),
+    0 0 16px rgba(251, 191, 36, 0.35),
+    0 16px 42px rgba(120, 53, 15, 0.45),
     0 0 20px rgba(216, 180, 254, 0.22);
   display: block;
   height: 70px;
@@ -4195,8 +4196,8 @@ body.suggest-page.dark-theme::before {
 
 .nyx-floating-link:hover img {
   box-shadow:
-    0 20px 52px rgba(126, 34, 206, 0.52),
-    0 0 26px rgba(216, 180, 254, 0.28);
+    0 0 28px rgba(251, 191, 36, 0.55),
+    0 20px 52px rgba(120, 53, 15, 0.55);
 }
 
 /* ── Ciel page ─────────────────────────────────────────────────────────────── */

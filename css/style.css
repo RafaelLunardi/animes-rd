@@ -5133,11 +5133,11 @@ body.pending-page .page-header h1 {
 
 body.pending-page .vote-card {
   background:
-    linear-gradient(rgba(8,18,18,0.92), rgba(8,18,18,0.92)) padding-box,
-    linear-gradient(135deg, rgba(26,107,120,0.65), rgba(26,74,50,0.5), rgba(90,26,66,0.6)) border-box !important;
-  border: 1.5px solid transparent !important;
+    linear-gradient(rgba(14,28,30,0.96), rgba(14,28,30,0.96)) padding-box,
+    linear-gradient(135deg, #1a6b78, #1a4a32, #5a1a42) border-box !important;
+  border: 2px solid transparent !important;
   border-radius: 28px !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(26,107,120,0.08) inset;
   margin-bottom: 0 !important;
   padding: 24px !important;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
@@ -5158,11 +5158,12 @@ body.pending-page .vote-card h3 {
 }
 
 body.pending-page .vote-card p {
-  color: rgba(125,211,222,0.6) !important;
+  color: #ffffff !important;
   font-size: 12px !important;
   font-weight: 700;
   letter-spacing: 0.04em;
   margin: 0 0 8px !important;
+  opacity: 0.9;
 }
 
 body.pending-page .vote-card > div:first-child {

@@ -5104,6 +5104,384 @@ body.ciel-page {
   }
 }
 
+/* ── Desafios page ───────────────────────────────────────────────────────── */
+
+body.desafios-page .page-header h1 {
+  background: linear-gradient(120deg, #c4b5fd 0%, #818cf8 45%, #67e8f9 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.desafios-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.desafio-tab {
+  background:
+    linear-gradient(rgba(16,16,22,0.85), rgba(16,16,22,0.85)) padding-box,
+    linear-gradient(135deg, rgba(129,140,248,0.5), rgba(103,232,249,0.4)) border-box;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  color: rgba(199,210,254,0.7);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 9px 20px;
+  transition: all 0.18s ease;
+}
+
+.desafio-tab:hover {
+  color: #c7d2fe;
+  background:
+    linear-gradient(rgba(22,18,34,0.9), rgba(22,18,34,0.9)) padding-box,
+    linear-gradient(135deg, rgba(167,139,250,0.7), rgba(103,232,249,0.6)) border-box;
+}
+
+.desafio-tab.active {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.35);
+  color: #fff;
+}
+
+.desafio-panel { display: none; }
+.desafio-panel.active { display: block; }
+
+.desafio-card {
+  background:
+    linear-gradient(rgba(14,14,22,0.92), rgba(14,14,22,0.92)) padding-box,
+    linear-gradient(135deg, rgba(129,140,248,0.45), rgba(103,232,249,0.35)) border-box;
+  border: 1.5px solid transparent;
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.desafio-card-header {
+  margin-bottom: 28px;
+}
+
+.desafio-eyebrow {
+  color: #818cf8;
+  display: block;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.desafio-card-header h2 {
+  color: var(--paper);
+  font-family: "Newsreader", serif;
+  font-size: clamp(24px, 3vw, 36px);
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.desafio-card-header p { color: var(--muted); font-size: 14px; }
+
+.desafio-field { display: flex; flex-direction: column; gap: 6px; }
+.desafio-field label { color: rgba(199,210,254,0.7); font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
+
+.desafio-field select,
+.desafio-field input {
+  appearance: none;
+  -webkit-appearance: none;
+  background:
+    linear-gradient(rgba(10,10,18,0.9), rgba(10,10,18,0.9)) padding-box,
+    linear-gradient(135deg, rgba(129,140,248,0.45), rgba(103,232,249,0.35)) border-box;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  color: var(--paper);
+  color-scheme: dark;
+  font-size: 13px;
+  outline: none;
+  padding: 10px 14px;
+  transition: all 0.18s ease;
+}
+
+.desafio-field select:focus,
+.desafio-field input:focus {
+  background:
+    linear-gradient(rgba(12,10,22,0.95), rgba(12,10,22,0.95)) padding-box,
+    linear-gradient(135deg, #a78bfa, #67e8f9) border-box;
+}
+
+.desafio-btn {
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 900;
+  padding: 10px 22px;
+  transition: all 0.18s ease;
+}
+
+.desafio-btn.primary {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  border: none;
+  box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+  color: #fff;
+}
+
+.desafio-btn.primary:hover { box-shadow: 0 6px 22px rgba(99,102,241,0.45); opacity: 0.9; transform: translateY(-1px); }
+
+.desafio-btn.secondary {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(129,140,248,0.3);
+  color: rgba(199,210,254,0.8);
+}
+
+.desafio-btn.secondary:hover { background: rgba(129,140,248,0.12); border-color: rgba(129,140,248,0.55); }
+
+/* Previsão */
+.previsao-controls { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end; margin-bottom: 24px; }
+.previsao-selects { display: flex; flex-wrap: wrap; gap: 16px; flex: 1; }
+.previsao-selects .desafio-field { flex: 1; min-width: 200px; }
+
+.previsao-result.hidden { display: none; }
+
+.previsao-output {
+  background: rgba(99,102,241,0.08);
+  border: 1px solid rgba(129,140,248,0.2);
+  border-radius: 20px;
+  padding: 24px;
+  text-align: center;
+}
+
+.previsao-score {
+  font-family: "Newsreader", serif;
+  font-size: 72px;
+  font-weight: 750;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.previsao-label { color: var(--muted); font-size: 14px; margin-bottom: 4px; }
+.previsao-anime { color: var(--paper); font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+
+.previsao-reasons { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 14px; }
+
+.previsao-tag {
+  background: rgba(129,140,248,0.1);
+  border: 1px solid rgba(129,140,248,0.22);
+  border-radius: 999px;
+  color: rgba(199,210,254,0.8);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+}
+
+.previsao-tag.match {
+  background: rgba(74,222,128,0.1);
+  border-color: rgba(74,222,128,0.3);
+  color: #86efac;
+}
+
+.previsao-disclaimer { color: var(--muted); font-size: 12px; margin: 0; }
+
+/* Misterioso */
+.misterio-clues { margin-bottom: 24px; }
+
+.mystery-clues-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.mystery-clue-block { display: flex; flex-direction: column; gap: 8px; }
+.mystery-clue-block small { color: rgba(199,210,254,0.5); font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
+
+.mystery-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.mystery-chip {
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(129,140,248,0.3);
+  border-radius: 999px;
+  color: #c7d2fe;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+}
+
+.mystery-nota { color: #fde68a; font-size: 24px; font-weight: 750; }
+.mystery-persons { display: flex; gap: 6px; }
+.mystery-person {
+  align-items: center;
+  border: 1.5px solid;
+  border-radius: 50%;
+  display: flex;
+  font-size: 12px;
+  font-weight: 900;
+  height: 28px;
+  justify-content: center;
+  width: 28px;
+}
+
+.misterio-input-row { display: flex; gap: 10px; margin-bottom: 14px; }
+.misterio-input-row input { flex: 1; }
+
+.misterio-feedback.hidden { display: none; }
+.misterio-feedback {
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  padding: 12px 16px;
+}
+
+.feedback-win { color: #86efac; }
+.feedback-miss { color: #fca5a5; }
+.feedback-reveal { color: #fde68a; }
+
+.misterio-actions { display: flex; gap: 10px; }
+
+/* Timeline */
+.timeline-section-title {
+  color: var(--paper);
+  font-size: 18px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.timeline-milestones { margin-bottom: 36px; }
+
+.timeline-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.timeline-milestone {
+  background: rgba(99,102,241,0.07);
+  border: 1px solid rgba(129,140,248,0.18);
+  border-radius: 18px;
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  align-items: flex-start;
+}
+
+.milestone-icon { font-size: 24px; flex-shrink: 0; }
+.timeline-milestone small { color: var(--muted); display: block; font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+.timeline-milestone strong { color: var(--paper); display: block; font-size: 14px; margin-bottom: 2px; }
+.timeline-milestone span { color: #818cf8; font-size: 12px; font-weight: 700; }
+
+.timeline-members-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+.timeline-member-card {
+  background: rgba(255,255,255,0.03);
+  border: 1.5px solid;
+  border-radius: 20px;
+  padding: 18px;
+}
+
+.timeline-member-name { font-size: 20px; font-weight: 800; margin-bottom: 14px; }
+.timeline-member-stats { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; margin-bottom: 14px; }
+.tms-item { display: flex; flex-direction: column; gap: 2px; }
+.tms-item small { color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+.tms-item strong { color: var(--paper); font-size: 16px; font-weight: 750; }
+
+.timeline-top-anime {
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+}
+
+.timeline-top-anime small { color: var(--muted); font-size: 10px; font-weight: 800; text-transform: uppercase; }
+.timeline-top-anime span { color: var(--paper); font-size: 13px; font-weight: 700; }
+
+/* Batalha */
+.batalha-cards {
+  align-items: stretch;
+  display: grid;
+  gap: 0;
+  grid-template-columns: 1fr auto 1fr;
+  margin-bottom: 24px;
+}
+
+.batalha-side {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(129,140,248,0.18);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  transition: all 0.18s ease;
+}
+
+.batalha-side:hover { background: rgba(99,102,241,0.07); border-color: rgba(129,140,248,0.35); }
+
+.batalha-info h3 { color: var(--paper); font-size: 18px; font-weight: 750; margin-bottom: 8px; }
+.batalha-meta { color: var(--muted); display: flex; flex-wrap: wrap; gap: 10px; font-size: 13px; font-weight: 700; }
+
+.batalha-vs {
+  align-items: center;
+  color: rgba(129,140,248,0.5);
+  display: flex;
+  font-size: 20px;
+  font-weight: 900;
+  justify-content: center;
+  padding: 0 16px;
+}
+
+.batalha-vote-btn {
+  background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(79,70,229,0.15)) !important;
+  border: 1.5px solid rgba(129,140,248,0.4) !important;
+  border-radius: 14px !important;
+  color: #c7d2fe !important;
+  padding: 10px !important;
+  width: 100%;
+  font-size: 13px !important;
+  font-weight: 800 !important;
+  transition: all 0.15s ease !important;
+}
+
+.batalha-vote-btn:hover {
+  background: linear-gradient(135deg, rgba(99,102,241,0.35), rgba(79,70,229,0.28)) !important;
+  border-color: #818cf8 !important;
+  color: #fff !important;
+}
+
+.batalha-bar-wrap {
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  height: 6px;
+  overflow: hidden;
+}
+
+.batalha-bar {
+  background: linear-gradient(90deg, #6366f1, #67e8f9);
+  border-radius: 999px;
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.batalha-pct { color: var(--muted); font-size: 12px; font-weight: 700; margin-top: auto; }
+
+.batalha-actions { display: flex; justify-content: center; }
+
+@media (max-width: 700px) {
+  .batalha-cards { grid-template-columns: 1fr; }
+  .batalha-vs { padding: 8px 0; }
+  .previsao-controls { flex-direction: column; }
+}
+
 /* ── Pending page ─────────────────────────────────────────────────────────── */
 body.pending-page {
   background:

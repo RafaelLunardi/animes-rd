@@ -958,7 +958,10 @@ body.suggest-page .suggest-form-card .form-group input[disabled] {
 }
 
 .table-wrap {
-  border: 1px solid rgba(243, 239, 230, 0.13);
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(135deg, rgba(134,239,172,0.4), rgba(147,197,253,0.4), rgba(249,168,212,0.4)) border-box;
+  border: 1.5px solid transparent;
   border-radius: 8px;
   overflow-x: auto;
 }

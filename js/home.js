@@ -479,7 +479,7 @@ async function renderNews() {
 
   const BLOCK_MS = 5 * 60 * 60 * 1000;
   const block = Math.floor(Date.now() / BLOCK_MS);
-  const cacheKey = `mal-news-v5-${block}`;
+  const cacheKey = `gnews-anime-v1-${block}`;
 
   let items = null;
   try {
@@ -487,42 +487,30 @@ async function renderNews() {
     if (cached) {
       items = JSON.parse(cached);
     } else {
-      const cutoff = Date.now() - 90 * 24 * 60 * 60 * 1000;
+      const rssUrl = encodeURIComponent(
+        "https://news.google.com/rss/search?q=anime&hl=en-US&gl=US&ceid=US:en",
+      );
+      const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}&count=10`);
+      if (!res.ok) throw new Error("rss failed");
+      const payload = await res.json();
 
-      // Busca top 25 animes em exibição agora
-      const topRes = await fetch(`https://api.jikan.moe/v4/top/anime?filter=airing&limit=25`);
-      if (!topRes.ok) throw new Error("top failed");
-      const topPayload = await topRes.json();
-      const pool = (topPayload.data || []).map((a) => ({
-        malId: a.mal_id,
-        nome: a.title_english || a.title,
-      }));
-      if (!pool.length) throw new Error("empty pool");
+      items = (payload.items || [])
+        .filter((item) => item.title && item.link)
+        .slice(0, 3)
+        .map((item) => ({
+          source: item.author || "Google News",
+          title: item.title.replace(/ - .*$/, ""),
+          excerpt: item.description
+            ? item.description.replace(/<[^>]*>/g, "").slice(0, 160)
+            : "",
+          url: item.link,
+          date: item.pubDate
+            ? new Date(item.pubDate).toLocaleDateString("pt-BR", {
+                day: "numeric", month: "short", year: "numeric",
+              })
+            : "",
+        }));
 
-      // Tenta em sequência até ter 3 notícias recentes
-      items = [];
-      for (let i = 0; i < pool.length && items.length < 3; i++) {
-        const anime = pool[(block * 3 + i) % pool.length];
-        try {
-          await new Promise((r) => setTimeout(r, i === 0 ? 0 : 500));
-          const res = await fetch(`https://api.jikan.moe/v4/anime/${anime.malId}/news?limit=10`);
-          if (!res.ok) continue;
-          const payload = await res.json();
-          const news = (payload.data || []).find(
-            (n) => n.date && new Date(n.date).getTime() >= cutoff,
-          );
-          if (!news) continue;
-          items.push({
-            animeName: anime.nome,
-            title: news.title,
-            excerpt: news.excerpt?.slice(0, 160) || "",
-            url: news.url,
-            date: new Date(news.date).toLocaleDateString("pt-BR", {
-              day: "numeric", month: "short", year: "numeric",
-            }),
-          });
-        } catch { continue; }
-      }
       if (items.length) {
         try { localStorage.setItem(cacheKey, JSON.stringify(items)); } catch {}
       }
@@ -545,7 +533,7 @@ async function renderNews() {
   grid.innerHTML = items.map(
     (item) => `
     <article class="news-card">
-      <span class="news-source">${escapeHTML(item.animeName)}</span>
+      <span class="news-source">${escapeHTML(item.source)}</span>
       ${item.date ? `<span class="news-date">${item.date}</span>` : ""}
       <h3>${escapeHTML(item.title)}</h3>
       <p>${escapeHTML(item.excerpt)}${item.excerpt.length >= 160 ? "…" : ""}</p>

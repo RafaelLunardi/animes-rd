@@ -5107,17 +5107,18 @@ body.ciel-page {
 /* ── Pending page ─────────────────────────────────────────────────────────── */
 body.pending-page {
   background:
-    radial-gradient(ellipse 55% 40% at 8% 10%,  rgba(187,247,208,0.12), transparent),
-    radial-gradient(ellipse 45% 50% at 92% 88%, rgba(253,230,138,0.09), transparent),
+    radial-gradient(ellipse 55% 40% at 8% 10%,  rgba(26,107,120,0.15), transparent),
+    radial-gradient(ellipse 45% 50% at 92% 88%, rgba(90,26,66,0.12), transparent),
+    radial-gradient(ellipse 35% 35% at 50% 50%, rgba(26,74,50,0.08), transparent),
     var(--bg);
 }
 
 body.pending-page .page-header {
-  border-bottom-color: rgba(187,247,208,0.18);
+  border-bottom-color: rgba(26,107,120,0.3);
 }
 
 body.pending-page .page-header h1 {
-  background: linear-gradient(120deg, #f0fdf4 0%, #86efac 40%, #fde68a 100%);
+  background: linear-gradient(120deg, #7dd3de 0%, #86efac 45%, #e879a8 100%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -5132,23 +5133,23 @@ body.pending-page .page-header h1 {
 
 body.pending-page .vote-card {
   background:
-    linear-gradient(rgba(10,16,12,0.9), rgba(10,16,12,0.9)) padding-box,
-    linear-gradient(135deg, rgba(134,239,172,0.55), rgba(253,230,138,0.38), rgba(134,239,172,0.3)) border-box !important;
+    linear-gradient(rgba(8,18,18,0.92), rgba(8,18,18,0.92)) padding-box,
+    linear-gradient(135deg, rgba(26,107,120,0.65), rgba(26,74,50,0.5), rgba(90,26,66,0.6)) border-box !important;
   border: 1.5px solid transparent !important;
   border-radius: 28px !important;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
   margin-bottom: 0 !important;
   padding: 24px !important;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
 body.pending-page .vote-card:hover {
-  box-shadow: 0 14px 44px rgba(0,0,0,0.38), 0 0 24px rgba(134,239,172,0.08);
+  box-shadow: 0 14px 44px rgba(0,0,0,0.4), 0 0 28px rgba(26,107,120,0.12);
   transform: translateY(-2px);
 }
 
 body.pending-page .vote-card h3 {
-  color: #f0fdf4 !important;
+  color: #e0f7fa !important;
   font-family: 'Newsreader', serif;
   font-size: 20px !important;
   font-weight: 700;
@@ -5157,7 +5158,7 @@ body.pending-page .vote-card h3 {
 }
 
 body.pending-page .vote-card p {
-  color: rgba(134,239,172,0.55) !important;
+  color: rgba(125,211,222,0.6) !important;
   font-size: 12px !important;
   font-weight: 700;
   letter-spacing: 0.04em;
@@ -5174,18 +5175,18 @@ body.pending-page .vote-card > div:first-child {
 
 body.pending-page .vote-card > div:last-child,
 body.pending-page .vote-card .vote-controls {
-  background: rgba(255,255,255,0.03) !important;
-  border: 1px solid rgba(134,239,172,0.1) !important;
+  background: rgba(26,107,120,0.06) !important;
+  border: 1px solid rgba(26,107,120,0.18) !important;
   border-radius: 20px !important;
   padding: 16px !important;
 }
 
 body.pending-page .vote-controls button {
-  background: linear-gradient(135deg, #4ade80, #86efac 50%, #fde68a) !important;
-  border: none !important;
+  background: linear-gradient(135deg, #1a6b78, #1a4a32 50%, #5a1a42) !important;
+  border: 1px solid rgba(125,211,222,0.25) !important;
   border-radius: 999px !important;
-  box-shadow: 0 4px 18px rgba(74,222,128,0.22) !important;
-  color: #052e16 !important;
+  box-shadow: 0 4px 18px rgba(26,107,120,0.3) !important;
+  color: #e0f7fa !important;
   font-size: 13px !important;
   font-weight: 900 !important;
   letter-spacing: 0.04em;
@@ -5201,14 +5202,14 @@ body.pending-page .vote-controls button:hover {
 }
 
 body.pending-page .vote-controls input[type=range] {
-  accent-color: #86efac;
+  accent-color: #7dd3de;
 }
 
 body.pending-page .vote-controls textarea {
-  background: rgba(0,0,0,0.35) !important;
-  border: 1px solid rgba(134,239,172,0.18) !important;
+  background: rgba(0,0,0,0.4) !important;
+  border: 1px solid rgba(26,107,120,0.3) !important;
   border-radius: 14px !important;
-  color: #f0fdf4 !important;
+  color: #e0f7fa !important;
   font-size: 13px;
   min-height: 72px;
   padding: 10px 14px !important;
@@ -5217,18 +5218,19 @@ body.pending-page .vote-controls textarea {
 }
 
 body.pending-page .vote-controls textarea::placeholder {
-  color: rgba(134,239,172,0.3);
+  color: rgba(125,211,222,0.3);
 }
 
 body.pending-page .vote-controls label {
-  color: rgba(240,253,244,0.8);
+  color: rgba(224,247,250,0.8);
   font-size: 13px;
   font-weight: 700;
 }
 
 body.pending-page .nav-person span[title] {
-  box-shadow: 0 0 0 3px rgba(187,247,208,0.05);
+  box-shadow: 0 0 0 3px rgba(26,107,120,0.08);
 }
+
 
 body.dark-theme .modal-overlay,
 .modal-overlay {

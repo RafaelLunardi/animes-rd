@@ -958,10 +958,7 @@ body.suggest-page .suggest-form-card .form-group input[disabled] {
 }
 
 .table-wrap {
-  background:
-    linear-gradient(var(--card), var(--card)) padding-box,
-    linear-gradient(135deg, rgba(134,239,172,0.4), rgba(147,197,253,0.4), rgba(249,168,212,0.4)) border-box;
-  border: 1.5px solid transparent;
+  border: 1px solid rgba(243, 239, 230, 0.1);
   border-radius: 8px;
   overflow-x: auto;
 }
@@ -4059,9 +4056,8 @@ body.dark-theme table {
 }
 
 body.dark-theme .table-wrap {
-  background:
-    linear-gradient(rgba(24, 23, 29, 0.7), rgba(24, 23, 29, 0.7)) padding-box,
-    linear-gradient(135deg, rgba(134,239,172,0.45), rgba(147,197,253,0.45), rgba(249,168,212,0.45)) border-box;
+  background: rgba(24, 23, 29, 0.7);
+  border-color: rgba(243, 239, 230, 0.1);
 }
 
 body.dark-theme .acervo-main-card {

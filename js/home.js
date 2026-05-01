@@ -479,7 +479,7 @@ async function renderNews(animes) {
 
   const BLOCK_MS = 5 * 60 * 60 * 1000;
   const block = Math.floor(Date.now() / BLOCK_MS);
-  const cacheKey = `mal-news-v3-${block}`;
+  const cacheKey = `mal-news-v4-${block}`;
 
   let items = null;
   try {
@@ -501,36 +501,37 @@ async function renderNews(animes) {
         picks.push(pool[(block + i * 5) % pool.length]);
       }
 
-      const cutoff = Date.now() - 90 * 24 * 60 * 60 * 1000; // 3 meses atrás
+      const cutoff = Date.now() - 90 * 24 * 60 * 60 * 1000;
 
-      const results = await Promise.all(
-        picks.map(async (anime) => {
-          try {
-            const res = await fetch(
-              `https://api.jikan.moe/v4/anime/${anime.malId}/news?limit=10`,
-            );
-            if (!res.ok) return null;
-            const payload = await res.json();
-            const news = (payload.data || []).find(
-              (n) => n.date && new Date(n.date).getTime() >= cutoff,
-            );
-            if (!news) return null;
-            return {
-              animeName: anime.nome,
-              title: news.title,
-              excerpt: news.excerpt?.slice(0, 160) || "",
-              url: news.url,
-              date: new Date(news.date).toLocaleDateString("pt-BR", {
-                day: "numeric", month: "short", year: "numeric",
-              }),
-            };
-          } catch {
-            return null;
-          }
-        }),
-      );
-
-      items = results.filter(Boolean);
+      // Tenta animes do pool em sequência até ter 3 notícias recentes
+      items = [];
+      const usedIds = new Set();
+      for (let i = 0; i < pool.length && items.length < 3; i++) {
+        const anime = pool[(block + i * 3) % pool.length];
+        if (usedIds.has(anime.malId)) continue;
+        usedIds.add(anime.malId);
+        try {
+          await new Promise((r) => setTimeout(r, i === 0 ? 0 : 400));
+          const res = await fetch(
+            `https://api.jikan.moe/v4/anime/${anime.malId}/news?limit=10`,
+          );
+          if (!res.ok) continue;
+          const payload = await res.json();
+          const news = (payload.data || []).find(
+            (n) => n.date && new Date(n.date).getTime() >= cutoff,
+          );
+          if (!news) continue;
+          items.push({
+            animeName: anime.nome,
+            title: news.title,
+            excerpt: news.excerpt?.slice(0, 160) || "",
+            url: news.url,
+            date: new Date(news.date).toLocaleDateString("pt-BR", {
+              day: "numeric", month: "short", year: "numeric",
+            }),
+          });
+        } catch { continue; }
+      }
       if (items.length) {
         try { localStorage.setItem(cacheKey, JSON.stringify(items)); } catch {}
       }

@@ -426,7 +426,7 @@ function renderPendingAnimes(animes) {
             <div style="display:flex">${dots}</div>
         </div>
         <p style="font-size:14px; color:var(--faint)">${(anime.generos || []).join(" • ")}</p>
-        <div style="font-size:12px; color:var(--faint); margin-bottom:15px">Sugerido por <strong>${anime.submittedByName}</strong></div>
+        <div style="font-size:12px; color:var(--faint); margin-bottom:15px">Sugerido por <strong style="color:${PERSON_LIGHTS[anime.submittedByName] || 'var(--paper)'}">${anime.submittedByName}</strong></div>
         ${
           currentUser
             ? `

@@ -425,7 +425,7 @@ function renderPendingAnimes(animes) {
             <h3 style="margin:0">${anime.nome}</h3>
             <div style="display:flex">${dots}</div>
         </div>
-        <p style="font-size:14px; color:var(--faint)">${(anime.generos || []).join(" • ")}</p>
+        <div class="pending-genres">${(anime.generos || []).map(g => `<span class="pending-genre-chip">${g}</span>`).join("")}</div>
         <div style="font-size:12px; color:var(--faint); margin-bottom:15px">Sugerido por <strong style="color:${PERSON_LIGHTS[anime.submittedByName] || 'var(--paper)'}">${anime.submittedByName}</strong></div>
         ${
           currentUser

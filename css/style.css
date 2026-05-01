@@ -5234,6 +5234,11 @@ body.pending-page .vote-controls label {
   font-weight: 700;
 }
 
+body.pending-page .vote-card button[style*="text-decoration:underline"],
+body.pending-page .vote-card button[style*="text-decoration: underline"] {
+  color: rgba(255,255,255,0.8) !important;
+}
+
 body.pending-page .nav-person span[title] {
   box-shadow: 0 0 0 3px rgba(26,107,120,0.08);
 }

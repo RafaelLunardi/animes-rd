@@ -473,16 +473,88 @@ function renderPulse(animes) {
   `;
 }
 
-function renderNews() {
-  document.getElementById("news-grid").innerHTML = NEWS_PLACEHOLDER.map(
+async function renderNews(animes) {
+  const grid = document.getElementById("news-grid");
+  if (!grid) return;
+
+  const BLOCK_MS = 5 * 60 * 60 * 1000;
+  const block = Math.floor(Date.now() / BLOCK_MS);
+  const cacheKey = `mal-news-v2-${block}`;
+
+  let items = null;
+  try {
+    const cached = localStorage.getItem(cacheKey);
+    if (cached) {
+      items = JSON.parse(cached);
+    } else {
+      // Pega os top 15 animes com malId para rotacionar
+      const pool = [...animes]
+        .filter((a) => a.malId && a.nota !== null && a.qtdVotos > 1)
+        .sort((a, b) => Number(b.nota) - Number(a.nota))
+        .slice(0, 15);
+
+      if (!pool.length) throw new Error("no pool");
+
+      // Escolhe 3 animes diferentes baseado no bloco de tempo
+      const picks = [];
+      for (let i = 0; i < 3; i++) {
+        picks.push(pool[(block + i * 5) % pool.length]);
+      }
+
+      const results = await Promise.all(
+        picks.map(async (anime) => {
+          try {
+            const res = await fetch(
+              `https://api.jikan.moe/v4/anime/${anime.malId}/news?limit=1`,
+            );
+            if (!res.ok) return null;
+            const payload = await res.json();
+            const news = payload.data?.[0];
+            if (!news) return null;
+            return {
+              animeName: anime.nome,
+              title: news.title,
+              excerpt: news.excerpt?.slice(0, 160) || "",
+              url: news.url,
+              date: news.date
+                ? new Date(news.date).toLocaleDateString("pt-BR", { day: "numeric", month: "short", year: "numeric" })
+                : "",
+            };
+          } catch {
+            return null;
+          }
+        }),
+      );
+
+      items = results.filter(Boolean);
+      if (items.length) {
+        try { localStorage.setItem(cacheKey, JSON.stringify(items)); } catch {}
+      }
+    }
+  } catch {}
+
+  if (!items || !items.length) {
+    grid.innerHTML = NEWS_PLACEHOLDER.map(
+      (item) => `
+      <article class="news-card">
+        <span class="news-source">${item.source}</span>
+        <h3>${item.title}</h3>
+        <p>${item.summary}</p>
+        <a href="${item.url}" aria-disabled="true">Aguardando endpoint</a>
+      </article>`,
+    ).join("");
+    return;
+  }
+
+  grid.innerHTML = items.map(
     (item) => `
     <article class="news-card">
-      <span class="news-source">${item.source}</span>
-      <h3>${item.title}</h3>
-      <p>${item.summary}</p>
-      <a href="${item.url}" ${item.url === "#" ? 'aria-disabled="true"' : ""}>Ler notícia</a>
-    </article>
-  `,
+      <span class="news-source">${escapeHTML(item.animeName)}</span>
+      ${item.date ? `<span class="news-date">${item.date}</span>` : ""}
+      <h3>${escapeHTML(item.title)}</h3>
+      <p>${escapeHTML(item.excerpt)}${item.excerpt.length >= 160 ? "…" : ""}</p>
+      <a href="${item.url}" target="_blank" rel="noopener noreferrer">Ler notícia</a>
+    </article>`,
   ).join("");
 }
 
@@ -590,7 +662,7 @@ async function init() {
   renderFeaturedPost(data.animes);
   renderMemberPosts(data.animes);
   renderPulse(data.animes);
-  renderNews();
+  renderNews(data.animes);
   renderCalendar();
 }
 

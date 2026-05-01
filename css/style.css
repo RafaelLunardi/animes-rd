@@ -5254,7 +5254,25 @@ body.pending-page .vote-controls label {
 
 body.pending-page .vote-card button[style*="text-decoration:underline"],
 body.pending-page .vote-card button[style*="text-decoration: underline"] {
-  color: rgba(255,255,255,0.8) !important;
+  background: rgba(255,255,255,0.07) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 999px !important;
+  color: rgba(255,255,255,0.85) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  padding: 4px 12px !important;
+  text-decoration: none !important;
+  margin-top: 8px !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+  transition: background 0.15s ease, border-color 0.15s ease !important;
+}
+
+body.pending-page .vote-card button[style*="text-decoration:underline"]:hover,
+body.pending-page .vote-card button[style*="text-decoration: underline"]:hover {
+  background: rgba(255,255,255,0.12) !important;
+  border-color: rgba(255,255,255,0.22) !important;
 }
 
 body.pending-page .nav-person span[title] {

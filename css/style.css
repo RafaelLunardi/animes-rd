@@ -4054,9 +4054,14 @@ body.dark-theme .comment-balloon p {
   color: var(--paper);
 }
 
-body.dark-theme .table-wrap,
 body.dark-theme table {
   background: rgba(24, 23, 29, 0.7);
+}
+
+body.dark-theme .table-wrap {
+  background:
+    linear-gradient(rgba(24, 23, 29, 0.7), rgba(24, 23, 29, 0.7)) padding-box,
+    linear-gradient(135deg, rgba(134,239,172,0.45), rgba(147,197,253,0.45), rgba(249,168,212,0.45)) border-box;
 }
 
 body.dark-theme thead {

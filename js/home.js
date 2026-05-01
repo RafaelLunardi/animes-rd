@@ -473,13 +473,13 @@ function renderPulse(animes) {
   `;
 }
 
-async function renderNews(animes) {
+async function renderNews() {
   const grid = document.getElementById("news-grid");
   if (!grid) return;
 
   const BLOCK_MS = 5 * 60 * 60 * 1000;
   const block = Math.floor(Date.now() / BLOCK_MS);
-  const cacheKey = `mal-news-v4-${block}`;
+  const cacheKey = `mal-news-v5-${block}`;
 
   let items = null;
   try {
@@ -487,34 +487,25 @@ async function renderNews(animes) {
     if (cached) {
       items = JSON.parse(cached);
     } else {
-      // Pega os top 15 animes com malId para rotacionar
-      const pool = [...animes]
-        .filter((a) => a.malId && a.nota !== null && a.qtdVotos > 1)
-        .sort((a, b) => Number(b.nota) - Number(a.nota))
-        .slice(0, 15);
-
-      if (!pool.length) throw new Error("no pool");
-
-      // Escolhe 3 animes diferentes baseado no bloco de tempo
-      const picks = [];
-      for (let i = 0; i < 3; i++) {
-        picks.push(pool[(block + i * 5) % pool.length]);
-      }
-
       const cutoff = Date.now() - 90 * 24 * 60 * 60 * 1000;
 
-      // Tenta animes do pool em sequência até ter 3 notícias recentes
+      // Busca top 25 animes em exibição agora
+      const topRes = await fetch(`https://api.jikan.moe/v4/top/anime?filter=airing&limit=25`);
+      if (!topRes.ok) throw new Error("top failed");
+      const topPayload = await topRes.json();
+      const pool = (topPayload.data || []).map((a) => ({
+        malId: a.mal_id,
+        nome: a.title_english || a.title,
+      }));
+      if (!pool.length) throw new Error("empty pool");
+
+      // Tenta em sequência até ter 3 notícias recentes
       items = [];
-      const usedIds = new Set();
       for (let i = 0; i < pool.length && items.length < 3; i++) {
-        const anime = pool[(block + i * 3) % pool.length];
-        if (usedIds.has(anime.malId)) continue;
-        usedIds.add(anime.malId);
+        const anime = pool[(block * 3 + i) % pool.length];
         try {
-          await new Promise((r) => setTimeout(r, i === 0 ? 0 : 400));
-          const res = await fetch(
-            `https://api.jikan.moe/v4/anime/${anime.malId}/news?limit=10`,
-          );
+          await new Promise((r) => setTimeout(r, i === 0 ? 0 : 500));
+          const res = await fetch(`https://api.jikan.moe/v4/anime/${anime.malId}/news?limit=10`);
           if (!res.ok) continue;
           const payload = await res.json();
           const news = (payload.data || []).find(
@@ -667,7 +658,7 @@ async function init() {
   renderFeaturedPost(data.animes);
   renderMemberPosts(data.animes);
   renderPulse(data.animes);
-  renderNews(data.animes);
+  renderNews();
   renderCalendar();
 }
 

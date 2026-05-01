@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-01T01:46:39.010Z",
+  "updatedAt": "2026-05-01T06:15:01.829Z",
   "total": 180,
   "animes": [
     {
@@ -1527,51 +1527,6 @@
       "notaZana": null
     },
     {
-      "id": "3416beab-c784-81e8-9767-f30d1f1d5f7f",
-      "nome": "Dan Da Dan",
-      "nota": "9.00",
-      "generos": [
-        "Ação ⚔️",
-        "Comédia 😂",
-        "Romance 💖",
-        "Fantasia 🧙"
-      ],
-      "notaRafael": null,
-      "notaFernando": null,
-      "notaDudu": 9,
-      "notaHacksuya": null,
-      "maisDeUmVoto": "nao",
-      "qtdVotos": 1,
-      "notaSort": 9,
-      "controversia": 0,
-      "migratedAt": {
-        "_seconds": 1777314441,
-        "_nanoseconds": 493000000
-      },
-      "malId": 57334,
-      "quemAssistiu": [
-        "Dudu"
-      ],
-      "comments": [
-        {
-          "person": "Dudu",
-          "text": "Muito bom pro que se propõe, dos animes mais atuais esta bem gostosinho."
-        }
-      ],
-      "comentarios": "Dudu: Muito bom pro que se propõe, dos animes mais atuais esta bem gostosinho.",
-      "updatedAt": {
-        "_seconds": 1777399482,
-        "_nanoseconds": 241000000
-      },
-      "files": [
-        {
-          "name": "Opening 1",
-          "url": "https://www.youtube.com/results?search_query=Dan%20Da%20Dan%20opening%201"
-        }
-      ],
-      "notaZana": null
-    },
-    {
       "id": "3416beab-c784-81f8-a37f-f5737daee6a0",
       "nome": "Little Busters!: Refrain",
       "quemAssistiu": [
@@ -2275,6 +2230,56 @@
         }
       ],
       "notaZana": null
+    },
+    {
+      "id": "3416beab-c784-81e8-9767-f30d1f1d5f7f",
+      "nome": "Dan Da Dan",
+      "generos": [
+        "Ação ⚔️",
+        "Comédia 😂",
+        "Romance 💖",
+        "Fantasia 🧙"
+      ],
+      "notaFernando": null,
+      "notaDudu": 9,
+      "notaHacksuya": null,
+      "migratedAt": {
+        "_seconds": 1777314441,
+        "_nanoseconds": 493000000
+      },
+      "malId": 57334,
+      "files": [
+        {
+          "name": "Opening 1",
+          "url": "https://www.youtube.com/results?search_query=Dan%20Da%20Dan%20opening%201"
+        }
+      ],
+      "notaZana": null,
+      "controversia": 0.4,
+      "quemAssistiu": [
+        "Rafael",
+        "Dudu"
+      ],
+      "qtdVotos": 2,
+      "comments": [
+        {
+          "person": "Dudu",
+          "text": "Muito bom pro que se propõe, dos animes mais atuais esta bem gostosinho."
+        },
+        {
+          "person": "Rafael",
+          "text": "Anime muito bom. Comédia quase sem censura, recomendo muito, Dica: assista a versão dublada da Netflix!"
+        }
+      ],
+      "maisDeUmVoto": "sim",
+      "notaSort": 8.8,
+      "notaRafael": 8.6,
+      "comentarios": "Dudu: Muito bom pro que se propõe, dos animes mais atuais esta bem gostosinho.Rafael: Anime muito bom. Comédia quase sem censura, recomendo muito, Dica: assista a versão dublada da Netflix!",
+      "nota": "8.80",
+      "updatedAt": {
+        "_seconds": 1777600136,
+        "_nanoseconds": 965000000
+      }
     },
     {
       "id": "3416beab-c784-814d-bf73-d714b38ad61f",

@@ -4064,6 +4064,13 @@ body.dark-theme .table-wrap {
     linear-gradient(135deg, rgba(134,239,172,0.45), rgba(147,197,253,0.45), rgba(249,168,212,0.45)) border-box;
 }
 
+body.dark-theme .acervo-main-card {
+  background:
+    linear-gradient(var(--card), var(--card)) padding-box,
+    linear-gradient(135deg, rgba(167,139,250,0.5), rgba(134,239,172,0.45), rgba(249,168,212,0.45)) border-box;
+  border: 1.5px solid transparent;
+}
+
 body.dark-theme thead {
   background: linear-gradient(90deg, rgba(124, 58, 237, 0.22), rgba(6, 182, 212, 0.16));
 }

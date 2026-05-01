@@ -479,7 +479,7 @@ async function renderNews() {
 
   const BLOCK_MS = 5 * 60 * 60 * 1000;
   const block = Math.floor(Date.now() / BLOCK_MS);
-  const cacheKey = `gnews-anime-v3-${block}`;
+  const cacheKey = `gnews-anime-v4-${block}`;
 
   let items = null;
   try {
@@ -490,7 +490,7 @@ async function renderNews() {
       const rssUrl = encodeURIComponent(
         "https://news.google.com/rss/search?q=anime&hl=en-US&gl=US&ceid=US:en",
       );
-      const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}&count=25`);
+      const res = await fetch(`https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}&count=10`);
       if (!res.ok) throw new Error("rss failed");
       const payload = await res.json();
 

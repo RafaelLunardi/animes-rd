@@ -5134,8 +5134,8 @@ body.pending-page .page-header h1 {
 body.pending-page .vote-card {
   background:
     linear-gradient(rgba(14,28,30,0.96), rgba(14,28,30,0.96)) padding-box,
-    linear-gradient(135deg, #1a6b78, #1a4a32, #5a1a42) border-box !important;
-  border: 2px solid transparent !important;
+    linear-gradient(135deg, #2a9db4, #2a7a52, #8a2a62) border-box !important;
+  border: 2.5px solid transparent !important;
   border-radius: 28px !important;
   box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(26,107,120,0.08) inset;
   margin-bottom: 0 !important;

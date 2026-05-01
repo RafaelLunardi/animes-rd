@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Desafios — Animes RD</title>
-    <link rel="stylesheet" href="css/style.css?v=desafios-1" />
+    <link rel="stylesheet" href="css/style.css?v=desafios-2" />
     <script type="module" src="./js/theme.js?v=ciel-gold-3"></script>
     <script type="module" src="./js/utils.js?v=ciel-gold-3"></script>
   </head>
@@ -17,87 +17,95 @@
         <p>Jogos e análises do acervo do grupo.</p>
       </div>
 
+      <!-- Tabs -->
       <div class="desafios-tabs" id="desafios-tabs">
-        <button class="desafio-tab active" data-tab="previsao">🔮 Previsão de Nota</button>
-        <button class="desafio-tab" data-tab="misterio">❓ Anime Misterioso</button>
-        <button class="desafio-tab" data-tab="timeline">📅 Linha do Tempo</button>
+        <button class="desafio-tab active" data-tab="previsao">🔮 Previsão</button>
+        <button class="desafio-tab" data-tab="misterio">❓ Misterioso</button>
+        <button class="desafio-tab" data-tab="timeline">📊 Timeline</button>
         <button class="desafio-tab" data-tab="batalha">⚔️ Batalha</button>
       </div>
 
-      <!-- 🔮 Previsão de Nota -->
+      <!-- 🔮 Previsão -->
       <section class="desafio-panel active" id="tab-previsao">
-        <div class="desafio-card">
-          <div class="desafio-card-header">
-            <span class="desafio-eyebrow">Previsão de Nota</span>
-            <h2>O que você provavelmente vai dar?</h2>
-            <p>Selecione um membro e um anime que ele ainda não assistiu. O sistema prevê a nota com base no histórico.</p>
+        <div class="desafio-hero" style="--accent:#818cf8;--glow:rgba(99,102,241,0.18)">
+          <div class="desafio-hero-icon">🔮</div>
+          <div class="desafio-hero-text">
+            <h2>Previsão de Nota</h2>
+            <p>Com base no seu histórico, o sistema calcula a nota que você provavelmente daria a um anime que ainda não assistiu.</p>
           </div>
-          <div class="previsao-controls">
-            <div class="previsao-selects">
+        </div>
+        <div class="desafio-body">
+          <div class="previsao-form">
+            <div class="desafio-field-group">
               <div class="desafio-field">
                 <label>Membro</label>
                 <select id="prev-person"></select>
               </div>
               <div class="desafio-field">
-                <label>Anime (não assistido)</label>
+                <label>Anime não assistido</label>
                 <select id="prev-anime"></select>
               </div>
+              <button class="desafio-btn primary" id="prev-btn">Prever →</button>
             </div>
-            <button class="desafio-btn primary" id="prev-btn">Prever nota</button>
           </div>
           <div id="prev-result" class="previsao-result hidden"></div>
         </div>
       </section>
 
-      <!-- ❓ Anime Misterioso -->
+      <!-- ❓ Misterioso -->
       <section class="desafio-panel" id="tab-misterio">
-        <div class="desafio-card">
-          <div class="desafio-card-header">
-            <span class="desafio-eyebrow">Anime Misterioso</span>
-            <h2>Adivinhe o anime!</h2>
-            <p>O nome está escondido. Use as pistas para tentar acertar.</p>
+        <div class="desafio-hero" style="--accent:#f472b6;--glow:rgba(244,114,182,0.15)">
+          <div class="desafio-hero-icon">❓</div>
+          <div class="desafio-hero-text">
+            <h2>Anime Misterioso</h2>
+            <p>O nome está escondido. Use as pistas para adivinhar qual anime é.</p>
           </div>
-          <div id="misterio-clues" class="misterio-clues"></div>
+        </div>
+        <div class="desafio-body">
+          <div id="misterio-clues" class="misterio-clues-wrap"></div>
           <div class="misterio-input-row">
-            <input id="misterio-guess" type="text" placeholder="Digite o nome do anime..." autocomplete="off" />
-            <button class="desafio-btn primary" id="misterio-submit">Chutar</button>
+            <input id="misterio-guess" type="text" placeholder="Digite o nome do anime..." autocomplete="off" class="desafio-input" />
+            <button class="desafio-btn primary" id="misterio-submit">Chutar →</button>
           </div>
           <div id="misterio-feedback" class="misterio-feedback hidden"></div>
-          <div class="misterio-actions">
-            <button class="desafio-btn secondary" id="misterio-reveal">Revelar</button>
-            <button class="desafio-btn secondary" id="misterio-next">Próximo</button>
+          <div class="misterio-footer">
+            <button class="desafio-btn secondary" id="misterio-reveal">👁 Revelar</button>
+            <button class="desafio-btn secondary" id="misterio-next">⟳ Novo anime</button>
           </div>
         </div>
       </section>
 
-      <!-- 📅 Linha do Tempo -->
+      <!-- 📊 Timeline -->
       <section class="desafio-panel" id="tab-timeline">
-        <div class="desafio-card">
-          <div class="desafio-card-header">
-            <span class="desafio-eyebrow">Linha do Tempo</span>
-            <h2>A história do grupo em números</h2>
+        <div class="desafio-hero" style="--accent:#34d399;--glow:rgba(52,211,153,0.15)">
+          <div class="desafio-hero-icon">📊</div>
+          <div class="desafio-hero-text">
+            <h2>Linha do Tempo</h2>
+            <p>Recordes, marcos e perfil detalhado de cada membro do grupo.</p>
           </div>
-          <div id="timeline-content" class="timeline-content"></div>
         </div>
+        <div class="desafio-body" id="timeline-content"></div>
       </section>
 
       <!-- ⚔️ Batalha -->
       <section class="desafio-panel" id="tab-batalha">
-        <div class="desafio-card">
-          <div class="desafio-card-header">
-            <span class="desafio-eyebrow">Batalha de Animes</span>
-            <h2>Qual você prefere?</h2>
-            <p>Vote no seu favorito. Resultado ao vivo.</p>
+        <div class="desafio-hero" style="--accent:#fb923c;--glow:rgba(251,146,60,0.15)">
+          <div class="desafio-hero-icon">⚔️</div>
+          <div class="desafio-hero-text">
+            <h2>Batalha de Animes</h2>
+            <p>Vote no seu favorito. Os votos são salvos e acumulados entre sessões.</p>
           </div>
-          <div id="batalha-arena" class="batalha-arena"></div>
-          <div class="batalha-actions">
-            <button class="desafio-btn secondary" id="batalha-next">Nova batalha ⚔️</button>
+        </div>
+        <div class="desafio-body">
+          <div id="batalha-arena"></div>
+          <div class="batalha-footer">
+            <button class="desafio-btn secondary" id="batalha-next">⟳ Nova batalha</button>
           </div>
         </div>
       </section>
     </main>
 
-    <script type="module" src="js/desafios.js?v=desafios-1"></script>
+    <script type="module" src="js/desafios.js?v=desafios-2"></script>
     <script type="module" src="js/nyx-widget.js?v=ciel-widget-1"></script>
   </body>
 </html>

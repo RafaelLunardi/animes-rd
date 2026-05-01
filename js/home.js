@@ -479,7 +479,7 @@ async function renderNews() {
 
   const BLOCK_MS = 5 * 60 * 60 * 1000;
   const block = Math.floor(Date.now() / BLOCK_MS);
-  const cacheKey = `gnews-anime-v1-${block}`;
+  const cacheKey = `gnews-anime-v2-${block}`;
 
   let items = null;
   try {
@@ -494,8 +494,15 @@ async function renderNews() {
       if (!res.ok) throw new Error("rss failed");
       const payload = await res.json();
 
+      const seenTitles = new Set();
       items = (payload.items || [])
-        .filter((item) => item.title && item.link)
+        .filter((item) => {
+          if (!item.title || !item.link) return false;
+          const key = item.title.slice(0, 40).toLowerCase();
+          if (seenTitles.has(key)) return false;
+          seenTitles.add(key);
+          return true;
+        })
         .slice(0, 3)
         .map((item) => ({
           source: item.author || "Google News",

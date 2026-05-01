@@ -12,7 +12,8 @@
       "Bash(awk 'NR>=4143 && NR<=4760 && /bbf7d0/{print NR\": \"$0}' \"c:/Users/rafa-/Downloads/Git anime/css/style.css\")",
       "Bash(awk 'NR>=4143 && NR<=4760 && /c4b5|7dd3|bae6|ddd6|196,1|125,2|bbf7|4ade|d9c8/{print NR\": \"$0}' \"c:/Users/rafa-/Downloads/Git anime/css/style.css\")",
       "Bash(awk 'NR==4143{start=NR} NR==4739{end=NR} END{print start, end}' \"c:/Users/rafa-/Downloads/Git anime/css/style.css\")",
-      "Bash(awk 'NR>=4143 && NR<=4760 && /^\\\\/\\\\* ── /{print NR\": \"$0}' \"c:/Users/rafa-/Downloads/Git anime/css/style.css\")"
+      "Bash(awk 'NR>=4143 && NR<=4760 && /^\\\\/\\\\* ── /{print NR\": \"$0}' \"c:/Users/rafa-/Downloads/Git anime/css/style.css\")",
+      "Bash(git mv *)"
     ]
   }
 }

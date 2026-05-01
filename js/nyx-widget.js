@@ -1,9 +1,9 @@
 const currentPage = window.location.pathname.split("/").pop() || "index.html";
 
-if (currentPage !== "nyx.html") {
+if (currentPage !== "ciel.html") {
   const link = document.createElement("a");
   link.className = "nyx-floating-link";
-  link.href = "nyx.html";
+  link.href = "ciel.html";
   link.setAttribute("aria-label", "Abrir Ciel");
   link.title = "Ciel — Grande Sábia";
   link.innerHTML = `

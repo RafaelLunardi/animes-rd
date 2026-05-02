@@ -155,7 +155,7 @@ async function tryResolve(sessionId, round) {
   if (!s || s.current_round !== round) return;
 
   const voteMap = {};
-  votesSnap.forEach((v) => { const d = v.data(); voteMap[d.player_name] = d.anime_id; });
+  votesSnap.docs.forEach((v) => { const d = v.data(); voteMap[d.player_name] = d.anime_id; });
 
   const rd = s.rounds[round - 1];
   const vA = Object.values(voteMap).filter((v) => v === rd.animeA.id).length;

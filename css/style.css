@@ -1028,6 +1028,44 @@ tbody td {
   font-weight: 700;
 }
 
+.dub-badge {
+  background: rgba(0, 156, 59, 0.15);
+  border: 1px solid rgba(0, 156, 59, 0.4);
+  border-radius: 999px;
+  color: #4ade80;
+  flex-shrink: 0;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  padding: 2px 7px;
+  white-space: nowrap;
+}
+
+.anime-dub-toggle { margin-top: 10px; }
+
+.dub-toggle-btn {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  transition: all 0.15s ease;
+}
+
+.dub-toggle-btn:hover {
+  border-color: rgba(74,222,128,0.4);
+  color: #86efac;
+}
+
+.dub-toggle-btn.dub-on {
+  background: rgba(0, 156, 59, 0.12);
+  border-color: rgba(74,222,128,0.45);
+  color: #4ade80;
+}
+
 .anime-img {
   background: rgba(243, 239, 230, 0.07);
   border: 1px solid rgba(243, 239, 230, 0.12);

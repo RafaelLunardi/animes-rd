@@ -155,6 +155,7 @@ function renderAnimeIdentity(anime) {
     <span class="anime-identity">
       <img class="anime-img" src="${escapeHTML(imageUrl)}" alt="" loading="lazy" ${imgAttrs} />
       <span class="anime-name">${escapeHTML(anime.nome)}</span>
+      ${anime.ptDub ? `<span class="dub-badge" title="Disponível dublado em Português">🇧🇷 DUB</span>` : ""}
     </span>
   `;
 }
@@ -370,9 +371,9 @@ function renderTable() {
         <td>${renderAnimeIdentity(a)}</td>
         <td>${genres}${moreGenres}</td>
         <td>${viewers}</td>
-        <td><span class="nota ${notaCls}">${nota}</span></td>
-        <td>${a.qtdVotos ?? "—"}</td>
-        <td><span class="${contrCls}">${contr > 0 ? "🌶️ " + contr : contr}</span></td>
+        <td style="text-align:center"><span class="nota ${notaCls}">${nota}</span></td>
+        <td style="text-align:center">${a.qtdVotos ?? "—"}</td>
+        <td style="text-align:center"><span class="${contrCls}">${contr > 0 ? "🌶️ " + contr : contr}</span></td>
       </tr>
     `;
     })
@@ -541,6 +542,23 @@ window.toggleAddLinkForm = function (animeId) {
   if (!form.hidden) {
     document.getElementById(`add-link-name-${animeId}`)?.focus();
     document.getElementById(`add-link-status-${animeId}`).textContent = "";
+  }
+};
+
+window.togglePtDub = async function (animeId) {
+  if (!db || !currentUser?.personName) return;
+  const anime = allAnimes.find((a) => a.id === animeId);
+  if (!anime) return;
+  const newVal = !anime.ptDub;
+  try {
+    await runTransaction(db, async (transaction) => {
+      const snap = await transaction.get(doc(db, "animes", animeId));
+      if (!snap.exists()) throw new Error("Anime não encontrado.");
+      transaction.update(doc(db, "animes", animeId), { ptDub: newVal, updatedAt: serverTimestamp() });
+    });
+    updateAnimeLocally(animeId, { ...anime, ptDub: newVal });
+  } catch (e) {
+    console.error(e);
   }
 };
 
@@ -790,6 +808,11 @@ function renderEditForm(anime) {
         <div class="anime-edit-actions">
         <button class="edit-button" type="button" data-save-anime-edit>${hasScore || comment ? "Salvar alterações" : "Enviar nota"}</button>
         <span id="anime-edit-status" class="edit-status"></span>
+        </div>
+        <div class="anime-dub-toggle">
+          <button class="dub-toggle-btn ${anime.ptDub ? "dub-on" : ""}" type="button" onclick="togglePtDub('${anime.id}')">
+            🇧🇷 ${anime.ptDub ? "Dublado em PT ✓" : "Marcar como dublado em PT"}
+          </button>
         </div>
       </div>
     </details>

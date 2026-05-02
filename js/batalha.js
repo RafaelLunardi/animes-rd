@@ -557,45 +557,76 @@ function renderFinished(container, session) {
   const c1 = PERSON_LIGHTS[session.player1_name] || "#a78bfa";
   const c2 = PERSON_LIGHTS[session.player2_name] || "#f9a8d4";
 
+  const agreed_total = (session.round_results || []).filter((r) => {
+    const v = r.votes || {};
+    return v[session.player1_name] && v[session.player1_name] === v[session.player2_name];
+  }).length;
+
   container.innerHTML = `
-    <div class="bt-finished">
-      <div class="bt-fin-banner">
-        <div class="bt-fin-icon">🎭</div>
-        <h2 class="bt-fin-title">Reveal das escolhas!</h2>
-        <p class="bt-fin-subtitle">Veja o que cada um escolheu e discutam 👇</p>
+    <div class="bt-reveal">
+
+      <div class="bt-reveal-header">
+        <div class="bt-reveal-players">
+          <div class="bt-reveal-player" style="--pc:${PERSON_COLORS[session.player1_name]};--pl:${c1}">
+            <div class="bt-reveal-avatar">${session.player1_name[0]}</div>
+            <span>${session.player1_name}</span>
+          </div>
+          <div class="bt-reveal-title-block">
+            <div class="bt-reveal-emoji">🎭</div>
+            <h2>Reveal</h2>
+            ${agreed_total > 0 ? `<div class="bt-reveal-agree-badge">🤝 ${agreed_total} escolha${agreed_total > 1 ? "s" : ""} igual${agreed_total > 1 ? "is" : ""}!</div>` : ""}
+          </div>
+          <div class="bt-reveal-player" style="--pc:${PERSON_COLORS[session.player2_name]};--pl:${c2}">
+            <div class="bt-reveal-avatar">${session.player2_name[0]}</div>
+            <span>${session.player2_name}</span>
+          </div>
+        </div>
       </div>
 
-      <div class="bt-fin-players-label">
-        <span style="color:${c1}">● ${session.player1_name}</span>
-        <span style="color:${c2}">● ${session.player2_name}</span>
-      </div>
-
-      <div class="bt-fin-rounds">
+      <div class="bt-reveal-cards">
         ${(session.round_results || []).map((r) => {
-          const rd = session.rounds?.[r.round - 1];
-          const votes = r.votes || {};
-          const p1vote = votes[session.player1_name];
-          const p2vote = votes[session.player2_name];
-          const p1anime = p1vote === rd?.animeA?.id ? rd.animeA.nome : rd?.animeB?.nome;
-          const p2anime = p2vote === rd?.animeA?.id ? rd.animeA.nome : rd?.animeB?.nome;
-          const agreed = p1vote === p2vote;
+          const rd   = session.rounds?.[r.round - 1];
+          const v    = r.votes || {};
+          const p1id = v[session.player1_name];
+          const p2id = v[session.player2_name];
+          const p1nome = p1id === rd?.animeA?.id ? rd.animeA.nome : rd?.animeB?.nome;
+          const p2nome = p2id === rd?.animeA?.id ? rd.animeA.nome : rd?.animeB?.nome;
+          const same = p1id && p1id === p2id;
+
           return `
-            <div class="bt-reveal-row">
-              <div class="bt-reveal-round">Rodada ${r.round}</div>
-              <div class="bt-reveal-pair">
-                <span class="bt-reveal-opt">${escapeHTML(rd?.animeA?.nome || "")}</span>
-                <span class="bt-reveal-vs">vs</span>
-                <span class="bt-reveal-opt">${escapeHTML(rd?.animeB?.nome || "")}</span>
+            <div class="bt-reveal-card ${same ? "bt-reveal-card-same" : ""}">
+              <div class="bt-reveal-card-num">Rodada ${r.round}</div>
+
+              <div class="bt-reveal-card-options">
+                <span class="${p1id === rd?.animeA?.id || p2id === rd?.animeA?.id ? "bt-opt-picked" : "bt-opt-skipped"}">${escapeHTML(rd?.animeA?.nome || "")}</span>
+                <span class="bt-opt-vs">vs</span>
+                <span class="${p1id === rd?.animeB?.id || p2id === rd?.animeB?.id ? "bt-opt-picked" : "bt-opt-skipped"}">${escapeHTML(rd?.animeB?.nome || "")}</span>
               </div>
-              <div class="bt-reveal-choices">
-                <span class="bt-reveal-choice" style="border-color:${PERSON_COLORS[session.player1_name]}55;color:${c1}">
-                  ${session.player1_name} → <strong>${escapeHTML(p1anime || "—")}</strong>
-                </span>
-                <span class="bt-reveal-choice" style="border-color:${PERSON_COLORS[session.player2_name]}55;color:${c2}">
-                  ${session.player2_name} → <strong>${escapeHTML(p2anime || "—")}</strong>
-                </span>
-                ${agreed ? `<span class="bt-reveal-agree">🤝 Mesma escolha!</span>` : ""}
+
+              <div class="bt-reveal-card-votes">
+                <div class="bt-rvc" style="--pl:${c1};--pc:${PERSON_COLORS[session.player1_name]}">
+                  <div class="bt-rvc-dot"></div>
+                  <div class="bt-rvc-info">
+                    <span class="bt-rvc-name">${session.player1_name}</span>
+                    <span class="bt-rvc-choice">${escapeHTML(p1nome || "—")}</span>
+                  </div>
+                </div>
+
+                ${same
+                  ? `<div class="bt-rvc-same">🤝</div>`
+                  : `<div class="bt-rvc-diff">⚡</div>`
+                }
+
+                <div class="bt-rvc" style="--pl:${c2};--pc:${PERSON_COLORS[session.player2_name]}">
+                  <div class="bt-rvc-info" style="text-align:right">
+                    <span class="bt-rvc-name">${session.player2_name}</span>
+                    <span class="bt-rvc-choice">${escapeHTML(p2nome || "—")}</span>
+                  </div>
+                  <div class="bt-rvc-dot"></div>
+                </div>
               </div>
+
+              ${same ? `<div class="bt-rvc-same-label">Mesma escolha!</div>` : ""}
             </div>
           `;
         }).join("")}

@@ -157,34 +157,14 @@ async function tryResolve(sessionId, round) {
   const voteMap = {};
   votesSnap.docs.forEach((v) => { const d = v.data(); voteMap[d.player_name] = d.anime_id; });
 
-  const rd = s.rounds[round - 1];
-  const vA = Object.values(voteMap).filter((v) => v === rd.animeA.id).length;
-  const vB = Object.values(voteMap).filter((v) => v === rd.animeB.id).length;
-
-  let roundWinner = null;
-  let roundWinnerAnime = null;
-  if (vA > vB) {
-    roundWinnerAnime = rd.animeA.nome;
-    roundWinner = Object.entries(voteMap).find(([,v]) => v === rd.animeA.id)?.[0];
-  } else if (vB > vA) {
-    roundWinnerAnime = rd.animeB.nome;
-    roundWinner = Object.entries(voteMap).find(([,v]) => v === rd.animeB.id)?.[0];
-  }
-
-  const newScores = { ...s.scores };
-  if (roundWinner) newScores[roundWinner] = (newScores[roundWinner] || 0) + 1;
-
-  const result = { round, votes: voteMap, winner: roundWinner, winnerAnime: roundWinnerAnime, vA, vB };
+  const result = { round, votes: voteMap };
   const newResults = [...(s.round_results || []), result];
   const isLast = round >= ROUNDS_TOTAL;
 
-  const update = { round_results: newResults, scores: newScores, updated_at: serverTimestamp() };
+  const update = { round_results: newResults, updated_at: serverTimestamp() };
   if (isLast) {
-    const [n1, n2] = [s.player1_name, s.player2_name];
-    let winner = newScores[n1] > newScores[n2] ? n1 : newScores[n2] > newScores[n1] ? n2 : "tie";
     update.status = "finished";
-    update.winner = winner;
-    console.log(`[Batalha] FIM! Vencedor: ${winner}. Placar: ${n1}=${newScores[n1]} ${n2}=${newScores[n2]}`);
+    console.log(`[Batalha] FIM! Revelando escolhas.`);
   } else {
     update.current_round = round + 1;
     console.log(`[Batalha] Avançando para rodada ${round + 1}`);
@@ -451,14 +431,12 @@ async function renderActive(container, session, animes) {
         <div class="bt-scoreboard">
           <div class="bt-scorer">
             <span class="bt-scorer-name" style="color:${c1}">${session.player1_name}</span>
-            <span class="bt-scorer-pts">${session.scores?.[session.player1_name] || 0}</span>
           </div>
           <div class="bt-round-indicator">
             <span>Rodada</span>
             <strong>${round}/${ROUNDS_TOTAL}</strong>
           </div>
           <div class="bt-scorer">
-            <span class="bt-scorer-pts">${session.scores?.[session.player2_name] || 0}</span>
             <span class="bt-scorer-name" style="color:${c2}">${session.player2_name}</span>
           </div>
         </div>
@@ -578,46 +556,46 @@ async function renderActive(container, session, animes) {
 function renderFinished(container, session) {
   const c1 = PERSON_LIGHTS[session.player1_name] || "#a78bfa";
   const c2 = PERSON_LIGHTS[session.player2_name] || "#f9a8d4";
-  const isTie    = session.winner === "tie";
-  const isWinner = session.winner === myName;
 
   container.innerHTML = `
     <div class="bt-finished">
       <div class="bt-fin-banner">
-        <div class="bt-fin-icon">${isTie ? "🤝" : isWinner ? "🏆" : "💔"}</div>
-        <h2 class="bt-fin-title">${isTie ? "Empate!" : `${escapeHTML(session.winner)} venceu!`}</h2>
+        <div class="bt-fin-icon">🎭</div>
+        <h2 class="bt-fin-title">Reveal das escolhas!</h2>
+        <p class="bt-fin-subtitle">Veja o que cada um escolheu e discutam 👇</p>
       </div>
 
-      <div class="bt-fin-scores">
-        <div class="bt-fin-player ${session.winner === session.player1_name ? "champion" : ""}">
-          <div class="bt-fin-name" style="color:${c1}">${session.player1_name}</div>
-          <div class="bt-fin-pts">${session.scores?.[session.player1_name] || 0}</div>
-          <div class="bt-fin-label">pontos</div>
-        </div>
-        <div class="bt-fin-vs">vs</div>
-        <div class="bt-fin-player ${session.winner === session.player2_name ? "champion" : ""}">
-          <div class="bt-fin-name" style="color:${c2}">${session.player2_name}</div>
-          <div class="bt-fin-pts">${session.scores?.[session.player2_name] || 0}</div>
-          <div class="bt-fin-label">pontos</div>
-        </div>
+      <div class="bt-fin-players-label">
+        <span style="color:${c1}">● ${session.player1_name}</span>
+        <span style="color:${c2}">● ${session.player2_name}</span>
       </div>
 
       <div class="bt-fin-rounds">
-        <h4>Rodada a rodada</h4>
         ${(session.round_results || []).map((r) => {
           const rd = session.rounds?.[r.round - 1];
+          const votes = r.votes || {};
+          const p1vote = votes[session.player1_name];
+          const p2vote = votes[session.player2_name];
+          const p1anime = p1vote === rd?.animeA?.id ? rd.animeA.nome : rd?.animeB?.nome;
+          const p2anime = p2vote === rd?.animeA?.id ? rd.animeA.nome : rd?.animeB?.nome;
+          const agreed = p1vote === p2vote;
           return `
-            <div class="bt-fin-row">
-              <span class="bt-fin-rnum">R${r.round}</span>
-              <div class="bt-fin-votes">
-                ${Object.entries(r.votes || {}).map(([player, animeId]) => {
-                  const chosen = animeId === rd?.animeA?.id ? rd.animeA.nome : rd?.animeB?.nome;
-                  return `<span style="color:${PERSON_LIGHTS[player]}">${player}: ${escapeHTML(chosen || animeId)}</span>`;
-                }).join("")}
+            <div class="bt-reveal-row">
+              <div class="bt-reveal-round">Rodada ${r.round}</div>
+              <div class="bt-reveal-pair">
+                <span class="bt-reveal-opt">${escapeHTML(rd?.animeA?.nome || "")}</span>
+                <span class="bt-reveal-vs">vs</span>
+                <span class="bt-reveal-opt">${escapeHTML(rd?.animeB?.nome || "")}</span>
               </div>
-              <span class="bt-fin-result" style="color:${r.winner ? PERSON_LIGHTS[r.winner] : "var(--muted)"}">
-                ${r.winner ? `+1 ${r.winner}` : "empate"}
-              </span>
+              <div class="bt-reveal-choices">
+                <span class="bt-reveal-choice" style="border-color:${PERSON_COLORS[session.player1_name]}55;color:${c1}">
+                  ${session.player1_name} → <strong>${escapeHTML(p1anime || "—")}</strong>
+                </span>
+                <span class="bt-reveal-choice" style="border-color:${PERSON_COLORS[session.player2_name]}55;color:${c2}">
+                  ${session.player2_name} → <strong>${escapeHTML(p2anime || "—")}</strong>
+                </span>
+                ${agreed ? `<span class="bt-reveal-agree">🤝 Mesma escolha!</span>` : ""}
+              </div>
             </div>
           `;
         }).join("")}

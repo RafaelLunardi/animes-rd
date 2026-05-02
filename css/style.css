@@ -5361,6 +5361,19 @@ body.desafios-page .page-header h1 {
 .bt-fin-pts { font-family: "Newsreader", serif; font-size: 52px; font-weight: 750; }
 .bt-fin-label { color: var(--muted); font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; }
 .bt-fin-vs { color: var(--muted); font-size: 18px; font-weight: 900; }
+.bt-fin-subtitle { color: var(--muted); font-size: 14px; margin: 4px 0 0; }
+.bt-fin-players-label { display: flex; gap: 20px; font-size: 14px; font-weight: 800; margin-bottom: 4px; }
+
+.bt-reveal-row { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 18px; display: flex; flex-direction: column; gap: 12px; padding: 18px; }
+.bt-reveal-round { color: #fdba74; font-size: 11px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
+.bt-reveal-pair { align-items: center; color: var(--muted); display: flex; font-size: 13px; font-weight: 700; gap: 10px; }
+.bt-reveal-opt { color: var(--paper); font-size: 14px; font-weight: 750; }
+.bt-reveal-vs { color: var(--muted); font-size: 11px; }
+.bt-reveal-choices { display: flex; flex-wrap: wrap; gap: 10px; }
+.bt-reveal-choice { background: rgba(255,255,255,0.04); border: 1.5px solid; border-radius: 12px; font-size: 13px; padding: 8px 14px; }
+.bt-reveal-choice strong { color: var(--paper); }
+.bt-reveal-agree { align-items: center; background: rgba(99,102,241,0.1); border: 1px solid rgba(129,140,248,0.3); border-radius: 999px; color: #c7d2fe; display: inline-flex; font-size: 12px; font-weight: 800; padding: 4px 12px; }
+
 .bt-fin-rounds h4 { color: var(--paper); font-size: 16px; font-weight: 800; margin: 0 0 12px; }
 .bt-fin-row { align-items: center; background: rgba(255,255,255,0.03); border-radius: 14px; display: flex; flex-wrap: wrap; font-size: 12px; font-weight: 700; gap: 10px; padding: 10px 14px; }
 .bt-fin-rnum { background: rgba(251,146,60,0.12); border-radius: 999px; color: #fdba74; font-size: 10px; font-weight: 900; padding: 2px 8px; white-space: nowrap; }

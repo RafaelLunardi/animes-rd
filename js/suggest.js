@@ -403,7 +403,7 @@ function renderPendingAnimes(animes) {
 
   if (unvoted.length === 0) {
     pendingAnimesContainer.innerHTML = `
-      <div style="align-items:center; display:flex; flex-direction:column; gap:12px; padding:80px 20px; text-align:center;">
+      <div style="align-items:center; display:flex; flex-direction:column; gap:12px; grid-column:1/-1; padding:80px 20px; text-align:center; width:100%;">
         <div style="font-size:48px;line-height:1">✅</div>
         <p style="font-size:22px; font-weight:800; color:#86efac; margin:0">Você votou em todos!</p>
         <p style="color:rgba(134,239,172,0.55); font-size:14px; margin:0">Confira seu histórico de votos clicando no botão acima.</p>

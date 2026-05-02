@@ -530,19 +530,37 @@ async function renderActive(container, session, animes) {
     </div>
   `;
 
-  // Vote buttons
+  // Vote buttons — após votar, bloqueia TODOS os botões imediatamente
   document.querySelectorAll(".bvote2:not([disabled])").forEach((btn) => {
     btn.addEventListener("click", async () => {
       if (!myName) { alert("Selecione quem você é primeiro."); return; }
-      btn.disabled = true;
-      btn.textContent = "Votando...";
+
+      // Bloqueia todos os botões na hora para evitar duplo clique
+      document.querySelectorAll(".bvote2").forEach((b) => {
+        b.disabled = true;
+        if (b === btn) {
+          b.textContent = "Votando...";
+          b.classList.add("bvote2-done");
+        } else {
+          b.textContent = "—";
+        }
+      });
+
+      // Atualiza status imediatamente
+      const statusEl = document.querySelector(".bt-vote-status");
+      if (statusEl) statusEl.innerHTML = `<div class="bt-voted-msg">✓ Voto registrado! Aguardando o outro jogador...</div>`;
+
       try {
         await castVote(session.id, round, myName, btn.dataset.id);
+        // Força re-render para mostrar estado correto
+        await renderActive(container, session, animes);
       } catch (e) {
         console.error("[Batalha] Erro ao votar:", e);
-        btn.disabled = false;
-        btn.textContent = "Votar";
-        alert(e.message);
+        if (e.message !== "Você já votou nesta rodada") {
+          alert(e.message);
+        }
+        // Re-render para mostrar estado real do Firestore
+        await renderActive(container, session, animes);
       }
     });
   });

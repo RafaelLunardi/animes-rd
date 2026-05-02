@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-05-02T06:33:50.103Z",
+  "updatedAt": "2026-05-02T07:17:27.482Z",
   "total": 180,
   "animes": [
     {
@@ -484,17 +484,17 @@
         }
       ],
       "comentarios": "Fernando: Aquela maldita mentira, se tem pensamentos suicidas não veja esse anime, 10/10, animação desnecessáriamente boa\nDudu: KIMI DA YO, KIMI NAN DA YOOO, OSHIETE KURETAAAAAA\nKURAYAMI MO HIKARU NARA, HOSHIZORA NI NARUUUUUUUU!",
-      "updatedAt": {
-        "_seconds": 1777398444,
-        "_nanoseconds": 330000000
-      },
+      "notaZana": null,
       "files": [
         {
           "name": "Opening 1",
-          "url": "https://www.youtube.com/results?search_query=Shigatsu%20wa%20Kimi%20no%20Uso%20opening%201"
+          "url": "https://www.youtube.com/watch?v=fBsfD0Eytjw"
         }
       ],
-      "notaZana": null
+      "updatedAt": {
+        "_seconds": 1777704014,
+        "_nanoseconds": 883000000
+      }
     },
     {
       "id": "3416beab-c784-81e6-a402-d03f1e1b1aba",

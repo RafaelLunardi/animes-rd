@@ -12,6 +12,7 @@ import {
   missedAnimes,
 } from "./data.js?v=ciel-gold-3";
 import { escapeHTML, stripEmoji } from "./utils.js";
+import { initBatalha } from "./batalha.js";
 
 const NOTE_FIELDS = {
   Rafael: "notaRafael",
@@ -326,66 +327,7 @@ function initTimeline(data) {
   `;
 }
 
-// ── ⚔️ Batalha ───────────────────────────────────────────────────────────────
-
-const VOTES_KEY = "desafios-batalha-v2";
-function getVotes() { try { return JSON.parse(localStorage.getItem(VOTES_KEY)) || {}; } catch { return {}; } }
-function saveVotes(v) { try { localStorage.setItem(VOTES_KEY, JSON.stringify(v)); } catch {} }
-
-let pair = null;
-
-function loadBatalha(animes) {
-  const pool = animes.filter((a) => a.nota !== null);
-  const a = pool[Math.floor(Math.random() * pool.length)];
-  let b;
-  do { b = pool[Math.floor(Math.random() * pool.length)]; } while (b.id === a.id);
-  pair = [a, b];
-  renderBatalha(animes);
-}
-
-function renderBatalha(animes) {
-  if (!pair) return;
-  const [a, b] = pair;
-  const votes = getVotes();
-  const vA = votes[a.id] || 0;
-  const vB = votes[b.id] || 0;
-  const total = vA + vB;
-  const pA = total ? Math.round((vA / total) * 100) : 50;
-  const pB = total ? 100 - pA : 50;
-
-  const side = (anime, pct, v, pos) => `
-    <div class="bside bside-${pos}" data-id="${anime.id}">
-      <div class="bside-top">
-        <div class="bside-nota">${formatNota(anime.nota)}</div>
-        <div class="bside-genres">${(anime.generos || []).slice(0, 2).map((g) => `<span>${stripEmoji(g)}</span>`).join("")}</div>
-      </div>
-      <div class="bside-name">${escapeHTML(anime.nome)}</div>
-      <div class="bside-watchers">${(anime.quemAssistiu || []).map((p) => `<span class="bwatcher" style="background:${PERSON_COLORS[p]}22;border:1px solid ${PERSON_COLORS[p]}66;color:${PERSON_LIGHTS[p]}">${p[0]}</span>`).join("")}</div>
-      <button class="desafio-btn batalha-btn" data-id="${anime.id}">Votar</button>
-      <div class="bbar-wrap">
-        <div class="bbar" style="width:${pct}%"></div>
-      </div>
-      <div class="bpct">${pct}% · ${v} voto${v !== 1 ? "s" : ""}</div>
-    </div>
-  `;
-
-  document.getElementById("batalha-arena").innerHTML = `
-    <div class="batalha-grid">
-      ${side(a, pA, vA, "left")}
-      <div class="batalha-vs"><span>VS</span></div>
-      ${side(b, pB, vB, "right")}
-    </div>
-  `;
-
-  document.querySelectorAll(".batalha-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const v = getVotes();
-      v[btn.dataset.id] = (v[btn.dataset.id] || 0) + 1;
-      saveVotes(v);
-      renderBatalha(animes);
-    });
-  });
-}
+// ── ⚔️ Batalha — handled by batalha.js ──────────────────────────────────────
 
 // ── Init ─────────────────────────────────────────────────────────────────────
 
@@ -394,10 +336,7 @@ async function init() {
   initPrevisao(data);
   initMisterio(data);
   initTimeline(data);
-  loadBatalha(data.animes);
-  document.getElementById("batalha-next").addEventListener("click", () =>
-    loadBatalha(data.animes),
-  );
+  initBatalha(document.getElementById("batalha-container"), data.animes);
 }
 
 init().catch(console.error);

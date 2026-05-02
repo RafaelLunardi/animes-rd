@@ -394,7 +394,7 @@ async function init() {
   initPrevisao(data);
   initMisterio(data);
   initTimeline(data);
-  initBatalha(data);
+  loadBatalha(data.animes);
   document.getElementById("batalha-next").addEventListener("click", () =>
     loadBatalha(data.animes),
   );

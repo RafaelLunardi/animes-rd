@@ -16,19 +16,25 @@ import {
   deleteDoc,
   query,
   where,
-  orderBy,
   limit,
   onSnapshot,
   runTransaction,
   serverTimestamp,
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
 import { firebaseConfig } from "./firebase-config.js";
 import { PEOPLE, PERSON_COLORS, PERSON_LIGHTS, animesOf, formatNota } from "./data.js?v=ciel-gold-3";
 import { escapeHTML } from "./utils.js";
 
-const app = getApps()[0] || initializeApp(firebaseConfig);
-const db  = getFirestore(app);
+const app  = getApps()[0] || initializeApp(firebaseConfig);
+const db   = getFirestore(app);
+const auth = getAuth(app);
 
 const ROUNDS_TOTAL  = 5;
 const SESSIONS_COL  = "battle_sessions_v2";
@@ -189,12 +195,43 @@ async function tryResolve(sessionId, round) {
 
 // ── UI ────────────────────────────────────────────────────────────────────────
 
-let unsub = null;
-let myName = localStorage.getItem(MY_KEY) || null;
+let unsub    = null;
+let myName   = localStorage.getItem(MY_KEY) || null;
+let fireUser = null;
 
 export function initBatalha(container, animes) {
   console.log("[Batalha] Init. PEOPLE:", PEOPLE);
-  renderRoot(container, animes);
+
+  onAuthStateChanged(auth, (user) => {
+    fireUser = user;
+    if (!user) {
+      renderAuthGate(container, animes);
+    } else {
+      // Recupera nome ligado a este uid (mesmo sistema do suggest.js)
+      const linked = localStorage.getItem(`user-${user.uid}-personName`);
+      if (linked && !myName) myName = linked;
+      renderRoot(container, animes);
+    }
+  });
+}
+
+function renderAuthGate(container, animes) {
+  container.innerHTML = `
+    <div class="bt-auth-gate">
+      <div class="bt-auth-icon">🔐</div>
+      <h3>Login necessário</h3>
+      <p>Para jogar a Batalha, faça login com Google — o mesmo que você usa para votar nos animes.</p>
+      <button class="batalha-action-btn" id="bt-login-btn">Entrar com Google</button>
+    </div>
+  `;
+  document.getElementById("bt-login-btn")?.addEventListener("click", async () => {
+    try {
+      await signInWithPopup(auth, new GoogleAuthProvider());
+      // onAuthStateChanged vai reagir automaticamente
+    } catch (e) {
+      alert("Erro no login: " + e.message);
+    }
+  });
 }
 
 function renderRoot(container, animes) {

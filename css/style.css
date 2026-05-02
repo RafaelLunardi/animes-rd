@@ -5285,6 +5285,11 @@ body.desafios-page .page-header h1 {
 .bt-label { color: rgba(199,210,254,0.55); display: block; font-size: 10px; font-weight: 900; letter-spacing: 0.14em; margin-bottom: 10px; text-transform: uppercase; }
 
 /* Lobby */
+.bt-auth-gate { align-items: center; display: flex; flex-direction: column; gap: 16px; padding: 48px 20px; text-align: center; }
+.bt-auth-icon { font-size: 48px; }
+.bt-auth-gate h3 { color: var(--paper); font-size: 22px; font-weight: 800; margin: 0; }
+.bt-auth-gate p { color: var(--muted); font-size: 14px; max-width: 400px; }
+
 .bt-lobby { display: flex; flex-direction: column; gap: 28px; }
 .bt-identity {  }
 .bt-person-grid { display: flex; flex-wrap: wrap; gap: 8px; }

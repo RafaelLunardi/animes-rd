@@ -275,6 +275,7 @@ function renderFilters() {
     </select>
     <select id="filter-votes">
       <option value="">Qtd. votos</option>
+      <option value="5">5 votos</option>
       <option value="4">4 votos</option>
       <option value="3">3 votos</option>
       <option value="2">2 votos</option>

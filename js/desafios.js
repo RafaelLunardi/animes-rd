@@ -34,68 +34,131 @@ document.getElementById("desafios-tabs").addEventListener("click", (e) => {
 
 // ── 🔮 Previsão de Nota ──────────────────────────────────────────────────────
 
-function predictScore(animes, person, targetAnime) {
-  const watched = animesOf(animes, person).filter(
-    (a) => a[NOTE_FIELDS[person]] !== null && a[NOTE_FIELDS[person]] !== undefined,
+const PREV_KEY = "desafios-previsoes-v1";
+
+function getSavedPredictions() {
+  try { return JSON.parse(localStorage.getItem(PREV_KEY)) || []; } catch { return []; }
+}
+
+function savePrediction(entry) {
+  const list = getSavedPredictions().filter(
+    (p) => !(p.person === entry.person && p.animeId === entry.animeId),
   );
-  if (watched.length < 2) return null;
+  list.unshift(entry);
+  try { localStorage.setItem(PREV_KEY, JSON.stringify(list.slice(0, 50))); } catch {}
+}
 
-  const targetGenres = new Set(
-    (targetAnime.generos || []).map((g) => stripEmoji(g).toLowerCase()),
-  );
+function renderPredictions(animes) {
+  const list = getSavedPredictions();
+  const container = document.getElementById("prev-history");
+  if (!list.length) { container.innerHTML = ""; return; }
 
-  let totalWeight = 0;
-  let weightedSum = 0;
+  const rows = list.map((p) => {
+    const anime = animes.find((a) => a.id === p.animeId);
+    const color = PERSON_LIGHTS[p.person] || "#a78bfa";
+    const realScore = anime ? anime[NOTE_FIELDS[p.person]] : null;
+    const watched = realScore !== null && realScore !== undefined;
+    const diff = watched ? (Number(realScore) - Number(p.predicted)).toFixed(1) : null;
+    const diffLabel = diff
+      ? `<span class="pdiff ${Number(diff) > 0 ? "pos" : Number(diff) < 0 ? "neg" : "zero"}">${Number(diff) > 0 ? "+" : ""}${diff}</span>`
+      : "";
 
-  watched.forEach((anime) => {
-    const animeGenres = new Set(
-      (anime.generos || []).map((g) => stripEmoji(g).toLowerCase()),
-    );
-    const overlap = [...targetGenres].filter((g) => animeGenres.has(g)).length;
-    const union = new Set([...targetGenres, ...animeGenres]).size;
-    const similarity = union > 0 ? overlap / union : 0;
-    const weight = 0.2 + similarity * 2;
-    const score = Number(anime[NOTE_FIELDS[person]]);
-    totalWeight += weight;
-    weightedSum += score * weight;
+    return `
+      <div class="prev-row">
+        <div class="prev-row-info">
+          <div class="prev-row-name">${escapeHTML(p.animeName)}</div>
+          <div class="prev-row-person" style="color:${color}">${p.person}</div>
+        </div>
+        <div class="prev-row-scores">
+          <div class="prev-score-block">
+            <small>Previsão</small>
+            <strong style="color:${color}">${p.predicted}</strong>
+          </div>
+          <div class="prev-arrow">→</div>
+          <div class="prev-score-block">
+            <small>Real</small>
+            <strong class="${watched ? "" : "pending"}">${watched ? Number(realScore).toFixed(1) : "—"}</strong>
+          </div>
+          ${diffLabel}
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  container.innerHTML = `
+    <div class="prev-history-header">
+      <h3>Histórico de previsões</h3>
+      <button class="desafio-btn secondary" id="prev-clear" style="font-size:11px;padding:6px 14px">Limpar</button>
+    </div>
+    <div class="prev-history-list">${rows}</div>
+  `;
+
+  document.getElementById("prev-clear")?.addEventListener("click", () => {
+    localStorage.removeItem(PREV_KEY);
+    renderPredictions(animes);
   });
-
-  const base = totalWeight > 0 ? weightedSum / totalWeight : null;
-  if (!base) return null;
-  const groupNota = targetAnime.nota ? Number(targetAnime.nota) : base;
-  return Math.min(10, Math.max(0, base * 0.75 + groupNota * 0.25)).toFixed(1);
 }
 
 function initPrevisao(data) {
   const personSel = document.getElementById("prev-person");
   const animeSel = document.getElementById("prev-anime");
-  const result = document.getElementById("prev-result");
+  const slider = document.getElementById("prev-slider");
+  const sliderVal = document.getElementById("prev-slider-val");
 
-  personSel.innerHTML = PEOPLE.map(
-    (p) => `<option value="${p}">${p}</option>`,
-  ).join("");
+  personSel.innerHTML = PEOPLE.map((p) => `<option value="${p}">${p}</option>`).join("");
+
+  slider?.addEventListener("input", () => {
+    sliderVal.textContent = parseFloat(slider.value).toFixed(1);
+  });
 
   function updateAnimes() {
     const person = personSel.value;
     const missed = missedAnimes(data.animes, person)
-      .filter((a) => a.nota !== null)
       .sort((a, b) => a.nome.localeCompare(b.nome));
     animeSel.innerHTML = missed
       .map((a) => `<option value="${a.id}">${escapeHTML(a.nome)}</option>`)
       .join("");
-    result.classList.add("hidden");
   }
 
   personSel.addEventListener("change", updateAnimes);
   updateAnimes();
+  renderPredictions(data.animes);
 
   document.getElementById("prev-btn").addEventListener("click", () => {
     const person = personSel.value;
     const anime = data.animes.find((a) => a.id === animeSel.value);
-    if (!anime) return;
+    if (!anime || !slider) return;
 
-    const predicted = predictScore(data.animes, person, anime);
+    const predicted = parseFloat(slider.value).toFixed(1);
     const color = PERSON_LIGHTS[person] || "#a78bfa";
+
+    savePrediction({
+      person,
+      animeId: anime.id,
+      animeName: anime.nome,
+      predicted,
+      savedAt: Date.now(),
+    });
+
+    const result = document.getElementById("prev-result");
+    result.innerHTML = `
+      <div class="previsao-output">
+        <div class="previsao-score-wrap">
+          <div class="previsao-score" style="color:${color}">${predicted}</div>
+          <div class="previsao-score-label">/10</div>
+        </div>
+        <div class="previsao-anime-name">${escapeHTML(anime.nome)}</div>
+        <div class="previsao-person-label">Previsão de <span style="color:${color};font-weight:900">${person}</span> salva!</div>
+        <div class="previsao-tags">
+          <span class="ptag">Após assistir, volte aqui para ver a diferença</span>
+        </div>
+        <p class="previsao-note">A nota real aparece automaticamente quando ${person} registrar o voto no acervo.</p>
+      </div>
+    `;
+    result.classList.remove("hidden");
+    renderPredictions(data.animes);
+
+    // dummy removed, kept for compat
     const fav = stripEmoji(favoriteGenre(data.animes, person));
     const genreMatch = (anime.generos || []).some(
       (g) => stripEmoji(g).toLowerCase() === fav.toLowerCase(),
@@ -105,21 +168,22 @@ function initPrevisao(data) {
     result.innerHTML = `
       <div class="previsao-output">
         <div class="previsao-score-wrap">
-          <div class="previsao-score" style="color:${color}">${predicted ?? "?"}</div>
+          <div class="previsao-score" style="color:${color}">${predicted}</div>
           <div class="previsao-score-label">/10</div>
         </div>
         <div class="previsao-anime-name">${escapeHTML(anime.nome)}</div>
-        <div class="previsao-person-label">Previsão para <span style="color:${color};font-weight:900">${person}</span></div>
+        <div class="previsao-person-label">Previsão de <span style="color:${color};font-weight:900">${person}</span> registrada ✓</div>
         <div class="previsao-tags">
           <span class="ptag">Gênero fav: ${fav}</span>
           ${genreMatch ? `<span class="ptag green">✓ Gênero combina!</span>` : ""}
           <span class="ptag">Nota do grupo: ${formatNota(anime.nota)}</span>
-          <span class="ptag">${watchedCount} animes analisados</span>
+          <span class="ptag">${watchedCount} animes no histórico</span>
         </div>
-        <p class="previsao-note">${predicted ? "Previsão baseada em gêneros, histórico e nota do grupo." : "Poucos dados para uma previsão confiável."}</p>
+        <p class="previsao-note">A nota real aparece automaticamente quando ${person} registrar o voto no acervo.</p>
       </div>
     `;
     result.classList.remove("hidden");
+    renderPredictions(data.animes);
   });
 }
 

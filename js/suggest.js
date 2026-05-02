@@ -34,7 +34,7 @@ import {
   getPersonNota,
   formatNota,
   notaColor,
-} from "./data.js?v=modal-notes-line-2";
+} from "./data.js?v=desafios-soft-1";
 import { normalizeText } from "./utils.js";
 
 const GENRE_TRANSLATION = {

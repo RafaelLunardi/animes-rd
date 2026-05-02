@@ -8,7 +8,7 @@ import {
   getPersonNota,
   loadData,
   mostControversial,
-} from "./data.js?v=modal-notes-line-2";
+} from "./data.js?v=desafios-soft-1";
 import { escapeHTML, shortText, shuffleItems } from "./utils.js";
 
 const OPENINGS = {

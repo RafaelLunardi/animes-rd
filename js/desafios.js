@@ -10,7 +10,7 @@ import {
   getPersonNota,
   loadData,
   missedAnimes,
-} from "./data.js?v=modal-notes-line-2";
+} from "./data.js?v=desafios-soft-1";
 import { escapeHTML, stripEmoji } from "./utils.js";
 import { initBatalha } from "./batalha.js";
 

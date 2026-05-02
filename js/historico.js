@@ -12,7 +12,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
 import { firebaseConfig } from "./firebase-config.js";
-import { PEOPLE, PERSON_COLORS, PERSON_LIGHTS } from "./data.js?v=modal-notes-line-2";
+import { PEOPLE, PERSON_COLORS, PERSON_LIGHTS } from "./data.js?v=desafios-soft-1";
 import { escapeHTML } from "./utils.js";
 
 const isConfigured = firebaseConfig.apiKey !== "SUA_API_KEY";

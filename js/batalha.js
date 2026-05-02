@@ -35,7 +35,7 @@ import {
   PERSON_LIGHTS,
   animesOf,
   formatNota,
-} from "./data.js?v=modal-notes-line-2";
+} from "./data.js?v=desafios-soft-1";
 import { escapeHTML } from "./utils.js";
 
 const app = getApps()[0] || initializeApp(firebaseConfig);

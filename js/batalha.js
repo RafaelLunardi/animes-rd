@@ -98,15 +98,16 @@ async function cancelSession(sessionId) {
 }
 
 async function castVote(sessionId, round, playerName, animeId) {
-  // Verifica duplicata
-  const dup = await getDocs(query(
+  // Verifica duplicata — query simples por session_id, filtra client-side
+  const dupSnap = await getDocs(query(
     collection(db, VOTES_COL),
     where("session_id", "==", sessionId),
-    where("round",      "==", round),
-    where("player_name","==", playerName),
-    limit(1),
   ));
-  if (!dup.empty) throw new Error("Você já votou nesta rodada");
+  const dup = dupSnap.docs.filter((d) => {
+    const v = d.data();
+    return v.round === round && v.player_name === playerName;
+  });
+  if (dup.length > 0) throw new Error("Você já votou nesta rodada");
 
   const sessionRef = doc(db, SESSIONS_COL, sessionId);
   await runTransaction(db, async (tx) => {
@@ -133,11 +134,12 @@ async function castVote(sessionId, round, playerName, animeId) {
 }
 
 async function tryResolve(sessionId, round) {
-  const votesSnap = await getDocs(query(
+  const allVotesSnap = await getDocs(query(
     collection(db, VOTES_COL),
     where("session_id", "==", sessionId),
-    where("round",      "==", round),
   ));
+  const votesSnap = { docs: allVotesSnap.docs.filter((d) => d.data().round === round), size: 0 };
+  votesSnap.size = votesSnap.docs.length;
   console.log(`[Batalha] Votos na rodada ${round}:`, votesSnap.size);
   if (votesSnap.size < 2) return;
 
@@ -202,13 +204,12 @@ function renderRoot(container, animes) {
   container.innerHTML = `<div class="bt-loading">Carregando...</div>`;
 
   // Escuta sessões ativas que envolvem qualquer membro
-  const q = query(
-    collection(db, SESSIONS_COL),
-    where("status", "in", ["waiting", "active", "finished"]),
-  );
+  // Query simples sem filtro composto — filtra client-side
+  const q = collection(db, SESSIONS_COL);
 
   unsub = onSnapshot(q, (snap) => {
-    const sessions = snap.docs.map((d) => ({ ...d.data(), id: d.id }));
+    const all = snap.docs.map((d) => ({ ...d.data(), id: d.id }));
+    const sessions = all.filter((s) => ["waiting", "active", "finished"].includes(s.status));
     console.log("[Batalha] Sessões:", sessions.map((s) => `${s.id.slice(0,6)} ${s.status}`));
 
     const mySession = myName
@@ -224,8 +225,14 @@ function renderRoot(container, animes) {
       renderLobby(container, animes, sessions.filter((s) => s.status === "waiting"));
     }
   }, (err) => {
-    console.error("[Batalha] Erro no listener:", err);
-    container.innerHTML = `<div class="bt-error">Erro ao conectar. Verifique sua conexão.</div>`;
+    console.error("[Batalha] Erro no listener:", err.code, err.message);
+    // Mostra lobby mesmo sem conexão ao Firestore
+    renderLobby(container, animes, []);
+    // Banner de aviso não-bloqueante
+    const warn = document.createElement("div");
+    warn.style.cssText = "background:rgba(253,230,138,0.08);border:1px solid rgba(253,230,138,0.2);border-radius:12px;color:rgba(253,230,138,0.7);font-size:12px;font-weight:700;margin-top:16px;padding:10px 14px;";
+    warn.textContent = `⚠️ Sem sincronização em tempo real (${err.code || "erro"}). A batalha pode não funcionar corretamente.`;
+    container.appendChild(warn);
   });
 }
 
@@ -387,14 +394,14 @@ async function renderActive(container, session, animes) {
   const c1 = PERSON_LIGHTS[session.player1_name] || "#a78bfa";
   const c2 = PERSON_LIGHTS[session.player2_name] || "#f9a8d4";
 
-  // Pega votos desta rodada
-  const votesSnap = await getDocs(query(
+  // Pega votos desta rodada (filtra client-side para evitar índices compostos)
+  const allVotesSnap = await getDocs(query(
     collection(db, VOTES_COL),
     where("session_id", "==", session.id),
-    where("round",      "==", round),
   ));
+  const votesSnap = { docs: allVotesSnap.docs.filter((d) => d.data().round === round) };
   const votes = {};
-  votesSnap.forEach((v) => { const d = v.data(); votes[d.player_name] = d.anime_id; });
+  votesSnap.docs.forEach((v) => { const d = v.data(); votes[d.player_name] = d.anime_id; });
   const myVote     = myName ? votes[myName] : null;
   const votedNames = Object.keys(votes);
 

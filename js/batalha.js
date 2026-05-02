@@ -530,7 +530,7 @@ async function renderActive(container, session, animes) {
     </div>
   `;
 
-  // Vote buttons — após votar, bloqueia TODOS os botões imediatamente
+  // Vote buttons — bloqueia tudo imediatamente, deixa onSnapshot atualizar a UI
   document.querySelectorAll(".bvote2:not([disabled])").forEach((btn) => {
     btn.addEventListener("click", async () => {
       if (!myName) { alert("Selecione quem você é primeiro."); return; }
@@ -538,29 +538,23 @@ async function renderActive(container, session, animes) {
       // Bloqueia todos os botões na hora para evitar duplo clique
       document.querySelectorAll(".bvote2").forEach((b) => {
         b.disabled = true;
-        if (b === btn) {
-          b.textContent = "Votando...";
-          b.classList.add("bvote2-done");
-        } else {
-          b.textContent = "—";
-        }
+        b.classList.add("bvote2-done");
+        b.textContent = b === btn ? "✓ Seu voto" : "—";
       });
 
-      // Atualiza status imediatamente
+      // Atualiza status otimisticamente (sem re-render completo)
       const statusEl = document.querySelector(".bt-vote-status");
       if (statusEl) statusEl.innerHTML = `<div class="bt-voted-msg">✓ Voto registrado! Aguardando o outro jogador...</div>`;
 
       try {
         await castVote(session.id, round, myName, btn.dataset.id);
-        // Força re-render para mostrar estado correto
-        await renderActive(container, session, animes);
+        // NÃO chama renderActive aqui — o onSnapshot vai atualizar quando o round avançar
+        console.log("[Batalha] Voto registrado, aguardando onSnapshot...");
       } catch (e) {
         console.error("[Batalha] Erro ao votar:", e);
         if (e.message !== "Você já votou nesta rodada") {
           alert(e.message);
         }
-        // Re-render para mostrar estado real do Firestore
-        await renderActive(container, session, animes);
       }
     });
   });

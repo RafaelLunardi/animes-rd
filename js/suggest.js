@@ -398,10 +398,23 @@ function renderPendingAnimes(animes) {
     return;
   }
 
-  pendingAnimesContainer.innerHTML = animes
+  // Filtra fora os já votados pelo usuário atual
+  const unvoted = animes.filter((a) => !a.votedUserIds?.includes(currentUser?.uid));
+
+  if (unvoted.length === 0) {
+    pendingAnimesContainer.innerHTML = `
+      <div style="text-align:center; padding:48px; color:var(--muted)">
+        <div style="font-size:40px; margin-bottom:12px">✅</div>
+        <p style="font-size:16px; font-weight:700; color:var(--paper)">Você votou em todos!</p>
+        <p>Confira seu histórico de votos clicando no botão acima.</p>
+      </div>`;
+    return;
+  }
+
+  pendingAnimesContainer.innerHTML = unvoted
     .map((anime) => {
-      const isVoted = anime.votedUserIds?.includes(currentUser?.uid);
-      const userVote = currentUser?.personName ? anime.votes?.[currentUser.personName] : null;
+      const isVoted = false;
+      const userVote = null;
 
       let dots = PEOPLE.map((p) => {
         const hasVoted = anime.votes && anime.votes[p];

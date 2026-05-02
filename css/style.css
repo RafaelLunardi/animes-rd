@@ -5305,6 +5305,34 @@ body.desafios-page .page-header h1 {
   .desafio-hero { flex-direction: column; gap: 12px; }
   .desafio-hero-icon { font-size: 36px; }
 }
+.pending-header {
+  align-items: flex-end;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pending-history-btn {
+  background:
+    linear-gradient(rgba(10,16,12,0.9), rgba(10,16,12,0.9)) padding-box,
+    linear-gradient(135deg, rgba(134,239,172,0.55), rgba(253,230,138,0.38)) border-box;
+  border: 1.5px solid transparent;
+  border-radius: 999px;
+  color: #86efac;
+  font-size: 13px;
+  font-weight: 800;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+}
+
+.pending-history-btn:hover {
+  box-shadow: 0 4px 16px rgba(134,239,172,0.2);
+  color: #f0fdf4;
+}
+
 /* ── Pending page ─────────────────────────────────────────────────────────── */
 body.pending-page {
   background:

@@ -370,9 +370,9 @@ function renderTable() {
         <td>${renderAnimeIdentity(a)}</td>
         <td>${genres}${moreGenres}</td>
         <td>${viewers}</td>
-        <td><span class="nota ${notaCls}">${nota}</span></td>
-        <td>${a.qtdVotos ?? "—"}</td>
-        <td><span class="${contrCls}">${contr > 0 ? "🌶️ " + contr : contr}</span></td>
+        <td style="text-align:center"><span class="nota ${notaCls}">${nota}</span></td>
+        <td style="text-align:center">${a.qtdVotos ?? "—"}</td>
+        <td style="text-align:center"><span class="${contrCls}">${contr > 0 ? "🌶️ " + contr : contr}</span></td>
       </tr>
     `;
     })

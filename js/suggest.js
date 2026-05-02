@@ -403,35 +403,15 @@ function renderPendingAnimes(animes) {
 
   if (unvoted.length === 0) {
     pendingAnimesContainer.innerHTML = `
-      <div style="
-        align-items:center;
-        background: linear-gradient(rgba(10,16,12,0.92), rgba(10,16,12,0.92)) padding-box,
-          linear-gradient(135deg, rgba(134,239,172,0.55), rgba(253,230,138,0.38)) border-box;
-        border: 1.5px solid transparent;
-        border-radius: 28px;
-        display:flex;
-        flex-direction:column;
-        gap:14px;
-        justify-content:center;
-        margin: 0 auto;
-        max-width: 480px;
-        padding: 60px 40px;
-        text-align:center;
-      ">
-        <div style="font-size:52px;line-height:1">✅</div>
-        <p style="font-size:20px; font-weight:800; color:#86efac; margin:0">Você votou em todos!</p>
-        <p style="color:rgba(134,239,172,0.6); font-size:14px; margin:0">Confira seu histórico de votos clicando no botão acima.</p>
+      <div style="align-items:center; display:flex; flex-direction:column; gap:12px; padding:80px 20px; text-align:center;">
+        <div style="font-size:48px;line-height:1">✅</div>
+        <p style="font-size:22px; font-weight:800; color:#86efac; margin:0">Você votou em todos!</p>
+        <p style="color:rgba(134,239,172,0.55); font-size:14px; margin:0">Confira seu histórico de votos clicando no botão acima.</p>
         <a href="historico.html" style="
-          background: linear-gradient(rgba(10,16,12,0.9), rgba(10,16,12,0.9)) padding-box,
-            linear-gradient(135deg, rgba(134,239,172,0.55), rgba(253,230,138,0.38)) border-box;
-          border: 1.5px solid transparent;
-          border-radius: 999px;
-          color: #86efac;
-          font-size: 13px;
-          font-weight: 800;
-          margin-top: 6px;
-          padding: 10px 22px;
-          text-decoration: none;
+          background: linear-gradient(rgba(10,16,12,0.9),rgba(10,16,12,0.9)) padding-box,
+            linear-gradient(135deg,rgba(134,239,172,0.55),rgba(253,230,138,0.38)) border-box;
+          border:1.5px solid transparent; border-radius:999px; color:#86efac;
+          font-size:13px; font-weight:800; margin-top:8px; padding:10px 22px; text-decoration:none;
         ">Ver histórico →</a>
       </div>`;
     return;

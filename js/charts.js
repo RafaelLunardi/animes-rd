@@ -1,4 +1,4 @@
-// js/charts.js?v=ciel-gold-3 — gráficos gerais (charts.html)
+// js/charts.js?v=modal-notes-line-2 — gráficos gerais (charts.html)
 
 import {
   PEOPLE,
@@ -7,7 +7,7 @@ import {
   topGenres,
   countGenres,
   animesOf,
-} from "./data.js?v=ciel-gold-3";
+} from "./data.js?v=modal-notes-line-2";
 import { hexToRgba, shortText } from "./utils.js";
 
 Chart.defaults.color = "#94a3b8";

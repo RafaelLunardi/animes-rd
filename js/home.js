@@ -8,7 +8,7 @@ import {
   getPersonNota,
   loadData,
   mostControversial,
-} from "./data.js?v=ciel-gold-3";
+} from "./data.js?v=modal-notes-line-2";
 import { escapeHTML, shortText, shuffleItems } from "./utils.js";
 
 const OPENINGS = {
@@ -496,7 +496,12 @@ async function renderNews() {
 
       // Extrai o nome do anime/tópico principal do título (primeiras 2 palavras)
       function topicKey(title) {
-        return title.toLowerCase().split(/[\s:,\-–|]/g).filter(Boolean).slice(0, 2).join(" ");
+        return title
+          .toLowerCase()
+          .split(/[\s:,\-–|]/g)
+          .filter(Boolean)
+          .slice(0, 2)
+          .join(" ");
       }
 
       const seenTopics = new Set();
@@ -512,19 +517,21 @@ async function renderNews() {
         .map((item) => ({
           source: item.author || "Google News",
           title: item.title.replace(/ - .*$/, ""),
-          excerpt: item.description
-            ? item.description.replace(/<[^>]*>/g, "").slice(0, 160)
-            : "",
+          excerpt: item.description ? item.description.replace(/<[^>]*>/g, "").slice(0, 160) : "",
           url: item.link,
           date: item.pubDate
             ? new Date(item.pubDate).toLocaleDateString("pt-BR", {
-                day: "numeric", month: "short", year: "numeric",
+                day: "numeric",
+                month: "short",
+                year: "numeric",
               })
             : "",
         }));
 
       if (items.length) {
-        try { localStorage.setItem(cacheKey, JSON.stringify(items)); } catch {}
+        try {
+          localStorage.setItem(cacheKey, JSON.stringify(items));
+        } catch {}
       }
     }
   } catch {}
@@ -542,8 +549,9 @@ async function renderNews() {
     return;
   }
 
-  grid.innerHTML = items.map(
-    (item) => `
+  grid.innerHTML = items
+    .map(
+      (item) => `
     <article class="news-card">
       <span class="news-source">${escapeHTML(item.source)}</span>
       ${item.date ? `<span class="news-date">${item.date}</span>` : ""}
@@ -551,7 +559,8 @@ async function renderNews() {
       <p>${escapeHTML(item.excerpt)}${item.excerpt.length >= 160 ? "…" : ""}</p>
       <a href="${item.url}" target="_blank" rel="noopener noreferrer">Ler notícia</a>
     </article>`,
-  ).join("");
+    )
+    .join("");
 }
 
 const SCHEDULE_DAYS_PT = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"];

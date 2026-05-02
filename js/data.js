@@ -1,4 +1,4 @@
-// js/data.js?v=ciel-gold-3 — carrega e processa animes.json
+// js/data.js?v=modal-notes-line-2 — carrega e processa animes.json
 
 import { normalizeText, stripEmoji } from "./utils.js";
 

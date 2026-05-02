@@ -1,4 +1,4 @@
-// js/compare.js?v=ciel-gold-3 — lógica de comparação, Venn e radar
+// js/compare.js?v=modal-notes-line-2 — lógica de comparação, Venn e radar
 
 import {
   PEOPLE,
@@ -12,7 +12,7 @@ import {
   formatNota,
   notaColor,
   getPersonNota, // Importa a função centralizada
-} from "./data.js?v=ciel-gold-3";
+} from "./data.js?v=modal-notes-line-2";
 
 Chart.defaults.color = "#94a3b8";
 Chart.defaults.font.family = "'Poppins', sans-serif";

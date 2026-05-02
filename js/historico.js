@@ -12,7 +12,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
 import { firebaseConfig } from "./firebase-config.js";
-import { PEOPLE, PERSON_COLORS, PERSON_LIGHTS } from "./data.js?v=ciel-gold-3";
+import { PEOPLE, PERSON_COLORS, PERSON_LIGHTS } from "./data.js?v=modal-notes-line-2";
 import { escapeHTML } from "./utils.js";
 
 const isConfigured = firebaseConfig.apiKey !== "SUA_API_KEY";
@@ -52,31 +52,34 @@ function renderHistorico(animes, currentUser) {
       ${voted.length} anime${voted.length !== 1 ? "s" : ""} votado${voted.length !== 1 ? "s" : ""} por <strong style="color:${color}">${person}</strong>
     </div>
     <div id="pending-animes-container">
-      ${voted.map((anime) => {
-        const myVote = person ? anime.votes?.[person] : null;
-        const myLabel = getVoteLabel(myVote);
-        const myColor = myVote?.score !== null && myVote?.score !== undefined ? "#86efac" : "#fde68a";
+      ${voted
+        .map((anime) => {
+          const myVote = person ? anime.votes?.[person] : null;
+          const myLabel = getVoteLabel(myVote);
+          const myColor =
+            myVote?.score !== null && myVote?.score !== undefined ? "#86efac" : "#fde68a";
 
-        const dots = PEOPLE.map((p) => {
-          const hasVoted = anime.votes && anime.votes[p];
-          const c = PERSON_COLORS[p] || "#ccc";
-          const lc = PERSON_LIGHTS[p] || "rgba(255,255,255,0.1)";
-          return `<span title="${p}: ${hasVoted ? "Já votou" : "Pendente"}"
+          const dots = PEOPLE.map((p) => {
+            const hasVoted = anime.votes && anime.votes[p];
+            const c = PERSON_COLORS[p] || "#ccc";
+            const lc = PERSON_LIGHTS[p] || "rgba(255,255,255,0.1)";
+            return `<span title="${p}: ${hasVoted ? "Já votou" : "Pendente"}"
             style="display:inline-flex;width:22px;height:22px;border-radius:50%;
                    align-items:center;justify-content:center;font-size:11px;font-weight:bold;
                    margin-right:4px;border:1px solid ${hasVoted ? c : "rgba(255,255,255,0.1)"};
                    background:${hasVoted ? lc : "transparent"};color:${hasVoted ? c : "rgba(255,255,255,0.2)"};
                    opacity:${hasVoted ? "1" : "0.5"}">${p[0]}</span>`;
-        }).join("");
-
-        const otherVotes = PEOPLE.filter((p) => p !== person && anime.votes?.[p])
-          .map((p) => {
-            const v = anime.votes[p];
-            const lbl = getVoteLabel(v);
-            return `<span class="pending-genre-chip" style="color:${PERSON_LIGHTS[p]}">${p}: ${lbl}</span>`;
           }).join("");
 
-        return `
+          const otherVotes = PEOPLE.filter((p) => p !== person && anime.votes?.[p])
+            .map((p) => {
+              const v = anime.votes[p];
+              const lbl = getVoteLabel(v);
+              return `<span class="pending-genre-chip" style="color:${PERSON_LIGHTS[p]}">${p}: ${lbl}</span>`;
+            })
+            .join("");
+
+          return `
           <div class="vote-card">
             <div style="display:flex;justify-content:space-between;align-items:flex-start">
               <h3 style="margin:0">${escapeHTML(anime.nome)}</h3>
@@ -94,7 +97,8 @@ function renderHistorico(animes, currentUser) {
               ${otherVotes ? `<div style="display:flex;flex-wrap:wrap;gap:6px">${otherVotes}</div>` : ""}
             </div>
           </div>`;
-      }).join("")}
+        })
+        .join("")}
     </div>
   `;
 }

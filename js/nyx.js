@@ -5,7 +5,7 @@ import {
   formatNota,
   loadData,
   missedAnimes,
-} from "./data.js?v=ciel-gold-3";
+} from "./data.js?v=modal-notes-line-2";
 import { escapeHTML, stripEmoji } from "./utils.js";
 
 // ── Recommendation engine ────────────────────────────────────────────────────
@@ -93,9 +93,24 @@ function analyzeProfile(animes, person) {
 // ── Intent parser ────────────────────────────────────────────────────────────
 
 const GENRE_KEYWORDS = [
-  "ação", "acao", "fantasia", "drama", "comedia", "comédia", "romance",
-  "shounen", "isekai", "terror", "mecha", "slice of life", "ecchi",
-  "esportes", "sci-fi", "sobrenatural", "psicológico", "psicologico",
+  "ação",
+  "acao",
+  "fantasia",
+  "drama",
+  "comedia",
+  "comédia",
+  "romance",
+  "shounen",
+  "isekai",
+  "terror",
+  "mecha",
+  "slice of life",
+  "ecchi",
+  "esportes",
+  "sci-fi",
+  "sobrenatural",
+  "psicológico",
+  "psicologico",
 ];
 
 function normalize(str) {
@@ -107,8 +122,7 @@ function parseIntent(text, person) {
   const foundPerson = PEOPLE.find((p) => t.includes(p.toLowerCase()));
   const foundGenre = GENRE_KEYWORDS.find((g) => t.includes(normalize(g)));
 
-  if (/^(oi|ola|ei|bom|boa|alo|hey|hello|salve|tudo|como vai)/.test(t))
-    return { type: "greet" };
+  if (/^(oi|ola|ei|bom|boa|alo|hey|hello|salve|tudo|como vai)/.test(t)) return { type: "greet" };
 
   if (/quant|total|acervo|quanto|estatistica|base de dados|resumo|perfil|analise|anali/.test(t))
     return { type: "stats", person: foundPerson || person };
@@ -116,14 +130,12 @@ function parseIntent(text, person) {
   if (/top|melhor|mais visto|nota alta|ranking|melhores|mais bem avaliado/.test(t))
     return { type: "top" };
 
-  if (foundGenre)
-    return { type: "recommend", genre: foundGenre, person: foundPerson || person };
+  if (foundGenre) return { type: "recommend", genre: foundGenre, person: foundPerson || person };
 
   if (/recomend|indica|sugere|assistir|ver|proximo|proxim|o que|dica/.test(t))
     return { type: "recommend", person: foundPerson || person };
 
-  if (foundPerson)
-    return { type: "stats", person: foundPerson };
+  if (foundPerson) return { type: "stats", person: foundPerson };
 
   return { type: "unknown" };
 }
@@ -213,9 +225,11 @@ const GENRE_LINES = {
 function getGenreLine(genre) {
   const key = normalize(genre).replace(/[^a-z]/g, "");
   const match = Object.keys(GENRE_LINES).find((k) => key.includes(k) || k.includes(key));
-  const lines = match ? GENRE_LINES[match] : [
-    `Gênero <strong>${genre}</strong> identificado. Filtragem em execução. Selecionando títulos não consumidos.`,
-  ];
+  const lines = match
+    ? GENRE_LINES[match]
+    : [
+        `Gênero <strong>${genre}</strong> identificado. Filtragem em execução. Selecionando títulos não consumidos.`,
+      ];
   return rand(lines);
 }
 
@@ -311,7 +325,9 @@ function buildUnknownResponse() {
 const AVATAR_HTML = `<div class="ciel-msg-avatar"><img src="assets/ciel-icon.png" alt="Ciel" loading="lazy" /></div>`;
 
 let $log = null;
-function getLog() { return $log || ($log = document.getElementById("ciel-messages")); }
+function getLog() {
+  return $log || ($log = document.getElementById("ciel-messages"));
+}
 
 function scrollToBottom() {
   const log = getLog();
@@ -323,16 +339,20 @@ function addMessage(role, html) {
   if (!log) return;
   const wrap = document.createElement("div");
   wrap.className = role === "ciel" ? "ciel-msg ciel-msg-ciel" : "ciel-msg ciel-msg-user";
-  wrap.innerHTML = role === "ciel"
-    ? `${AVATAR_HTML}<div class="ciel-msg-bubble">${html}</div>`
-    : `<div class="ciel-msg-bubble">${html}</div>`;
+  wrap.innerHTML =
+    role === "ciel"
+      ? `${AVATAR_HTML}<div class="ciel-msg-bubble">${html}</div>`
+      : `<div class="ciel-msg-bubble">${html}</div>`;
   log.appendChild(wrap);
   scrollToBottom();
   return wrap;
 }
 
 function addTypingIndicator() {
-  return addMessage("ciel", `<span class="ciel-typing"><span></span><span></span><span></span></span>`);
+  return addMessage(
+    "ciel",
+    `<span class="ciel-typing"><span></span><span></span><span></span></span>`,
+  );
 }
 
 function addRecCards(picks) {
@@ -340,7 +360,9 @@ function addRecCards(picks) {
   if (!log) return;
   const wrap = document.createElement("div");
   wrap.className = "ciel-msg ciel-msg-ciel ciel-msg-cards";
-  const cards = picks.map((anime, i) => `
+  const cards = picks
+    .map(
+      (anime, i) => `
     <a class="ciel-rec-card" href="acervo.html?anime=${encodeURIComponent(anime.id)}">
       <span class="ciel-rec-rank">${String(i + 1).padStart(2, "0")}</span>
       <div class="ciel-rec-body">
@@ -348,7 +370,9 @@ function addRecCards(picks) {
         <p>${escapeHTML(anime.reason)}.</p>
         <small>Nota ${formatNota(anime.nota)} · ${anime.qtdVotos || 0} voto(s)</small>
       </div>
-    </a>`).join("");
+    </a>`,
+    )
+    .join("");
   wrap.innerHTML = `${AVATAR_HTML}<div class="ciel-rec-list">${cards}</div>`;
   log.appendChild(wrap);
   scrollToBottom();
@@ -402,12 +426,12 @@ async function init() {
   const data = await loadData();
   let selectedPerson = PEOPLE[0];
 
-  const $count       = document.getElementById("ciel-count");
+  const $count = document.getElementById("ciel-count");
   const $personCount = document.getElementById("ciel-person-count");
-  const $people      = document.getElementById("ciel-people");
-  const $quickArea   = document.querySelector(".ciel-quick-actions");
-  const $input       = document.getElementById("ciel-input");
-  const $send        = document.getElementById("ciel-send");
+  const $people = document.getElementById("ciel-people");
+  const $quickArea = document.querySelector(".ciel-quick-actions");
+  const $input = document.getElementById("ciel-input");
+  const $send = document.getElementById("ciel-send");
 
   $count.textContent = `${data.animes.length} títulos`;
 
@@ -417,7 +441,8 @@ async function init() {
 
   function renderPeople() {
     $people.innerHTML = PEOPLE.map(
-      (p) => `<button type="button" class="${p === selectedPerson ? "active" : ""}" data-person="${p}">${p}</button>`,
+      (p) =>
+        `<button type="button" class="${p === selectedPerson ? "active" : ""}" data-person="${p}">${p}</button>`,
     ).join("");
   }
 
@@ -461,7 +486,9 @@ async function init() {
   }
 
   $send.addEventListener("click", send);
-  $input.addEventListener("keydown", (e) => { if (e.key === "Enter") send(); });
+  $input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") send();
+  });
 }
 
 init().catch((err) => {

@@ -11,13 +11,52 @@ import {
 } from "./data.js?v=ciel-gold-3";
 import { escapeHTML, shortText, shuffleItems } from "./utils.js";
 
-const OPENINGS = {
-  Rafael: ["again", "Unravel", "Gurenge"],
-  Fernando: ["Departure!", "Haruka Kanata", "Kaikai Kitan"],
-  Dudu: ["The Rumbling", "Blue Bird", "Silhouette"],
-  Hacksuya: ["Kyouran Hey Kids!!", "Inferno", "Kick Back"],
-  Zana: ["Guren no Yumiya", "Bling-Bang-Bang-Born", "Colors"],
+import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
+import { firebaseConfig } from "./firebase-config.js";
+
+const _app  = getApps()[0] || initializeApp(firebaseConfig);
+const _db   = getFirestore(_app);
+const _auth = getAuth(_app);
+
+// Fallback de openings (sem URL)
+const OPENINGS_DEFAULT = {
+  Rafael:   [{ name: "again", url: "" }, { name: "Unravel", url: "" }, { name: "Gurenge", url: "" }],
+  Fernando: [{ name: "Departure!", url: "" }, { name: "Haruka Kanata", url: "" }, { name: "Kaikai Kitan", url: "" }],
+  Dudu:     [{ name: "The Rumbling", url: "" }, { name: "Blue Bird", url: "" }, { name: "Silhouette", url: "" }],
+  Hacksuya: [{ name: "Kyouran Hey Kids!!", url: "" }, { name: "Inferno", url: "" }, { name: "Kick Back", url: "" }],
+  Zana:     [{ name: "Guren no Yumiya", url: "" }, { name: "Bling-Bang-Bang-Born", url: "" }, { name: "Colors", url: "" }],
 };
+
+// Cache de openings carregadas do Firestore
+let openingsCache = { ...OPENINGS_DEFAULT };
+let currentPersonName = null;
+
+async function loadOpenings() {
+  for (const person of PEOPLE) {
+    try {
+      const snap = await getDoc(doc(_db, "member_openings", person));
+      if (snap.exists()) {
+        openingsCache[person] = snap.data().openings || OPENINGS_DEFAULT[person];
+      }
+    } catch {}
+  }
+}
+
+async function saveOpenings(person, openings) {
+  await setDoc(doc(_db, "member_openings", person), { openings });
+  openingsCache[person] = openings;
+}
+
+// Escuta auth para saber quem está logado
+onAuthStateChanged(_auth, (user) => {
+  if (user) {
+    currentPersonName = localStorage.getItem(`user-${user.uid}-personName`) || null;
+  } else {
+    currentPersonName = null;
+  }
+});
 
 const NEWS_PLACEHOLDER = [
   {
@@ -404,6 +443,74 @@ function renderFeaturedPost(animes) {
   startFeaturedCommentRotation(comments);
 }
 
+function renderOpeningChips(person) {
+  const ops = (openingsCache[person] || OPENINGS_DEFAULT[person] || []).slice(0, 3);
+  const canEdit = currentPersonName === person;
+  return ops.map((op, i) => {
+    const name = typeof op === "string" ? op : op.name;
+    const url  = typeof op === "string" ? "" : op.url;
+    const chip = url
+      ? `<a class="opening-chip" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer"><b>${String(i + 1).padStart(2, "0")}</b>${escapeHTML(name)}</a>`
+      : `<span class="opening-chip"><b>${String(i + 1).padStart(2, "0")}</b>${escapeHTML(name)}</span>`;
+    const editBtn = canEdit
+      ? `<button class="opening-edit-btn" onclick="window.editOpening('${escapeHTML(person)}',${i})" title="Editar">✎</button>`
+      : "";
+    return `<div class="opening-chip-wrap">${chip}${editBtn}</div>`;
+  }).join("");
+}
+
+window.editOpening = function (person, index) {
+  const ops = (openingsCache[person] || OPENINGS_DEFAULT[person] || []).slice(0, 3);
+  const current = ops[index] || { name: "", url: "" };
+  const name = typeof current === "string" ? current : current.name;
+  const url  = typeof current === "string" ? "" : current.url;
+
+  const wrap = document.getElementById(`openings-${person}`);
+  if (!wrap) return;
+
+  // Remove form anterior se existir
+  document.querySelectorAll(".opening-inline-form").forEach((el) => el.remove());
+
+  const form = document.createElement("div");
+  form.className = "opening-inline-form";
+  form.innerHTML = `
+    <input class="opening-form-input" id="op-name-${index}" type="text" placeholder="Nome da opening" value="${escapeHTML(name)}" maxlength="80" />
+    <input class="opening-form-input" id="op-url-${index}"  type="url"  placeholder="URL (opcional)" value="${escapeHTML(url)}" maxlength="300" />
+    <div class="opening-form-actions">
+      <button class="opening-save-btn" id="op-save-${index}">Salvar</button>
+      <button class="opening-cancel-btn" onclick="this.closest('.opening-inline-form').remove()">Cancelar</button>
+    </div>
+    <span class="opening-form-status" id="op-status-${index}"></span>
+  `;
+  wrap.after(form);
+
+  document.getElementById(`op-save-${index}`).addEventListener("click", async () => {
+    const newName = document.getElementById(`op-name-${index}`).value.trim();
+    const newUrl  = document.getElementById(`op-url-${index}`).value.trim();
+    const statusEl = document.getElementById(`op-status-${index}`);
+    if (!newName) { statusEl.textContent = "Nome obrigatório."; return; }
+
+    const btn = document.getElementById(`op-save-${index}`);
+    btn.disabled = true;
+    statusEl.textContent = "Salvando...";
+
+    const newOps = (openingsCache[person] || OPENINGS_DEFAULT[person] || []).slice(0, 3).map((op, i2) => {
+      if (i2 === index) return { name: newName, url: newUrl };
+      return typeof op === "string" ? { name: op, url: "" } : op;
+    });
+
+    try {
+      await saveOpenings(person, newOps);
+      form.remove();
+      const listEl = document.getElementById(`openings-${person}`);
+      if (listEl) listEl.innerHTML = renderOpeningChips(person);
+    } catch (e) {
+      statusEl.textContent = "Erro ao salvar.";
+      btn.disabled = false;
+    }
+  });
+};
+
 function renderMemberPosts(animes) {
   document.getElementById("member-grid").innerHTML = PEOPLE.map((person) => {
     const topAnimes = topAnimesByPerson(animes, person);
@@ -432,15 +539,8 @@ function renderMemberPosts(animes) {
         </ol>
         <div class="post-tags post-openings" aria-label="Top 3 openings de ${person}">
           <strong>Top 3 openings</strong>
-          <div class="opening-list">
-            ${(OPENINGS[person] || [])
-              .slice(0, 3)
-              .map(
-                (opening, index) => `
-              <span><b>${String(index + 1).padStart(2, "0")}</b>${opening}</span>
-            `,
-              )
-              .join("")}
+          <div class="opening-list" id="openings-${person}">
+            ${renderOpeningChips(person)}
           </div>
         </div>
         <a href="${person.toLowerCase()}.html">Abrir perfil</a>
@@ -654,6 +754,7 @@ window.scrollMemberGrid = function (dir) {
 
 async function init() {
   const data = await loadData();
+  await loadOpenings();
   await renderHero(data);
   renderFeaturedPost(data.animes);
   renderMemberPosts(data.animes);

@@ -3106,6 +3106,99 @@ body.blog-page::before {
   width: 100%;
 }
 
+.opening-chip-wrap {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+}
+
+.opening-chip {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  color: var(--paper);
+  font-size: 12px;
+  font-weight: 700;
+  flex: 1;
+  padding: 5px 10px;
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+a.opening-chip:hover { border-color: rgba(255,255,255,0.25); }
+
+.opening-chip b { color: var(--member-color); margin-right: 5px; }
+
+.opening-edit-btn {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 50%;
+  color: var(--muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  font-size: 12px;
+  height: 22px;
+  line-height: 1;
+  transition: all 0.15s ease;
+  width: 22px;
+}
+
+.opening-edit-btn:hover { border-color: rgba(255,255,255,0.25); color: var(--paper); }
+
+.opening-inline-form {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  padding: 12px;
+}
+
+.opening-form-input {
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  color: var(--paper);
+  font-size: 12px;
+  outline: none;
+  padding: 7px 10px;
+  width: 100%;
+}
+
+.opening-form-input:focus { border-color: rgba(255,255,255,0.3); }
+
+.opening-form-actions { display: flex; gap: 6px; }
+
+.opening-save-btn {
+  background: var(--member-color, var(--accent));
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 900;
+  padding: 5px 14px;
+  opacity: 0.9;
+  transition: opacity 0.15s ease;
+}
+
+.opening-save-btn:hover { opacity: 1; }
+
+.opening-cancel-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 999px;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+}
+
+.opening-form-status { color: var(--muted); font-size: 11px; }
+
 .opening-list span {
   align-items: center;
   display: flex;

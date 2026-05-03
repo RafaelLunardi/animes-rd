@@ -10,7 +10,7 @@ import {
   getPersonNota,
   loadData,
   missedAnimes,
-} from "./data.js?v=ciel-gold-3";
+} from "./data.js?v=desafios-soft-1";
 import { escapeHTML, stripEmoji } from "./utils.js";
 import { initBatalha } from "./batalha.js";
 
@@ -38,7 +38,11 @@ document.getElementById("desafios-tabs").addEventListener("click", (e) => {
 const PREV_KEY = "desafios-previsoes-v1";
 
 function getSavedPredictions() {
-  try { return JSON.parse(localStorage.getItem(PREV_KEY)) || []; } catch { return []; }
+  try {
+    return JSON.parse(localStorage.getItem(PREV_KEY)) || [];
+  } catch {
+    return [];
+  }
 }
 
 function savePrediction(entry) {
@@ -46,25 +50,31 @@ function savePrediction(entry) {
     (p) => !(p.person === entry.person && p.animeId === entry.animeId),
   );
   list.unshift(entry);
-  try { localStorage.setItem(PREV_KEY, JSON.stringify(list.slice(0, 50))); } catch {}
+  try {
+    localStorage.setItem(PREV_KEY, JSON.stringify(list.slice(0, 50)));
+  } catch {}
 }
 
 function renderPredictions(animes) {
   const list = getSavedPredictions();
   const container = document.getElementById("prev-history");
-  if (!list.length) { container.innerHTML = ""; return; }
+  if (!list.length) {
+    container.innerHTML = "";
+    return;
+  }
 
-  const rows = list.map((p) => {
-    const anime = animes.find((a) => a.id === p.animeId);
-    const color = PERSON_LIGHTS[p.person] || "#a78bfa";
-    const realScore = anime ? anime[NOTE_FIELDS[p.person]] : null;
-    const watched = realScore !== null && realScore !== undefined;
-    const diff = watched ? (Number(realScore) - Number(p.predicted)).toFixed(1) : null;
-    const diffLabel = diff
-      ? `<span class="pdiff ${Number(diff) > 0 ? "pos" : Number(diff) < 0 ? "neg" : "zero"}">${Number(diff) > 0 ? "+" : ""}${diff}</span>`
-      : "";
+  const rows = list
+    .map((p) => {
+      const anime = animes.find((a) => a.id === p.animeId);
+      const color = PERSON_LIGHTS[p.person] || "#a78bfa";
+      const realScore = anime ? anime[NOTE_FIELDS[p.person]] : null;
+      const watched = realScore !== null && realScore !== undefined;
+      const diff = watched ? (Number(realScore) - Number(p.predicted)).toFixed(1) : null;
+      const diffLabel = diff
+        ? `<span class="pdiff ${Number(diff) > 0 ? "pos" : Number(diff) < 0 ? "neg" : "zero"}">${Number(diff) > 0 ? "+" : ""}${diff}</span>`
+        : "";
 
-    return `
+      return `
       <div class="prev-row">
         <div class="prev-row-info">
           <div class="prev-row-name">${escapeHTML(p.animeName)}</div>
@@ -84,7 +94,8 @@ function renderPredictions(animes) {
         </div>
       </div>
     `;
-  }).join("");
+    })
+    .join("");
 
   container.innerHTML = `
     <div class="prev-history-header">
@@ -114,8 +125,7 @@ function initPrevisao(data) {
 
   function updateAnimes() {
     const person = personSel.value;
-    const missed = missedAnimes(data.animes, person)
-      .sort((a, b) => a.nome.localeCompare(b.nome));
+    const missed = missedAnimes(data.animes, person).sort((a, b) => a.nome.localeCompare(b.nome));
     animeSel.innerHTML = missed
       .map((a) => `<option value="${a.id}">${escapeHTML(a.nome)}</option>`)
       .join("");
@@ -202,9 +212,7 @@ function loadMystery(animes) {
   fb.classList.add("hidden");
   fb.innerHTML = "";
 
-  const genres = (mystery.generos || [])
-    .map((g) => `<span class="mchip">${g}</span>`)
-    .join("");
+  const genres = (mystery.generos || []).map((g) => `<span class="mchip">${g}</span>`).join("");
 
   const watchers = (mystery.quemAssistiu || [])
     .map(
@@ -262,7 +270,9 @@ function initMisterio(data) {
   }
 
   document.getElementById("misterio-submit").addEventListener("click", submit);
-  guess.addEventListener("keydown", (e) => { if (e.key === "Enter") submit(); });
+  guess.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") submit();
+  });
 
   document.getElementById("misterio-reveal").addEventListener("click", () => {
     if (!mystery) return;
@@ -271,9 +281,9 @@ function initMisterio(data) {
     mysteryDone = true;
   });
 
-  document.getElementById("misterio-next").addEventListener("click", () =>
-    loadMystery(data.animes),
-  );
+  document
+    .getElementById("misterio-next")
+    .addEventListener("click", () => loadMystery(data.animes));
 }
 
 // ── 📊 Timeline ──────────────────────────────────────────────────────────────

@@ -1,4 +1,4 @@
-// js/data.js?v=ciel-gold-3 — carrega e processa animes.json
+// js/data.js?v=desafios-soft-1 — carrega e processa animes.json
 
 import { normalizeText, stripEmoji } from "./utils.js";
 

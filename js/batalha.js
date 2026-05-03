@@ -29,17 +29,23 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
 import { firebaseConfig } from "./firebase-config.js";
-import { PEOPLE, PERSON_COLORS, PERSON_LIGHTS, animesOf, formatNota } from "./data.js?v=ciel-gold-3";
+import {
+  PEOPLE,
+  PERSON_COLORS,
+  PERSON_LIGHTS,
+  animesOf,
+  formatNota,
+} from "./data.js?v=desafios-soft-1";
 import { escapeHTML } from "./utils.js";
 
-const app  = getApps()[0] || initializeApp(firebaseConfig);
-const db   = getFirestore(app);
+const app = getApps()[0] || initializeApp(firebaseConfig);
+const db = getFirestore(app);
 const auth = getAuth(app);
 
-const ROUNDS_TOTAL  = 5;
-const SESSIONS_COL  = "battle_sessions_v2";
-const VOTES_COL     = "battle_votes_v2";
-const MY_KEY        = "batalha-my-name-v2";
+const ROUNDS_TOTAL = 5;
+const SESSIONS_COL = "battle_sessions_v2";
+const VOTES_COL = "battle_votes_v2";
+const MY_KEY = "batalha-my-name-v2";
 
 // ── Utilities ─────────────────────────────────────────────────────────────────
 
@@ -60,7 +66,7 @@ function buildRounds(animes, p1, p2) {
   if (common.length < ROUNDS_TOTAL * 2) return null;
   const pool = shuffle(common).slice(0, ROUNDS_TOTAL * 2);
   return Array.from({ length: ROUNDS_TOTAL }, (_, i) => ({
-    animeA: { id: pool[i * 2].id,     nome: pool[i * 2].nome,     nota: pool[i * 2].nota },
+    animeA: { id: pool[i * 2].id, nome: pool[i * 2].nome, nota: pool[i * 2].nota },
     animeB: { id: pool[i * 2 + 1].id, nome: pool[i * 2 + 1].nome, nota: pool[i * 2 + 1].nota },
   }));
 }
@@ -73,17 +79,17 @@ async function createSession(animes, p1, p2) {
   if (!rounds) throw new Error(`Animes em comum insuficientes (mínimo ${ROUNDS_TOTAL * 2})`);
 
   const ref = await addDoc(collection(db, SESSIONS_COL), {
-    player1_name:  p1,
-    player2_name:  p2,
+    player1_name: p1,
+    player2_name: p2,
     player2_ready: false,
-    status:        "waiting",
+    status: "waiting",
     current_round: 1,
     rounds,
     round_results: [],
-    scores:        { [p1]: 0, [p2]: 0 },
-    winner:        null,
-    created_at:    serverTimestamp(),
-    updated_at:    serverTimestamp(),
+    scores: { [p1]: 0, [p2]: 0 },
+    winner: null,
+    created_at: serverTimestamp(),
+    updated_at: serverTimestamp(),
   });
   console.log(`[Batalha] Sessão criada: ${ref.id}`);
   return ref.id;
@@ -92,8 +98,8 @@ async function createSession(animes, p1, p2) {
 async function joinSession(sessionId) {
   await updateDoc(doc(db, SESSIONS_COL, sessionId), {
     player2_ready: true,
-    status:        "active",
-    updated_at:    serverTimestamp(),
+    status: "active",
+    updated_at: serverTimestamp(),
   });
   console.log(`[Batalha] Sessão ativada: ${sessionId}`);
 }
@@ -105,10 +111,9 @@ async function cancelSession(sessionId) {
 
 async function castVote(sessionId, round, playerName, animeId) {
   // Verifica duplicata — query simples por session_id, filtra client-side
-  const dupSnap = await getDocs(query(
-    collection(db, VOTES_COL),
-    where("session_id", "==", sessionId),
-  ));
+  const dupSnap = await getDocs(
+    query(collection(db, VOTES_COL), where("session_id", "==", sessionId)),
+  );
   const dup = dupSnap.docs.filter((d) => {
     const v = d.data();
     return v.round === round && v.player_name === playerName;
@@ -130,7 +135,7 @@ async function castVote(sessionId, round, playerName, animeId) {
       session_id: sessionId,
       round,
       player_name: playerName,
-      anime_id:   animeId,
+      anime_id: animeId,
       created_at: serverTimestamp(),
     });
   });
@@ -140,10 +145,9 @@ async function castVote(sessionId, round, playerName, animeId) {
 }
 
 async function tryResolve(sessionId, round) {
-  const allVotesSnap = await getDocs(query(
-    collection(db, VOTES_COL),
-    where("session_id", "==", sessionId),
-  ));
+  const allVotesSnap = await getDocs(
+    query(collection(db, VOTES_COL), where("session_id", "==", sessionId)),
+  );
   const votesSnap = { docs: allVotesSnap.docs.filter((d) => d.data().round === round), size: 0 };
   votesSnap.size = votesSnap.docs.length;
   console.log(`[Batalha] Votos na rodada ${round}:`, votesSnap.size);
@@ -155,7 +159,10 @@ async function tryResolve(sessionId, round) {
   if (!s || s.current_round !== round) return;
 
   const voteMap = {};
-  votesSnap.docs.forEach((v) => { const d = v.data(); voteMap[d.player_name] = d.anime_id; });
+  votesSnap.docs.forEach((v) => {
+    const d = v.data();
+    voteMap[d.player_name] = d.anime_id;
+  });
 
   const result = { round, votes: voteMap };
   const newResults = [...(s.round_results || []), result];
@@ -175,8 +182,8 @@ async function tryResolve(sessionId, round) {
 
 // ── UI ────────────────────────────────────────────────────────────────────────
 
-let unsub    = null;
-let myName   = localStorage.getItem(MY_KEY) || null;
+let unsub = null;
+let myName = localStorage.getItem(MY_KEY) || null;
 let fireUser = null;
 
 export function initBatalha(container, animes) {
@@ -215,7 +222,10 @@ function renderAuthGate(container, animes) {
 }
 
 function renderRoot(container, animes) {
-  if (unsub) { unsub(); unsub = null; }
+  if (unsub) {
+    unsub();
+    unsub = null;
+  }
 
   // Mostra loading
   container.innerHTML = `<div class="bt-loading">Carregando...</div>`;
@@ -224,33 +234,47 @@ function renderRoot(container, animes) {
   // Query simples sem filtro composto — filtra client-side
   const q = collection(db, SESSIONS_COL);
 
-  unsub = onSnapshot(q, (snap) => {
-    const all = snap.docs.map((d) => ({ ...d.data(), id: d.id }));
-    const sessions = all.filter((s) => ["waiting", "active", "finished"].includes(s.status));
-    console.log("[Batalha] Sessões:", sessions.map((s) => `${s.id.slice(0,6)} ${s.status}`));
+  unsub = onSnapshot(
+    q,
+    (snap) => {
+      const all = snap.docs.map((d) => ({ ...d.data(), id: d.id }));
+      const sessions = all.filter((s) => ["waiting", "active", "finished"].includes(s.status));
+      console.log(
+        "[Batalha] Sessões:",
+        sessions.map((s) => `${s.id.slice(0, 6)} ${s.status}`),
+      );
 
-    const mySession = myName
-      ? sessions.find((s) => s.player1_name === myName || s.player2_name === myName)
-      : null;
+      const mySession = myName
+        ? sessions.find((s) => s.player1_name === myName || s.player2_name === myName)
+        : null;
 
-    if (mySession) {
-      console.log(`[Batalha] Minha sessão: ${mySession.id} status=${mySession.status} round=${mySession.current_round}`);
-      if (mySession.status === "finished") renderFinished(container, mySession);
-      else if (mySession.status === "waiting") renderWaiting(container, mySession, animes);
-      else renderActive(container, mySession, animes);
-    } else {
-      renderLobby(container, animes, sessions.filter((s) => s.status === "waiting"));
-    }
-  }, (err) => {
-    console.error("[Batalha] Erro no listener:", err.code, err.message);
-    // Mostra lobby mesmo sem conexão ao Firestore
-    renderLobby(container, animes, []);
-    // Banner de aviso não-bloqueante
-    const warn = document.createElement("div");
-    warn.style.cssText = "background:rgba(253,230,138,0.08);border:1px solid rgba(253,230,138,0.2);border-radius:12px;color:rgba(253,230,138,0.7);font-size:12px;font-weight:700;margin-top:16px;padding:10px 14px;";
-    warn.textContent = `⚠️ Sem sincronização em tempo real (${err.code || "erro"}). A batalha pode não funcionar corretamente.`;
-    container.appendChild(warn);
-  });
+      if (mySession) {
+        console.log(
+          `[Batalha] Minha sessão: ${mySession.id} status=${mySession.status} round=${mySession.current_round}`,
+        );
+        if (mySession.status === "finished") renderFinished(container, mySession);
+        else if (mySession.status === "waiting") renderWaiting(container, mySession, animes);
+        else renderActive(container, mySession, animes);
+      } else {
+        renderLobby(
+          container,
+          animes,
+          sessions.filter((s) => s.status === "waiting"),
+        );
+      }
+    },
+    (err) => {
+      console.error("[Batalha] Erro no listener:", err.code, err.message);
+      // Mostra lobby mesmo sem conexão ao Firestore
+      renderLobby(container, animes, []);
+      // Banner de aviso não-bloqueante
+      const warn = document.createElement("div");
+      warn.style.cssText =
+        "background:rgba(253,230,138,0.08);border:1px solid rgba(253,230,138,0.2);border-radius:12px;color:rgba(253,230,138,0.7);font-size:12px;font-weight:700;margin-top:16px;padding:10px 14px;";
+      warn.textContent = `⚠️ Sem sincronização em tempo real (${err.code || "erro"}). A batalha pode não funcionar corretamente.`;
+      container.appendChild(warn);
+    },
+  );
 }
 
 // ── Tela 1: Lobby ─────────────────────────────────────────────────────────────
@@ -263,13 +287,15 @@ function renderLobby(container, animes, activeSessions) {
       <div class="bt-identity">
         <label class="bt-label">Eu sou</label>
         <div class="bt-person-grid" id="bt-who">
-          ${PEOPLE.map((p) => `
+          ${PEOPLE.map(
+            (p) => `
             <button class="bt-person-btn ${myName === p ? "active" : ""}" data-name="${p}"
               style="--pc:${PERSON_COLORS[p]};--pl:${PERSON_LIGHTS[p]}">
               <span class="bt-person-dot" style="background:${PERSON_LIGHTS[p]}"></span>
               ${p}
             </button>
-          `).join("")}
+          `,
+          ).join("")}
         </div>
       </div>
 
@@ -278,9 +304,13 @@ function renderLobby(container, animes, activeSessions) {
         <div class="bt-create-row">
           <select id="bt-opponent" class="batalha-select">
             <option value="">Selecionar oponente...</option>
-            ${PEOPLE.filter((p) => p !== myName).map((p) => `
+            ${PEOPLE.filter((p) => p !== myName)
+              .map(
+                (p) => `
               <option value="${p}">${p}</option>
-            `).join("")}
+            `,
+              )
+              .join("")}
           </select>
           <button class="batalha-action-btn" id="bt-create-btn">Criar batalha →</button>
         </div>
@@ -288,19 +318,29 @@ function renderLobby(container, animes, activeSessions) {
         <div id="bt-create-loading" class="bt-loading-msg hidden">Criando sessão...</div>
       </div>
 
-      ${activeSessions.filter((s) => s.player1_name !== myName && s.player2_name !== myName).length > 0 ? `
+      ${
+        activeSessions.filter((s) => s.player1_name !== myName && s.player2_name !== myName)
+          .length > 0
+          ? `
         <div class="bt-open-sessions">
           <label class="bt-label">Batalhas abertas para entrar</label>
           <div class="bt-sessions-list">
-            ${activeSessions.filter((s) => s.status === "waiting" && (s.player2_name === myName)).map((s) => `
+            ${activeSessions
+              .filter((s) => s.status === "waiting" && s.player2_name === myName)
+              .map(
+                (s) => `
               <div class="bt-session-item">
                 <span>${s.player1_name} <em>criou uma batalha para você</em></span>
                 <button class="batalha-action-btn" onclick="window.__btJoin('${s.id}')">Entrar →</button>
               </div>
-            `).join("")}
+            `,
+              )
+              .join("")}
           </div>
         </div>
-      ` : ""}
+      `
+          : ""
+      }
     </div>
   `;
 
@@ -322,9 +362,21 @@ function renderLobby(container, animes, activeSessions) {
     const btn = document.getElementById("bt-create-btn");
     errEl.classList.add("hidden");
 
-    if (!myName) { errEl.textContent = "Selecione quem você é primeiro."; errEl.classList.remove("hidden"); return; }
-    if (!opp) { errEl.textContent = "Selecione um oponente."; errEl.classList.remove("hidden"); return; }
-    if (opp === myName) { errEl.textContent = "Você não pode batalhar contra si mesmo."; errEl.classList.remove("hidden"); return; }
+    if (!myName) {
+      errEl.textContent = "Selecione quem você é primeiro.";
+      errEl.classList.remove("hidden");
+      return;
+    }
+    if (!opp) {
+      errEl.textContent = "Selecione um oponente.";
+      errEl.classList.remove("hidden");
+      return;
+    }
+    if (opp === myName) {
+      errEl.textContent = "Você não pode batalhar contra si mesmo.";
+      errEl.classList.remove("hidden");
+      return;
+    }
 
     console.log(`[Batalha] Tentando criar: ${myName} vs ${opp}`);
     btn.disabled = true;
@@ -344,7 +396,11 @@ function renderLobby(container, animes, activeSessions) {
 
   // Entrar em sessão
   window.__btJoin = async (sessionId) => {
-    try { await joinSession(sessionId); } catch (e) { alert(e.message); }
+    try {
+      await joinSession(sessionId);
+    } catch (e) {
+      alert(e.message);
+    }
   };
 }
 
@@ -373,11 +429,17 @@ function renderWaiting(container, session, animes) {
         ${session.player2_ready ? "Ambos prontos! Iniciando..." : `Aguardando <strong style="color:${c2}">${session.player2_name}</strong> entrar na batalha...`}
       </p>
 
-      ${!isP2 && !session.player2_ready ? "" : (!session.player2_ready ? `
+      ${
+        !isP2 && !session.player2_ready
+          ? ""
+          : !session.player2_ready
+            ? `
         <button class="batalha-action-btn" id="bt-join-btn">
           Entrar como ${session.player2_name} →
         </button>
-      ` : "")}
+      `
+            : ""
+      }
 
       <div class="bt-waiting-info">
         <span>5 rodadas · ${session.rounds?.length || 0} pares de animes sorteados</span>
@@ -393,7 +455,11 @@ function renderWaiting(container, session, animes) {
       myName = session.player2_name;
       localStorage.setItem(MY_KEY, myName);
     }
-    try { await joinSession(session.id); } catch (e) { alert(e.message); }
+    try {
+      await joinSession(session.id);
+    } catch (e) {
+      alert(e.message);
+    }
   });
 
   document.getElementById("bt-cancel")?.addEventListener("click", async () => {
@@ -405,21 +471,23 @@ function renderWaiting(container, session, animes) {
 
 async function renderActive(container, session, animes) {
   const round = session.current_round;
-  const rd    = session.rounds?.[round - 1];
+  const rd = session.rounds?.[round - 1];
   if (!rd) return;
 
   const c1 = PERSON_LIGHTS[session.player1_name] || "#a78bfa";
   const c2 = PERSON_LIGHTS[session.player2_name] || "#f9a8d4";
 
   // Pega votos desta rodada (filtra client-side para evitar índices compostos)
-  const allVotesSnap = await getDocs(query(
-    collection(db, VOTES_COL),
-    where("session_id", "==", session.id),
-  ));
+  const allVotesSnap = await getDocs(
+    query(collection(db, VOTES_COL), where("session_id", "==", session.id)),
+  );
   const votesSnap = { docs: allVotesSnap.docs.filter((d) => d.data().round === round) };
   const votes = {};
-  votesSnap.docs.forEach((v) => { const d = v.data(); votes[d.player_name] = d.anime_id; });
-  const myVote     = myName ? votes[myName] : null;
+  votesSnap.docs.forEach((v) => {
+    const d = v.data();
+    votes[d.player_name] = d.anime_id;
+  });
+  const myVote = myName ? votes[myName] : null;
   const votedNames = Object.keys(votes);
 
   console.log(`[Batalha] Rodada ${round} votos:`, votes, "Meu voto:", myVote);
@@ -444,7 +512,7 @@ async function renderActive(container, session, animes) {
         <div class="bt-pips">
           ${Array.from({ length: ROUNDS_TOTAL }, (_, i) => {
             const res = session.round_results?.[i];
-            const st  = i < round - 1 ? "done" : i === round - 1 ? "active" : "pending";
+            const st = i < round - 1 ? "done" : i === round - 1 ? "active" : "pending";
             return `<div class="bpip bpip-${st}" title="Rodada ${i + 1}">
               ${res?.winner === myName ? "✓" : res && res.winner !== myName && res.winner !== null ? "✗" : i + 1}
             </div>`;
@@ -457,10 +525,11 @@ async function renderActive(container, session, animes) {
         ${[
           { anime: rd.animeA, key: "A" },
           { anime: rd.animeB, key: "B" },
-        ].map(({ anime, key }) => {
-          const chosen = myVote === anime.id;
-          const disabled = !!myVote;
-          return `
+        ]
+          .map(({ anime, key }) => {
+            const chosen = myVote === anime.id;
+            const disabled = !!myVote;
+            return `
             <div class="bcard2 ${chosen ? "bcard2-chosen" : ""}">
               <div class="bcard2-nota">${formatNota(anime.nota)}</div>
               <div class="bcard2-name">${escapeHTML(anime.nome)}</div>
@@ -470,29 +539,41 @@ async function renderActive(container, session, animes) {
               </button>
             </div>
           `;
-        }).join(`<div class="bt-vs-center">VS</div>`)}
+          })
+          .join(`<div class="bt-vs-center">VS</div>`)}
       </div>
 
       <!-- Status -->
       <div class="bt-vote-status">
-        ${myVote
-          ? `<div class="bt-voted-msg">Você votou! ${votedNames.length < 2 ? "Aguardando o outro jogador..." : "Resolvendo..."}</div>`
-          : `<div class="bt-your-turn" style="color:${PERSON_LIGHTS[myName] || "#fff"}">Sua vez de votar, ${myName || "jogador"}!</div>`
+        ${
+          myVote
+            ? `<div class="bt-voted-msg">Você votou! ${votedNames.length < 2 ? "Aguardando o outro jogador..." : "Resolvendo..."}</div>`
+            : `<div class="bt-your-turn" style="color:${PERSON_LIGHTS[myName] || "#fff"}">Sua vez de votar, ${myName || "jogador"}!</div>`
         }
         <div class="bt-voter-badges">
-          ${[session.player1_name, session.player2_name].map((p) => `
+          ${[session.player1_name, session.player2_name]
+            .map(
+              (p) => `
             <span class="bt-voter-badge ${votes[p] ? "voted" : ""}"
               style="border-color:${PERSON_COLORS[p]}55;color:${votes[p] ? PERSON_LIGHTS[p] : "var(--muted)"}">
               ${p[0]} ${votes[p] ? "✓" : "…"}
             </span>
-          `).join("")}
+          `,
+            )
+            .join("")}
         </div>
       </div>
 
       <!-- Últimas rodadas -->
-      ${session.round_results?.length ? `
+      ${
+        session.round_results?.length
+          ? `
         <div class="bt-history">
-          ${session.round_results.slice().reverse().map((r) => `
+          ${session.round_results
+            .slice()
+            .reverse()
+            .map(
+              (r) => `
             <div class="bt-hist-row">
               <span class="bt-hist-num">R${r.round}</span>
               <span class="bt-hist-anime">${escapeHTML(r.winnerAnime || "Empate")}</span>
@@ -500,9 +581,13 @@ async function renderActive(container, session, animes) {
                 ${r.winner ? `+1 ${r.winner}` : "empate"}
               </span>
             </div>
-          `).join("")}
+          `,
+            )
+            .join("")}
         </div>
-      ` : ""}
+      `
+          : ""
+      }
 
       <button class="batalha-cancel-btn" id="bt-cancel">Abandonar</button>
     </div>
@@ -511,7 +596,10 @@ async function renderActive(container, session, animes) {
   // Vote buttons — bloqueia tudo imediatamente, deixa onSnapshot atualizar a UI
   document.querySelectorAll(".bvote2:not([disabled])").forEach((btn) => {
     btn.addEventListener("click", async () => {
-      if (!myName) { alert("Selecione quem você é primeiro."); return; }
+      if (!myName) {
+        alert("Selecione quem você é primeiro.");
+        return;
+      }
 
       // Bloqueia todos os botões na hora para evitar duplo clique
       document.querySelectorAll(".bvote2").forEach((b) => {
@@ -522,7 +610,8 @@ async function renderActive(container, session, animes) {
 
       // Atualiza status otimisticamente (sem re-render completo)
       const statusEl = document.querySelector(".bt-vote-status");
-      if (statusEl) statusEl.innerHTML = `<div class="bt-voted-msg">✓ Voto registrado! Aguardando o outro jogador...</div>`;
+      if (statusEl)
+        statusEl.innerHTML = `<div class="bt-voted-msg">✓ Voto registrado! Aguardando o outro jogador...</div>`;
 
       try {
         await castVote(session.id, round, myName, btn.dataset.id);
@@ -584,16 +673,17 @@ function renderFinished(container, session) {
       </div>
 
       <div class="bt-reveal-cards">
-        ${(session.round_results || []).map((r) => {
-          const rd   = session.rounds?.[r.round - 1];
-          const v    = r.votes || {};
-          const p1id = v[session.player1_name];
-          const p2id = v[session.player2_name];
-          const p1nome = p1id === rd?.animeA?.id ? rd.animeA.nome : rd?.animeB?.nome;
-          const p2nome = p2id === rd?.animeA?.id ? rd.animeA.nome : rd?.animeB?.nome;
-          const same = p1id && p1id === p2id;
+        ${(session.round_results || [])
+          .map((r) => {
+            const rd = session.rounds?.[r.round - 1];
+            const v = r.votes || {};
+            const p1id = v[session.player1_name];
+            const p2id = v[session.player2_name];
+            const p1nome = p1id === rd?.animeA?.id ? rd.animeA.nome : rd?.animeB?.nome;
+            const p2nome = p2id === rd?.animeA?.id ? rd.animeA.nome : rd?.animeB?.nome;
+            const same = p1id && p1id === p2id;
 
-          return `
+            return `
             <div class="bt-reveal-card ${same ? "bt-reveal-card-same" : ""}">
               <div class="bt-reveal-card-num">Rodada ${r.round}</div>
 
@@ -612,10 +702,7 @@ function renderFinished(container, session) {
                   </div>
                 </div>
 
-                ${same
-                  ? `<div class="bt-rvc-same">🤝</div>`
-                  : `<div class="bt-rvc-diff">⚡</div>`
-                }
+                ${same ? `<div class="bt-rvc-same">🤝</div>` : `<div class="bt-rvc-diff">⚡</div>`}
 
                 <div class="bt-rvc" style="--pl:${c2};--pc:${PERSON_COLORS[session.player2_name]}">
                   <div class="bt-rvc-info" style="text-align:right">
@@ -629,7 +716,8 @@ function renderFinished(container, session) {
               ${same ? `<div class="bt-rvc-same-label">Mesma escolha!</div>` : ""}
             </div>
           `;
-        }).join("")}
+          })
+          .join("")}
       </div>
 
       <button class="batalha-action-btn" id="bt-rematch">Nova batalha →</button>

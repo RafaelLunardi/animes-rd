@@ -1,4 +1,4 @@
-// js/table.js?v=ciel-gold-3 — tabela com filtros, ordenação e modal
+// js/table.js?v=desafios-soft-1 — tabela com filtros, ordenação e modal
 
 import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import {
@@ -22,7 +22,7 @@ import {
   PEOPLE,
   PERSON_COLORS,
   PERSON_LIGHTS,
-} from "./data.js?v=ciel-gold-3";
+} from "./data.js?v=desafios-soft-1";
 import { escapeHTML, normalizeText, stripEmoji } from "./utils.js";
 
 let allAnimes = [];
@@ -276,6 +276,7 @@ function renderFilters() {
     </select>
     <select id="filter-votes">
       <option value="">Qtd. votos</option>
+      <option value="5">5 votos</option>
       <option value="4">4 votos</option>
       <option value="3">3 votos</option>
       <option value="2">2 votos</option>
@@ -553,7 +554,10 @@ window.togglePtDub = async function (animeId) {
     await runTransaction(db, async (transaction) => {
       const snap = await transaction.get(doc(db, "animes", animeId));
       if (!snap.exists()) throw new Error("Anime não encontrado.");
-      transaction.update(doc(db, "animes", animeId), { ptDub: newVal, updatedAt: serverTimestamp() });
+      transaction.update(doc(db, "animes", animeId), {
+        ptDub: newVal,
+        updatedAt: serverTimestamp(),
+      });
     });
     updateAnimeLocally(animeId, { ...anime, ptDub: newVal });
   } catch (e) {

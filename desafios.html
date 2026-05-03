@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Desafios — Animes RD</title>
-    <link rel="stylesheet" href="css/style.css?v=desafios-2" />
-    <script type="module" src="./js/theme.js?v=ciel-gold-3"></script>
-    <script type="module" src="./js/utils.js?v=ciel-gold-3"></script>
+    <link rel="stylesheet" href="css/style.css?v=desafios-soft-1" />
+    <script type="module" src="./js/theme.js?v=desafios-soft-1"></script>
+    <script type="module" src="./js/utils.js?v=desafios-soft-1"></script>
   </head>
   <body class="desafios-page">
     <nav class="nav"></nav>
@@ -27,11 +27,14 @@
 
       <!-- 🔮 Previsão -->
       <section class="desafio-panel active" id="tab-previsao">
-        <div class="desafio-hero" style="--accent:#818cf8;--glow:rgba(99,102,241,0.18)">
+        <div class="desafio-hero" style="--accent: #818cf8; --glow: rgba(99, 102, 241, 0.18)">
           <div class="desafio-hero-icon">🔮</div>
           <div class="desafio-hero-text">
             <h2>Previsão de Nota</h2>
-            <p>Chute sua nota <strong>antes</strong> de assistir. Depois que você votar no acervo, a nota real aparece aqui automaticamente para comparar.</p>
+            <p>
+              Chute sua nota <strong>antes</strong> de assistir. Depois que você votar no acervo, a
+              nota real aparece aqui automaticamente para comparar.
+            </p>
           </div>
         </div>
         <div class="desafio-body">
@@ -47,8 +50,19 @@
               </div>
             </div>
             <div class="prev-slider-wrap">
-              <label class="prev-slider-label">Minha previsão: <span id="prev-slider-val" class="prev-slider-number">5.0</span></label>
-              <input type="range" id="prev-slider" min="0" max="10" step="0.1" value="5.0" class="prev-slider" />
+              <label class="prev-slider-label"
+                >Minha previsão:
+                <span id="prev-slider-val" class="prev-slider-number">5.0</span></label
+              >
+              <input
+                type="range"
+                id="prev-slider"
+                min="0"
+                max="10"
+                step="0.1"
+                value="5.0"
+                class="prev-slider"
+              />
               <div class="prev-slider-marks"><span>0</span><span>5</span><span>10</span></div>
             </div>
             <button class="desafio-btn primary" id="prev-btn">Registrar previsão →</button>
@@ -60,7 +74,7 @@
 
       <!-- ❓ Misterioso -->
       <section class="desafio-panel" id="tab-misterio">
-        <div class="desafio-hero" style="--accent:#f472b6;--glow:rgba(244,114,182,0.15)">
+        <div class="desafio-hero" style="--accent: #f472b6; --glow: rgba(244, 114, 182, 0.15)">
           <div class="desafio-hero-icon">❓</div>
           <div class="desafio-hero-text">
             <h2>Anime Misterioso</h2>
@@ -70,7 +84,13 @@
         <div class="desafio-body">
           <div id="misterio-clues" class="misterio-clues-wrap"></div>
           <div class="misterio-input-row">
-            <input id="misterio-guess" type="text" placeholder="Digite o nome do anime..." autocomplete="off" class="desafio-input" />
+            <input
+              id="misterio-guess"
+              type="text"
+              placeholder="Digite o nome do anime..."
+              autocomplete="off"
+              class="desafio-input"
+            />
             <button class="desafio-btn primary" id="misterio-submit">Chutar →</button>
           </div>
           <div id="misterio-feedback" class="misterio-feedback hidden"></div>
@@ -83,7 +103,7 @@
 
       <!-- 📊 Timeline -->
       <section class="desafio-panel" id="tab-timeline">
-        <div class="desafio-hero" style="--accent:#34d399;--glow:rgba(52,211,153,0.15)">
+        <div class="desafio-hero" style="--accent: #34d399; --glow: rgba(52, 211, 153, 0.15)">
           <div class="desafio-hero-icon">📊</div>
           <div class="desafio-hero-text">
             <h2>Linha do Tempo</h2>
@@ -95,11 +115,14 @@
 
       <!-- ⚔️ Batalha -->
       <section class="desafio-panel" id="tab-batalha">
-        <div class="desafio-hero" style="--accent:#fb923c;--glow:rgba(251,146,60,0.15)">
+        <div class="desafio-hero" style="--accent: #fb923c; --glow: rgba(251, 146, 60, 0.15)">
           <div class="desafio-hero-icon">⚔️</div>
           <div class="desafio-hero-text">
             <h2>Batalha de Animes</h2>
-            <p>5 rodadas. Apenas animes que vocês dois assistiram. 1 voto por rodada. Quem ganhar mais rodadas vence.</p>
+            <p>
+              5 rodadas. Apenas animes que vocês dois assistiram. 1 voto por rodada. Quem ganhar
+              mais rodadas vence.
+            </p>
           </div>
         </div>
         <div class="desafio-body">
@@ -108,7 +131,7 @@
       </section>
     </main>
 
-    <script type="module" src="js/desafios.js?v=desafios-3"></script>
-    <script type="module" src="js/nyx-widget.js?v=ciel-widget-1"></script>
+    <script type="module" src="js/desafios.js?v=desafios-soft-1"></script>
+    <script type="module" src="js/nyx-widget.js?v=desafios-soft-1"></script>
   </body>
 </html>

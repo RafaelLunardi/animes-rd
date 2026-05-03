@@ -3138,6 +3138,11 @@ body.blog-page::before {
   width: auto;
 }
 
+a.opening-chip,
+a.opening-chip:hover {
+  text-decoration: none !important;
+}
+
 a.opening-chip:hover { border-color: rgba(255,255,255,0.25); }
 
 .opening-chip b { color: var(--member-color); margin-right: 5px; }

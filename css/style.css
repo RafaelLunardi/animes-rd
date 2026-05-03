@@ -3127,17 +3127,30 @@ body.blog-page::before {
   border: 1px solid rgba(255,255,255,0.1);
   border-radius: 999px;
   color: var(--paper);
+  display: flex;
   font-size: 12px;
   font-weight: 700;
   flex: 1;
+  gap: 0;
   padding: 5px 10px;
   text-decoration: none;
   transition: border-color 0.15s ease;
+  width: auto;
 }
 
 a.opening-chip:hover { border-color: rgba(255,255,255,0.25); }
 
 .opening-chip b { color: var(--member-color); margin-right: 5px; }
+
+/* Neutraliza herança de .post-tags span */
+.post-tags .opening-chip,
+.post-openings .opening-chip {
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-radius: 999px !important;
+  color: var(--paper) !important;
+  padding: 5px 10px !important;
+}
 
 .opening-edit-btn {
   background: rgba(255,255,255,0.04);
